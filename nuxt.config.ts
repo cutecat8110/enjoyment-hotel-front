@@ -22,5 +22,6 @@ export default defineNuxtConfig({
     defaultLocale: 'zh',
     strategy: 'no_prefix',
     vueI18n: './i18n.config.js'
-  }
+  },
+  css: ['~/assets/scss/main.scss']
 })
