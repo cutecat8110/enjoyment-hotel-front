@@ -18,12 +18,14 @@
   "devDependencies": {
     "@nuxt/devtools": "latest",
     "@nuxtjs/eslint-config-typescript": "^12.1.0",
+    "@nuxtjs/tailwindcss": "^6.10.1",
     "cz-git": "^1.8.0",
     "eslint": "^8.55.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.0.1",
     "nuxt": "^3.8.2",
     "prettier": "^3.1.1",
+    "prettier-plugin-tailwindcss": "^0.5.9",
     "vue": "^3.3.10",
     "vue-router": "^4.2.5",
     "vue-tsc": "^1.8.25"

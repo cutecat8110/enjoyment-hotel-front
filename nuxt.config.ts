@@ -3,5 +3,6 @@ export default defineNuxtConfig({
   devtools: { enabled: false },
   typescript: {
     typeCheck: true
-  }
+  },
+  modules: ['@nuxtjs/tailwindcss']
 })
