@@ -4,5 +4,5 @@ export default defineNuxtConfig({
   typescript: {
     typeCheck: true
   },
-  modules: ['@nuxtjs/tailwindcss']
+  modules: ['@nuxtjs/tailwindcss', '@pinia/nuxt', '@pinia-plugin-persistedstate/nuxt']
 })
