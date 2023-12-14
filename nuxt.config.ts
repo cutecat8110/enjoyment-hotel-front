@@ -9,7 +9,8 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     '@pinia-plugin-persistedstate/nuxt',
     '@nuxtjs/i18n',
-    '@vueuse/nuxt'
+    '@vueuse/nuxt',
+    'nuxt-icon'
   ],
   i18n: {
     langDir: 'locales',

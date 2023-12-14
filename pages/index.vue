@@ -10,6 +10,7 @@
         {{ `pinia: ${commonStore.test}` }}
       </button>
       <div>pos: {{ x }}, {{ y }}</div>
+      <Icon name="uil:github" color="black" />
     </div>
   </div>
 </template>
