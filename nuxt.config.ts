@@ -4,5 +4,21 @@ export default defineNuxtConfig({
   typescript: {
     typeCheck: true
   },
-  modules: ['@nuxtjs/tailwindcss', '@pinia/nuxt', '@pinia-plugin-persistedstate/nuxt']
+  modules: [
+    '@nuxtjs/tailwindcss',
+    '@pinia/nuxt',
+    '@pinia-plugin-persistedstate/nuxt',
+    '@nuxtjs/i18n'
+  ],
+  i18n: {
+    langDir: 'locales',
+    locales: [
+      { code: 'en', file: 'en.json', iso: 'en-US', name: 'English' },
+      { code: 'zh', file: 'zh.json', iso: 'zh-TW', name: '繁體中文' }
+    ],
+    lazy: true,
+    defaultLocale: 'zh',
+    strategy: 'no_prefix',
+    vueI18n: './i18n.config.js'
+  }
 })
