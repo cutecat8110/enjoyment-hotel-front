@@ -2,6 +2,6 @@
 export default defineNuxtConfig({
   devtools: { enabled: false },
   typescript: {
-    typeCheck: true,
-  },
-});
+    typeCheck: true
+  }
+})
