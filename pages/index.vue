@@ -9,6 +9,7 @@
       >
         {{ `pinia: ${commonStore.test}` }}
       </button>
+      <div>pos: {{ x }}, {{ y }}</div>
     </div>
   </div>
 </template>
@@ -16,4 +17,5 @@
 <script setup lang="ts">
 import { useCommonStore } from '@/stores/common'
 const commonStore = useCommonStore()
+const { x, y } = useMouse()
 </script>
