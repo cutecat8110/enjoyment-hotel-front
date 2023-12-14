@@ -8,7 +8,7 @@
         <NuxtLink to="/admin">admin</NuxtLink>
       </div>
       <div class="ml-auto">
-        <button type="button" @click="changeLanguage" class="rounded border px-4 py-2">
+        <button class="rounded border px-4 py-2" type="button" @click="changeLanguage">
           {{ $t('language') }}
         </button>
       </div>
@@ -16,7 +16,7 @@
   </header>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 const { locale, setLocaleCookie } = useI18n()
 const changeLanguage = () => {
   const localeCode = locale.value === 'en' ? 'zh' : 'en'

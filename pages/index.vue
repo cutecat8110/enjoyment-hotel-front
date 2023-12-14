@@ -3,9 +3,9 @@
     <PageDefault />
     <div class="container">
       <button
+        class="rounded border px-4 py-2"
         type="button"
         @click="commonStore.test = !commonStore.test"
-        class="rounded border px-4 py-2"
       >
         {{ `pinia: ${commonStore.test}` }}
       </button>
@@ -15,7 +15,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import { useCommonStore } from '@/stores/common'
 const commonStore = useCommonStore()
 const { x, y } = useMouse()
