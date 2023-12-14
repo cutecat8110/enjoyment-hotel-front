@@ -1,9 +1,11 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: false },
+
   typescript: {
     typeCheck: true
   },
+
   modules: [
     '@nuxtjs/tailwindcss',
     '@pinia/nuxt',
@@ -12,6 +14,21 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     'nuxt-icon'
   ],
+
+  app: {
+    pageTransition: { name: 'page', mode: 'out-in' },
+    layoutTransition: {
+      name: 'layout',
+      mode: 'out-in'
+    }
+  },
+
+  runtimeConfig: {
+    public: {
+      apiBase: process.env.NUXT_PUBLIC_API_BASE
+    }
+  },
+
   i18n: {
     langDir: 'locales',
     locales: [
@@ -23,5 +40,6 @@ export default defineNuxtConfig({
     strategy: 'no_prefix',
     vueI18n: './i18n.config.js'
   },
+
   css: ['~/assets/scss/main.scss']
 })
