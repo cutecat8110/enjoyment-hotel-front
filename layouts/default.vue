@@ -1,9 +1,16 @@
 <template>
-  <div class="flex min-h-screen flex-col">
+  <div class="flex-column min-h-screen d-flex">
     <PageHeader />
-    <main class="flex-1 overflow-x-hidden">
+    <main class="layout-default-main">
       <slot />
     </main>
     <PageFooter />
   </div>
 </template>
+
+<style lang="scss" scoped>
+.layout-default-main {
+  flex: 1;
+  overflow-x: hidden;
+}
+</style>

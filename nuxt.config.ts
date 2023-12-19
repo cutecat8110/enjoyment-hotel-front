@@ -7,7 +7,6 @@ export default defineNuxtConfig({
   },
 
   modules: [
-    '@nuxtjs/tailwindcss',
     '@pinia/nuxt',
     '@pinia-plugin-persistedstate/nuxt',
     '@nuxtjs/i18n',
@@ -41,5 +40,26 @@ export default defineNuxtConfig({
     vueI18n: './i18n.config.js'
   },
 
-  css: ['~/assets/scss/main.scss']
+  css: ['~/assets/scss/app.scss'],
+
+  postcss: {
+    // CSS 屬性加上瀏覽器相容性前綴
+    plugins: {
+      autoprefixer: true
+    }
+  },
+
+  vite: {
+    // 定義全域共用 Sass / SCSS 變數
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: `
+            @import "@/assets/scss/_color.scss";
+            @import "@/assets/scss/_variables.scss";
+          `
+        }
+      }
+    }
+  }
 })

@@ -1,14 +1,14 @@
 <template>
-  <header class="shadow">
-    <div class="container flex h-14 items-center bg-white">
-      <div class="flex gap-4">
+  <header class="shadow-sm">
+    <div class="container d-flex py-3 align-items-center bg-white">
+      <div class="d-flex nav">
         <NuxtLink to="/">Home</NuxtLink>
         <NuxtLink to="/about">About</NuxtLink>
         <NuxtLink to="/contact">Contact</NuxtLink>
         <NuxtLink to="/admin">admin</NuxtLink>
       </div>
-      <div class="ml-auto">
-        <button class="rounded border px-4 py-2" type="button" @click="changeLanguage">
+      <div class="ms-auto">
+        <button class="btn" type="button" @click="changeLanguage">
           {{ $t('language') }}
         </button>
       </div>
@@ -24,3 +24,9 @@ const changeLanguage = () => {
   setLocaleCookie(localeCode)
 }
 </script>
+
+<style lang="scss" scoped>
+.nav {
+  gap: 20px;
+}
+</style>

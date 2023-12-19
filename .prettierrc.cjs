@@ -2,8 +2,7 @@ module.exports = {
   plugins: [
     'prettier-plugin-organize-imports',
     'prettier-plugin-packagejson',
-    'prettier-plugin-organize-attributes',
-    'prettier-plugin-tailwindcss'
+    'prettier-plugin-organize-attributes'
   ],
   printWidth: 100, // 每行文字數量達 100 字元就換到新的一行
   semi: false, // 每個語句的結尾不需要分號
