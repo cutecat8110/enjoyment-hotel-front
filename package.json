@@ -41,6 +41,12 @@
     "vue-tsc": "^1.8.25"
   },
   "dependencies": {
+<<<<<<< HEAD
     "@popperjs/core": "^2.11.8"
+=======
+    "@nuxt/image": "^1.1.0",
+    "@popperjs/core": "^2.11.8",
+    "bootstrap": "^5.3.2"
+>>>>>>> main
   }
 }

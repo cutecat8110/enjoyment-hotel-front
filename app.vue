@@ -5,6 +5,10 @@
 </template>
 
 <style>
+body {
+  background-color: #cccccc;
+}
+
 .page-enter-active,
 .page-leave-active {
   transition: all 0.075s ease-in-out !important;
