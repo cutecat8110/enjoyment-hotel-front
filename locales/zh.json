@@ -1,3 +1,15 @@
 {
-  "language": "語言"
+  "admin": "管理者",
+  "confirmation": "預約成功",
+  "index": "首頁",
+  "language": "語言",
+  "login": "登入",
+  "reserve": "預定",
+  "room": "房型詳細",
+  "rooms": "客房旅宿",
+  "signup": "註冊",
+  "user": "會員",
+  "user-orders": "我的訂單",
+  "room-id": "房型詳細"
+
 }

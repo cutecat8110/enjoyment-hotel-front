@@ -1,10 +1,12 @@
 <template>
-  <header class="page-header bg-black">
-    <NuxtImg src="/img/logo.png" height="72" />
+  <header class="page-header">
+    <NuxtLink to="/">
+      <NuxtImg src="/img/logo.png" height="72" />
+    </NuxtLink>
     <nav class="navbar">
-      <NuxtLink to="/">客房旅宿</NuxtLink>
-      <NuxtLink to="/about">會員登入</NuxtLink>
-      <NuxtLink to="/contact">立即訂房</NuxtLink>
+      <NuxtLink to="/rooms">客房旅宿</NuxtLink>
+      <NuxtLink to="/login">會員登入</NuxtLink>
+      <NuxtLink to="/rooms">立即訂房</NuxtLink>
     </nav>
   </header>
 </template>
