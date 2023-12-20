@@ -1,32 +1,28 @@
 <template>
-  <header class="shadow-sm">
-    <div class="container d-flex py-3 align-items-center bg-white">
-      <div class="d-flex nav">
-        <NuxtLink to="/">Home</NuxtLink>
-        <NuxtLink to="/about">About</NuxtLink>
-        <NuxtLink to="/contact">Contact</NuxtLink>
-        <NuxtLink to="/admin">admin</NuxtLink>
-      </div>
-      <div class="ms-auto">
-        <button class="btn" type="button" @click="changeLanguage">
-          {{ $t('language') }}
-        </button>
-      </div>
-    </div>
+  <header class="page-header bg-black">
+    <NuxtImg src="/img/logo.png" height="72" />
+    <nav class="navbar">
+      <NuxtLink to="/">客房旅宿</NuxtLink>
+      <NuxtLink to="/about">會員登入</NuxtLink>
+      <NuxtLink to="/contact">立即訂房</NuxtLink>
+    </nav>
   </header>
 </template>
 
-<script lang="ts" setup>
-const { locale, setLocaleCookie } = useI18n()
-const changeLanguage = () => {
-  const localeCode = locale.value === 'en' ? 'zh' : 'en'
-  locale.value = localeCode
-  setLocaleCookie(localeCode)
-}
-</script>
+<script lang="ts" setup></script>
 
 <style lang="scss" scoped>
-.nav {
-  gap: 20px;
+.page-header {
+  padding: 1.5rem 5rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  .navbar {
+    display: flex;
+
+    margin-left: auto;
+    gap: 1rem;
+    color: #ffffff;
+  }
 }
 </style>
