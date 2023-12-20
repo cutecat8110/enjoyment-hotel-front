@@ -40,15 +40,13 @@ export default defineNuxtConfig({
     vueI18n: './i18n.config.js'
   },
 
-  css: ['~/assets/scss/app.scss'],
-
+  css: ['@/assets/scss/app.scss'],
   postcss: {
     // CSS 屬性加上瀏覽器相容性前綴
     plugins: {
       autoprefixer: true
     }
   },
-
   vite: {
     // 定義全域共用 Sass / SCSS 變數
     css: {
