@@ -1,3 +1,14 @@
 {
-  "language": "Language"
+  "admin": "Admin",
+  "confirmation": "Confirmation",
+  "index": "Index",
+  "language": "Language",
+  "login": "Login",
+  "reserve": "Reserve",
+  "room": "Room",
+  "rooms": "Rooms",
+  "signup": "Signup",
+  "user": "User",
+  "user-orders": "User Orders",
+  "room-id": "Room ID"
 }

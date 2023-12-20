@@ -1,6 +1,6 @@
 <template>
   <div class="flex-column min-h-screen d-flex">
-    <PageHeader class="sticky-top" />
+    <PageHeader class="fixed-top" />
     <main class="layout-default-main">
       <slot />
     </main>

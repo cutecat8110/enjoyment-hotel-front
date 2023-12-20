@@ -1,15 +1,35 @@
 <template>
-  <div class="container my-5">
-    <h1>{{ `This is ${route.name}.` }}</h1>
+  <div class="page-default">
+    <article v-for="(_, index) in 5" :key="index" class="container border">
+      <div class="page-text">{{ `This is ${$t(String(route.name))} page.` }}</div>
+      <div class="page-text">
+        {{ index + 1 }}
+      </div>
+      <div v-if="index === 0">
+        <slot></slot>
+      </div>
+    </article>
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 const route = useRoute()
 </script>
 
 <style lang="scss" scoped>
-h1 {
-  color: $primary;
+.page-default {
+  background-color: #cccccc;
+  > article {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+  .page-text {
+    color: #fff;
+    font-size: 2rem;
+  }
 }
 </style>
