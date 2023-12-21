@@ -1,2 +1,93 @@
-$primary: #c97f54;
-$secondary: #e4a79d;
+// scss-docs-start gray-color-variables
+$white:    #fff !default;    // 中性色 Neutral 0
+$gray-100: #F9F9F9 !default; // 中性色 Neutral 10
+$gray-200: #e9ecef !default;
+$gray-300: #dee2e6 !default;
+$gray-400: #ECECEC !default; // 中性色 Neutral 40
+$gray-500: #adb5bd !default;
+$gray-600: #909090 !default; // 中性色 Neutral 60
+$gray-700: #495057 !default;
+$gray-800: #4B4B4B !default; // 中性色 Neutral 80
+$gray-900: #212529 !default;
+$black:    #000 !default;    // 中性色 Neutral 100
+
+// scss-docs-start color-variables
+$blue:    #0d6efd !default;
+$indigo:  #6610f2 !default;
+$purple:  #6f42c1 !default;
+$pink:    #d63384 !default;
+$red:     #dc3545 !default;
+$orange:  #fd7e14 !default;
+$yellow:  #ffc107 !default;
+$green:   #198754 !default;
+$teal:    #20c997 !default;
+$cyan:    #0dcaf0 !default;
+
+// scss-docs-start theme-color-variables
+
+// primary
+$primary-dark:  #7B6651 !default; // 120
+$primary:       #BF9D7D !default; // 100
+$primary-80:    #AE9984 !default; // 80
+$primary-60:    #E1D1C2!default;  // 60
+$primary-40:    #F1EAE4 !default; // 40
+$primary-tint:  #FAF7F5 !default; // Primary Tint
+
+$secondary:     $gray-600 !default;
+// success
+$success-dark:  #299F65 !default; // 120
+$success:       #52DD7E !default; // 100
+$success-20:    #BCFBBD !default; // 20
+$success-10:    #E8FEE7 !default; // 10
+// info
+$info-dark:     #1D66AC !default; // 120
+$info:          #3BADEF !default; // 100
+$info-20:       #B1EFFD !default; // 20
+$info-10:       #E6FBFE !default; // 10
+
+$warning:       $yellow !default;
+// Alert / Error
+$danger-dark:   #C22538 !default; // 120
+$danger:        #DA3E51 !default; // 100  原 $red
+$danger-20:     #F5CCD1 !default; // 20
+$danger-10:     #FDECEF !default; // 10
+
+$light:         $gray-100 !default;
+$dark:          $black !default;
+// scss-docs-end theme-color-variables
+
+// scss-docs-start theme-colors-map
+$theme-colors: (
+  "primary-dark":   $primary-dark,
+  "primary":        $primary,
+  "primary-80":     $primary-80,
+  "primary-60":     $primary-60,
+  "primary-40":     $primary-40,
+  "primary-tint":   $primary-tint,
+
+  "secondary":      $secondary,
+
+  "success-dark":   $success-dark,
+  "success":        $success,
+  "success-20":     $success-20,
+  "success-10":     $success-10,
+
+  "info-dark":      $info-dark,
+  "info":           $info,
+  "info-20":        $info-20,
+  "info-10":        $info-10,
+
+  "warning":        $warning,
+
+  "danger-dark":    $danger-dark,
+  "danger":         $danger,
+  "danger-20":      $danger-20,
+  "danger-10":      $danger-10,
+
+  "light":          $white,
+  "dark":           $dark,
+  "gray-80":        $gray-800,
+  "gray-60":        $gray-600,
+  "gray-40":        $gray-400,
+  "gray-10":        $gray-100
+) !default;

@@ -5,6 +5,7 @@
 
 /** 2. 自訂變數置於 bootstrap variables 前，覆蓋 bootstrap 變數 */
 @import './color';
+@import './font';
 @import './variables';
 
 /** 3. 引入 variables, mixins, root */
@@ -35,4 +36,6 @@
 @import 'bootstrap/scss/utilities/api';
 
 /** 8. 客製樣式置於最後，覆蓋前面的樣式 */
+@import './button';
+@import './base';
 @import './style';
