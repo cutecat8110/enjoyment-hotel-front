@@ -1,7 +1,7 @@
 <template>
-  <div class="flex-column min-h-screen d-flex">
+  <div class="layout-default flex-column min-h-screen d-flex">
     <PageHeader class="fixed-top" />
-    <main class="layout-default-main">
+    <main>
       <slot />
     </main>
     <PageFooter />
@@ -9,7 +9,7 @@
 </template>
 
 <style lang="scss" scoped>
-.layout-default-main {
+.layout-default > main {
   overflow-x: hidden;
   flex: 1;
 }
