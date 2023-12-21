@@ -1,5 +1,5 @@
 <template>
-  <header class="page-header">
+  <header :class="[statusColor, 'page-header']">
     <NuxtLink to="/">
       <NuxtImg src="/img/logo.png" height="72" />
     </NuxtLink>
@@ -11,7 +11,23 @@
   </header>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+const props = defineProps({
+  status: {
+    type: Number,
+    default: 0
+  }
+})
+
+const statusColor = computed(() => {
+  switch (props.status) {
+    case 1:
+      return 'bg-black'
+    default:
+      return ''
+  }
+})
+</script>
 
 <style lang="scss" scoped>
 .page-header {
