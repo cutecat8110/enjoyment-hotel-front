@@ -1,0 +1,20 @@
+$dropdown-min-width: 300px;
+$dropdown-padding-x: $spacer;
+$dropdown-padding-y: $spacer;
+$dropdown-border-color: $primary;
+
+.dropdown {
+  & .btn.btn-dropdown {
+    color: $gray-800;
+    background-color: $light;
+    
+    &:focus {
+      color: $dark;
+      border-color: $primary;
+    }
+    &.disabled {
+      color: $dark;
+      opacity: 1;
+    }
+  }
+}

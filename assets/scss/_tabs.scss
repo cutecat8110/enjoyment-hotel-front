@@ -1,0 +1,23 @@
+$nav-link-padding-y: 1rem * 0.5;
+$nav-link-padding-x: 1rem * 0.5;
+$nav-link-hover-color: $primary;
+$nav-link-font-weight: 700;
+
+.nav {
+  & .nav-link {
+    position: relative;
+    &:hover, &:active, &.active {
+      &::after {
+        position: absolute;
+        content: '';
+        left: 50%;
+        bottom: 0;
+        transform: translateX(-50%);
+        width: 70%;
+        height: 4px;
+        background-color:  $primary;
+        border-radius: 10px;
+      }
+    }
+  }
+}

@@ -1,0 +1,32 @@
+// checkbox
+$form-check-input-checked-bg-color: $primary;
+$form-check-input-focus-box-shadow: none;
+
+[type="checkbox"] {
+  &:hover {
+    border-color: $gray-400;
+    box-shadow: 0px 0px 0px 2px $primary;
+    cursor: pointer;
+  }
+}
+
+
+// Input Field
+$form-label-color: $light;
+$form-label-font-weight: 700;
+
+$input-padding-y: $spacer;
+$input-padding-x: $spacer;
+
+// 預設
+$input-color: $gray-800;
+$input-border-color: $gray-400;
+$input-placeholder-color: $gray-600;
+// focus
+$input-focus-border-color: $primary;
+$input-focus-color: $gray-800;
+$input-focus-box-shadow: 0px 0px 0px 4px rgba($primary, 0.1);
+
+.form-control.verify-error {
+  border-color: $danger;
+}

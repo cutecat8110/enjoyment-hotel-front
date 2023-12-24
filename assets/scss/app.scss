@@ -4,9 +4,13 @@
 @import 'bootstrap/scss/functions';
 
 /** 2. 自訂變數置於 bootstrap variables 前，覆蓋 bootstrap 變數 */
+@import './spacers';
+@import './variables';
 @import './color';
 @import './font';
-@import './variables';
+@import './input';
+@import './dropdown';
+@import './tabs';
 
 /** 3. 引入 variables, mixins, root */
 @import 'bootstrap/scss/variables';
@@ -29,6 +33,8 @@
 @import 'bootstrap/scss/tables';
 @import 'bootstrap/scss/forms';
 @import 'bootstrap/scss/buttons';
+@import 'bootstrap/scss/dropdown';
+@import 'bootstrap/scss/nav';
 @import 'bootstrap/scss/helpers';
 /** ... */
 

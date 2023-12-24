@@ -1,4 +1,59 @@
 $btn-padding-y:               16px;
 $btn-padding-x:               32px;
 
-.btn-primary {}
+.btn-primary {
+  color: $light;
+  &:hover {
+    color: $light;
+    background-color: darken($primary-dark, 1.2);
+  }
+
+  &.disabled {
+    color: $secondary;
+    background-color: transparent;
+    border-color: transparent;
+  }
+}
+
+.btn-outline-primary {
+  background-color: $light;
+  &:hover {
+    color: $primary-dark;
+    border-color: $primary-dark;
+    background-color: #F7F2EE;
+  }
+
+  &.disabled {
+    color: $gray-600;
+    border-color: $gray-600;
+    background-color: $light;
+    opacity: 1;
+  }
+}
+
+.btn-ghost {
+  color: $light;
+  &:hover {
+    color: $primary-dark;
+    border-color: transparent;
+  }
+
+  &.disabled {
+    color: $gray-600;
+    border-color: transparent;
+  }
+}
+
+.btn-text {
+  color: $primary;
+  text-decoration: underline;
+  &:hover {
+    color: $primary-dark;
+    border-color: transparent;
+  }
+
+  &.disabled {
+    color: $gray-600;
+    border-color: transparent;
+  }
+}

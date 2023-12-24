@@ -1,8 +1,8 @@
 <template>
   <div class="p-4">
-    <h2 class="text-primary-dark fw-bold">Font</h2>
-    <h5 class="text-info-dark fw-bold">大小</h5>
-    <ul class="list-unstyled row flex-wrap mb-4">
+    <h2 class="text-primary-dark fw-bold d-none">Font</h2>
+    <h5 class="text-info-dark fw-bold d-none">大小</h5>
+    <ul class="list-unstyled row flex-wrap mb-4 d-none">
       <li class="col-4 border border-dark">
         <div class="fs-lg">"fs-lg" 100px</div>
       </li>
@@ -34,8 +34,8 @@
         <small>small 12px</small>
       </li>
     </ul>
-    <h5 class="text-info-dark fw-bold">粗細</h5>
-    <ul class="list-unstyled row flex-wrap mb-4">
+    <h5 class="text-info-dark fw-bold d-none">粗細</h5>
+    <ul class="list-unstyled row flex-wrap mb-4 d-none">
       <li class="col-4 border border-dark">
         <div>Base 400</div>
       </li>
@@ -47,7 +47,7 @@
       </li>
     </ul>
 
-    <div class="row border-bottom border-dark pb-5 mb-4">
+    <div class="row border-bottom border-dark pb-5 mb-4 d-none">
       <div class="col-6">
         <h5 class="text-info-dark fw-bold">行高</h5>
         <ul class="row list-unstyled row flex-wrap">
@@ -72,8 +72,8 @@
       </div>
     </div>
 
-    <h2 class="text-primary-dark fw-bold">Color</h2>
-    <ul class="list-unstyled flex-wrap border-bottom border-dark pb-5 mb-4">
+    <h2 class="text-primary-dark fw-bold d-none">Color</h2>
+    <ul class="list-unstyled flex-wrap border-bottom border-dark pb-5 mb-4 d-none">
       <li class="d-flex flex-wrap border border-dark mb-1">
         <div class="col-2">
           <div class="p-2 bg-primary-dark text-light">Primary-dark</div>
@@ -119,21 +119,145 @@
       </li>
     </ul>
 
-    <h2>Button</h2>
-    <ul class="list-unstyled flex-wrap border-bottom border-dark pb-5 mb-4">
-      <button class="btn btn-primary me-2">Primary</button>
-      <button class="btn btn-secondary me-2">Secondary</button>
-      <button class="btn btn-ghost me-2">Ghost</button>
-      <button class="btn btn-text">Text</button>
+    <h2 class="text-primary-dark fw-bold d-none">Button</h2>
+    <div class="border-bottom border-dark pb-5 d-none">
+      <ul class="list-unstyled d-flex flex-wrap mb-2">
+        <li class="">
+          <button class="btn btn-primary me-2">Primary icon</button>
+        </li>
+        <li class="">
+          <button class="btn btn-primary disabled">Primary disabled</button>
+        </li>
+      </ul>
+      <ul class="list-unstyled d-flex flex-wrap mb-2">
+        <li class="">
+          <button class="btn btn-outline-primary me-2">Secondary icon</button>
+        </li>
+        <li class="">
+          <button class="btn btn-outline-primary disabled">Secondary icon</button>
+        </li>
+      </ul>
+      <ul class="list-unstyled d-flex flex-wrap mb-2">
+        <li class="">
+          <button class="btn btn-ghost">Ghost</button>
+        </li>
+        <li class="">
+          <button class="btn btn-ghost disabled">Ghost disabled</button>
+        </li>
+      </ul>
+      <ul class="list-unstyled d-flex flex-wrap">
+        <li class="">
+          <button class="btn btn-text">Text</button>
+        </li>
+        <li class="">
+          <button class="btn btn-text disabled">Text disabled</button>
+        </li>
+      </ul>
+    </div>
+
+    <h2 class="text-primary-dark fw-bold d-none">Input Field</h2>
+    <ul class="list-unstyled d-flex flex-wrap border-bottom border-dark pb-5 mb-4 d-none">
+      <li class="me-3">
+        <label class="form-label d-flex justify-content-between" for="default">
+          預設
+          <span class="text-primary fw-bold ms-auto">必填</span>
+        </label>
+        <input id="text" class="form-control" type="default" placeholder="請輸入" />
+      </li>
+      <li>
+        <label class="form-label d-flex ustify-content-between" for="name">錯誤</label>
+        <input
+          id="name"
+          class="form-control verify-error"
+          type="name"
+          value="名稱"
+          placeholder="error"
+        />
+        <div class="text-danger fs-8 fw-bold mt-2">錯誤提示訊息</div>
+      </li>
     </ul>
 
-    <h2>Icon</h2>
-    <h2>Input Field</h2>
-    <h2>Dropdown</h2>
-    <h2>Section Tab</h2>
-    <h2>Checkbox</h2>
-    <h2>Stepper</h2>
-    <h2></h2>
+    <h2 class="text-primary-dark fw-bold d-none">Dropdown</h2>
+    <ul class="list-unstyled d-flex flex-wrap border-bottom border-dark pb-5 mb-4 d-none">
+      <li class="me-3">
+        <div class="dropdown">
+          <button
+            class="btn btn-dropdown dropdown-toggle"
+            type="button"
+            aria-expanded="false"
+            data-bs-auto-close="outside"
+            data-bs-toggle="dropdown"
+          >
+            Dropdown
+          </button>
+          <form class="dropdown-menu">
+            <div class="mb-3">
+              <label class="form-label text-dark" for="exampleDropdownFormEmail2">Email</label>
+              <input
+                id="exampleDropdownFormEmail2"
+                class="form-control"
+                type="email"
+                placeholder="email@example.com"
+              />
+            </div>
+            <button class="btn btn-primary" type="submit">Sign in</button>
+          </form>
+        </div>
+      </li>
+      <li>
+        <div class="dropdown w-100">
+          <button
+            class="btn btn-dropdown dropdown-toggle w-100 disabled"
+            type="button"
+            aria-expanded="false"
+            data-bs-auto-close="outside"
+            data-bs-toggle="dropdown"
+          >
+            Dropdown disabled
+          </button>
+          <form class="dropdown-menu">
+            <div class="mb-3">
+              <input id="inpuy" class="form-control" type="email" placeholder="email" />
+            </div>
+          </form>
+        </div>
+      </li>
+    </ul>
+
+    <h2 class="text-primary-dark fw-bold">Section Tab</h2>
+    <ul class="nav list-unstyled d-flex flex-wrap border-bottom border-dark pb-5 mb-4">
+      <li class="nav-item">
+        <a class="nav-link active" href="#" aria-current="page">Active</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Section Tab</a>
+      </li>
+    </ul>
+
+    <h2 class="text-primary-dark fw-bold d-none">Checkbox</h2>
+    <ul class="list-unstyled d-flex flex-wrap border-bottom border-dark pb-5 mb-4 d-none">
+      <li class="me-3">
+        <label class="form-check-label" for="flexCheckChecked-1">
+          <input id="flexCheckChecked-1" class="form-check-input" type="checkbox" value="" />
+          Unchecked
+        </label>
+      </li>
+      <li>
+        <label class="form-check-label" for="flexCheckChecked-2">
+          <input
+            id="flexCheckChecked-2"
+            class="form-check-input"
+            type="checkbox"
+            value=""
+            checked
+          />
+          Checked
+        </label>
+      </li>
+    </ul>
+
+    <h2 class="text-primary-dark fw-bold">Stepper</h2>
+    <h2 class="text-primary-dark fw-bold"></h2>
   </div>
 </template>
 
