@@ -1,8 +1,8 @@
 <template>
   <div class="p-4">
-    <h2 class="text-primary-dark fw-bold d-none">Font</h2>
-    <h5 class="text-info-dark fw-bold d-none">大小</h5>
-    <ul class="list-unstyled row flex-wrap mb-4 d-none">
+    <h2 class="text-primary-dark fw-bold">Font</h2>
+    <h5 class="text-info-dark fw-bold">大小</h5>
+    <ul class="list-unstyled row flex-wrap mb-4">
       <li class="col-4 border border-dark">
         <div class="fs-lg">"fs-lg" 100px</div>
       </li>
@@ -34,46 +34,45 @@
         <small>small 12px</small>
       </li>
     </ul>
-    <h5 class="text-info-dark fw-bold d-none">粗細</h5>
-    <ul class="list-unstyled row flex-wrap mb-4 d-none">
-      <li class="col-4 border border-dark">
+    <h5 class="text-info-dark fw-bold">粗細</h5>
+    <ul class="list-unstyled row flex-wrap mb-4">
+      <li class="col-2 border border-dark">
         <div>Base 400</div>
       </li>
-      <li class="col-4 border border-dark">
+      <li class="col-2 border border-dark">
         <div class="fw-medium">"fw-medium" 500</div>
       </li>
-      <li class="col-4 border border-dark">
+      <li class="col-2 border border-dark">
         <div class="fw-bold">"fw-bold" 700</div>
       </li>
     </ul>
 
-    <div class="row border-bottom border-dark pb-5 mb-4 d-none">
-      <div class="col-6">
-        <h5 class="text-info-dark fw-bold">行高</h5>
-        <ul class="row list-unstyled row flex-wrap">
-          <li class="col-6 border border-dark">
-            <p>Base 150%</p>
-          </li>
-          <li class="col-6 border border-dark">
-            <p class="lh-lg">"lh-lg" 在大標題上使用 120%</p>
-          </li>
-        </ul>
-      </div>
-      <div class="col-6">
-        <h5 class="text-info-dark fw-bold">字母間距</h5>
-        <ul class="row list-unstyled row flex-wrap">
-          <li class="col-6 border border-dark">
-            <p>Base 2%</p>
-          </li>
-          <li class="col-6 border border-dark">
-            <p class="">"" 在標題上使用 5%</p>
-          </li>
-        </ul>
-      </div>
+    <div class="row mb-4">
+      <h5 class="text-info-dark fw-bold">行高</h5>
+      <ul class="row list-unstyled row flex-wrap">
+        <li class="col-2 border border-dark">
+          <p>Base 150%</p>
+        </li>
+        <li class="col-2 border border-dark">
+          <p class="lh-lg">"lh-lg" 在大標題上使用 120%</p>
+        </li>
+      </ul>
     </div>
 
-    <h2 class="text-primary-dark fw-bold d-none">Color</h2>
-    <ul class="list-unstyled flex-wrap border-bottom border-dark pb-5 mb-4 d-none">
+    <div class="border-bottom border-dark pb-5 mb-4">
+      <h5 class="text-info-dark fw-bold">字母間距</h5>
+      <ul class="row list-unstyled row flex-wrap">
+        <li class="col-2 border border-dark">
+          <p>Base 2%</p>
+        </li>
+        <li class="col-2 border border-dark">
+          <p class="ls-1">"ls-1" 在標題上使用 5%</p>
+        </li>
+      </ul>
+    </div>
+
+    <h2 class="text-primary-dark fw-bold">Color</h2>
+    <ul class="list-unstyled flex-wrap border-bottom border-dark pb-5 mb-4">
       <li class="d-flex flex-wrap border border-dark mb-1">
         <div class="col-2">
           <div class="p-2 bg-primary-dark text-light">Primary-dark</div>
@@ -119,8 +118,8 @@
       </li>
     </ul>
 
-    <h2 class="text-primary-dark fw-bold d-none">Button</h2>
-    <div class="border-bottom border-dark pb-5 d-none">
+    <h2 class="text-primary-dark fw-bold">Button</h2>
+    <div class="border-bottom border-dark pb-5">
       <ul class="list-unstyled d-flex flex-wrap mb-2">
         <li class="">
           <button class="btn btn-primary me-2">Primary icon</button>
@@ -155,8 +154,8 @@
       </ul>
     </div>
 
-    <h2 class="text-primary-dark fw-bold d-none">Input Field</h2>
-    <ul class="list-unstyled d-flex flex-wrap border-bottom border-dark pb-5 mb-4 d-none">
+    <h2 class="text-primary-dark fw-bold">Input Field</h2>
+    <ul class="list-unstyled d-flex flex-wrap border-bottom border-dark pb-5 mb-4">
       <li class="me-3">
         <label class="form-label d-flex justify-content-between" for="default">
           預設
@@ -177,8 +176,8 @@
       </li>
     </ul>
 
-    <h2 class="text-primary-dark fw-bold d-none">Dropdown</h2>
-    <ul class="list-unstyled d-flex flex-wrap border-bottom border-dark pb-5 mb-4 d-none">
+    <h2 class="text-primary-dark fw-bold">Dropdown</h2>
+    <ul class="list-unstyled d-flex flex-wrap border-bottom border-dark pb-5 mb-4">
       <li class="me-3">
         <div class="dropdown">
           <button
@@ -234,8 +233,8 @@
       </li>
     </ul>
 
-    <h2 class="text-primary-dark fw-bold d-none">Checkbox</h2>
-    <ul class="list-unstyled d-flex flex-wrap border-bottom border-dark pb-5 mb-4 d-none">
+    <h2 class="text-primary-dark fw-bold">Checkbox</h2>
+    <ul class="list-unstyled d-flex flex-wrap border-bottom border-dark pb-5 mb-4">
       <li class="me-3">
         <label class="form-check-label" for="flexCheckChecked-1">
           <input id="flexCheckChecked-1" class="form-check-input" type="checkbox" value="" />
@@ -255,9 +254,6 @@
         </label>
       </li>
     </ul>
-
-    <h2 class="text-primary-dark fw-bold">Stepper</h2>
-    <h2 class="text-primary-dark fw-bold"></h2>
   </div>
 </template>
 

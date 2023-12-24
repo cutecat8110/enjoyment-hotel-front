@@ -30,3 +30,8 @@ $font-sizes: (
   8:  $h8-font-size,
   lg: $font-size-lg
 );
+
+// 文字間距
+.ls-1 {
+  letter-spacing: 0.05rem;
+}
