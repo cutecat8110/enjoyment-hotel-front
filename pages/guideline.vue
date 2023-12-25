@@ -113,6 +113,7 @@
       </li>
 
       <li class="d-flex flex-wrap border border-dark">
+        <div class="col-4"><div class="p-2 bg-background text-light">Background</div></div>
         <div class="col-4"><div class="p-2 bg-dark text-light">Dark</div></div>
         <div class="col-4"><div class="p-2 bg-light border-end">Light</div></div>
       </li>

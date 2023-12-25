@@ -1,8 +1,10 @@
-$btn-padding-y:               16px;
-$btn-padding-x:               32px;
+$btn-padding-y: 16px;
+$btn-padding-x: 32px;
 
 .btn-primary {
   color: $light;
+  padding: $spacer $spacer * 2;
+  border: 0;
   &:hover {
     color: $light;
     background-color: darken($primary-dark, 1.2);
@@ -17,10 +19,11 @@ $btn-padding-x:               32px;
 
 .btn-outline-primary {
   background-color: $light;
+  padding: calc($spacer - 1px) calc($spacer * 2 - 1px);
   &:hover {
     color: $primary-dark;
     border-color: $primary-dark;
-    background-color: #F7F2EE;
+    background-color: #f7f2ee;
   }
 
   &.disabled {
@@ -33,6 +36,8 @@ $btn-padding-x:               32px;
 
 .btn-ghost {
   color: $light;
+  padding: $spacer;
+  border: 0;
   &:hover {
     color: $primary-dark;
     border-color: transparent;
@@ -47,6 +52,8 @@ $btn-padding-x:               32px;
 .btn-text {
   color: $primary;
   text-decoration: underline;
+  padding: 0;
+  border: 0;
   &:hover {
     color: $primary-dark;
     border-color: transparent;
