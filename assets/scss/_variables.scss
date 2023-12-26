@@ -9,7 +9,7 @@ $duration-450: 450ms; // page, modal
 }
 
 @mixin md {
-  @media (max-width: 1200px) {
+  @media (max-width: 768px) {
     @content;
   }
 }

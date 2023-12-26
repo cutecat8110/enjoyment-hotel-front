@@ -36,12 +36,14 @@
 @import 'bootstrap/scss/dropdown';
 @import 'bootstrap/scss/nav';
 @import 'bootstrap/scss/helpers';
+@import 'bootstrap/scss/transitions';
 /** ... */
 
 /** 7. 使用 utilities 需引入 utilities api（將 sass map 轉換為 utility classes） */
 @import 'bootstrap/scss/utilities/api';
 
 /** 8. 客製樣式置於最後，覆蓋前面的樣式 */
+@import './navbar';
 @import './button';
 @import './base';
 @import './style';
