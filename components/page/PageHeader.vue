@@ -141,40 +141,41 @@ watch(width, () => {
   }
 
   .navbar-collapse {
-    position: fixed;
-    z-index: 1090;
-    top: 0;
-    left: 0;
-    overflow: hidden;
-    transition: width $duration-300 ease-in-out;
-    background: $background;
-
     @include md {
+      position: fixed;
+      z-index: 1090;
+      top: 0;
+      left: 0;
+      overflow: hidden;
+      transition: width $duration-300 ease-in-out;
+      background: $background;
+
       width: 0;
       height: 100vh;
 
       &.show {
         width: 100vw;
       }
-    }
 
-    &.collapsing {
-      width: 0;
-      height: 100vh;
+      &.collapsing {
+        width: 0;
+        height: 100vh;
+      }
     }
   }
 
   .nav-list {
     display: flex;
-    gap: 16px;
-    width: 100%;
-    height: 100vh;
+    list-style: none;
     margin: 0;
     padding: 0;
-    padding: 1.25rem;
-    list-style: none;
 
     @include md {
+      gap: 16px;
+      width: 100%;
+      height: 100vh;
+      padding: 1.25rem;
+
       flex-direction: column;
       justify-content: center;
 
