@@ -86,11 +86,13 @@ const toLock = () => {
 
 /* 收合 */
 const closeNav = () => {
-  toggler.value.click()
+  if (width.value < 768 && isLocked.value) {
+    toggler.value.click()
+  }
 }
 watch(width, () => {
   if (width.value > 768 && isLocked.value) {
-    closeNav()
+    toggler.value.click()
   }
 })
 </script>
