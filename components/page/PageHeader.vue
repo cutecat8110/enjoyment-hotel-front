@@ -1,7 +1,7 @@
 <template>
   <header :class="[colorful && 'bg-background', 'page-header']">
     <NuxtLink to="/">
-      <NuxtImg src="/img/logo.png" :height="width < 1200 ? 40 : 72" />
+      <NuxtImg src="/img/logo.png" :height="width < 768 ? 40 : 72" />
     </NuxtLink>
     <nav v-if="props.status !== 'auth'" class="navbar navbar-expand-md">
       <button
