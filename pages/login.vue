@@ -1,33 +1,34 @@
 <template>
-  <div class="login-wrapper">
+  <div class="login-wrapper bg-background">
     <NuxtImg class="img-cover" src="/img/register.png" />
     <div class="login-content">
       <main>
         <div>
-          <div>享樂酒店，誠摯歡迎</div>
-          <h2>立即開始旅程</h2>
+          <div class="text-primary fs-7 fw-bold lh-lg ls-1 mb-2">享樂酒店，誠摯歡迎</div>
+          <div class="text-light fs-1 fw-bold lh-lg ls-1">立即開始旅程</div>
         </div>
         <div class="input-wrapper">
           <div>
-            <label for="email">電子信箱</label>
-            <input id="email" name="email" type="text" />
+            <label class="form-label" for="email"> 電子信箱 </label>
+            <input id="text" class="form-control" type="email" placeholder="hello@exsample.com" />
           </div>
           <div>
-            <label for="email">電子信箱</label>
-            <input id="email" name="email" type="text" />
+            <label class="form-label" for="password"> 密碼 </label>
+            <input id="password" class="form-control" type="password" placeholder="請輸入密碼" />
           </div>
           <div class="d-flex justify-content-between">
-            <div>
-              <input id="remember" name="remember" type="checkbox" checked />
-              <label for="remember">記住帳號</label>
-            </div>
-            <div>忘記密碼？</div>
+            <label class="form-check-label text-light" for="remember">
+              <input id="remember" class="form-check-input" type="checkbox" />
+              記住帳號
+            </label>
+            <button class="btn btn-text">忘記密碼？</button>
           </div>
-          <button type="button">會員登入</button>
-          <div>
-            沒有會員嗎？
-            <NuxtLink to="/signup">前往註冊</NuxtLink>
-          </div>
+        </div>
+        <button class="btn btn-primary" type="button">會員登入</button>
+
+        <div>
+          <span class="text-light me-2"> 沒有會員嗎？ </span>
+          <NuxtLink class="btn btn-text text-primary" to="/signup">前往註冊</NuxtLink>
         </div>
       </main>
     </div>
@@ -52,6 +53,8 @@ definePageMeta({
   }
 
   main {
+    max-width: 26rem;
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 2.5rem;
@@ -60,7 +63,7 @@ definePageMeta({
   .input-wrapper {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 1rem;
   }
 }
 </style>
