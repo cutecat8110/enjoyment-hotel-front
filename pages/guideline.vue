@@ -4,7 +4,7 @@
     <h5 class="text-info-dark fw-bold">大小</h5>
     <ul class="list-unstyled row flex-wrap mb-4">
       <li class="col-4 border border-dark">
-        <div class="fs-lg fs-xl-6">"fs-lg" 100px</div>
+        <div class="fs-md-6 fs-lg-lg">"fs-lg" 100px</div>
       </li>
       <li class="col-4 border border-dark">
         <h1>"h1"/"fs-1" 48px</h1>
