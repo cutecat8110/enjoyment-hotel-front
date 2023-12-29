@@ -7,6 +7,12 @@ $utilities: map-merge(
 				responsive: true
 			)
 		),
+    'viewport-height': map-merge(
+			map-get($utilities, 'viewport-height'),
+			(
+				responsive: true
+			)
+    ),
     'cursor': (
       property: cursor,
       class: cursor,
