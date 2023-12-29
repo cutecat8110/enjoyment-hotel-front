@@ -1,11 +1,11 @@
 <template>
   <div class="login-wrapper bg-background">
-    <NuxtImg class="img-cover" src="/img/register.png" />
+    <NuxtImg class="img-cover d-none d-md-block" src="/img/register.png" />
     <div class="login-content">
       <main>
         <div>
           <div class="text-primary fs-7 fw-bold lh-lg ls-1 mb-2">享樂酒店，誠摯歡迎</div>
-          <div class="text-light fs-1 fw-bold lh-lg ls-1">立即開始旅程</div>
+          <div class="text-light fs-1 fs-md-3 fw-bold lh-lg ls-1">立即開始旅程</div>
         </div>
         <div class="input-wrapper">
           <div>
@@ -26,8 +26,8 @@
         </div>
         <button class="btn btn-primary" type="button">會員登入</button>
 
-        <div>
-          <span class="text-light me-2"> 沒有會員嗎？ </span>
+        <div class="d-flex">
+          <div class="text-light me-2">沒有會員嗎？</div>
           <NuxtLink class="btn btn-text text-primary" to="/signup">前往註冊</NuxtLink>
         </div>
       </main>
@@ -46,6 +46,10 @@ definePageMeta({
   display: grid;
   grid-template-columns: repeat(2, 50%);
   grid-template-rows: 100vh;
+
+  @include md {
+    grid-template-columns: 1fr;
+  }
   .login-content {
     display: flex;
     align-items: center;
@@ -58,6 +62,7 @@ definePageMeta({
     display: flex;
     flex-direction: column;
     gap: 2.5rem;
+    padding: 1.25rem;
   }
 
   .input-wrapper {
