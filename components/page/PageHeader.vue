@@ -3,7 +3,7 @@
     <NuxtLink to="/">
       <NuxtImg src="/img/logo.png" :height="width < 768 ? 40 : 72" />
     </NuxtLink>
-    <nav v-if="props.status !== 'auth'" class="navbar navbar-expand-md">
+    <nav v-if="props.status !== 'auth' || !isOverMd" class="navbar navbar-expand-md">
       <button
         ref="toggler"
         :class="[isLocked && 'isLocked', 'btn btn-ghost navbar-toggler shadow-none']"
@@ -85,13 +85,14 @@ const toLock = () => {
 }
 
 /* 收合 */
+const isOverMd = computed(() => width.value > 768)
 const closeNav = () => {
-  if (width.value < 768 && isLocked.value) {
+  if (!isOverMd.value && isLocked.value) {
     toggler.value.click()
   }
 }
 watch(width, () => {
-  if (width.value > 768 && isLocked.value) {
+  if (isOverMd.value && isLocked.value) {
     toggler.value.click()
   }
 })
