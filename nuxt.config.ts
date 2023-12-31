@@ -20,6 +20,18 @@ export default defineNuxtConfig({
     layoutTransition: {
       name: 'layout',
       mode: 'out-in'
+    },
+    head: {
+      link: [
+        {
+          href: 'https://fonts.googleapis.com/icon?family=Material+Icons',
+          rel: 'stylesheet'
+        },
+        {
+          href: 'https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0',
+          rel: 'stylesheet'
+        }
+      ]
     }
   },
 

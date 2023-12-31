@@ -39,6 +39,7 @@
         </div>
       </li>
     </ul>
+
     <h5 class="text-info-dark fw-bold">粗細</h5>
     <ul class="list-unstyled row flex-wrap mb-4 text-light">
       <li class="col-2 border border-light">
@@ -254,15 +255,15 @@
     </ul>
 
     <h2 class="text-primary mb-3 fw-bold">Checkbox</h2>
-    <ul class="list-unstyled d-flex flex-wrap border-bottom border-light pb-5 mb-4">
+    <ul class="list-unstyled d-flex flex-wrap border-bottom border-light pb-5 mb-4 text-light">
       <li class="me-3">
-        <label class="form-check-label text-light" for="flexCheckChecked-1">
+        <label class="form-check-label" for="flexCheckChecked-1">
           <input id="flexCheckChecked-1" class="form-check-input" type="checkbox" value="" />
           Unchecked
         </label>
       </li>
       <li>
-        <label class="form-check-label text-light" for="flexCheckChecked-2">
+        <label class="form-check-label" for="flexCheckChecked-2">
           <input
             id="flexCheckChecked-2"
             class="form-check-input"
@@ -274,6 +275,43 @@
         </label>
       </li>
     </ul>
+
+    <h2 class="text-primary mb-3 fw-bold">material-icons</h2>
+    <div class="border-bottom border-light pb-5 mb-4 text-light">
+      <div>
+        <span class="material-icons me-2">done</span>
+        <span class="material-icons me-2">chevron_left</span>
+        <span class="material-icons me-2">expand_less</span>
+        <span class="material-icons me-2">expand_more</span>
+        <span class="material-icons me-2">navigate_next</span>
+        <span class="material-icons me-2">person</span>
+        <span class="material-icons me-2">arrow_back</span>
+        <span class="material-icons me-2">close</span>
+        <span class="material-icons me-2">arrow_forward</span>
+        <span class="material-symbols-rounded me-2">menu</span>
+        <span class="material-icons me-2">king_bed</span>
+      </div>
+      <div class="d-flex">
+        <span class="d-flex bg-light">
+          <img src="~\svg\ic_car.svg" alt="ic_car" />
+        </span>
+        <span class="d-flex bg-light">
+          <img src="~\svg\ic_train.svg" alt="ic_train" />
+        </span>
+        <span class="d-flex bg-light">
+          <img src="~\svg\ic_luxurycar.svg" alt="ic_luxurycar" />
+        </span>
+        <span class="d-flex bg-light">
+          <img src="~\svg\bi_line.svg" alt="bi_line" />
+        </span>
+        <span class="d-flex bg-light">
+          <img src="~\svg\ic_Size.svg" alt="ic_Size" />
+        </span>
+        <span class="d-flex bg-light">
+          <img src="~\svg\ic_Profile.svg" alt="ic_Profile" />
+        </span>
+      </div>
+    </div>
   </div>
 </template>
 
