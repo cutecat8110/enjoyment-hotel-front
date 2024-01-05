@@ -276,7 +276,7 @@
       </li>
     </ul>
 
-    <h2 class="text-primary mb-3 fw-bold">material-icons</h2>
+    <h2 class="text-primary mb-3 fw-bold">Material Icons</h2>
     <div class="border-bottom border-light pb-5 mb-4 text-light">
       <div>
         <span class="material-icons me-2">done</span>
