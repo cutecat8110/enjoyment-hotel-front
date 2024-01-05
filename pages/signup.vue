@@ -13,7 +13,7 @@
               <Icon name="ic:baseline-check" />
             </template>
           </div>
-          <div>輸入信箱及密碼</div>
+          <div class="fs-8 fs-md-7">輸入信箱及密碼</div>
         </div>
 
         <div :class="[status === 0 ? 'bg-primary-60' : 'bg-primary-40', 'flex-fill space-line']" />
@@ -32,7 +32,7 @@
           >
             2
           </div>
-          <div>填寫基本資料</div>
+          <div class="fs-8 fs-md-7">填寫基本資料</div>
         </div>
       </div>
     </div>
