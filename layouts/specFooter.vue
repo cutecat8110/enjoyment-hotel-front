@@ -1,6 +1,6 @@
 <template>
-  <div class="layout-default flex-column min-h-screen d-flex">
-    <PageHeader class="fixed-top" />
+  <div class="layout-default flex-column min-h-screen d-flex bg-background">
+    <PageHeader class="fixed-top" status="keepBg" />
     <main>
       <slot />
     </main>

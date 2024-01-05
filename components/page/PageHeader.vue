@@ -58,6 +58,8 @@ const colorful = computed(() => {
   switch (props.status) {
     case 'onlyLogo':
       return true
+    case 'keepBg':
+      return true
     default:
       return false
   }
