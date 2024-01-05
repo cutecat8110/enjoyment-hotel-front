@@ -169,7 +169,7 @@
 
 <script lang="ts" setup>
 definePageMeta({
-  layout: 'access'
+  layout: 'no-footer'
 })
 
 const status = ref(0)

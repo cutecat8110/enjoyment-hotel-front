@@ -23,7 +23,7 @@
       </div>
     </div>
 
-    <button class="btn btn-primary mb-2" type="button">會員登入</button>
+    <button class="btn btn-primary mb-2" type="button" @click="login">會員登入</button>
 
     <div class="d-flex">
       <div class="text-light me-2 fs-8 fs-md-7">沒有會員嗎？</div>
@@ -34,8 +34,12 @@
 
 <script lang="ts" setup>
 definePageMeta({
-  layout: 'access'
+  layout: 'no-footer'
 })
+
+const login = () => {
+  navigateTo('/user')
+}
 </script>
 
 <style lang="scss" scoped>
