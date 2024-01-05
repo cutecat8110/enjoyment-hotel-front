@@ -3,7 +3,7 @@
     <NuxtLink to="/">
       <NuxtImg src="/img/logo.png" :height="width < 768 ? 40 : 72" />
     </NuxtLink>
-    <nav v-if="props.status !== 'auth' || !isOverMd" class="navbar navbar-expand-md">
+    <nav v-if="props.status !== 'onlyLogo' || !isOverMd" class="navbar navbar-expand-md">
       <button
         ref="toggler"
         :class="[isLocked && 'isLocked', 'btn btn-ghost navbar-toggler shadow-none']"
@@ -56,7 +56,9 @@ const props = defineProps({
 const colorful = computed(() => {
   if (isOverVH.value) return true
   switch (props.status) {
-    case 'auth':
+    case 'onlyLogo':
+      return true
+    case 'keepBg':
       return true
     default:
       return false

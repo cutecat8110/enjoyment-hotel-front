@@ -1,6 +1,7 @@
 <template>
   <footer class="page-footer bg-background text-light">
-    <div class="container-md d-flex flex-column">
+    <NuxtImg v-if="props.status == 'spec'" class="page-footer-img" src="/svg/bg/bg_line_lg.svg" />
+    <div class="page-footer-container container-md d-flex flex-column">
       <div class="footer-top">
         <div class="social-wrapper">
           <NuxtLink to="/">
@@ -45,11 +46,29 @@
   </footer>
 </template>
 
+<script lang="ts" setup>
+const props = defineProps({
+  status: {
+    type: String,
+    default: ''
+  }
+})
+</script>
+
 <style lang="scss" scoped>
 .page-footer {
-  padding-top: 5rem;
-  padding-bottom: 7.5rem;
-
+  .page-footer-img {
+    height: 11.75rem;
+    width: 100%;
+    object-fit: cover;
+    @include md {
+      height: 5.25rem;
+    }
+  }
+  .page-footer-container {
+    padding-top: 5rem;
+    padding-bottom: 7.5rem;
+  }
   .container-md {
     gap: 5rem;
   }
