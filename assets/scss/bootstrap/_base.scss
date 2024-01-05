@@ -20,3 +20,18 @@ h6,
 p {
   margin-bottom: 0;
 }
+
+.room-info-title-border {
+  position: relative;
+  &::before {
+    position: absolute;
+    content: '';
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 80%;
+    background-color: $primary;
+    border-radius: 10px;
+  }
+}
