@@ -72,7 +72,7 @@
           <div class="d-flex flex-row gap-2">
             <div class="dropdown flex-grow-1">
               <button
-                class="btn btn-outline-primary btn-dropdown dropdown-toggle border-0 w-100"
+                class="btn btn-outline-primary btn-dropdown dropdown-toggle px-0 border-0 w-100"
                 type="button"
                 aria-expanded="false"
                 data-bs-auto-close="outside"
@@ -86,7 +86,7 @@
             </div>
             <div class="dropdown flex-grow-1">
               <button
-                class="btn btn-outline-primary btn-dropdown dropdown-toggle border-0 w-100"
+                class="btn btn-outline-primary btn-dropdown dropdown-toggle px-0 border-0 w-100"
                 type="button"
                 aria-expanded="false"
                 data-bs-auto-close="outside"
@@ -100,7 +100,7 @@
             </div>
             <div class="dropdown flex-grow-1">
               <button
-                class="btn btn-outline-primary btn-dropdown dropdown-toggle border-0 w-100"
+                class="btn btn-outline-primary btn-dropdown dropdown-toggle px-0 border-0 w-100"
                 type="button"
                 aria-expanded="false"
                 data-bs-auto-close="outside"
