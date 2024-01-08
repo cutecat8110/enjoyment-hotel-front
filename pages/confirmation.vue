@@ -3,10 +3,6 @@
   <!-- TODO: vh-100 mt-xl pt-5 要拿掉 -->
   <div class="p-0 px-md-xl bg-dark vh-100 mt-xl pt-5 text-light">
     <div class="container-xl border border-danger">
-      <div class="d-flex align-items-center mb-5">
-        <span class="material-icons me-2 fs-1">chevron_left</span>
-        <button class="btn p-0 fs-3 fw-bold">確認訂房資訊</button>
-      </div>
       <div class="row">
         <div class="col-md-7 mb-xl">
           <div class="pb-xl mb-xl border-bottom border-light">
@@ -14,14 +10,16 @@
               <div
                 class="done-icon d-flex justify-content-center align-items-center rounded-circle bg-success me-5"
               >
-                <span class="material-icons text-light fs-1">done</span>
+                <Icon class="fs-5 fw-blod" name="ic:round-check" />
               </div>
               <div class="fs-1 fw-bold">
                 <p class="mb-2 ls-1">恭喜，Jessica！</p>
                 <p class="ls-1">您已預訂成功</p>
               </div>
             </div>
-            <span>我們已發送訂房資訊及詳細內容至你的電子信箱，入住時需向櫃檯人員出示訂房人證件。</span>
+            <span>
+              我們已發送訂房資訊及詳細內容至你的電子信箱，入住時需向櫃檯人員出示訂房人證件。
+            </span>
           </div>
 
           <div class="pb-xl mb-xl border-bottom border-light">

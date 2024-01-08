@@ -2,7 +2,9 @@
   <div class="p-0 px-md-xl bg-primary-tint">
     <div class="container-xl border border-danger">
       <div class="d-flex align-items-center mb-5">
-        <span class="material-icons me-2 fs-1">chevron_left</span>
+        <span class="mt-1">
+          <Icon class="fs-1 fw-blod" name="ic:round-keyboard-arrow-left" />
+        </span>
         <button class="btn p-0 fs-3 fw-bold">確認訂房資訊</button>
       </div>
       <div class="row">
@@ -97,7 +99,7 @@
             <ul class="list-unstyled mb-5">
               <li class="d-flex justify-content-between active mb-3">
                 <div>
-                  <span>NT$ 10,000</span>×
+                  <span>NT$ 10,000</span>
                   <span class="text-gray-80">2 晚</span>
                 </div>
                 <span>NT$ 20,000</span>
