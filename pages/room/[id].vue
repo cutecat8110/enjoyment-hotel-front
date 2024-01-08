@@ -116,7 +116,9 @@
         </div>
 
         <div class="col-12">
-          <h5 class="room-info-title-border fw-bold fs-5 ps-3 mb-3 mb-lg-4">訂房須知</h5>
+          <h5 class="room-info-title-border title-border-primary fw-bold fs-5 ps-3 mb-3 mb-lg-4">
+            訂房須知
+          </h5>
           <ol class="pb-5 mb-lg-xl text-gray-80">
             <li>入住時間為下午3點，退房時間為上午12點。</li>
             <li>如需延遲退房，請提前與櫃檯人員聯繫，視當日房況可能會產生額外費用。</li>

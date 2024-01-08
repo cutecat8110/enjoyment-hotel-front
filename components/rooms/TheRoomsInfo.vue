@@ -1,64 +1,78 @@
 <template>
   <div>
-    <h5 class="room-info-title-border fw-bold fs-5 ps-3 mb-3 mb-lg-4">房型基本資訊</h5>
-    <ul :class="`mb-lg-${mbSpace}`" class="list-unstyled d-flex mb-4">
-      <li
-        class="info-icon-wrap d-flex flex-column justify-content-center p-3 me-3 bg-light rounded-3 text-gray-80"
-      >
-        <span class="mb-2">
-          <NuxtImg src="\svg\ic_Size.svg" alt="ic_Size" />
-        </span>
-        24坪
-      </li>
-      <li
-        class="info-icon-wrap d-flex flex-column justify-content-center p-3 me-3 bg-light rounded-3 text-gray-80"
-      >
-        <span class="mb-2">
-          <Icon class="fs-5 fw-blod text-primary" name="ic:round-king-bed" />
-        </span>
-        1 張大床
-      </li>
-      <li
-        class="info-icon-wrap d-flex flex-column justify-content-center p-3 bg-light rounded-3 text-gray-80"
-      >
-        <span class="mb-2">
-          <Icon class="fs-5 fw-blod text-primary" name="ic:round-person" />
-        </span>
-        2-4 人
-      </li>
-    </ul>
+    <div v-if="!showPart">
+      <h5 class="room-info-title-border title-border-primary fw-bold fs-5 ps-3 mb-3 mb-lg-4">
+        房型基本資訊
+      </h5>
+      <ul :class="`mb-lg-${mbSpace}`" class="list-unstyled d-flex mb-4">
+        <li
+          class="info-icon-wrap d-flex flex-column justify-content-center p-3 me-3 bg-light rounded-3 text-gray-80"
+        >
+          <span class="mb-2">
+            <NuxtImg src="\svg\ic_Size.svg" alt="ic_Size" />
+          </span>
+          24坪
+        </li>
+        <li
+          class="info-icon-wrap d-flex flex-column justify-content-center p-3 me-3 bg-light rounded-3 text-gray-80"
+        >
+          <span class="mb-2">
+            <Icon class="fs-5 fw-blod text-primary" name="ic:round-king-bed" />
+          </span>
+          1 張大床
+        </li>
+        <li
+          class="info-icon-wrap d-flex flex-column justify-content-center p-3 bg-light rounded-3 text-gray-80"
+        >
+          <span class="mb-2">
+            <Icon class="fs-5 fw-blod text-primary" name="ic:round-person" />
+          </span>
+          2-4 人
+        </li>
+      </ul>
+    </div>
 
-    <h5 class="room-info-title-border fw-bold fs-5 ps-3 mb-3 mb-lg-4">房間格局</h5>
-    <ul
-      :class="`mb-lg-${mbSpace}`"
-      class="list-unstyled row row-cols-2 row-cols-lg-5 p-4 bg-light rounded-3 mb-4 mx-0"
-    >
-      <li class="col fw-bold text-gray-80">
-        <Icon class="fs-5 fw-blod text-primary" name="ic:round-check" />
-        市景
-      </li>
-      <li class="col fw-bold text-gray-80">
-        <Icon class="fs-5 fw-blod text-primary" name="ic:round-check" />
-        獨立衛浴
-      </li>
-      <li class="col fw-bold text-gray-80">
-        <Icon class="fs-5 fw-blod text-primary" name="ic:round-check" />
-        客廳
-      </li>
-      <li class="col fw-bold text-gray-80">
-        <Icon class="fs-5 fw-blod text-primary" name="ic:round-check" />
-        書房
-      </li>
-      <li class="col fw-bold text-gray-80">
-        <Icon class="fs-5 fw-blod text-primary" name="ic:round-check" />
-        樓層電梯
-      </li>
-    </ul>
+    <div v-if="!showPart">
+      <h5 class="room-info-title-border title-border-primary fw-bold fs-5 ps-3 mb-3 mb-lg-4">
+        房間格局
+      </h5>
+      <ul
+        :class="`mb-lg-${mbSpace}`"
+        class="list-unstyled row row-cols-2 row-cols-lg-5 p-4 bg-light rounded-3 mb-4 mx-0"
+      >
+        <li class="col fw-bold text-gray-80">
+          <Icon class="fs-5 fw-blod text-primary" name="ic:round-check" />
+          市景
+        </li>
+        <li class="col fw-bold text-gray-80">
+          <Icon class="fs-5 fw-blod text-primary" name="ic:round-check" />
+          獨立衛浴
+        </li>
+        <li class="col fw-bold text-gray-80">
+          <Icon class="fs-5 fw-blod text-primary" name="ic:round-check" />
+          客廳
+        </li>
+        <li class="col fw-bold text-gray-80">
+          <Icon class="fs-5 fw-blod text-primary" name="ic:round-check" />
+          書房
+        </li>
+        <li class="col fw-bold text-gray-80">
+          <Icon class="fs-5 fw-blod text-primary" name="ic:round-check" />
+          樓層電梯
+        </li>
+      </ul>
+    </div>
 
-    <h5 class="room-info-title-border fw-bold fs-5 ps-3 mb-3 mb-lg-4">房內設備</h5>
+    <h5 class="room-info-title-border title-border-primary fw-bold fs-5 ps-3 mb-3 mb-lg-4">
+      房內設備
+    </h5>
     <ul
-      :class="`mb-lg-${mbSpace}`"
-      class="list-unstyled row row-cols-2 row-cols-lg-5 flex-wrap p-4 bg-light rounded-3 mb-4 mx-0"
+      :class="[
+        `mb-lg-${mbSpace}`,
+        { 'row-cols-lg-5': !showPart },
+        { 'row-cols-lg-3 border': showPart }
+      ]"
+      class="list-unstyled row flex-wrap row-cols-2 p-4 bg-light rounded-3 mb-4 mx-0"
     >
       <li class="col fw-bold text-gray-80">
         <Icon class="fs-5 fw-blod text-primary" name="ic:round-check" />
@@ -103,10 +117,16 @@
       </li>
     </ul>
 
-    <h5 class="room-info-title-border fw-bold fs-5 ps-3 mb-3 mb-lg-4">備品提供</h5>
+    <h5 class="room-info-title-border title-border-primary fw-bold fs-5 ps-3 mb-3 mb-lg-4">
+      備品提供
+    </h5>
     <ul
-      :class="`mb-lg-${mbSpace}`"
-      class="list-unstyled row row-cols-2 row-cols-lg-5 flex-wrap p-4 bg-light rounded-3 mb-4 mx-0"
+      :class="[
+        `mb-lg-${mbSpace}`,
+        { 'row-cols-lg-5': !showPart },
+        { 'row-cols-lg-3 border': showPart }
+      ]"
+      class="list-unstyled row flex-wrap row-cols-2 p-4 bg-light rounded-3 mb-4 mx-0"
     >
       <li class="col fw-bold text-gray-80">
         <Icon class="fs-5 fw-blod text-primary" name="ic:round-check" />
@@ -154,7 +174,7 @@
 </template>
 
 <script lang="ts" setup>
-defineProps<{ mbSpace?: string }>()
+defineProps<{ mbSpace?: string; showPart?: boolean }>()
 </script>
 
 <style lang="scss" scoped>

@@ -11,7 +11,9 @@
           <div class="pb-6 mb-6 border-bottom">
             <div class="row align-items-center mb-4">
               <div class="col-10">
-                <div class="room-info-title-border ps-3 fw-bold mb-2">選擇房型</div>
+                <div class="room-info-title-border title-border-primary ps-3 fw-bold mb-2">
+                  選擇房型
+                </div>
                 <div>尊爵雙人房</div>
               </div>
               <div class="col-2">
@@ -21,9 +23,11 @@
 
             <div class="row align-items-center mb-4">
               <div class="col-10">
-                <div class="room-info-title-border ps-3 fw-bold mb-2">訂房日期</div>
+                <div class="room-info-title-border title-border-primary ps-3 fw-bold mb-2">
+                  訂房日期
+                </div>
                 <div class="mb-2">入住：6 月 10 日星期二</div>
-                <div>入住：6 月 10 日星期二</div>
+                <div>退房：6 月 11 日星期三</div>
               </div>
               <div class="col-2">
                 <button class="btn btn-text text-dark fw-bold">編輯</button>
@@ -32,7 +36,9 @@
 
             <div class="row align-items-center">
               <div class="col-10">
-                <div class="room-info-title-border ps-3 fw-bold mb-2">房客人數</div>
+                <div class="room-info-title-border title-border-primary ps-3 fw-bold mb-2">
+                  房客人數
+                </div>
                 <div>2 人</div>
               </div>
               <div class="col-2">

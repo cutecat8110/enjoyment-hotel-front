@@ -23,7 +23,7 @@ p {
 
 .room-info-title-border {
   position: relative;
-  &::before {
+  &.title-border-primary::before, &.title-border-gray::before {
     position: absolute;
     content: '';
     left: 0;
@@ -33,5 +33,12 @@ p {
     height: 80%;
     background-color: $primary;
     border-radius: 10px;
+  }
+
+  &.title-border-primary::before {
+    background-color: $primary;
+  }
+  &.title-border-gray::before {
+    background-color: $gray-600
   }
 }
