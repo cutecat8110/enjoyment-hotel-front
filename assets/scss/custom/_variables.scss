@@ -1,0 +1,9 @@
+$duration-150: 150ms; // btn, radio
+$duration-300: 300ms; // select
+$duration-450: 450ms; // page, modal
+
+@mixin md {
+  @media (max-width: 768px) {
+    @content;
+  }
+}

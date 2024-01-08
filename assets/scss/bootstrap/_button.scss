@@ -2,9 +2,11 @@ $btn-padding-y: 16px;
 $btn-padding-x: 32px;
 
 .btn-primary {
-  color: $light;
   padding: $spacer $spacer * 2;
+  white-space: nowrap;
+  color: $light;
   border: 0;
+
   &:hover {
     color: $light;
     background-color: darken($primary-dark, 1.2);
@@ -12,14 +14,16 @@ $btn-padding-x: 32px;
 
   &.disabled {
     color: $secondary;
-    background-color: transparent;
     border-color: transparent;
+    background-color: transparent;
   }
 }
 
 .btn-outline-primary {
-  background-color: $light;
   padding: calc($spacer - 1px) calc($spacer * 2 - 1px);
+  white-space: nowrap;
+  background-color: $light;
+
   &:hover {
     color: $primary-dark;
     border-color: $primary-dark;
@@ -27,17 +31,19 @@ $btn-padding-x: 32px;
   }
 
   &.disabled {
+    opacity: 1;
     color: $gray-600;
     border-color: $gray-600;
     background-color: $light;
-    opacity: 1;
   }
 }
 
 .btn-ghost {
-  color: $light;
   padding: $spacer;
+  white-space: nowrap;
+  color: $light;
   border: 0;
+
   &:hover {
     color: $primary-dark;
     border-color: transparent;
@@ -50,10 +56,12 @@ $btn-padding-x: 32px;
 }
 
 .btn-text {
-  color: $primary;
-  text-decoration: underline;
   padding: 0;
+  white-space: nowrap;
+  text-decoration: underline;
+  color: $primary;
   border: 0;
+
   &:hover {
     color: $primary-dark;
     border-color: transparent;

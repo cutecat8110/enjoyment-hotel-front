@@ -6,17 +6,20 @@ $nav-link-font-weight: 700;
 .nav {
   & .nav-link {
     position: relative;
-    &:hover, &:active, &.active {
+
+    &:hover,
+    &:active,
+    &.active {
       &::after {
         position: absolute;
-        content: '';
-        left: 50%;
         bottom: 0;
-        transform: translateX(-50%);
+        left: 50%;
         width: 70%;
         height: 4px;
-        background-color:  $primary;
+        content: '';
+        transform: translateX(-50%);
         border-radius: 10px;
+        background-color: $primary;
       }
     }
   }

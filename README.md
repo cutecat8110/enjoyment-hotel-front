@@ -14,3 +14,17 @@
 ## 部屬到 Github
 1. 全域安裝 git-cz1：`npm install -g git-cz
 2. 詳細操作參考： https://israynotarray.com/git/20221115/721294310/
+
+---
+
+## Icon
+[Google Material Icons](https://icones.js.org/collection/ic?s=Size)
+
+用法：
+```HTML
+ <Icon class="fs-5 fw-blod" name="icon 名稱" />
+```
+範例：
+```HTML
+<Icon class="fs-5 fw-blod" name="ic:round-check" />
+```

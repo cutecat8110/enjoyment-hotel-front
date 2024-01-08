@@ -1,6 +1,7 @@
 <template>
   <footer class="page-footer bg-background text-light">
-    <div class="container d-flex flex-column">
+    <NuxtImg v-if="props.status == 'spec'" class="page-footer-img" src="/svg/bg/bg_line_lg.svg" />
+    <div class="page-footer-container container-md d-flex flex-column">
       <div class="footer-top">
         <div class="social-wrapper">
           <NuxtLink to="/">
@@ -45,38 +46,61 @@
   </footer>
 </template>
 
+<script lang="ts" setup>
+const props = defineProps({
+  status: {
+    type: String,
+    default: ''
+  }
+})
+</script>
+
 <style lang="scss" scoped>
 .page-footer {
-  padding-top: 5rem;
-  padding-bottom: 7.5rem;
-  .container {
+  .page-footer-img {
+    height: 11.75rem;
+    width: 100%;
+    object-fit: cover;
+    @include md {
+      height: 5.25rem;
+    }
+  }
+  .page-footer-container {
+    padding-top: 5rem;
+    padding-bottom: 7.5rem;
+  }
+  .container-md {
     gap: 5rem;
   }
 
   .footer-top {
     display: flex;
     justify-content: space-between;
+
     @include md {
       flex-direction: column;
       gap: 5rem;
     }
   }
+
   .social-wrapper {
     display: flex;
     flex-direction: column;
     gap: 2.5rem;
   }
+
   .social-link {
-    width: 2.5rem;
-    height: 2.5rem;
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
     padding: 0;
 
     &:last-child {
       margin-left: 1rem;
     }
+
     svg {
       font-size: 24px;
     }
@@ -84,33 +108,35 @@
 
   .info-list {
     display: grid;
+    gap: 2.5rem 5rem;
     grid-template-columns: auto auto;
     list-style: none;
-    gap: 2.5rem 5rem;
 
     @include md {
-      grid-template-columns: 1fr;
       gap: 1rem;
+      grid-template-columns: 1fr;
     }
 
     > li {
-      width: calc((100% - 2.5rem) / 2);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      width: calc((100% - 2.5rem) / 2);
+
+      @include md {
+        order: 0;
+      }
 
       &:nth-child(2) {
         order: 2;
       }
+
       &:nth-child(3) {
         order: 1;
       }
+
       &:nth-child(4) {
         order: 3;
-      }
-
-      @include md {
-        order: 0;
       }
     }
   }
@@ -118,6 +144,7 @@
   .footer-down {
     display: flex;
     justify-content: space-between;
+
     @include md {
       flex-direction: column;
       gap: 1rem;

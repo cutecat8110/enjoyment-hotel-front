@@ -37,5 +37,6 @@ module.exports = {
     '^@'
   ],
   attributeSort: 'ASC',
-  pluginSearchDirs: false
+  pluginSearchDirs: false,
+  htmlWhitespaceSensitivity: 'ignore'
 }

@@ -4,9 +4,9 @@
   </NuxtLayout>
 </template>
 
-<style>
+<style lang="scss">
 body {
-  background-color: #cccccc;
+  background-color: #ccc;
 }
 
 .page-enter-active,
@@ -15,13 +15,13 @@ body {
 }
 
 .page-enter-from {
-  opacity: 0;
   transform: translateX(-30px);
+  opacity: 0;
 }
 
 .page-leave-to {
-  opacity: 0;
   transform: translateX(30px);
+  opacity: 0;
 }
 
 .layout-enter-active,

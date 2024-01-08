@@ -18,18 +18,20 @@ const route = useRoute()
 
 <style lang="scss" scoped>
 .page-default {
-  background-color: #cccccc;
+  background-color: #ccc;
+
   > article {
-    height: 100vh;
     display: flex;
-    flex-direction: column;
     align-items: center;
+    flex-direction: column;
     justify-content: center;
     gap: 1rem;
+    height: 100vh;
   }
+
   .page-text {
-    color: #fff;
     font-size: 2rem;
+    color: #fff;
   }
 }
 </style>
