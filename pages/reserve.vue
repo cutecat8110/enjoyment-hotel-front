@@ -6,7 +6,7 @@
         確認訂房資訊
       </button>
       <div class="row">
-        <div class="col-md-7 mb-xl">
+        <div class="col-md-7 mb-lg-xl">
           <h4 class="fw-bold mb-5">訂房資訊</h4>
           <div class="pb-6 mb-6 border-bottom">
             <div class="row align-items-center mb-4">
@@ -70,7 +70,7 @@
               </label>
               <div class="row">
                 <div class="col-4 mb-3">
-                  <select class="form-select" aria-label="Default select example">
+                  <select class="form-select" aria-label="Default select year">
                     <option selected>選擇年分</option>
                     <option value="1990">1990年</option>
                     <option value="1991">1991年</option>
@@ -78,7 +78,7 @@
                   </select>
                 </div>
                 <div class="col-4">
-                  <select class="form-select" aria-label="Default select example">
+                  <select class="form-select" aria-label="Default select month">
                     <option selected>請選擇月份</option>
                     <option value="1">1月</option>
                     <option value="2">2月</option>
@@ -86,7 +86,7 @@
                   </select>
                 </div>
                 <div class="col-4">
-                  <select class="form-select" aria-label="Default select example">
+                  <select class="form-select" aria-label="Default select day">
                     <option selected>請選擇日期</option>
                     <option value="1">1日</option>
                     <option value="2">2日</option>
@@ -101,7 +101,7 @@
               </label>
               <div class="row">
                 <div class="col-6 mb-3">
-                  <select class="form-select -" aria-label="Default select example">
+                  <select class="form-select -" aria-label="Default select city">
                     <option selected>請選擇縣市</option>
                     <option value="高雄市">高雄市</option>
                     <option value="台中市">台中市</option>
@@ -109,7 +109,7 @@
                   </select>
                 </div>
                 <div class="col-6">
-                  <select class="form-select -" aria-label="Default select example">
+                  <select class="form-select -" aria-label="Default select area">
                     <option selected>請選擇區域</option>
                     <option value="楠梓區">楠梓區</option>
                     <option value="三民區">三民區</option>
@@ -134,7 +134,7 @@
         <div class="col-md-5 mb-5 mb-lg-0">
           <div class="bg-light rounded-4 p-4 p-lg-5">
             <div class="rounded-3 overflow-hidden">
-              <img class="w-100 h-auto" src="/img/room/Room_1.png" alt="Room_1" />
+              <NuxtImg class="w-100 h-auto" src="/img/room/Room_1.png" alt="Room_1" />
             </div>
 
             <h3 class="fs-6 fs-md-4 fw-bold my-4 mt-lg-5">價格詳情</h3>
@@ -157,9 +157,37 @@
                 <span>NT$ 19,000</span>
               </li>
             </ul>
-            <NuxtLink to="/confirmation">
-              <span class="btn btn-primary w-100">確認訂房</span>
-            </NuxtLink>
+            <button class="btn btn-primary w-100" type="button" @click="submitOrder">
+              確認訂房
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      id="orderLoadModal"
+      ref="orderLoad"
+      class="modal fade"
+      aria-hidden="true"
+      aria-labelledby="orderLoadLabel"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+    >
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content p-xl">
+          <div class="modal-body d-flex flex-column justify-content-center align-items-center">
+            <div class="d-flex">
+              <span
+                class="spinner-grow spinner-grow-sm mb-xl text-primary-dark me-2"
+                role="status"
+              ></span>
+              <span class="spinner-grow spinner-grow-sm mb-xl text-primary-dark me-2"></span>
+              <span class="spinner-grow spinner-grow-sm mb-xl text-primary-dark"></span>
+            </div>
+            <NuxtImg class="w-80 mb-3" src="/img/logo-primary.svg" />
+            <div class="fs-5 fw-bold">正在處理你的預訂</div>
           </div>
         </div>
       </div>
@@ -173,6 +201,31 @@ import TheRoomsInfo from '@/components/rooms/TheRoomsInfo.vue'
 definePageMeta({
   layout: 'default'
 })
+
+const { $bootstrap } = useNuxtApp()
+const orderLoad = ref(null)
+
+let modal: any
+onMounted(() => {
+  modal = $bootstrap.modal(orderLoad.value)
+})
+
+onBeforeUnmount(() => {
+  // 加上 dispose，避免切換頁面時或是 HMR 看到殘留畫面
+  modal.dispose()
+})
+
+const submitOrder = () => {
+  modal.show()
+  setTimeout(() => {
+    navigateTo('/confirmation')
+  }, 3000)
+}
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.w-80 {
+  max-width: 50%;
+  width: 100%;
+}
+</style>
