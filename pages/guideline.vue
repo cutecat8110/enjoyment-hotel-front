@@ -458,16 +458,16 @@
             </li>
             <li class="icons-wrapper flex-wrap">
               <div class="bg-light p-1 rounded-1">
-                <img src="~\svg\ic_luxurycar.svg" alt="ic_luxurycar" />
+                <NuxtImg src="\svg\ic_luxurycar.svg" alt="ic_luxurycar" />
               </div>
               <div class="bg-light p-1 rounded-1">
-                <img src="~\svg\bi_line.svg" alt="bi_line" />
+                <NuxtImg src="\svg\bi_line.svg" alt="bi_line" />
               </div>
               <div class="bg-light p-1 rounded-1">
-                <img src="~\svg\ic_Size.svg" alt="ic_Size" />
+                <NuxtImg src="\svg\ic_Size.svg" alt="ic_Size" />
               </div>
               <div class="bg-light p-1 rounded-1">
-                <img src="~\svg\ic_Profile.svg" alt="ic_Profile" />
+                <NuxtImg src="\svg\ic_Profile.svg" alt="ic_Profile" />
               </div>
             </li>
           </ul>

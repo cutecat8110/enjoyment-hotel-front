@@ -6,7 +6,7 @@
         class="info-icon-wrap d-flex flex-column justify-content-center p-3 me-3 bg-light rounded-3 text-gray-80"
       >
         <span class="mb-2">
-          <img src="~\svg\ic_Size.svg" alt="ic_Size" />
+          <NuxtImg src="\svg\ic_Size.svg" alt="ic_Size" />
         </span>
         24坪
       </li>

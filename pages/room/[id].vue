@@ -6,23 +6,23 @@
         <div class="row d-none d-md-flex px-3">
           <div class="col-6 pe-0">
             <div class="rounded-end-0 rounded-4 overflow-hidden">
-              <img class="w-100 h-auto" src="/img/room/Room_1.png" alt="Room_1" />
+              <NuxtImg class="w-100 h-auto" src="/img/room/Room_1.png" alt="Room_1" />
             </div>
           </div>
           <div class="col-6">
-            <div class="w-100 h-100 rounded-start-0 rounded-4 overflow-hidden">
+            <div class="w-auto h-100 rounded-start-0 rounded-4 overflow-hidden">
               <div class="row align-content-between h-100">
                 <div class="col-6 ps-0">
-                  <img class="w-100 h-auto" src="/img/room/Room_2.png" alt="Room_2" />
+                  <NuxtImg class="w-100 h-auto" src="/img/room/Room_2.png" alt="Room_2" />
                 </div>
                 <div class="col-6 ps-0">
-                  <img class="w-100 h-auto" src="/img/room/Room_3.png" alt="Room_3" />
+                  <NuxtImg class="w-100 h-auto" src="/img/room/Room_3.png" alt="Room_3" />
                 </div>
                 <div class="col-6 ps-0">
-                  <img class="w-100 h-auto" src="/img/room/Room_4.png" alt="Room_4" />
+                  <NuxtImg class="w-100 h-auto" src="/img/room/Room_4.png" alt="Room_4" />
                 </div>
                 <div class="col-6 ps-0">
-                  <img class="w-100 h-auto" src="/img/room/Room_5.png" alt="Room_5" />
+                  <NuxtImg class="w-100 h-auto" src="/img/room/Room_5.png" alt="Room_5" />
                 </div>
               </div>
             </div>
@@ -31,7 +31,7 @@
 
         <!-- 手機 -->
         <div class="d-flex d-md-none">
-          <div id="banner_img" class="carousel slide" data-bs-ride="carousel">
+          <div id="banner_img" class="carousel slide w-100" data-bs-ride="carousel">
             <div class="carousel-indicators ms-3">
               <button
                 class="active"
@@ -68,19 +68,19 @@
             </div>
             <div class="carousel-inner">
               <div class="carousel-item active" data-bs-interval="5000">
-                <img class="w-100 h-auto" src="/img/room/Room_1.png" alt="Room_1" />
+                <NuxtImg class="w-100 h-auto" src="/img/room/Room_1.png" alt="Room_1" />
               </div>
               <div class="carousel-item" data-bs-interval="5000">
-                <img class="w-100 h-auto" src="/img/room/Room_2.png" alt="Room_2" />
+                <NuxtImg class="w-100 h-auto" src="/img/room/Room_2.png" alt="Room_2" />
               </div>
               <div class="carousel-item" data-bs-interval="5000">
-                <img class="w-100 h-auto" src="/img/room/Room_3.png" alt="Room_3" />
+                <NuxtImg class="w-100 h-auto" src="/img/room/Room_3.png" alt="Room_3" />
               </div>
               <div class="carousel-item" data-bs-interval="5000">
-                <img class="w-100 h-auto" src="/img/room/Room_4.png" alt="Room_4" />
+                <NuxtImg class="w-100 h-auto" src="/img/room/Room_4.png" alt="Room_4" />
               </div>
               <div class="carousel-item" data-bs-interval="5000">
-                <img class="w-100 h-auto" src="/img/room/Room_5.png" alt="Room_5" />
+                <NuxtImg class="w-100 h-auto" src="/img/room/Room_5.png" alt="Room_5" />
               </div>
             </div>
           </div>
