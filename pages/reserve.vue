@@ -167,7 +167,32 @@
 
     <div
       id="orderLoadModal"
+      :class="`modal fade ${isShowModal ? 'show d-block' : ''}`"
+      tabindex="-1"
+    >
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content p-xl">
+          <div class="modal-body d-flex flex-column justify-content-center align-items-center">
+            <div class="d-flex">
+              <span
+                class="spinner-grow spinner-grow-sm mb-xl text-primary-dark me-2"
+                role="status"
+              ></span>
+              <span class="spinner-grow spinner-grow-sm mb-xl text-primary-dark me-2"></span>
+              <span class="spinner-grow spinner-grow-sm mb-xl text-primary-dark"></span>
+            </div>
+            <NuxtImg class="w-80 mb-3" src="/img/logo-primary.svg" />
+            <div class="fs-5 fw-bold">正在處理你的預訂</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- // modal 寫法，先保留
+    <div
+      id="orderLoadModal"
       ref="orderLoad"
+      :class="{ 'show': isShowModal }"
       class="modal fade"
       aria-hidden="true"
       aria-labelledby="orderLoadLabel"
@@ -191,7 +216,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -202,21 +227,25 @@ definePageMeta({
   layout: 'default'
 })
 
-const { $bootstrap } = useNuxtApp()
-const orderLoad = ref(null)
+const isShowModal = ref(false)
 
-let modal: any
-onMounted(() => {
-  modal = $bootstrap.modal(orderLoad.value)
-})
+// modal 寫法，先保留
+// const { $bootstrap } = useNuxtApp()
+// const orderLoad = ref(null)
 
-onBeforeUnmount(() => {
-  // 加上 dispose，避免切換頁面時或是 HMR 看到殘留畫面
-  modal.dispose()
-})
+// let modal: any
+// onMounted(() => {
+//   const routes = useRoute()
+//   modal = routes.path === '/reserve' ? $bootstrap.modal(orderLoad.value) : ''
+// })
+
+// onBeforeUnmount(() => {
+//   // 加上 dispose，避免切換頁面時或是 HMR 看到殘留畫面
+//   modal.dispose()
+// })
 
 const submitOrder = () => {
-  modal.show()
+  isShowModal.value = true
   setTimeout(() => {
     navigateTo('/confirmation')
   }, 3000)
@@ -227,5 +256,10 @@ const submitOrder = () => {
 .w-80 {
   max-width: 50%;
   width: 100%;
+}
+
+.modal {
+  background-color: rgba($dark, 0.5);
+  box-shadow: 10px;
 }
 </style>
