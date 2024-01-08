@@ -1,7 +1,6 @@
 <template>
   <!-- <NuxtLink to="/user/orders">我的訂單</NuxtLink> -->
-  <!-- TODO: vh-100 mt-xl pt-5 要拿掉 -->
-  <div class="p-0 px-md-xl bg-dark vh-100 mt-xl pt-5 text-light">
+  <div class="p-0 px-md-xl bg-dark text-light">
     <div class="container-xl border border-danger">
       <div class="row">
         <div class="col-md-7 mb-xl">
@@ -54,6 +53,12 @@
     </div>
   </div>
 </template>
+
+<script lang="ts" setup>
+definePageMeta({
+  layout: 'spec-footer'
+})
+</script>
 
 <style lang="scss" scoped>
 .done-icon {
