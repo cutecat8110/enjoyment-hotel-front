@@ -279,25 +279,21 @@
     <h2 class="text-primary mb-3 fw-bold">Material Icons</h2>
     <div class="border-bottom border-light pb-5 mb-4 text-light">
       <div>
-        <span class="material-icons me-2">done</span>
-        <span class="material-icons me-2">chevron_left</span>
-        <span class="material-icons me-2">expand_less</span>
-        <span class="material-icons me-2">expand_more</span>
-        <span class="material-icons me-2">navigate_next</span>
-        <span class="material-icons me-2">person</span>
-        <span class="material-icons me-2">arrow_back</span>
-        <span class="material-icons me-2">close</span>
-        <span class="material-icons me-2">arrow_forward</span>
-        <span class="material-symbols-rounded me-2">menu</span>
-        <span class="material-icons me-2">king_bed</span>
+        <Icon class="fs-5 fw-blod" name="ic:round-check" />
+        <Icon class="fs-3 fw-blod" name="ic:round-keyboard-arrow-left" />
+        <Icon class="fs-3 fw-blod" name="ic:round-keyboard-arrow-down" />
+        <Icon class="fs-3 fw-blod" name="ic:round-keyboard-arrow-up" />
+        <Icon class="fs-3 fw-blod" name="ic:round-keyboard-arrow-right" />
+        <Icon class="fs-5 fw-blod" name="ic:round-person" />
+        <Icon class="fs-5 fw-blod" name="ic:round-arrow-back" />
+        <Icon class="fs-5 fw-blod" name="ic:round-close" />
+        <Icon class="fs-5 fw-blod" name="ic:round-arrow-forward" />
+        <Icon class="fs-5 fw-blod" name="ic:round-menu" />
+        <Icon class="fs-5 fw-blod" name="ic:round-king-bed" />
+        <Icon class="fs-5 fw-blod" name="ic:round-directions-car-filled" />
+        <Icon class="fs-5 fw-blod" name="ic:round-train" />
       </div>
       <div class="d-flex">
-        <span class="d-flex bg-light">
-          <img src="~\svg\ic_car.svg" alt="ic_car" />
-        </span>
-        <span class="d-flex bg-light">
-          <img src="~\svg\ic_train.svg" alt="ic_train" />
-        </span>
         <span class="d-flex bg-light">
           <img src="~\svg\ic_luxurycar.svg" alt="ic_luxurycar" />
         </span>
