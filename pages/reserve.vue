@@ -1,12 +1,10 @@
 <template>
-  <div class="p-0 px-md-xl bg-primary-tint">
-    <div class="container-xl border border-danger">
-      <div class="d-flex align-items-center mb-5">
-        <span class="mt-1">
-          <Icon class="fs-1 fw-blod" name="ic:round-keyboard-arrow-left" />
-        </span>
-        <button class="btn p-0 fs-3 fw-bold">確認訂房資訊</button>
-      </div>
+  <div class="p-0 p-md-xl pb-md-5 bg-primary-tint">
+    <div class="container-xl">
+      <button class="btn btn-ghost d-flex align-items-center py-5 text-dark p-0 fs-3 fw-bold">
+        <Icon class="fs-1 fw-blod" name="ic:round-keyboard-arrow-left" />
+        確認訂房資訊
+      </button>
       <div class="row">
         <div class="col-md-7 mb-xl">
           <h4 class="fw-bold mb-5">訂房資訊</h4>
@@ -15,6 +13,17 @@
               <div class="col-10">
                 <div class="room-info-title-border ps-3 fw-bold mb-2">選擇房型</div>
                 <div>尊爵雙人房</div>
+              </div>
+              <div class="col-2">
+                <button class="btn btn-text text-dark fw-bold">編輯</button>
+              </div>
+            </div>
+
+            <div class="row align-items-center mb-4">
+              <div class="col-10">
+                <div class="room-info-title-border ps-3 fw-bold mb-2">訂房日期</div>
+                <div class="mb-2">入住：6 月 10 日星期二</div>
+                <div>入住：6 月 10 日星期二</div>
               </div>
               <div class="col-2">
                 <button class="btn btn-text text-dark fw-bold">編輯</button>
@@ -55,6 +64,37 @@
               </label>
               <input id="email" class="form-control" type="default" placeholder="請輸入電子信箱" />
             </li>
+            <li class="d-md-none mb-4">
+              <label class="form-label d-flex justify-content-between text-dark" for="default">
+                生日
+              </label>
+              <div class="row">
+                <div class="col-4 mb-3">
+                  <select class="form-select" aria-label="Default select example">
+                    <option selected>選擇年分</option>
+                    <option value="1990">1990年</option>
+                    <option value="1991">1991年</option>
+                    <option value="1992">1992年</option>
+                  </select>
+                </div>
+                <div class="col-4">
+                  <select class="form-select" aria-label="Default select example">
+                    <option selected>請選擇月份</option>
+                    <option value="1">1月</option>
+                    <option value="2">2月</option>
+                    <option value="3">3月</option>
+                  </select>
+                </div>
+                <div class="col-4">
+                  <select class="form-select" aria-label="Default select example">
+                    <option selected>請選擇日期</option>
+                    <option value="1">1日</option>
+                    <option value="2">2日</option>
+                    <option value="3">3日</option>
+                  </select>
+                </div>
+              </div>
+            </li>
             <li>
               <label class="form-label d-flex justify-content-between text-dark" for="default">
                 地址
@@ -92,14 +132,16 @@
         </div>
 
         <div class="col-md-5 mb-5 mb-lg-0">
-          <div class="bg-light rounded-4 p-5">
-            <img src="" alt="圖片" />
+          <div class="bg-light rounded-4 p-4 p-lg-5">
+            <div class="rounded-3 overflow-hidden">
+              <img class="w-100 h-auto" src="/img/room/Room_1.png" alt="Room_1" />
+            </div>
 
-            <h3 class="fs-4 fw-bold mb-4 mt-5">價格詳情</h3>
-            <ul class="list-unstyled mb-5">
+            <h3 class="fs-6 fs-md-4 fw-bold my-4 mt-lg-5">價格詳情</h3>
+            <ul class="list-unstyled mb-4 mb-lg-5">
               <li class="d-flex justify-content-between active mb-3">
                 <div>
-                  <span>NT$ 10,000</span>
+                  <span>NT$ 10,000 ×</span>
                   <span class="text-gray-80">2 晚</span>
                 </div>
                 <span>NT$ 20,000</span>
@@ -129,7 +171,7 @@
 import TheRoomsInfo from '@/components/rooms/TheRoomsInfo.vue'
 
 definePageMeta({
-  layout: 'page-info'
+  layout: 'default'
 })
 </script>
 
