@@ -1,8 +1,9 @@
 <template>
   <div class="p-0 px-lg-xl bg-primary-tint">
-    <div class="py-5 py-lg-xl border mb-5">
+    <div class="pt-0 py-md-5 py-lg-xl mb-5">
       <div class="position-relative">
-        <div class="row">
+        <!-- 平板、電腦 -->
+        <div class="row d-none d-md-flex px-3">
           <div class="col-6 pe-0">
             <div class="rounded-end-0 rounded-4 overflow-hidden">
               <img class="w-100 h-auto" src="/img/room/Room_1.png" alt="Room_1" />
@@ -23,6 +24,63 @@
                 <div class="col-6 ps-0">
                   <img class="w-100 h-auto" src="/img/room/Room_5.png" alt="Room_5" />
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 手機 -->
+        <div class="d-flex d-md-none">
+          <div id="banner_img" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators ms-3">
+              <button
+                class="active"
+                type="button"
+                aria-current="true"
+                aria-label="Slide 1"
+                data-bs-slide-to="0"
+                data-bs-target="#banner_img"
+              />
+              <button
+                type="button"
+                aria-label="Slide 2"
+                data-bs-slide-to="1"
+                data-bs-target="#banner_img"
+              />
+              <button
+                type="button"
+                aria-label="Slide 3"
+                data-bs-slide-to="2"
+                data-bs-target="#banner_img"
+              />
+              <button
+                type="button"
+                aria-label="Slide 4"
+                data-bs-slide-to="3"
+                data-bs-target="#banner_img"
+              />
+              <button
+                type="button"
+                aria-label="Slide 5"
+                data-bs-slide-to="4"
+                data-bs-target="#banner_img"
+              />
+            </div>
+            <div class="carousel-inner">
+              <div class="carousel-item active" data-bs-interval="5000">
+                <img class="w-100 h-auto" src="/img/room/Room_1.png" alt="Room_1" />
+              </div>
+              <div class="carousel-item" data-bs-interval="5000">
+                <img class="w-100 h-auto" src="/img/room/Room_2.png" alt="Room_2" />
+              </div>
+              <div class="carousel-item" data-bs-interval="5000">
+                <img class="w-100 h-auto" src="/img/room/Room_3.png" alt="Room_3" />
+              </div>
+              <div class="carousel-item" data-bs-interval="5000">
+                <img class="w-100 h-auto" src="/img/room/Room_4.png" alt="Room_4" />
+              </div>
+              <div class="carousel-item" data-bs-interval="5000">
+                <img class="w-100 h-auto" src="/img/room/Room_5.png" alt="Room_5" />
               </div>
             </div>
           </div>
@@ -89,5 +147,17 @@ definePageMeta({
 .btn-more {
   bottom: 40px;
   right: 40px;
+  @include md {
+    bottom: 23px;
+    right: 13px;
+  }
+}
+
+.carousel-indicators {
+  right: inherit;
+  & .active {
+    width: 60px;
+    background-color: $primary;
+  }
 }
 </style>
