@@ -44,6 +44,7 @@
 @import 'bootstrap/scss/utilities/api';
 
 /** 8. 客製樣式置於最後，覆蓋前面的樣式 */
+@import './bootstrap/nav';
 @import './bootstrap/form-control';
 @import './bootstrap/labels';
 @import './bootstrap/navbar';

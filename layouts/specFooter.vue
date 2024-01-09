@@ -7,7 +7,15 @@
         Hello，Jessica
       </div>
     </div>
-    <main class="specFooter-content">
+    <main class="specFooter-content container">
+      <ul class="nav list-unstyled d-flex">
+        <li class="nav-item">
+          <NuxtLink class="nav-link" to="/user">個人資料</NuxtLink>
+        </li>
+        <li class="nav-item">
+          <NuxtLink class="nav-link" to="/user/orders">訂單</NuxtLink>
+        </li>
+      </ul>
       <slot />
     </main>
     <PageFooter status="spec" />
@@ -42,6 +50,19 @@
   .specFooter-content {
     overflow-x: hidden;
     flex: 1;
+    padding-bottom: 5rem;
+    padding-top: 5rem;
+    @include md {
+      padding-bottom: 2.5rem;
+      padding-top: 2.5rem;
+    }
+  }
+
+  .nav {
+    margin-bottom: 5rem;
+    @include md {
+      margin-bottom: 2.5rem;
+    }
   }
 
   .user-photo {
