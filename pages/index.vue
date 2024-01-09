@@ -160,7 +160,9 @@
           <div class="col-6"></div>
           <div class="col-6 text-light room-content">
             <h2 class="room-title">尊爵雙人房</h2>
-            <h7>享受高級的住宿體驗，尊爵雙人房提供給您舒適寬敞的空間和精緻的裝潢。</h7>
+            <div class="fs-7">
+              享受高級的住宿體驗，尊爵雙人房提供給您舒適寬敞的空間和精緻的裝潢。
+            </div>
             <h3 class="room-price">NT$ 10,000</h3>
             <button class="btn room-button" type="button">
               查看更多
@@ -188,14 +190,14 @@
             <div class="d-flex mb-4">
               <h5 class="ms-4">海霸</h5>
               <div class="ms-auto me-4">
-                <h7 class="card-week">SUN-MON</h7>
-                <h7>11:00 - 20:30</h7>
+                <div class="fs-7 card-week">SUN-MON</div>
+                <div class="fs-7">11:00 - 20:30</div>
               </div>
             </div>
             <div class="mx-4">
-              <h7 class="card-directions">
+              <div class="fs-7 card-directions">
                 以新鮮海產料理聞名，我們的專業廚師選用高雄當地的海鮮，每一道菜都充滿海洋的鮮美與清甜。無論是烤魚、蒸蝦還是煮蛤蜊，都能讓您品嚐到最新鮮的海洋風味。
-              </h7>
+              </div>
             </div>
           </div>
         </div>
@@ -206,14 +208,14 @@
             <div class="d-flex mb-4">
               <h5 class="ms-4">日食</h5>
               <div class="ms-auto me-4">
-                <h7 class="card-week">SUN-MON</h7>
-                <h7>17:00 - 22:00</h7>
+                <div class="fs-7 card-week">SUN-MON</div>
+                <div class="fs-7">17:00 - 22:00</div>
               </div>
             </div>
             <div class="mx-4">
-              <h7 class="card-directions">
+              <div class="fs-7 card-directions">
                 為您提供優質的牛排，每一塊肉都來自頂級的牛肉，經過專業廚師的巧手烹調，口感豐滿、風味絕佳。搭配我們的特製醬料，讓您的味蕾享受一場美味的盛宴。
-              </h7>
+              </div>
             </div>
           </div>
         </div>
@@ -224,14 +226,14 @@
             <div class="d-flex mb-4">
               <h5 class="ms-4">山臻</h5>
               <div class="ms-auto me-4">
-                <h7 class="card-week">SUN-MON</h7>
-                <h7>11:30 - 20:30</h7>
+                <div class="fs-7 card-week">SUN-MON</div>
+                <div class="fs-7">11:30 - 20:30</div>
               </div>
             </div>
             <div class="mx-4">
-              <h7 class="card-directions">
+              <div class="fs-7 card-directions">
                 帶您進入一次辣味與鮮香兼具的川菜美食之旅。我們的廚師掌握正宗的川菜烹調技巧，從麻辣鍋到口水雞，每一道菜都有其獨特的風味，讓您回味無窮。
-              </h7>
+              </div>
             </div>
           </div>
         </div>
@@ -242,14 +244,14 @@
             <div class="d-flex mb-4">
               <h5 class="ms-4">月永</h5>
               <div class="ms-auto me-4">
-                <h7 class="card-week">SUN-MON</h7>
-                <h7>11:00 - 20:00</h7>
+                <div class="fs-7 card-week">SUN-MON</div>
+                <div class="fs-7">11:00 - 20:00</div>
               </div>
             </div>
             <div class="mx-4">
-              <h7 class="card-directions">
+              <div class="fs-7 card-directions">
                 從鮮美的海鮮、經典的牛排，到各國的特色美食，我們都一應俱全。在這裡，您可以品嚐到世界各地的美食，每一道菜都由專業廚師用心製作，讓您在享受美食的同時，也能感受到我們的熱情與用心。
-              </h7>
+              </div>
             </div>
           </div>
         </div>
@@ -260,14 +262,14 @@
             <div class="d-flex mb-4">
               <h5 class="ms-4">天潮</h5>
               <div class="ms-auto me-4">
-                <h7 class="card-week">SUN-MON</h7>
-                <h7>14:00 - 19:30</h7>
+                <div class="fs-7 card-week">SUN-MON</div>
+                <div class="fs-7">14:00 - 19:30</div>
               </div>
             </div>
             <div class="mx-4">
-              <h7 class="card-directions">
+              <div class="fs-7 card-directions">
                 我們提供各種精緻甜點與糕點，無論您喜歡的是巧克力蛋糕、法式馬卡龍，還是台灣傳統的糕點，都能在這裡找到。讓我們的甜點帶您進入一場繽紛的甜蜜旅程。
-              </h7>
+              </div>
             </div>
           </div>
         </div>
@@ -288,23 +290,23 @@
           <div class="col-4">
             <img class="mb-3" src="/img/desktop/car.png" alt="" />
             <h5 class="text-white mb-2">自行開車</h5>
-            <h7 class="text-white">
+            <div class="fs-7 text-white">
               如果您選擇自行開車，可以透過國道一號下高雄交流道，往市區方向行駛，並依路標指示即可抵達「享樂酒店」。飯店內設有停車場，讓您停車方便。
-            </h7>
+            </div>
           </div>
           <div class="col-4">
             <img class="mb-3" src="/img/desktop/train.png" alt="" />
             <h5 class="text-white mb-2">高鐵/火車</h5>
-            <h7 class="text-white">
+            <div class="fs-7 text-white">
               如果您是搭乘高鐵或火車，可於左營站下車，外頭有計程車站，搭乘計程車約20分鐘即可抵達。或者您也可以轉乘捷運紅線至中央公園站下車，步行約10分鐘便可抵達。
-            </h7>
+            </div>
           </div>
           <div class="col-4">
             <img class="mb-3" src="/img/desktop/luxurycar.png" alt="" />
             <h5 class="text-white mb-2">禮賓車服務</h5>
-            <h7 class="text-white">
+            <div class="fs-7 text-white">
               承億酒店提供禮賓專車接送服務，但因目的地遠近會有不同的收費，請撥打電話將由專人為您服務洽詢專線：(07)123-4567
-            </h7>
+            </div>
           </div>
         </div>
       </div>
@@ -333,8 +335,8 @@
 }
 
 .bg-goose-yellow {
-  background-color: #f7f2ee;
   width: 1920px;
+  background-color: #f7f2ee;
 }
 
 .banner-outer {
@@ -360,12 +362,12 @@
     }
 
     .banner-button {
+      font-size: 24px;
       width: 772px;
       height: 116px;
-      border-radius: 8px;
-      font-size: 24px;
       border: none;
-      background-color: #ffffff;
+      border-radius: 8px;
+      background-color: #fff;
 
       &:hover {
         background-color: #7b6651;
@@ -398,58 +400,58 @@
 
     .line {
       width: 636px;
-      border-top: solid #be9c7c 2px;
       margin-top: 40px;
+      border-top: solid #be9c7c 2px;
     }
   }
 
   .banner-right-content {
     position: absolute;
-    background-image: linear-gradient(to bottom, #ffffff 0%, #ffffff 30%);
     top: 236px;
     left: 916px;
     width: 924px;
     height: 668px;
-    border-radius: 80px;
-    border: solid 1px #f5f7f9;
-    border-left: none;
-    border-bottom: none;
     opacity: 0.5;
+    border: solid 1px #f5f7f9;
+    border-bottom: none;
+    border-left: none;
+    border-radius: 80px;
+    background-image: linear-gradient(to bottom, #fff 0%, #fff 30%);
   }
 
   @media (max-width: 768px) {
     .banner-img {
-      background-size: cover;
-      background-repeat: no-repeat;
       background-image: url('/img/mobile/HeroImg.png');
+      background-repeat: no-repeat;
+      background-size: cover;
     }
 
     .banner-left-content {
       top: 200px;
       left: 100px;
       display: flex;
+      align-content: flex-start;
       flex-direction: column;
       justify-content: center;
-      align-content: flex-start;
 
       .zh-title {
-        font-weight: 700;
         font-size: 28px;
+        font-weight: 700;
         margin-left: 70px;
       }
 
       .en-title {
-        font-weight: 700;
         font-size: 24px;
+        font-weight: 700;
       }
 
       .line {
-        width: 0px;
-        border-left: 2px solid #be9c7c;
-        height: 100%;
-        left: 50%;
         position: absolute;
+        left: 50%;
+        width: 0;
+        height: 100%;
         margin-top: 175px;
+        border-left: 2px solid #be9c7c;
       }
     }
 
@@ -474,9 +476,9 @@
       }
 
       .banner-button {
+        font-size: 16px;
         width: 309px;
         height: 64px;
-        font-size: 16px;
 
         .banner-button-text {
           margin-right: 16px;
@@ -495,20 +497,20 @@
 .news-outer {
   .news-top-absolute {
     position: absolute;
-    width: 200px;
-    height: 200px;
     top: 100px;
     left: 1540px;
+    width: 200px;
+    height: 200px;
     background-image: url('/img/desktop/dot.png');
   }
 
   .news-bottom-absolute {
     position: absolute;
     z-index: 9;
-    width: 200px;
-    height: 200px;
     top: 1082px;
     left: 200px;
+    width: 200px;
+    height: 200px;
     background-image: url('/img/desktop/dot.png');
   }
 
@@ -523,25 +525,25 @@
       .news-img-one {
         width: 474px;
         height: 294px;
-        background-size: cover;
-        background-repeat: no-repeat;
         background-image: url('/img/desktop/newsImg-1.png');
+        background-repeat: no-repeat;
+        background-size: cover;
       }
 
       .news-img-two {
         width: 474px;
         height: 294px;
-        background-size: cover;
-        background-repeat: no-repeat;
         background-image: url('/img/desktop/newsImg-2.png');
+        background-repeat: no-repeat;
+        background-size: cover;
       }
 
       .news-img-three {
         width: 474px;
         height: 294px;
-        background-size: cover;
-        background-repeat: no-repeat;
         background-image: url('/img/desktop/newsImg-3.png');
+        background-repeat: no-repeat;
+        background-size: cover;
       }
 
       .card-content {
@@ -557,18 +559,18 @@
   @media (max-width: 768px) {
     .news-top-absolute {
       position: absolute;
-      width: 100px;
-      height: 100px;
       top: 40px;
       left: 251px;
+      width: 100px;
+      height: 100px;
       background-image: url('/img/mobile/dot.png');
     }
 
     .news-bottom-absolute {
-      width: 100px;
-      height: 100px;
       top: 1900px;
       left: 24px;
+      width: 100px;
+      height: 100px;
       background-image: url('/img/mobile/dot.png');
     }
 
@@ -582,38 +584,38 @@
         margin-bottom: 40px;
 
         .news-img-one {
-          margin-bottom: 24px;
           width: 351px;
-          background-size: cover;
-          background-repeat: no-repeat;
+          margin-bottom: 24px;
           background-image: url('/img/mobile/newsImg-1.png');
+          background-repeat: no-repeat;
+          background-size: cover;
         }
 
         .news-img-two {
-          margin-bottom: 24px;
           width: 351px;
-          background-size: cover;
-          background-repeat: no-repeat;
+          margin-bottom: 24px;
           background-image: url('/img/mobile/newsImg-2.png');
+          background-repeat: no-repeat;
+          background-size: cover;
         }
 
         .news-img-three {
-          margin-bottom: 24px;
           width: 351px;
-          background-size: cover;
-          background-repeat: no-repeat;
+          margin-bottom: 24px;
           background-image: url('/img/mobile/newsImg-3.png');
+          background-repeat: no-repeat;
+          background-size: cover;
         }
 
         .card-content {
           width: 360px;
-          margin-left: 0px;
+          margin-left: 0;
 
           .card-title {
             font-size: 28px;
             line-height: 33px;
-            letter-spacing: 5%;
             margin-bottom: 8px;
+            letter-spacing: 5%;
           }
 
           .card-text {
@@ -641,12 +643,12 @@
     position: absolute;
     top: 200px;
     left: 564px;
-    background-image: linear-gradient(to bottom, #140f0a 0%, #be9c7c 80%);
     opacity: 0.8;
-    border-radius: 80px 80px 0 80px;
-    border: 1px solid #ffffff;
+    border: 1px solid #fff;
     border-top: none;
     border-right: none;
+    border-radius: 80px 80px 0 80px;
+    background-image: linear-gradient(to bottom, #140f0a 0%, #be9c7c 80%);
 
     .about-content {
       width: 884px;
@@ -659,10 +661,10 @@
     }
 
     .about-img-text {
-      margin-top: 80px;
-      margin-left: 80px;
       width: 304px;
       height: 120px;
+      margin-top: 80px;
+      margin-left: 80px;
       background-image: url('/img/desktop/aboutName.png');
     }
   }
@@ -677,12 +679,12 @@
     .about-main {
       top: 160px;
       left: 40px;
-      background-image: linear-gradient(to bottom, #140f0a 0%, #be9c7c 80%);
       opacity: 0.8;
-      border-radius: 40px 40px 0 40px;
-      border: 1px solid #ffffff;
+      border: 1px solid #fff;
       border-top: none;
       border-right: none;
+      border-radius: 40px 40px 0 40px;
+      background-image: linear-gradient(to bottom, #140f0a 0%, #be9c7c 80%);
 
       .about-content {
         width: 267px;
@@ -696,10 +698,10 @@
       }
 
       .about-img-text {
-        margin-top: 24px;
-        margin-left: 24px;
         width: 267px;
         height: 80px;
+        margin-top: 24px;
+        margin-left: 24px;
         background-image: url('/img/mobile/aboutName.png');
       }
     }
@@ -736,12 +738,12 @@
     }
 
     .room-button {
+      font-size: 24px;
       width: 628px;
       height: 116px;
-      text-align: end;
-      font-size: 24px;
       margin-bottom: 40px;
-      background-color: #ffffff;
+      text-align: end;
+      background-color: #fff;
 
       &:hover {
         background-color: #7b6651;
@@ -763,10 +765,10 @@
 
   .food-dot {
     z-index: 9;
+    right: 80px;
+    bottom: 880px;
     width: 200px;
     height: 200px;
-    bottom: 880px;
-    right: 80px;
   }
 
   .food-title-absolute {
@@ -775,31 +777,30 @@
   }
 
   .food-card-box {
-    left: 312px;
     top: 320px;
-
+    left: 312px;
+    overflow-y: auto;
     width: 1600px;
     height: 600px;
     white-space: nowrap;
-    overflow-y: auto;
 
     ::-webkit-scrollbar {
       display: none;
     }
 
     .card-content {
+      display: inline-block;
       width: 416px;
       height: 600px;
       margin-right: 24px;
+      color: #fff;
       border-radius: 8px;
-      display: inline-block;
-      color: #ffffff;
 
       .card-bg {
-        width: 416px;
-        background: linear-gradient(to bottom, #000000 0%, #140f0a 0%);
-        opacity: 0.8;
         top: 403px;
+        width: 416px;
+        opacity: 0.8;
+        background: linear-gradient(to bottom, #000 0%, #140f0a 0%);
 
         .card-week {
           margin-right: 16px;

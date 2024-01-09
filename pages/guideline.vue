@@ -1,126 +1,106 @@
 <template>
-  <div class="p-4 bg-dark">
-    <h2 class="text-primary mb-3 fw-bold">Font</h2>
-    <h5 class="text-info-dark fw-bold">大小</h5>
-    <ul class="list-unstyled row flex-wrap mb-4 text-light">
-      <li class="col-3 border border-light">
-        <div class="fs-md-6 fs-lg-2 p-3">fs-responsive</div>
-      </li>
-      <li class="col-3 border border-light">
-        <div class="fs-lg p-3">"fs-lg" 100px</div>
-      </li>
-      <li class="col-3 border border-light">
-        <h1 class="p-3">"h1"/"fs-1" 48px</h1>
-      </li>
-      <li class="col-3 border border-light">
-        <h2 class="p-3">"h2"/"fs-2" 40px</h2>
-      </li>
-      <li class="col-3 border border-light">
-        <h3 class="p-3">"h3"/"fs-3" 32px</h3>
-      </li>
-      <li class="col-3 border border-light">
-        <h4 class="p-3">"h4"/"fs-4" 28px</h4>
-      </li>
-      <li class="col-3 border border-light">
-        <h5 class="p-3">"h5"/"fs-5" 24px</h5>
-      </li>
-      <li class="col-3 border border-light">
-        <h6 class="p-3">"h6"/"fs-6" 20px</h6>
-      </li>
-      <li class="col-3 border border-light">
-        <div class="fs-7 p-3">Base/"fs-7 "16px</div>
-      </li>
-      <li class="col-3 border border-light">
-        <div class="fs-8 p-3">"fs-8" 14px</div>
-      </li>
-      <li class="col-3 border border-light">
-        <div class="p-3">
-          <small>small 12px</small>
+  <div class="page">
+    <h1 class="page-title fs-3 fw-bold py-4 px-5">Design System</h1>
+    <div class="guideline-wrapper">
+      <section>
+        <h2 class="fs-4">Font Sizes</h2>
+        <div class="guideline-container">
+          <ul class="guideline-content">
+            <li>
+              <div class="label fs-lg">"fs-lg" / Display H</div>
+              <div>6.25rem (100px)</div>
+            </li>
+            <li>
+              <h1 class="label fs-1">"fs-1" / H1</h1>
+              <div>3rem (48px)</div>
+            </li>
+            <li>
+              <h2 class="label fs-2">"fs-2" / H2</h2>
+              <div>2.5rem (40px)</div>
+            </li>
+            <li>
+              <h3 class="label fs-3">"fs-3" / H3</h3>
+              <div>2rem (32px)</div>
+            </li>
+            <li>
+              <h4 class="label fs-4">"fs-4" / H4</h4>
+              <div>1.75rem (28px)</div>
+            </li>
+            <li>
+              <h5 class="label fs-5">"fs-5" / H5</h5>
+              <div>1.5rem (24px)</div>
+            </li>
+            <li>
+              <h6 class="label fs-6">"fs-6" / H6</h6>
+              <div>1.25rem (20px)</div>
+            </li>
+            <li>
+              <div class="label fs-7">"fs-7" / Body</div>
+              <div>1rem (16px)</div>
+            </li>
+            <li>
+              <div class="label fs-8">"fs-8" / Body2</div>
+              <div>0.875rem (14px)</div>
+            </li>
+            <li>
+              <small class="label">small / Tiny</small>
+              <div>0.75rem (12px)</div>
+            </li>
+          </ul>
         </div>
-      </li>
-    </ul>
+      </section>
 
-    <h5 class="text-info-dark fw-bold">粗細</h5>
-    <ul class="list-unstyled row flex-wrap mb-4 text-light">
-      <li class="col-2 border border-light">
-        <div class="p-3">Base 400</div>
-      </li>
-      <li class="col-2 border border-light">
-        <div class="fw-medium p-3">"fw-medium" 500</div>
-      </li>
-      <li class="col-2 border border-light">
-        <div class="fw-bold p-3">"fw-bold" 700</div>
-      </li>
-    </ul>
-
-    <div class="row mb-4">
-      <h5 class="text-info-dark fw-bold">行高</h5>
-      <ul class="row list-unstyled row flex-wrap text-light">
-        <li class="col-2 border border-light">
-          <p class="p-3">Base 150%</p>
-        </li>
-        <li class="col-2 border border-light">
-          <p class="lh-lg p-3">"lh-lg" 在大標題上使用 120%</p>
-        </li>
-      </ul>
-    </div>
-
-    <div class="border-bottom border-light pb-5 mb-4">
-      <h5 class="text-info-dark fw-bold">字母間距</h5>
-      <ul class="row list-unstyled row flex-wrap text-light">
-        <li class="col-2 border border-light">
-          <p class="p-3">Base 2%</p>
-        </li>
-        <li class="col-2 border border-light">
-          <p class="ls-1 p-3">"ls-1" 在標題上使用 5%</p>
-        </li>
-      </ul>
-    </div>
-
-    <h2 class="text-primary mb-3 fw-bold">Color</h2>
-    <ul class="list-unstyled flex-wrap border-bottom border-light pb-5 mb-4">
-      <li class="d-flex flex-wrap mb-3">
-        <div class="col-2">
-          <div class="p-2 bg-primary-dark text-light">Primary-dark</div>
+      <section>
+        <h2 class="fs-4">Font Weight</h2>
+        <div class="guideline-container">
+          <ul class="guideline-content">
+            <li>
+              <div class="label fs-5">Base</div>
+              <div>400</div>
+            </li>
+            <li>
+              <div class="label fs-5 fw-medium">"fw-medium"</div>
+              <div>500</div>
+            </li>
+            <li>
+              <div class="label fs-5 fw-bold">"fw-bold"</div>
+              <div>700</div>
+            </li>
+          </ul>
         </div>
-        <div class="col-2"><div class="p-2 bg-primary">Primary</div></div>
-        <div class="col-2"><div class="p-2 bg-primary-80">Primary-80</div></div>
-        <div class="col-2"><div class="p-2 bg-primary-60">Primary-60</div></div>
-        <div class="col-2"><div class="p-2 bg-primary-tint">Primary-tint</div></div>
-        <div class="col-2"><div class="p-2 bg-primary-40">Primary-40</div></div>
-      </li>
+      </section>
 
-      <li class="d-flex flex-wrap mb-3">
-        <div class="col-2"><div class="p-2 bg-success-dark text-light">Success-dark</div></div>
-        <div class="col-2"><div class="p-2 bg-success">Success</div></div>
-        <div class="col-2"><div class="p-2 bg-success-20">Success-20</div></div>
-        <div class="col-2"><div class="p-2 bg-success-10">Success-10</div></div>
-      </li>
+      <section>
+        <h2 class="fs-4">Line Height</h2>
+        <div class="guideline-container">
+          <ul class="guideline-content">
+            <li>
+              <div class="label fs-5 lh-lg">"lh-lg" / 標題</div>
+              <div class="label fs-5 lh-lg">"lh-lg" / 標題</div>
+              <div>1.2em (120%)</div>
+            </li>
+            <li>
+              <div class="label fs-5">Base / 內文</div>
+              <div class="label fs-5">Base / 內文</div>
+              <div>1.5em (150%)</div>
+            </li>
+          </ul>
+        </div>
+      </section>
 
-      <li class="d-flex flex-wrap mb-3">
-        <div class="col-2"><div class="p-2 bg-info-dark text-light">Info-dark</div></div>
-        <div class="col-2"><div class="p-2 bg-info">Info</div></div>
-        <div class="col-2"><div class="p-2 bg-info-20">Info-20</div></div>
-        <div class="col-2"><div class="p-2 bg-info-10">Info-10</div></div>
-      </li>
-
-      <li class="d-flex flex-wrap mb-3">
-        <div class="col-2"><div class="p-2 bg-danger-dark text-light">Danger-dark</div></div>
-        <div class="col-2"><div class="p-2 bg-danger">Danger</div></div>
-        <div class="col-2"><div class="p-2 bg-danger-20">Danger-20</div></div>
-        <div class="col-2"><div class="p-2 bg-danger-10">Danger-10</div></div>
-      </li>
-
-      <li class="d-flex flex-wrap mb-3">
-        <div class="col-2"><div class="p-2 bg-gray-80 text-light">Gray-80</div></div>
-        <div class="col-2"><div class="p-2 bg-gray-60">Gray-60</div></div>
-        <div class="col-2"><div class="p-2 bg-gray-40">Gray-40</div></div>
-        <div class="col-2"><div class="p-2 bg-gray-10">Gray-10</div></div>
-      </li>
-
-      <li class="d-flex flex-wrap">
-        <div class="col-2">
-          <div class="p-2 bg-background text-light border border-light">Background</div>
+      <section>
+        <h2 class="fs-4">Letter Spacing</h2>
+        <div class="guideline-container">
+          <ul class="guideline-content">
+            <li>
+              <div class="label fs-5 ls-1">"ls-1" / 標題</div>
+              <div>0.05em (5%)</div>
+            </li>
+            <li>
+              <div class="label fs-5">Base / 內文</div>
+              <div>0.02em (2%)</div>
+            </li>
+          </ul>
         </div>
       </section>
 
@@ -502,3 +482,137 @@ definePageMeta({
   layout: 'none'
 })
 </script>
+
+<style lang="scss" scoped>
+.page {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: rgb(160, 174, 192);
+  background-color: #0f0f17;
+}
+
+.page-title {
+  margin: 0;
+  color: rgb(160, 174, 192);
+  background-color: rgb(26, 32, 44);
+}
+
+.guideline-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  padding: 3rem 5rem;
+
+  @media (max-width: 1200px) {
+    padding: 1rem 1.25rem;
+  }
+
+  .guideline-container {
+    padding: 1.5rem;
+    border: rgb(26, 32, 44);
+    border-radius: 0.25rem;
+    background-color: rgb(26, 32, 44);
+  }
+
+  .guideline-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .colors-wrapper {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(6, 9rem);
+
+    @media (max-width: 1200px) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    @media (max-width: 576px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .colors-content {
+    padding-bottom: 61.8%;
+    border-radius: 0.25rem;
+  }
+
+  .buttons-wrapper {
+    width: auto;
+    border-spacing: 0;
+    border-collapse: separate;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid rgb(74, 85, 104) !important;
+    border-radius: 4px;
+    border-radius: 4px;
+    background-color: transparent !important;
+
+    tr,
+    th,
+    td {
+      border: 1px solid rgb(74, 85, 104) !important;
+      background-color: transparent !important;
+    }
+
+    th,
+    td {
+      color: rgb(160, 174, 192);
+
+      &:not(.label) {
+        padding: 1.25rem 2.5rem;
+      }
+    }
+
+    thead {
+      tr:first-child th:first-child {
+        border-top-left-radius: 4px;
+      }
+
+      /*最後欄第一列：右上*/
+      tr:first-child th:last-child {
+        border-top-right-radius: 4px;
+      }
+    }
+
+    tbody {
+      /*第一欄最後列：左下*/
+      tr:last-child td:first-child {
+        border-bottom-left-radius: 4px;
+      }
+
+      /*最後欄第一列：右下*/
+      tr:last-child td:last-child {
+        border-bottom-right-radius: 4px;
+      }
+    }
+  }
+
+  .icons-wrapper {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .label {
+    font-size: 1rem;
+  }
+
+  small {
+    font-size: 0.75rem !important;
+  }
+
+  .overflow-x {
+    overflow-x: auto;
+  }
+
+  .flex-wrap {
+    flex-wrap: wrap;
+  }
+}
+</style>
