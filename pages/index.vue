@@ -310,23 +310,14 @@
           </div>
         </div>
       </div>
-      <img class="traffic-deco" src="/img/desktop/deco-4.png" alt="" />
     </article>
   </div>
 </template>
 
 <script lang="ts" setup>
-// import { useCommonStore } from '@/stores/common'
-// const commonStore = useCommonStore()
-// const { x, y } = useMouse()
-
-// const { locale, setLocaleCookie } = useI18n()
-
-// const chengeLanguage = () => {
-//   const localeCode = locale.value === 'en' ? 'zh' : 'en'
-//   locale.value = localeCode
-//   setLocaleCookie(localeCode)
-// }
+definePageMeta({
+  layout: 'h-f-spl'
+})
 </script>
 
 <style lang="scss" scoped>
@@ -342,7 +333,7 @@
 .banner-outer {
   .banner-img {
     width: 100%;
-    height: 1080px;
+    height: 100vh;
     background-image: url('/img/desktop/HeroImg.png');
     filter: brightness(60%);
   }
@@ -816,6 +807,7 @@
 
 .traffic-outer {
   padding-top: 120px;
+  padding-bottom: 80px;
 
   .traffic-name {
     margin-bottom: 80px;

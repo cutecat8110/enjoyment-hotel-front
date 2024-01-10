@@ -169,7 +169,7 @@
 
 <script lang="ts" setup>
 definePageMeta({
-  layout: 'no-footer'
+  layout: 'h-logo-f-no'
 })
 
 const status = ref(0)
@@ -177,12 +177,13 @@ const status = ref(0)
 
 <style lang="scss" scoped>
 @import url('@/assets/scss/site/login.scss');
+
 .num-ball {
-  width: 2rem;
-  height: 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 2rem;
+  height: 2rem;
 }
 
 .space-line {

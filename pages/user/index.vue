@@ -4,6 +4,6 @@
 
 <script lang="ts" setup>
 definePageMeta({
-  layout: 'spec-footer'
+  layout: 'h-bg-f-spl'
 })
 </script>

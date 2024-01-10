@@ -1,5 +1,5 @@
 <template>
-  <div class="page-default">
+  <div class="pageault">
     <article v-for="(_, index) in 5" :key="index" class="container border">
       <div class="page-text">{{ `This is ${$t(String(route.name))} page.` }}</div>
       <div class="page-text">
@@ -17,7 +17,7 @@ const route = useRoute()
 </script>
 
 <style lang="scss" scoped>
-.page-default {
+.pageault {
   background-color: #ccc;
 
   > article {

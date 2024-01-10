@@ -1,6 +1,6 @@
 <template>
-  <div class="p-0 px-md-xl bg-dark text-light pt-lg-xl">
-    <div class="container-xl pt-5">
+  <div class="p-0 px-md-xl text-light py-lg-xl">
+    <div class="container-xl py-5">
       <div class="row">
         <div class="col-md-6 mb-6 mb-lg-xl">
           <div class="pb-5 pb-lg-xl mb-5 mb-lg-xl border-bottom border-light">
@@ -78,7 +78,7 @@
 import TheRoomsInfo from '@/components/rooms/TheRoomsInfo.vue'
 
 definePageMeta({
-  layout: 'spec-footer'
+  layout: 'h-logo-f-spl'
 })
 </script>
 

@@ -1,6 +1,6 @@
 <template>
   <footer class="page-footer bg-background text-light">
-    <NuxtImg v-if="props.status == 'spec'" class="page-footer-img" src="/svg/bg/bg_line_lg.svg" />
+    <NuxtImg v-if="props.status == 'spl'" class="page-footer-img" src="/svg/bg/bg_line_lg.svg" />
     <div class="page-footer-container container-md d-flex flex-column">
       <div class="footer-top">
         <div class="social-wrapper">
@@ -102,7 +102,7 @@ const props = defineProps({
     }
 
     svg {
-      font-size: 24px;
+      font-size: 1.5rem;
     }
   }
 

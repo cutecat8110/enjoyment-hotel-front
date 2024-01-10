@@ -3,7 +3,7 @@
     <NuxtLink to="/">
       <NuxtImg src="/img/logo.png" :height="width < 768 ? 40 : 72" />
     </NuxtLink>
-    <nav v-if="props.status !== 'onlyLogo' || !isOverMd" class="navbar navbar-expand-md">
+    <nav v-if="props.status !== 'logo' || !isOverMd" class="navbar navbar-expand-md">
       <button
         ref="toggler"
         :class="[isLocked && 'isLocked', 'btn btn-ghost navbar-toggler shadow-none']"
@@ -56,9 +56,9 @@ const props = defineProps({
 const colorful = computed(() => {
   if (isOverVH.value) return true
   switch (props.status) {
-    case 'onlyLogo':
+    case 'logo':
       return true
-    case 'keepBg':
+    case 'bg':
       return true
     default:
       return false
@@ -104,13 +104,13 @@ watch(width, () => {
 .page-header {
   display: flex;
   align-items: center;
-  gap: 16px;
-  padding: 24px 80px;
+  gap: 1rem;
+  padding: 1.5rem 5rem;
   transition: background $duration-300 ease-in-out;
   background: transparentize($background, 1);
 
   @include md {
-    padding: 16px 12px;
+    padding: 1rem 0.75rem;
   }
 
   .navbar {
@@ -152,11 +152,10 @@ watch(width, () => {
       top: 0;
       left: 0;
       overflow: hidden;
-      transition: width $duration-300 ease-in-out;
-      background: $background;
-
       width: 0;
       height: 100vh;
+      transition: width $duration-300 ease-in-out;
+      background: $background;
 
       &.show {
         width: 100vw;
@@ -171,18 +170,17 @@ watch(width, () => {
 
   .nav-list {
     display: flex;
-    list-style: none;
     margin: 0;
     padding: 0;
+    list-style: none;
 
     @include md {
-      gap: 16px;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1rem;
       width: 100%;
       height: 100vh;
       padding: 1.25rem;
-
-      flex-direction: column;
-      justify-content: center;
 
       .btn {
         width: 100%;

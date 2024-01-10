@@ -230,7 +230,7 @@
 import TheRoomsInfo from '@/components/rooms/TheRoomsInfo.vue'
 
 definePageMeta({
-  layout: 'default'
+  layout: 'h-bg-f'
 })
 
 const isShowModal = ref(false)
@@ -260,8 +260,8 @@ const submitOrder = () => {
 
 <style lang="scss" scoped>
 .w-80 {
-  max-width: 50%;
   width: 100%;
+  max-width: 50%;
 }
 
 .modal {

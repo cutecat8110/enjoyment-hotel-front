@@ -550,8 +550,8 @@ definePageMeta({
     text-align: center;
     vertical-align: middle;
     border: 1px solid rgb(74, 85, 104) !important;
-    border-radius: 4px;
-    border-radius: 4px;
+    border-radius: 0.25rem;
+    border-radius: 0.25rem;
     background-color: transparent !important;
 
     tr,
@@ -572,24 +572,24 @@ definePageMeta({
 
     thead {
       tr:first-child th:first-child {
-        border-top-left-radius: 4px;
+        border-top-left-radius: 0.25rem;
       }
 
       /*最後欄第一列：右上*/
       tr:first-child th:last-child {
-        border-top-right-radius: 4px;
+        border-top-right-radius: 0.25rem;
       }
     }
 
     tbody {
       /*第一欄最後列：左下*/
       tr:last-child td:first-child {
-        border-bottom-left-radius: 4px;
+        border-bottom-left-radius: 0.25rem;
       }
 
       /*最後欄第一列：右下*/
       tr:last-child td:last-child {
-        border-bottom-right-radius: 4px;
+        border-bottom-right-radius: 0.25rem;
       }
     }
   }

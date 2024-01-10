@@ -34,7 +34,7 @@
 
 <script lang="ts" setup>
 definePageMeta({
-  layout: 'no-footer'
+  layout: 'h-logo-f-no'
 })
 
 const login = () => {

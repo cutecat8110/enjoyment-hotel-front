@@ -141,22 +141,24 @@
 import TheRoomsInfo from '@/components/rooms/TheRoomsInfo.vue'
 
 definePageMeta({
-  layout: 'default'
+  layout: 'h-bg-f'
 })
 </script>
 
 <style lang="scss" scoped>
 .btn-more {
-  bottom: 40px;
   right: 40px;
+  bottom: 40px;
+
   @include md {
-    bottom: 23px;
     right: 13px;
+    bottom: 23px;
   }
 }
 
 .carousel-indicators {
   right: inherit;
+
   & .active {
     width: 60px;
     background-color: $primary;
