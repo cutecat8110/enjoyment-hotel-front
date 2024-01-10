@@ -8,7 +8,7 @@
     <div class="input-wrapper fs-8 fs-md-7">
       <div>
         <label class="form-label" for="email">電子信箱</label>
-        <input id="text" class="form-control" type="email" placeholder="hello@exsample.com" />
+        <input id="email" class="form-control" type="email" placeholder="hello@exsample.com" />
       </div>
       <div>
         <label class="form-label" for="password">密碼</label>

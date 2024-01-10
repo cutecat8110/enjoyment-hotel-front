@@ -316,7 +316,7 @@
           <ul class="guideline-content flex-row flex-wrap">
             <li>
               <div class="label fs-5 mb-2">Base</div>
-              <label class="form-label Base d-flex justify-content-between" for="name">
+              <label class="form-label d-flex justify-content-between" for="name">
                 姓名
                 <span class="text-primary fw-bold ms-auto">必填</span>
               </label>

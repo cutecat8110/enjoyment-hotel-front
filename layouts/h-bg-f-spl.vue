@@ -7,17 +7,17 @@
         Hello，Jessica
       </div>
     </div>
-    <main class="h-bg-f-spl-content container">
+    <div class="h-bg-f-spl-content container-xl">
       <ul class="nav list-unstyled d-flex">
         <li class="nav-item">
           <NuxtLink class="nav-link" to="/user">個人資料</NuxtLink>
         </li>
         <li class="nav-item">
-          <NuxtLink class="nav-link" to="/user/orders">訂單</NuxtLink>
+          <NuxtLink class="nav-link" to="/user/orders">我的訂單</NuxtLink>
         </li>
       </ul>
       <slot />
-    </main>
+    </div>
     <PageFooter status="spl" />
   </div>
 </template>
@@ -51,7 +51,7 @@
     overflow-x: hidden;
     flex: 1;
     padding-top: 5rem;
-    padding-bottom: 5rem;
+    padding-bottom: 7.5rem;
 
     @include md {
       padding-top: 2.5rem;
