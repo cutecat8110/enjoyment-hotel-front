@@ -39,8 +39,22 @@
       </div>
 
       <div class="footer-down">
-        <div>806023 台灣高雄市新興區六角路123號</div>
-        <div>© 享樂酒店 2023 All Rights Reserved.</div>
+        <div class="d-flex gap-3 align-items-center">
+          <NuxtLink
+            class="btn btn-ghost footer-link"
+            target="_blank"
+            to="https://freyja-7ddy.onrender.com/swagger"
+          >
+            <Icon name="cib:swagger" />
+            Swagger
+          </NuxtLink>
+          |
+          <NuxtLink class="btn btn-ghost footer-link" target="_blank" to="/guideline">
+            <Icon name="ic:round-book" />
+            Guideline
+          </NuxtLink>
+        </div>
+        <div>Copyright © 2024 by Hao,Tori,Renee / 素材取自網路，僅作學習用途</div>
       </div>
     </div>
   </footer>
@@ -149,6 +163,13 @@ const props = defineProps({
       flex-direction: column;
       gap: 1rem;
     }
+  }
+
+  .footer-link {
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
   }
 }
 </style>

@@ -1,6 +1,7 @@
 <template>
   <div class="h-f-spl-wrapper d-flex flex-column min-h-screen bg-primary-tint">
     <PageHeader class="fixed-top" />
+
     <main>
       <slot />
     </main>

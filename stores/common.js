@@ -1,10 +1,12 @@
 export const useCommonStore = defineStore(
   'common',
   () => {
-    const test = ref(false)
+    const token = ref('')
+    const me = ref({})
 
     return {
-      test
+      token,
+      me
     }
   },
   { persist: true }

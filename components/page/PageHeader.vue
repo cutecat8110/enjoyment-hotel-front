@@ -29,10 +29,29 @@
           <li>
             <NuxtLink class="btn btn-ghost" to="/rooms" @click="closeNav">客房旅宿</NuxtLink>
           </li>
-          <li>
-            <NuxtLink class="btn btn-ghost" to="/rooms" @click="closeNav">客房旅宿</NuxtLink>
+          <li v-if="name">
+            <div class="dropdown flex-grow-1">
+              <button
+                class="btn btn-ghost d-flex align-items-center gap-2"
+                type="button"
+                aria-expanded="false"
+                data-bs-auto-close="outside"
+                data-bs-toggle="dropdown"
+              >
+                <Icon class="text-light fs-5" name="IconProfile" />
+                {{ name }}
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end px-0">
+                <li>
+                  <NuxtLink class="dropdown-item" to="/user">我的帳號</NuxtLink>
+                </li>
+                <li>
+                  <button class="dropdown-item" type="button" @click="checkout()">登出</button>
+                </li>
+              </ul>
+            </div>
           </li>
-          <li>
+          <li v-else>
             <NuxtLink class="btn btn-ghost" to="/login" @click="closeNav">會員登入</NuxtLink>
           </li>
           <li>
@@ -45,6 +64,7 @@
 </template>
 
 <script lang="ts" setup>
+import { useCommonStore } from '@/stores/common'
 const props = defineProps({
   status: {
     type: String,
@@ -98,6 +118,14 @@ watch(width, () => {
     toggler.value.click()
   }
 })
+
+/* 確認登入|登出 */
+const commonStore = useCommonStore()
+const name = computed(() => (!('name' in commonStore.me) ? '' : commonStore.me.name))
+const checkout = () => {
+  commonStore.me = {}
+  commonStore.token = ''
+}
 </script>
 
 <style lang="scss" scoped>
@@ -108,13 +136,11 @@ watch(width, () => {
   padding: 1.5rem 5rem;
   transition: background $duration-300 ease-in-out;
   background: transparentize($background, 1);
+  width: 100%;
+  justify-content: space-between;
 
   @include md {
     padding: 1rem 0.75rem;
-  }
-
-  .navbar {
-    margin-left: auto;
   }
 
   .navbar-toggler {
