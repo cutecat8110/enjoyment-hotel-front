@@ -336,7 +336,7 @@ definePageMeta({
     height: 100vh;
     background-size: cover;
     background-repeat: no-repeat;
-    background-image: url('../public/img/desktop/HeroImg.png');
+    background-image: url('/img/desktop/HeroImg.png');
     filter: brightness(60%);
   }
 
@@ -447,7 +447,7 @@ definePageMeta({
         .banner-button-line {
           width: 80px;
           height: 1px;
-          background-image: url('../public/img/mobile/line.png');
+          background-image: url('/img/mobile/line.png');
         }
       }
     }
@@ -497,7 +497,7 @@ definePageMeta({
     .banner-img {
       background-size: cover;
       background-repeat: no-repeat;
-      background-image: url('../public/img/mobile/HeroImg.png');
+      background-image: url('/img/mobile/HeroImg.png');
     }
 
     .banner-middle-content {
@@ -638,7 +638,7 @@ definePageMeta({
       height: 100px;
       top: 4%;
       left: 80%;
-      background-image: url('../public/img/mobile/dot.png');
+      background-image: url('/img/mobile/dot.png');
     }
 
     .news-bottom-absolute {
@@ -646,7 +646,7 @@ definePageMeta({
       height: 100px;
       top: 98%;
       left: 5%;
-      background-image: url('../public/img/mobile/dot.png');
+      background-image: url('/img/mobile/dot.png');
     }
 
     .news-content {
@@ -658,21 +658,21 @@ definePageMeta({
           margin-bottom: 24px;
           background-size: cover;
           background-repeat: no-repeat;
-          background-image: url('../public/img/desktop/newsImg-1.png');
+          background-image: url('/img/desktop/newsImg-1.png');
         }
 
         .news-img-two {
           margin-bottom: 24px;
           background-size: cover;
           background-repeat: no-repeat;
-          background-image: url('../public/img/desktop/newsImg-2.png');
+          background-image: url('/img/desktop/newsImg-2.png');
         }
 
         .news-img-three {
           margin-bottom: 24px;
           background-size: cover;
           background-repeat: no-repeat;
-          background-image: url('../public/img/desktop/newsImg-3.png');
+          background-image: url('/img/desktop/newsImg-3.png');
         }
 
         .card-content {
@@ -840,7 +840,7 @@ definePageMeta({
         margin-left: 24px;
         width: 267px;
         height: 80px;
-        background-image: url('../public/img/mobile/aboutName.png');
+        background-image: url('/img/mobile/aboutName.png');
       }
     }
   }
@@ -851,7 +851,7 @@ definePageMeta({
       height: 594px;
       background-repeat: no-repeat;
       background-size: cover;
-      background-image: url('../public/img/mobile/about.png');
+      background-image: url('/img/mobile/about.png');
     }
 
     .about-main {
