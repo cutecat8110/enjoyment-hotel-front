@@ -8,14 +8,26 @@ $dropdown-border-color: $primary;
     color: $gray-800;
     background-color: $light;
 
-    &:focus {
+    &:focus,
+    &.active {
       color: $dark;
       border-color: $primary;
+      background-color: white;
     }
 
     &.disabled {
       opacity: 1;
       color: $dark;
     }
+  }
+}
+
+.dropdown-item {
+  padding: 0 1.5rem !important;
+  line-height: 3.5rem !important;
+  &:hover,
+  &:focus {
+    color: $primary !important;
+    background-color: $primary-tint !important;
   }
 }

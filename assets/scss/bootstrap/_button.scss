@@ -1,13 +1,13 @@
 $btn-padding-y: 16px;
 $btn-padding-x: 32px;
 
-.btn-primary {
+.btn.btn-primary {
   padding: $spacer $spacer * 2;
   white-space: nowrap;
   color: $light;
   border: 0;
 
-  &:hover {
+  &:hover, &:active {
     color: $light;
     background-color: darken($primary-dark, 1.2);
   }
@@ -19,12 +19,12 @@ $btn-padding-x: 32px;
   }
 }
 
-.btn-outline-primary {
+.btn.btn-outline-primary {
   padding: calc($spacer - 1px) calc($spacer * 2 - 1px);
   white-space: nowrap;
   background-color: $light;
 
-  &:hover {
+  &:hover, &:active {
     color: $primary-dark;
     border-color: $primary-dark;
     background-color: #f7f2ee;
@@ -38,13 +38,13 @@ $btn-padding-x: 32px;
   }
 }
 
-.btn-ghost {
+.btn.btn-ghost {
   padding: $spacer;
   white-space: nowrap;
   color: $light;
   border: 0;
 
-  &:hover {
+  &:hover, &:active {
     color: $primary-dark;
     border-color: transparent;
   }
@@ -55,14 +55,14 @@ $btn-padding-x: 32px;
   }
 }
 
-.btn-text {
+.btn.btn-text {
   padding: 0;
   white-space: nowrap;
   text-decoration: underline;
   color: $primary;
   border: 0;
 
-  &:hover {
+  &:hover, &:active {
     color: $primary-dark;
     border-color: transparent;
   }

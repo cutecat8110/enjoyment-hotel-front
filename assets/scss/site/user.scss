@@ -1,0 +1,58 @@
+.user-wrapper {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: row;
+  gap: 2.5rem;
+  color: $black;
+
+  @include md {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .card-wrapper {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 2.5rem;
+    padding: 2.5rem;
+    border-radius: 1.25rem;
+
+    @include md {
+      gap: 1.5rem;
+      padding: 1.5rem;
+    }
+  }
+
+  .card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin: 0;
+
+    @include md {
+      font-size: 14px;
+      gap: 1rem;
+    }
+  }
+
+  .ellipse-list {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    height: 1.5rem;
+
+    @include md {
+      font-size: 1.05rem;
+    }
+  }
+
+  .ellipse {
+    font-size: 0.5rem;
+  }
+
+  .form-label {
+    color: $black;
+  }
+}

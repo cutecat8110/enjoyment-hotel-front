@@ -6,7 +6,7 @@
 
 <style lang="scss">
 body {
-  background-color: #ccc;
+  background-color: $background;
 }
 
 .page-enter-active,
@@ -15,12 +15,12 @@ body {
 }
 
 .page-enter-from {
-  transform: translateX(-30px);
+  transform: translateX(-1.875rem);
   opacity: 0;
 }
 
 .page-leave-to {
-  transform: translateX(30px);
+  transform: translateX(1.875rem);
   opacity: 0;
 }
 

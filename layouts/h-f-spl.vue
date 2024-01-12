@@ -1,15 +1,16 @@
 <template>
-  <div class="default-wrapper flex-column min-h-screen d-flex bg-primary-tint">
+  <div class="h-f-spl-wrapper d-flex flex-column min-h-screen bg-primary-tint">
     <PageHeader class="fixed-top" />
+
     <main>
       <slot />
     </main>
-    <PageFooter />
+    <PageFooter status="spl" />
   </div>
 </template>
 
 <style lang="scss" scoped>
-.default-wrapper > main {
+.h-f-spl-wrapper > main {
   overflow-x: hidden;
   flex: 1;
 }

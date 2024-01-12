@@ -3,7 +3,7 @@
     <NuxtLink to="/">
       <NuxtImg src="/img/logo.png" :height="width < 768 ? 40 : 72" />
     </NuxtLink>
-    <nav v-if="props.status !== 'onlyLogo' || !isOverMd" class="navbar navbar-expand-md">
+    <nav v-if="props.status !== 'logo' || !isOverMd" class="navbar navbar-expand-md">
       <button
         ref="toggler"
         :class="[isLocked && 'isLocked', 'btn btn-ghost navbar-toggler shadow-none']"
@@ -29,10 +29,29 @@
           <li>
             <NuxtLink class="btn btn-ghost" to="/rooms" @click="closeNav">客房旅宿</NuxtLink>
           </li>
-          <li>
-            <NuxtLink class="btn btn-ghost" to="/rooms" @click="closeNav">客房旅宿</NuxtLink>
+          <li v-if="name">
+            <div class="dropdown flex-grow-1">
+              <button
+                class="btn btn-ghost d-flex align-items-center gap-2"
+                type="button"
+                aria-expanded="false"
+                data-bs-auto-close="outside"
+                data-bs-toggle="dropdown"
+              >
+                <Icon class="text-light fs-5" name="IconProfile" />
+                {{ name }}
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end px-0">
+                <li>
+                  <NuxtLink class="dropdown-item" to="/user">我的帳號</NuxtLink>
+                </li>
+                <li>
+                  <button class="dropdown-item" type="button" @click="checkout()">登出</button>
+                </li>
+              </ul>
+            </div>
           </li>
-          <li>
+          <li v-else>
             <NuxtLink class="btn btn-ghost" to="/login" @click="closeNav">會員登入</NuxtLink>
           </li>
           <li>
@@ -45,6 +64,7 @@
 </template>
 
 <script lang="ts" setup>
+import { useCommonStore } from '@/stores/common'
 const props = defineProps({
   status: {
     type: String,
@@ -56,9 +76,9 @@ const props = defineProps({
 const colorful = computed(() => {
   if (isOverVH.value) return true
   switch (props.status) {
-    case 'onlyLogo':
+    case 'logo':
       return true
-    case 'keepBg':
+    case 'bg':
       return true
     default:
       return false
@@ -98,23 +118,29 @@ watch(width, () => {
     toggler.value.click()
   }
 })
+
+/* 確認登入|登出 */
+const commonStore = useCommonStore()
+const name = computed(() => (!('name' in commonStore.me) ? '' : commonStore.me.name))
+const checkout = () => {
+  commonStore.me = {}
+  commonStore.token = ''
+}
 </script>
 
 <style lang="scss" scoped>
 .page-header {
   display: flex;
   align-items: center;
-  gap: 16px;
-  padding: 24px 80px;
+  gap: 1rem;
+  padding: 1.5rem 5rem;
   transition: background $duration-300 ease-in-out;
   background: transparentize($background, 1);
+  width: 100%;
+  justify-content: space-between;
 
   @include md {
-    padding: 16px 12px;
-  }
-
-  .navbar {
-    margin-left: auto;
+    padding: 1rem 0.75rem;
   }
 
   .navbar-toggler {
@@ -152,11 +178,10 @@ watch(width, () => {
       top: 0;
       left: 0;
       overflow: hidden;
-      transition: width $duration-300 ease-in-out;
-      background: $background;
-
       width: 0;
       height: 100vh;
+      transition: width $duration-300 ease-in-out;
+      background: $background;
 
       &.show {
         width: 100vw;
@@ -171,18 +196,17 @@ watch(width, () => {
 
   .nav-list {
     display: flex;
-    list-style: none;
     margin: 0;
     padding: 0;
+    list-style: none;
 
     @include md {
-      gap: 16px;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1rem;
       width: 100%;
       height: 100vh;
       padding: 1.25rem;
-
-      flex-direction: column;
-      justify-content: center;
 
       .btn {
         width: 100%;

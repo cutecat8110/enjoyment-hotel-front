@@ -1,22 +1,30 @@
 <template>
-  <div class="specFooter-wrapper flex-column min-h-screen d-flex bg-background">
-    <PageHeader class="sticky-top" status="keepBg" />
-    <div class="specFooter-banner">
+  <div class="h-bg-f-spl-wrapper flex-column min-h-screen d-flex bg-background">
+    <PageHeader class="sticky-top" status="bg" />
+    <div class="h-bg-f-spl-banner">
       <div class="container fs-3 fs-md-1 text-light fw-bold lh-lg ls-1">
         <NuxtImg class="user-photo" src="/img/user.png" />
         Hello，Jessica
       </div>
     </div>
-    <main class="specFooter-content">
+    <div class="h-bg-f-spl-content container-xl">
+      <ul class="nav list-unstyled d-flex">
+        <li class="nav-item">
+          <NuxtLink class="nav-link" to="/user">個人資料</NuxtLink>
+        </li>
+        <li class="nav-item">
+          <NuxtLink class="nav-link" to="/user/orders">我的訂單</NuxtLink>
+        </li>
+      </ul>
       <slot />
-    </main>
-    <PageFooter status="spec" />
+    </div>
+    <PageFooter status="spl" />
   </div>
 </template>
 
 <style lang="scss" scoped>
-.specFooter-wrapper {
-  .specFooter-banner {
+.h-bg-f-spl-wrapper {
+  .h-bg-f-spl-banner {
     background-image: url('/img/bg/user.png');
     background-repeat: no-repeat;
     background-position: center;
@@ -39,9 +47,24 @@
     }
   }
 
-  .specFooter-content {
+  .h-bg-f-spl-content {
     overflow-x: hidden;
     flex: 1;
+    padding-top: 5rem;
+    padding-bottom: 7.5rem;
+
+    @include md {
+      padding-top: 2.5rem;
+      padding-bottom: 2.5rem;
+    }
+  }
+
+  .nav {
+    margin-bottom: 5rem;
+
+    @include md {
+      margin-bottom: 2.5rem;
+    }
   }
 
   .user-photo {

@@ -72,7 +72,7 @@
           <div class="d-flex flex-row gap-2">
             <div class="dropdown flex-grow-1">
               <button
-                class="btn btn-outline-primary btn-dropdown dropdown-toggle px-0 border-0 w-100"
+                class="btn btn-outline-primary btn-dropdown dropdown-toggle px-0 border-gray-40 w-100"
                 type="button"
                 aria-expanded="false"
                 data-bs-auto-close="outside"
@@ -86,7 +86,7 @@
             </div>
             <div class="dropdown flex-grow-1">
               <button
-                class="btn btn-outline-primary btn-dropdown dropdown-toggle px-0 border-0 w-100"
+                class="btn btn-outline-primary btn-dropdown dropdown-toggle px-0 border-gray-40 w-100"
                 type="button"
                 aria-expanded="false"
                 data-bs-auto-close="outside"
@@ -100,7 +100,7 @@
             </div>
             <div class="dropdown flex-grow-1">
               <button
-                class="btn btn-outline-primary btn-dropdown dropdown-toggle px-0 border-0 w-100"
+                class="btn btn-outline-primary btn-dropdown dropdown-toggle px-0 border-gray-40 w-100"
                 type="button"
                 aria-expanded="false"
                 data-bs-auto-close="outside"
@@ -119,7 +119,7 @@
           <div class="d-flex flex-row gap-2 mb-3">
             <div class="dropdown flex-grow-1">
               <button
-                class="btn btn-outline-primary btn-dropdown dropdown-toggle border-0 w-100"
+                class="btn btn-outline-primary btn-dropdown dropdown-toggle border-gray-40 w-100"
                 type="button"
                 aria-expanded="false"
                 data-bs-auto-close="outside"
@@ -133,7 +133,7 @@
             </div>
             <div class="dropdown flex-grow-1">
               <button
-                class="btn btn-outline-primary btn-dropdown dropdown-toggle border-0 w-100"
+                class="btn btn-outline-primary btn-dropdown dropdown-toggle border-gray-40 w-100"
                 type="button"
                 aria-expanded="false"
                 data-bs-auto-close="outside"
@@ -169,7 +169,7 @@
 
 <script lang="ts" setup>
 definePageMeta({
-  layout: 'no-footer'
+  layout: 'h-logo-f-no'
 })
 
 const status = ref(0)
@@ -177,12 +177,13 @@ const status = ref(0)
 
 <style lang="scss" scoped>
 @import url('@/assets/scss/site/login.scss');
+
 .num-ball {
-  width: 2rem;
-  height: 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 2rem;
+  height: 2rem;
 }
 
 .space-line {
