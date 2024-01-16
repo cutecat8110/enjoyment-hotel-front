@@ -5,40 +5,61 @@
       <div class="text-light fs-3 fs-md-1 fw-bold lh-lg ls-1">立即開始旅程</div>
     </div>
 
-    <div class="input-wrapper fs-8 fs-md-7">
-      <div>
-        <label class="form-label" for="email">電子信箱</label>
-        <input
-          id="email"
-          v-model="form.email"
-          class="form-control"
-          type="email"
-          placeholder="hello@exsample.com"
-          :disabled="apiPending"
-        />
+    <VForm ref="formRefs" v-slot="{ errors }" @submit="submit">
+      <div class="input-wrapper fs-8 fs-md-7 mb-5">
+        <div>
+          <label class="form-label" for="email">電子信箱</label>
+          <VField
+            id="email"
+            v-model="form.email"
+            :class="[errors.email && 'verify-error', 'form-control']"
+            name="email"
+            label="電子信箱"
+            type="email"
+            placeholder="hello@exsample.com"
+            rules="required|email"
+            :disabled="apiPending"
+          />
+          <div class="text-danger fs-8 fw-bold mt-2">{{ errors.email }}</div>
+        </div>
+
+        <div>
+          <label class="form-label" for="password">密碼</label>
+          <VField
+            id="password"
+            v-model="form.password"
+            :class="[errors.password && 'verify-error', 'form-control']"
+            name="password"
+            label="密碼"
+            type="password"
+            placeholder="請輸入密碼"
+            rules="required"
+            :disabled="apiPending"
+          />
+          <div class="text-danger fs-8 fw-bold mt-2">{{ errors.password }}</div>
+        </div>
+
+        <div class="d-flex justify-content-between">
+          <label class="form-check-label text-light" for="remember">
+            <input id="remember" class="form-check-input" type="checkbox" />
+            記住帳號
+          </label>
+          <button class="btn btn-text fs-8 fs-md-7">忘記密碼？</button>
+        </div>
       </div>
-      <div>
-        <label class="form-label" for="password">密碼</label>
-        <input
-          id="password"
-          v-model="form.password"
-          class="form-control"
-          type="password"
-          placeholder="請輸入密碼"
-          :disabled="apiPending"
-        />
-      </div>
-      <div class="d-flex justify-content-between">
-        <label class="form-check-label text-light" for="remember">
-          <input id="remember" class="form-check-input" type="checkbox" />
-          記住帳號
-        </label>
-        <button class="btn btn-text fs-8 fs-md-7">忘記密碼？</button>
-      </div>
-    </div>
-    <button class="btn btn-primary mb-2" type="button" :disabled="apiPending" @click="lRefresh()">
-      會員登入
-    </button>
+
+      <button
+        class="btn btn-primary mb-2 d-flex align-items-center gap-2"
+        type="submit"
+        :disabled="apiPending"
+      >
+        <template v-if="!apiPending">會員登入</template>
+        <template v-else>
+          登入中
+          <Icon class="fs-5" name="eos-icons:three-dots-loading"></Icon>
+        </template>
+      </button>
+    </VForm>
 
     <div class="d-flex">
       <div class="text-light me-2 fs-8 fs-md-7">沒有會員嗎？</div>
@@ -49,14 +70,23 @@
 
 <script lang="ts" setup>
 import { useCommonStore } from '@/stores/common'
+
 definePageMeta({
   layout: 'h-logo-f-no'
 })
+
 /* 登入表單 */
 const form = reactive({
   email: '',
   password: ''
 })
+
+const formRefs = ref<HTMLFormElement | null>(null)
+
+/* 登入 */
+const submit = () => {
+  lRefresh()
+}
 
 /* API */
 const commonStore = useCommonStore()
@@ -69,6 +99,18 @@ const { pending: lPending, refresh: lRefresh } = await login({
       commonStore.token = response._data.result.token
       commonStore.me = response._data.result
       navigateTo('/')
+    }
+  },
+  onResponseError({ response }: { response: any }) {
+    switch (response._data?.message) {
+      case '此使用者不存在':
+        formRefs.value?.setFieldError('email', '使用者不存在')
+        break
+      case '密碼錯誤':
+        formRefs.value?.setFieldError('password', '密碼錯誤')
+        break
+      default:
+        break
     }
   }
 })
