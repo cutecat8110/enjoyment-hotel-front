@@ -53,6 +53,8 @@
       </div>
     </article>
 
+    <h1 class="text-black">{{ data }}</h1>
+
     <!-- 最新消息 -->
     <article class="bg-goose-yellow position-relative news-outer">
       <div class="news-top-absolute"></div>
@@ -317,6 +319,17 @@
 <script lang="ts" setup>
 definePageMeta({
   layouts: 'h-f-spl'
+})
+
+/* API */
+const { news } = useApi()
+const { data } = await news({
+  onResponse({ response }: { response: any }) {
+    if (response.status === 200) {
+      console.log('yes')
+      return response
+    }
+  }
 })
 </script>
 
