@@ -11,7 +11,7 @@
           <label class="form-label" for="email">電子信箱</label>
           <VField
             id="email"
-            v-model="form.email"
+            v-model.trim="form.email"
             :class="[errors.email && 'verify-error', 'form-control']"
             name="email"
             label="電子信箱"
@@ -27,7 +27,7 @@
           <label class="form-label" for="password">密碼</label>
           <VField
             id="password"
-            v-model="form.password"
+            v-model.trim="form.password"
             :class="[errors.password && 'verify-error', 'form-control']"
             name="password"
             label="密碼"
@@ -83,6 +83,7 @@ definePageMeta({
 })
 
 /* 登入表單 */
+const formRefs = ref<HTMLFormElement | null>(null)
 const form = reactive({
   email: '',
   password: ''
@@ -98,7 +99,6 @@ const submit = () => {
 
 /* API */
 const { login } = useApi()
-const formRefs = ref<HTMLFormElement | null>(null)
 const apiPending = computed(() => lPending.value)
 const { pending: lPending, refresh: lRefresh } = await login({
   body: computed(() => form),
@@ -117,6 +117,10 @@ const { pending: lPending, refresh: lRefresh } = await login({
         formRefs.value?.setFieldError('email', '使用者不存在')
         break
       case '密碼錯誤':
+      case '密碼需至少 8 碼以上':
+      case '密碼不能只有英文':
+      case '密碼不能只有數字':
+      case '密碼需至少 8 碼以上，並英數混合':
         formRefs.value?.setFieldError('password', '密碼錯誤')
         break
       default:
