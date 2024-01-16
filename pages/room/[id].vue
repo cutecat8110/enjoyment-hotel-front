@@ -1,4 +1,5 @@
 <template>
+  <!-- ID: 65a6a24a4833c79e5f489517 -->
   <div class="p-0 px-lg-xl bg-primary-tint">
     <div class="pt-0 py-md-5 py-lg-xl mb-5">
       <div class="position-relative">
@@ -143,6 +144,9 @@ import TheRoomsInfo from '@/components/rooms/TheRoomsInfo.vue'
 definePageMeta({
   layout: 'h-bg-f'
 })
+
+// composables/api/users.js
+console.log(useApi())
 </script>
 
 <style lang="scss" scoped>
