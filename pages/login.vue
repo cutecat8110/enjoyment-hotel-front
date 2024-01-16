@@ -41,10 +41,16 @@
 
         <div class="d-flex justify-content-between">
           <label class="form-check-label text-light" for="remember">
-            <input id="remember" class="form-check-input" type="checkbox" />
+            <input
+              id="remember"
+              v-model="commonStore.remember"
+              class="form-check-input"
+              type="checkbox"
+              :disabled="apiPending"
+            />
             記住帳號
           </label>
-          <button class="btn btn-text fs-8 fs-md-7">忘記密碼？</button>
+          <button class="btn btn-text fs-8 fs-md-7" type="button">忘記密碼？</button>
         </div>
       </div>
 
@@ -70,6 +76,7 @@
 
 <script lang="ts" setup>
 import { useCommonStore } from '@/stores/common'
+const commonStore = useCommonStore()
 
 definePageMeta({
   layout: 'h-logo-f-no'
@@ -80,8 +87,9 @@ const form = reactive({
   email: '',
   password: ''
 })
-
-const formRefs = ref<HTMLFormElement | null>(null)
+if (commonStore.remember && commonStore.email) {
+  form.email = commonStore.email
+}
 
 /* 登入 */
 const submit = () => {
@@ -89,15 +97,17 @@ const submit = () => {
 }
 
 /* API */
-const commonStore = useCommonStore()
 const { login } = useApi()
+const formRefs = ref<HTMLFormElement | null>(null)
 const apiPending = computed(() => lPending.value)
 const { pending: lPending, refresh: lRefresh } = await login({
   body: computed(() => form),
   onResponse({ response }: { response: any }) {
     if (response.status === 200) {
-      commonStore.token = response._data.result.token
+      commonStore.token = response._data.token
       commonStore.me = response._data.result
+      commonStore.email = commonStore.remember ? form.email : ''
+
       navigateTo('/')
     }
   },

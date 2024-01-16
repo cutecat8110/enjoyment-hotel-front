@@ -121,10 +121,12 @@ watch(width, () => {
 
 /* 確認登入|登出 */
 const commonStore = useCommonStore()
+const reload = inject('reload', () => {})
 const name = computed(() => (!('name' in commonStore.me) ? '' : commonStore.me.name))
 const checkout = () => {
   commonStore.me = {}
   commonStore.token = ''
+  reload()
 }
 </script>
 
