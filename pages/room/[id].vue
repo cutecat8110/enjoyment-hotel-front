@@ -1,6 +1,7 @@
 <template>
   <!-- ID: 65a6a24a4833c79e5f489517 -->
   <div class="p-0 px-lg-xl bg-primary-tint">
+    apiPending: {{ apiPending }}
     <div class="pt-0 py-md-5 py-lg-xl mb-5">
       <div class="position-relative">
         <!-- 平板、電腦 -->
@@ -145,8 +146,49 @@ definePageMeta({
   layout: 'h-bg-f'
 })
 
-// composables/api/users.js
-console.log(useApi())
+// 取得 route id
+// const route = useRoute()
+// const id = route.params.id
+// console.log('params: ', id)
+
+/* API */
+const { roomInfo } = useApi()
+
+// id: 65a77277d044dc8f856c0a52
+// console.log(roomInfo('65a77277d044dc8f856c0a52')
+const apiPending = computed(() => lPending.value)
+const { data, pending: lPending } = await roomInfo('65a77277d044dc8f856c0a52', {
+  // body: computed(() => form),
+  onResponse({ response }: { response: any }) {
+    console.log('response: ', response)
+    // if (response.status === 200) {
+    //   commonStore.token = response._data.token
+    //   commonStore.me = response._data.result
+    //   commonStore.email = commonStore.remember ? form.email : ''
+
+    //   navigateTo('/')
+    // }
+  },
+  onResponseError({ response }: { response: any }) {
+    console.log('Error: ', response)
+    // switch (response._data?.message) {
+    //   case '此使用者不存在':
+    //     formRefs.value?.setFieldError('email', '使用者不存在')
+    //     break
+    //   case '密碼錯誤':
+    //   case '密碼需至少 8 碼以上':
+    //   case '密碼不能只有英文':
+    //   case '密碼不能只有數字':
+    //   case '密碼需至少 8 碼以上，並英數混合':
+    //     formRefs.value?.setFieldError('password', '密碼錯誤')
+    //     break
+    //   default:
+    //     break
+    // }
+  }
+})
+
+console.log('data: ', data)
 </script>
 
 <style lang="scss" scoped>

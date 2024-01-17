@@ -22,6 +22,7 @@ const handleError = (response) => {
 }
 
 const fetch = (url, options) => {
+  console.log('url, options: ', url, options)
   const runtimeConfig = useRuntimeConfig()
   const { apiBase } = runtimeConfig.public
   const reqUrl = apiBase + url
