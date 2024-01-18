@@ -152,12 +152,12 @@ definePageMeta({
 // console.log('params: ', id)
 
 /* API */
-const { roomInfo } = useApi()
+const { getRoomInfo } = useApi()
 
 // id: 65a77277d044dc8f856c0a52
 // console.log(roomInfo('65a77277d044dc8f856c0a52')
 const apiPending = computed(() => lPending.value)
-const { data, pending: lPending } = await roomInfo('65a77277d044dc8f856c0a52', {
+const { data, pending: lPending } = await getRoomInfo({
   // body: computed(() => form),
   onResponse({ response }: { response: any }) {
     console.log('response: ', response)
