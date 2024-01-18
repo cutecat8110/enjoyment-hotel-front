@@ -24,7 +24,7 @@
 
       <div class="border-bottom"></div>
 
-      <TheRoomsInfo :show-part="true" mb-space="4" />
+      <!-- <TheRoomsInfo :show-part="true" mb-space="4" /> -->
 
       <div class="d-flex gap-3 check-wrapper">
         <button class="btn btn-outline-primary" type="button">取消預訂</button>

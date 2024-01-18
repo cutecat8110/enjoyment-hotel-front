@@ -66,7 +66,7 @@
               <span>NT$ 10,000</span>
             </div>
 
-            <TheRoomsInfo :show-part="true" mb-space="4" />
+            <!-- <TheRoomsInfo :show-part="true" mb-space="4" /> -->
           </div>
         </div>
       </div>

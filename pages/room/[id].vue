@@ -1,30 +1,25 @@
 <template>
   <!-- ID: 65a6a24a4833c79e5f489517 -->
   <div class="p-0 px-lg-xl bg-primary-tint">
-    apiPending: {{ apiPending }}
+    <!-- 房型照片 -->
     <div class="pt-0 py-md-5 py-lg-xl mb-5">
       <div class="position-relative">
         <!-- 平板、電腦 -->
         <div class="row d-none d-md-flex px-3">
           <div class="col-6 pe-0">
             <div class="rounded-end-0 rounded-4 overflow-hidden">
-              <NuxtImg class="w-100 h-auto" src="/img/room/Room_1.png" alt="Room_1" />
+              <NuxtImg class="w-100 h-auto" :src="roomInfo.imageUrl" :alt="`${roomInfo.name}_0`" />
             </div>
           </div>
           <div class="col-6">
             <div class="w-auto h-100 rounded-start-0 rounded-4 overflow-hidden">
               <div class="row align-content-between h-100">
-                <div class="col-6 ps-0">
-                  <NuxtImg class="w-100 h-auto" src="/img/room/Room_2.png" alt="Room_2" />
-                </div>
-                <div class="col-6 ps-0">
-                  <NuxtImg class="w-100 h-auto" src="/img/room/Room_3.png" alt="Room_3" />
-                </div>
-                <div class="col-6 ps-0">
-                  <NuxtImg class="w-100 h-auto" src="/img/room/Room_4.png" alt="Room_4" />
-                </div>
-                <div class="col-6 ps-0">
-                  <NuxtImg class="w-100 h-auto" src="/img/room/Room_5.png" alt="Room_5" />
+                <div
+                  v-for="(image, idx) in roomInfo.imageUrlList"
+                  :key="`${idx}_${image}`"
+                  class="col-6 ps-0"
+                >
+                  <NuxtImg class="w-100 h-auto" :src="image" :alt="`${roomInfo.name}_${idx + 1}`" />
                 </div>
               </div>
             </div>
@@ -36,53 +31,24 @@
           <div id="banner_img" class="carousel slide w-100" data-bs-ride="carousel">
             <div class="carousel-indicators ms-3">
               <button
-                class="active"
+                v-for="(image, idx) in [roomInfo.imageUrl, ...roomInfo.imageUrlList]"
+                :key="`${idx}_${image}`"
+                :class="`${idx === 0 ? 'active' : ''}`"
                 type="button"
-                aria-current="true"
-                aria-label="Slide 1"
-                data-bs-slide-to="0"
-                data-bs-target="#banner_img"
-              />
-              <button
-                type="button"
-                aria-label="Slide 2"
-                data-bs-slide-to="1"
-                data-bs-target="#banner_img"
-              />
-              <button
-                type="button"
-                aria-label="Slide 3"
-                data-bs-slide-to="2"
-                data-bs-target="#banner_img"
-              />
-              <button
-                type="button"
-                aria-label="Slide 4"
-                data-bs-slide-to="3"
-                data-bs-target="#banner_img"
-              />
-              <button
-                type="button"
-                aria-label="Slide 5"
-                data-bs-slide-to="4"
+                :aria-current="`${idx === 0}`"
+                :aria-label="`Slide ${idx + 1}`"
+                :data-bs-slide-to="`${idx}`"
                 data-bs-target="#banner_img"
               />
             </div>
             <div class="carousel-inner">
-              <div class="carousel-item active" data-bs-interval="5000">
-                <NuxtImg class="w-100 h-auto" src="/img/room/Room_1.png" alt="Room_1" />
-              </div>
-              <div class="carousel-item" data-bs-interval="5000">
-                <NuxtImg class="w-100 h-auto" src="/img/room/Room_2.png" alt="Room_2" />
-              </div>
-              <div class="carousel-item" data-bs-interval="5000">
-                <NuxtImg class="w-100 h-auto" src="/img/room/Room_3.png" alt="Room_3" />
-              </div>
-              <div class="carousel-item" data-bs-interval="5000">
-                <NuxtImg class="w-100 h-auto" src="/img/room/Room_4.png" alt="Room_4" />
-              </div>
-              <div class="carousel-item" data-bs-interval="5000">
-                <NuxtImg class="w-100 h-auto" src="/img/room/Room_5.png" alt="Room_5" />
+              <div
+                v-for="(image, idx) in [roomInfo.imageUrl, ...roomInfo.imageUrlList]"
+                :key="`${idx}_${image}`"
+                class="carousel-item active"
+                data-bs-interval="5000"
+              >
+                <NuxtImg class="w-100 h-auto" :src="image" :alt="`${roomInfo.name}_${idx}`" />
               </div>
             </div>
           </div>
@@ -94,23 +60,25 @@
     <div class="container-xl">
       <div class="row">
         <div class="col-md-7">
-          <h2 class="text-primary h1 fw-bold mb-3">尊爵雙人房</h2>
+          <h2 class="text-primary h1 fw-bold mb-3">{{ roomInfo.name }}</h2>
           <p class="text-gray-80 mb-4 mb-lg-xl">
-            享受高級的住宿體驗，尊爵雙人房提供給您舒適寬敞的空間和精緻的裝潢。
+            {{ roomInfo.description }}
           </p>
 
-          <TheRoomsInfo mb-space="xl" />
+          <TheRoomsInfo :room-detail="roomDetail" mb-space="xl" />
         </div>
 
         <div class="col-md-5 mb-4 mb-lg-0">
           <div class="bg-light rounded-4 p-4 p-lg-5">
             <h4 class="s-5 fw-bold pb-3 border-bottom mb-4 mb-lg-5">預訂房型</h4>
 
-            <h3 class="fs-2 text-gray-80 fw-bold mb-2">尊爵雙人房</h3>
+            <h3 class="fs-2 text-gray-80 fw-bold mb-2">{{ roomInfo.name }}</h3>
             <p class="text-gray-80 mb-4 mb-lg-5">
-              享受高級的住宿體驗，尊爵雙人房提供給您舒適寬敞的空間和精緻的裝潢。
+              {{ roomInfo.description }}
             </p>
-            <span class="d-block text-primary fs-5 fw-bold mb-4 mb-5">NT$ 10,000</span>
+            <span class="d-block text-primary fs-5 fw-bold mb-4 mb-5">
+              NT$ {{ roomInfo.price }}
+            </span>
             <NuxtLink to="/reserve">
               <span class="btn btn-primary w-100">立即預訂</span>
             </NuxtLink>
@@ -147,48 +115,72 @@ definePageMeta({
 })
 
 // 取得 route id
-// const route = useRoute()
-// const id = route.params.id
-// console.log('params: ', id)
+const route = useRoute()
+const roomId = route.params.id || ''
 
-/* API */
-const { roomInfo } = useApi()
-
-// id: 65a77277d044dc8f856c0a52
-// console.log(roomInfo('65a77277d044dc8f856c0a52')
-const apiPending = computed(() => lPending.value)
-const { data, pending: lPending } = await roomInfo('65a77277d044dc8f856c0a52', {
-  // body: computed(() => form),
-  onResponse({ response }: { response: any }) {
-    console.log('response: ', response)
-    // if (response.status === 200) {
-    //   commonStore.token = response._data.token
-    //   commonStore.me = response._data.result
-    //   commonStore.email = commonStore.remember ? form.email : ''
-
-    //   navigateTo('/')
-    // }
-  },
-  onResponseError({ response }: { response: any }) {
-    console.log('Error: ', response)
-    // switch (response._data?.message) {
-    //   case '此使用者不存在':
-    //     formRefs.value?.setFieldError('email', '使用者不存在')
-    //     break
-    //   case '密碼錯誤':
-    //   case '密碼需至少 8 碼以上':
-    //   case '密碼不能只有英文':
-    //   case '密碼不能只有數字':
-    //   case '密碼需至少 8 碼以上，並英數混合':
-    //     formRefs.value?.setFieldError('password', '密碼錯誤')
-    //     break
-    //   default:
-    //     break
-    // }
-  }
+// 房型資訊
+interface RoomInfo {
+  id: string
+  name: string
+  imageUrl: string
+  imageUrlList: Array<string>
+  description: string
+  price: number
+}
+let roomInfo: RoomInfo = reactive({
+  id: '',
+  name: '',
+  imageUrl: '',
+  imageUrlList: [],
+  description: '',
+  price: 0
 })
 
-console.log('data: ', data)
+// 房型細節
+interface InfoItem {
+  isProvide: Boolean
+  title: string
+}
+interface RoomDetail {
+  amenityInfo: Array<InfoItem> // 備品
+  facilityInfo: Array<InfoItem> // 房內設備
+  areaInfo: string // 坪數
+  bedInfo: string // 床型
+  maxPeople: number // 人數
+}
+let roomDetail: RoomDetail = {
+  amenityInfo: [], // 備品
+  facilityInfo: [], // 房內設備
+  areaInfo: '', // 坪數
+  bedInfo: '', // 床型
+  maxPeople: 0 // 人數
+}
+
+/* API */
+// id: 65a77277d044dc8f856c0a52
+const { getRoomInfo } = useApi()
+const apiPending = computed(() => lPending.value)
+const { pending: lPending } = await getRoomInfo(roomId, {
+  onResponse({ response }: { response: any }) {
+    if (!response.status) {
+      return
+    }
+    console.log('res: ', response)
+    const resData = response._data.result
+    roomInfo = resData
+    roomDetail = {
+      amenityInfo: resData.amenityInfo, // 備品
+      facilityInfo: resData.facilityInfo, // 房內設備
+      areaInfo: resData.areaInfo, // 坪數
+      bedInfo: resData.bedInfo, // 床型
+      maxPeople: resData.maxPeople
+    }
+    console.log('roomInfo: ', roomInfo)
+  },
+  onResponseError({ response }: { response: any }) {
+    console.log('error: ', response)
+  }
+})
 </script>
 
 <style lang="scss" scoped>

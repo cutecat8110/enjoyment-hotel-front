@@ -4,6 +4,7 @@
       <h5 class="room-info-title-border title-border-primary fw-bold fs-5 ps-3 mb-3 mb-lg-4">
         房型基本資訊
       </h5>
+      roomDetail: {{ roomDetail }}
       <ul :class="`mb-lg-${mbSpace}`" class="list-unstyled d-flex mb-4">
         <li
           class="info-icon-wrap d-flex flex-column justify-content-center p-3 me-3 bg-light rounded-3 text-gray-80"
@@ -11,7 +12,7 @@
           <span class="mb-2">
             <img src="\svg\ic_Size.svg" alt="ic_Size" />
           </span>
-          24坪
+          {{ roomDetail?.areaInfo }}
         </li>
         <li
           class="info-icon-wrap d-flex flex-column justify-content-center p-3 me-3 bg-light rounded-3 text-gray-80"
@@ -19,7 +20,7 @@
           <span class="mb-2">
             <Icon class="fs-5 fw-blod text-primary" name="ic:round-king-bed" />
           </span>
-          1 張大床
+          {{ roomDetail.bedInfo }}
         </li>
         <li
           class="info-icon-wrap d-flex flex-column justify-content-center p-3 bg-light rounded-3 text-gray-80"
@@ -27,7 +28,7 @@
           <span class="mb-2">
             <Icon class="fs-5 fw-blod text-primary" name="ic:round-person" />
           </span>
-          2-4 人
+          {{ roomDetail.maxPeople }} 人
         </li>
       </ul>
     </div>
@@ -74,7 +75,15 @@
       ]"
       class="list-unstyled row flex-wrap row-cols-2 p-4 bg-light rounded-3 mb-4 mx-0"
     >
-      <li class="col fw-bold text-gray-80">
+      <li
+        v-for="facility in roomDetail.facilityInfo"
+        :key="facility.title"
+        class="col fw-bold text-gray-80"
+      >
+        <Icon class="fs-5 fw-blod text-primary" name="ic:round-check" />
+        {{ facility.title }}
+      </li>
+      <!-- <li class="col fw-bold text-gray-80">
         <Icon class="fs-5 fw-blod text-primary" name="ic:round-check" />
         平面電視
       </li>
@@ -114,7 +123,7 @@
       <li class="col fw-bold text-gray-80">
         <Icon class="fs-5 fw-blod text-primary" name="ic:round-check" />
         音響
-      </li>
+      </li> -->
     </ul>
 
     <h5 class="room-info-title-border title-border-primary fw-bold fs-5 ps-3 mb-3 mb-lg-4">
@@ -128,7 +137,15 @@
       ]"
       class="list-unstyled row flex-wrap row-cols-2 p-4 bg-light rounded-3 mb-4 mx-0"
     >
-      <li class="col fw-bold text-gray-80">
+      <li
+        v-for="amenity in roomDetail.amenityInfo"
+        :key="amenity.title"
+        class="col fw-bold text-gray-80"
+      >
+        <Icon class="fs-5 fw-blod text-primary" name="ic:round-check" />
+        {{ amenity.title }}
+      </li>
+      <!-- <li class="col fw-bold text-gray-80">
         <Icon class="fs-5 fw-blod text-primary" name="ic:round-check" />
         衛生紙
       </li>
@@ -168,18 +185,34 @@
       <li class="col fw-bold text-gray-80">
         <Icon class="fs-5 fw-blod text-primary" name="ic:round-check" />
         梳子
-      </li>
+      </li> -->
     </ul>
   </div>
 </template>
 
 <script lang="ts" setup>
-defineProps<{ mbSpace?: string; showPart?: boolean }>()
+interface InfoItem {
+  isProvide: Boolean
+  title: string
+}
+interface RoomDetail {
+  amenityInfo: Array<InfoItem> // 備品
+  facilityInfo: Array<InfoItem> // 房內設備
+  areaInfo: string // 坪數
+  bedInfo: string // 床型
+  maxPeople: number // 人數
+}
+
+defineProps<{
+  mbSpace?: string
+  showPart?: boolean
+  roomDetail: RoomDetail
+}>()
 </script>
 
 <style lang="scss" scoped>
 .info-icon-wrap {
-  width: 97px;
+  min-width: 97px;
   height: 97px;
 }
 </style>

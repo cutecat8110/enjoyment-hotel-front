@@ -62,7 +62,6 @@ export default defineNuxtConfig({
       autoprefixer: true
     }
   },
-
   vite: {
     // 定義全域共用 Sass / SCSS 變數
     css: {

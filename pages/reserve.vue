@@ -134,7 +134,7 @@
             </li>
           </ul>
 
-          <TheRoomsInfo mb-space="4" />
+          <!-- <TheRoomsInfo mb-space="4" /> -->
         </div>
 
         <div class="col-md-5 mb-5 mb-lg-0">
