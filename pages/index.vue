@@ -28,6 +28,12 @@
         <div class="carousel-inner position-relative">
           <div class="carousel-item active banner-outer">
             <div class="d-block banner-img"></div>
+            <div class="banner-left-content text-primary-dark">
+              <div class="zh-title">享樂酒店</div>
+              <div class="en-title">Enjoyment Luxury Hotel</div>
+              <div class="line"></div>
+            </div>
+            <div class="banner-right-content"></div>
             <div class="banner-middle-content">
               <div class="middle-content-title text-white">高雄</div>
               <div class="middle-content-title text-white">豪華住宿之選</div>
@@ -42,18 +48,12 @@
                 <div class="banner-button-line"></div>
               </button>
             </div>
-            <div class="banner-left-content text-primary-dark">
-              <div class="zh-title">享樂酒店</div>
-              <div class="en-title">Enjoyment Luxury Hotel</div>
-              <div class="line"></div>
-            </div>
-            <div class="banner-right-content"></div>
           </div>
         </div>
       </div>
     </article>
 
-    <h1 class="text-black">{{ data }}</h1>
+    <h1 class="text-black">{{ newsData }}</h1>
 
     <!-- 最新消息 -->
     <article class="bg-goose-yellow position-relative news-outer">
@@ -156,7 +156,9 @@
           <div class="col-12 col-lg-6"></div>
           <div class="col-12 col-lg-6 text-light room-content">
             <h2 class="room-title">尊爵雙人房</h2>
-            <h7>享受高級的住宿體驗，尊爵雙人房提供給您舒適寬敞的空間和精緻的裝潢。</h7>
+            <div class="fs-7">
+              享受高級的住宿體驗，尊爵雙人房提供給您舒適寬敞的空間和精緻的裝潢。
+            </div>
             <h3 class="room-price">NT$ 10,000</h3>
             <button class="btn room-button fs-5" type="button">
               查看更多
@@ -183,15 +185,15 @@
           <div class="card-bg position-absolute py-4">
             <div class="d-flex mb-4">
               <h5 class="ms-4 fs-5">海霸</h5>
-              <div class="ms-auto me-4 fs-8">
-                <h7 class="card-week">SUN-MON</h7>
-                <h7>11:00 - 20:30</h7>
+              <div class="ms-auto me-4 fs-8 d-flex">
+                <div class="fs-7 card-week">SUN-MON</div>
+                <div class="fs-7">11:00 - 20:30</div>
               </div>
             </div>
             <div class="mx-4">
-              <h7 class="card-directions fs-8">
+              <div class="card-directions fs-ml-7 fs-8">
                 以新鮮海產料理聞名，我們的專業廚師選用高雄當地的海鮮，每一道菜都充滿海洋的鮮美與清甜。無論是烤魚、蒸蝦還是煮蛤蜊，都能讓您品嚐到最新鮮的海洋風味。
-              </h7>
+              </div>
             </div>
           </div>
         </div>
@@ -201,15 +203,15 @@
           <div class="card-bg position-absolute py-4">
             <div class="d-flex mb-4">
               <h5 class="ms-4 fs-5">日食</h5>
-              <div class="ms-auto me-4 fs-8">
-                <h7 class="card-week">SUN-MON</h7>
-                <h7>17:00 - 22:00</h7>
+              <div class="ms-auto me-4 fs-8 d-flex">
+                <div class="fs-7 card-week">SUN-MON</div>
+                <div>17:00 - 22:00</div>
               </div>
             </div>
             <div class="mx-4">
-              <h7 class="card-directions fs-8">
+              <div class="card-directions fs-md-7 fs-8">
                 為您提供優質的牛排，每一塊肉都來自頂級的牛肉，經過專業廚師的巧手烹調，口感豐滿、風味絕佳。搭配我們的特製醬料，讓您的味蕾享受一場美味的盛宴。
-              </h7>
+              </div>
             </div>
           </div>
         </div>
@@ -219,15 +221,15 @@
           <div class="card-bg position-absolute py-4">
             <div class="d-flex mb-4">
               <h5 class="ms-4 fs-5">山臻</h5>
-              <div class="ms-auto me-4 fs-8">
-                <h7 class="card-week">SUN-MON</h7>
-                <h7>11:30 - 20:30</h7>
+              <div class="ms-auto me-4 fs-8 d-flex">
+                <div class="card-week fs-7">SUN-MON</div>
+                <div class="fs-7">11:30 - 20:30</div>
               </div>
             </div>
             <div class="mx-4">
-              <h7 class="card-directions fs-8">
+              <div class="card-directions fs-md-7 fs-8">
                 帶您進入一次辣味與鮮香兼具的川菜美食之旅。我們的廚師掌握正宗的川菜烹調技巧，從麻辣鍋到口水雞，每一道菜都有其獨特的風味，讓您回味無窮。
-              </h7>
+              </div>
             </div>
           </div>
         </div>
@@ -237,15 +239,15 @@
           <div class="card-bg position-absolute py-4">
             <div class="d-flex mb-4">
               <h5 class="ms-4 fs-5">月永</h5>
-              <div class="ms-auto me-4 fs-8">
-                <h7 class="card-week">SUN-MON</h7>
-                <h7>11:00 - 20:00</h7>
+              <div class="ms-auto me-4 fs-8 d-flex">
+                <div class="card-week fs-7">SUN-MON</div>
+                <div class="fs-7">11:00 - 20:00</div>
               </div>
             </div>
             <div class="mx-4">
-              <h7 class="card-directions fs-8">
+              <div class="card-directions fs-md-7 fs-8">
                 從鮮美的海鮮、經典的牛排，到各國的特色美食，我們都一應俱全。在這裡，您可以品嚐到世界各地的美食，每一道菜都由專業廚師用心製作，讓您在享受美食的同時，也能感受到我們的熱情與用心。
-              </h7>
+              </div>
             </div>
           </div>
         </div>
@@ -255,15 +257,15 @@
           <div class="card-bg position-absolute py-4">
             <div class="d-flex mb-4">
               <h5 class="ms-4 fs-5">天潮</h5>
-              <div class="ms-auto me-4 fs-8">
-                <h7 class="card-week">SUN-MON</h7>
-                <h7>14:00 - 19:30</h7>
+              <div class="ms-auto me-4 fs-8 d-flex">
+                <div class="card-week fs-7">SUN-MON</div>
+                <div class="fs-7">14:00 - 19:30</div>
               </div>
             </div>
             <div class="mx-4">
-              <h7 class="card-directions fs-8">
+              <div class="card-directions fs-md-7 fs-8">
                 我們提供各種精緻甜點與糕點，無論您喜歡的是巧克力蛋糕、法式馬卡龍，還是台灣傳統的糕點，都能在這裡找到。讓我們的甜點帶您進入一場繽紛的甜蜜旅程。
-              </h7>
+              </div>
             </div>
           </div>
         </div>
@@ -291,23 +293,23 @@
           <div class="col-12 col-lg-4 mb-4">
             <img class="mb-3" src="/img/desktop/car.png" alt="" />
             <h5 class="text-white mb-2">自行開車</h5>
-            <h7 class="text-white">
+            <div class="fs-7 text-white">
               如果您選擇自行開車，可以透過國道一號下高雄交流道，往市區方向行駛，並依路標指示即可抵達「享樂酒店」。飯店內設有停車場，讓您停車方便。
-            </h7>
+            </div>
           </div>
           <div class="col-12 col-lg-4 mb-4">
             <img class="mb-3" src="/img/desktop/train.png" alt="" />
             <h5 class="text-white mb-2">高鐵/火車</h5>
-            <h7 class="text-white">
+            <div class="text-white fs-7">
               如果您是搭乘高鐵或火車，可於左營站下車，外頭有計程車站，搭乘計程車約20分鐘即可抵達。或者您也可以轉乘捷運紅線至中央公園站下車，步行約10分鐘便可抵達。
-            </h7>
+            </div>
           </div>
           <div class="col-12 col-lg-4 mb-4">
             <img class="mb-3" src="/img/desktop/luxurycar.png" alt="" />
             <h5 class="text-white mb-2">禮賓車服務</h5>
-            <h7 class="text-white">
+            <div class="fs-7 text-white">
               承億酒店提供禮賓專車接送服務，但因目的地遠近會有不同的收費，請撥打電話將由專人為您服務洽詢專線：(07)123-4567
-            </h7>
+            </div>
           </div>
         </div>
       </div>
@@ -322,15 +324,47 @@ definePageMeta({
 })
 
 /* API */
-const { news } = useApi()
-const { data } = await news({
+const { news, culinary } = useApi()
+const apiPending = computed(() => lPending.value)
+
+const {
+  data: newsData,
+  pending: lPending,
+  refresh
+} = await news({
+  immediate: true,
   onResponse({ response }: { response: any }) {
     if (response.status === 200) {
-      console.log('yes')
-      return response
+      console.log('newsData response:', response)
+      return response._data.result
     }
+  },
+  onResponseError({ response }: { response: any }) {
+    console.log('Error:', response)
   }
 })
+console.log('newsData:', newsData)
+console.log('apiPending:', apiPending)
+
+const {
+  data: culinaryData
+  // pending: lPending,
+  // refresh
+} = await culinary({
+  immediate: true,
+  onResponse({ response }: { response: any }) {
+    if (response.status === 200) {
+      console.log('culinaryData', response._data.result)
+      return response._data.result
+    }
+  },
+  onResponseError({ response }: { response: any }) {
+    console.log('Error:', response)
+  }
+})
+console.log('culinaryData:', culinaryData)
+refresh()
+// lPending.value = false
 </script>
 
 <style lang="scss" scoped>
