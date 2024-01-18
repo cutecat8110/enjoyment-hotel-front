@@ -105,7 +105,6 @@ const { pending: lPending, refresh: lRefresh } = await login({
   immediate: false,
   watch: false,
   onResponse({ response }: { response: any }) {
-    console.log('response: ', response)
     if (response.status === 200) {
       commonStore.token = response._data.token
       commonStore.me = response._data.result
