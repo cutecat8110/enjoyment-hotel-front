@@ -24,14 +24,13 @@ const handleError = (response) => {
 const fetch = (url, options) => {
   const runtimeConfig = useRuntimeConfig()
   const { apiBase } = runtimeConfig.public
-  const reqUrl = apiBase + url
+  const reqUrl = url.startsWith('/api') ? apiBase + url : url
 
   const fetch = useFetch(reqUrl, {
     onRequest({ options }) {
       /* 檢查是否已登入 */
       const commonStore = useCommonStore()
       if (!commonStore.token) return
-
       /* 已登入 API 帶 token */
       options.headers = new Headers(options.headers)
       options.headers.set('Authorization', commonStore.token)
@@ -39,11 +38,8 @@ const fetch = (url, options) => {
     onResponseError({ response }) {
       handleError(response)
     },
-    immediate: false, // 不立即觸發 API
-    watch: false, // 不因參數變化, 觸發 API
     ...options
   })
-  fetch.pending.value = false // pending 初始為 false
   return fetch
 }
 

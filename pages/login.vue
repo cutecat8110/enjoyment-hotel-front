@@ -102,6 +102,8 @@ const { login } = useApi()
 const apiPending = computed(() => lPending.value)
 const { pending: lPending, refresh: lRefresh } = await login({
   body: computed(() => form),
+  immediate: false,
+  watch: false,
   onResponse({ response }: { response: any }) {
     if (response.status === 200) {
       commonStore.token = response._data.token
@@ -128,6 +130,7 @@ const { pending: lPending, refresh: lRefresh } = await login({
     }
   }
 })
+lPending.value = false
 </script>
 
 <style lang="scss" scoped>
