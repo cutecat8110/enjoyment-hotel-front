@@ -8,7 +8,7 @@
       <div class="py-3 d-flex align-items-center gap-2">
         <div class="d-flex text-light flex-column align-items-center">
           <div class="bg-primary rounded-circle num-ball mb-1">
-            <template v-if="status === 0">1</template>
+            <template v-if="formStatus === 0">1</template>
             <template v-else>
               <Icon name="ic:baseline-check" />
             </template>
@@ -16,17 +16,19 @@
           <div class="fs-8 fs-md-7">輸入信箱及密碼</div>
         </div>
 
-        <div :class="[status === 0 ? 'bg-primary-60' : 'bg-primary-40', 'flex-fill space-line']" />
+        <div
+          :class="[formStatus === 0 ? 'bg-primary-60' : 'bg-primary-40', 'flex-fill space-line']"
+        />
 
         <div
           :class="[
-            status === 0 ? 'text-primary-60' : 'text-light',
+            formStatus === 0 ? 'text-primary-60' : 'text-light',
             'd-flex flex-column align-items-center'
           ]"
         >
           <div
             :class="[
-              status === 0 ? 'border border-primary-60' : 'bg-primary',
+              formStatus === 0 ? 'border border-primary-60' : 'bg-primary',
               'rounded-circle num-ball mb-1'
             ]"
           >
@@ -37,163 +39,218 @@
       </div>
     </div>
 
-    <VForm ref="formRefs" v-slot="{ errors }" @submit="submit">
+    <VForm
+      v-if="formStatus === 0"
+      :ref="(el) => (formRefs[0] = el as HTMLFormElement)"
+      v-slot="{ errors }"
+      @submit="submit(0)"
+    >
       <div class="input-wrapper fs-8 fs-md-7 mb-5">
-        <template v-if="status === 0">
-          <div>
-            <label class="form-label" for="email">電子信箱</label>
-            <VField
-              id="email"
-              v-model.trim="form1.email"
-              :class="[errors.email && 'verify-error', 'form-control']"
-              name="email"
-              label="電子信箱"
-              type="email"
-              placeholder="hello@exsample.com"
-              rules="required|email"
-              :disabled="apiPending"
-            />
-            <div class="text-danger fs-8 fw-bold mt-2">{{ errors.email }}</div>
-          </div>
-          <div>
-            <label class="form-label" for="password">密碼</label>
-            <VField
-              id="password"
-              v-model.trim="form1.password"
-              :class="[errors.password && 'verify-error', 'form-control']"
-              name="password"
-              label="密碼"
-              type="password"
-              placeholder="請輸入密碼"
-              :rules="rules.password"
-              :disabled="apiPending"
-            />
-            <div class="text-danger fs-8 fw-bold mt-2">{{ errors.password }}</div>
-          </div>
-          <div>
-            <label class="form-label" for="confirmPassword">密碼</label>
-            <VField
-              id="confirmPassword"
-              v-model.trim="form1.confirmPassword"
-              :class="[errors.confirmPassword && 'verify-error', 'form-control']"
-              name="confirmPassword"
-              label="密碼"
-              type="password"
-              placeholder="請再輸入一次密碼"
-              rules="required|confirmed:@password"
-              :disabled="apiPending"
-            />
-            <div class="text-danger fs-8 fw-bold mt-2">{{ errors.confirmPassword }}</div>
-          </div>
-        </template>
-
-        <template v-else>
-          <div>
-            <label class="form-label" for="name">姓名</label>
-            <input id="name" class="form-control" type="text" placeholder="請輸入姓名" />
-          </div>
-          <div>
-            <label class="form-label" for="phone">手機號碼</label>
-            <input id="phone" class="form-control" type="text" placeholder="請輸入手機號碼" />
-          </div>
-          <div>
-            <label class="form-label" for="birthday">生日</label>
-            <div class="d-flex flex-row gap-2">
-              <div class="dropdown flex-grow-1">
-                <button
-                  class="btn btn-outline-primary btn-dropdown dropdown-toggle px-0 border-gray-40 w-100"
-                  type="button"
-                  aria-expanded="false"
-                  data-bs-auto-close="outside"
-                  data-bs-toggle="dropdown"
-                >
-                  1990 年
-                </button>
-                <ul class="dropdown-menu px-0">
-                  <li><a class="dropdown-item active" href="#">1990 年</a></li>
-                </ul>
-              </div>
-              <div class="dropdown flex-grow-1">
-                <button
-                  class="btn btn-outline-primary btn-dropdown dropdown-toggle px-0 border-gray-40 w-100"
-                  type="button"
-                  aria-expanded="false"
-                  data-bs-auto-close="outside"
-                  data-bs-toggle="dropdown"
-                >
-                  8 月
-                </button>
-                <ul class="dropdown-menu px-0">
-                  <li><a class="dropdown-item active" href="#">8 月</a></li>
-                </ul>
-              </div>
-              <div class="dropdown flex-grow-1">
-                <button
-                  class="btn btn-outline-primary btn-dropdown dropdown-toggle px-0 border-gray-40 w-100"
-                  type="button"
-                  aria-expanded="false"
-                  data-bs-auto-close="outside"
-                  data-bs-toggle="dropdown"
-                >
-                  15 日
-                </button>
-                <ul class="dropdown-menu px-0">
-                  <li><a class="dropdown-item active" href="#">15 日</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div>
-            <label class="form-label" for="address">地址</label>
-            <div class="d-flex flex-row gap-2 mb-3">
-              <div class="dropdown flex-grow-1">
-                <button
-                  class="btn btn-outline-primary btn-dropdown dropdown-toggle border-gray-40 w-100"
-                  type="button"
-                  aria-expanded="false"
-                  data-bs-auto-close="outside"
-                  data-bs-toggle="dropdown"
-                >
-                  高雄市
-                </button>
-                <ul class="dropdown-menu px-0">
-                  <li><a class="dropdown-item active" href="#">高雄市</a></li>
-                </ul>
-              </div>
-              <div class="dropdown flex-grow-1">
-                <button
-                  class="btn btn-outline-primary btn-dropdown dropdown-toggle border-gray-40 w-100"
-                  type="button"
-                  aria-expanded="false"
-                  data-bs-auto-close="outside"
-                  data-bs-toggle="dropdown"
-                >
-                  新興區
-                </button>
-                <ul class="dropdown-menu px-0">
-                  <li><a class="dropdown-item active" href="#">新興區</a></li>
-                </ul>
-              </div>
-            </div>
-            <input id="address" class="form-control" type="text" placeholder="請輸入詳細地址" />
-          </div>
-          <label class="form-check-label text-light" for="remember">
-            <input id="remember" class="form-check-input" type="checkbox" />
-            我已閱讀並同意本網站個資使用規範
-          </label>
-        </template>
+        <div>
+          <label class="form-label" for="email">電子信箱</label>
+          <VField
+            id="email"
+            v-model.trim="form.email"
+            :class="[errors.email && 'verify-error', 'form-control']"
+            name="email"
+            label="電子信箱"
+            type="email"
+            placeholder="hello@exsample.com"
+            rules="required|email"
+            :disabled="apiPending"
+          />
+          <div class="text-danger fs-8 fw-bold mt-2">{{ errors.email }}</div>
+        </div>
+        <div>
+          <label class="form-label" for="password">密碼</label>
+          <VField
+            id="password"
+            v-model.trim="form.password"
+            :class="[errors.password && 'verify-error', 'form-control']"
+            name="password"
+            label="密碼"
+            type="password"
+            placeholder="請輸入密碼"
+            :rules="rules.password"
+            :disabled="apiPending"
+          />
+          <div class="text-danger fs-8 fw-bold mt-2">{{ errors.password }}</div>
+        </div>
+        <div>
+          <label class="form-label" for="confirm">密碼</label>
+          <VField
+            id="confirm"
+            v-model.trim="form.confirm"
+            :class="[errors.confirm && 'verify-error', 'form-control']"
+            name="confirm"
+            label="密碼"
+            type="password"
+            placeholder="請再輸入一次密碼"
+            rules="required|confirmed:@password"
+            :disabled="apiPending"
+          />
+          <div class="text-danger fs-8 fw-bold mt-2">{{ errors.confirm }}</div>
+        </div>
       </div>
 
       <div>
-        <button class="btn btn-primary mb-3 w-100" type="submit" @click="submit">
-          {{ status === 0 ? '下一步' : '立即註冊' }}
-        </button>
+        <button class="btn btn-primary mb-3 w-100" type="submit">下一步</button>
         <div class="d-flex">
           <div class="text-light me-2 fs-8 fs-md-7">已經有會員了嗎？</div>
           <NuxtLink class="btn btn-text text-primary fs-8 fs-md-7" to="/login">立即登入</NuxtLink>
         </div>
       </div>
     </VForm>
+
+    <VForm
+      v-else
+      :ref="(el) => (formRefs[1] = el as HTMLFormElement)"
+      v-slot="{ errors }"
+      @submit="submit(1)"
+    >
+      <div class="input-wrapper fs-8 fs-md-7 mb-5">
+        <!-- 姓名 -->
+        <div>
+          <label class="form-label" for="name">姓名</label>
+          <VField
+            id="name"
+            v-model.trim="form.name"
+            :class="[errors.name && 'verify-error', 'form-control']"
+            name="name"
+            label="姓名"
+            type="text"
+            placeholder="請輸入姓名"
+            rules="required|min:2"
+            :disabled="apiPending"
+          />
+          <div class="text-danger fs-8 fw-bold mt-2">{{ errors.name }}</div>
+        </div>
+        <!-- 手機 -->
+        <div>
+          <label class="form-label" for="phone">手機號碼</label>
+          <VField
+            id="phone"
+            v-model.trim="form.phone"
+            :class="[errors.phone && 'verify-error', 'form-control']"
+            name="phone"
+            label="手機號碼"
+            type="text"
+            placeholder="請輸入手機號碼"
+            rules="required"
+            :disabled="apiPending"
+          />
+          <div class="text-danger fs-8 fw-bold mt-2">{{ errors.phone }}</div>
+        </div>
+        <!-- 生日 -->
+        <div>
+          <label class="form-label" for="birthday">生日</label>
+          <div class="d-flex flex-row gap-2">
+            <VField
+              v-model="birthday.Y"
+              class="select flex-grow-1"
+              name="birthdayY"
+              as="select"
+              rules="required"
+              :disabled="apiPending"
+            >
+              <option
+                v-for="(item, index) in Array.from(
+                  { length: 100 },
+                  (_, i) => Number(birthday.Y) - i
+                )"
+                :key="index"
+                :value="item"
+              >
+                {{ item }} 年
+              </option>
+            </VField>
+            <VField
+              v-model="birthday.M"
+              class="select flex-grow-1"
+              name="birthdayM"
+              as="select"
+              rules="required"
+              :disabled="apiPending"
+            >
+              <option
+                v-for="(item, index) in Array.from({ length: 12 }, (_, i) => i + 1)"
+                :key="index"
+                :value="item"
+              >
+                {{ item }} 月
+              </option>
+            </VField>
+            <VField
+              v-model="birthday.D"
+              class="select flex-grow-1"
+              name="birthdayD"
+              as="select"
+              rules="required"
+              :disabled="apiPending"
+            >
+              <option
+                v-for="(item, index) in Array.from({ length: daysInMonth }, (_, i) => i + 1)"
+                :key="index"
+                :value="item"
+              >
+                {{ item }} 日
+              </option>
+            </VField>
+          </div>
+          <div class="text-danger fs-8 fw-bold mt-2">{{ errors.birthday }}</div>
+        </div>
+
+        <div>
+          <label class="form-label" for="address">地址</label>
+          <div class="d-flex flex-row gap-2 mb-3">
+            <VField
+              v-model="address.city"
+              class="select flex-grow-1"
+              name="addressCity"
+              as="select"
+              rules="required"
+              :disabled="apiPending"
+            >
+              <option v-for="(item, index) in cityTmpl" :key="index" :value="item">
+                {{ item }}
+              </option>
+            </VField>
+            <VField
+              v-model="address.district"
+              class="select flex-grow-1"
+              name="addressDistrict"
+              as="select"
+              rules="required"
+              :disabled="apiPending"
+            >
+              <option
+                v-for="(district, index) in districtTmpl"
+                :key="index"
+                :value="district.district"
+              >
+                {{ district.district }}
+              </option>
+            </VField>
+          </div>
+          <input id="address" class="form-control" type="text" placeholder="請輸入詳細地址" />
+        </div>
+        <label class="form-check-label text-light" for="remember">
+          <input id="remember" class="form-check-input" type="checkbox" />
+          我已閱讀並同意本網站個資使用規範
+        </label>
+      </div>
+
+      <div>
+        <button class="btn btn-primary mb-3 w-100" type="submit">立即註冊</button>
+        <div class="d-flex">
+          <div class="text-light me-2 fs-8 fs-md-7">已經有會員了嗎？</div>
+          <NuxtLink class="btn btn-text text-primary fs-8 fs-md-7" to="/login">立即登入</NuxtLink>
+        </div>
+      </div>
+    </VForm>
+    <pre>
+      {{ tData }}
+    </pre>
   </main>
 </template>
 
@@ -202,20 +259,34 @@ definePageMeta({
   layout: 'h-logo-f-no'
 })
 
-const status = ref(0)
-
-/* 註冊表單 */
-const formRefs = ref<HTMLFormElement | null>(null)
-const form1 = reactive({
-  email: 'test@gmail.com',
-  password: 'test123456',
-  confirmPassword: 'test123456'
+/* 生日 */
+const { $dayjs } = useNuxtApp()
+const birthday = reactive({
+  Y: $dayjs().format('YYYY-M-D').split('-')[0],
+  M: $dayjs().format('YYYY-M-D').split('-')[1],
+  D: $dayjs().format('YYYY-M-D').split('-')[2]
+})
+const daysInMonth = computed(() => {
+  return $dayjs(`${birthday.Y}-${birthday.M}`, 'YYYY-M').daysInMonth()
+})
+watchEffect(() => {
+  if (daysInMonth.value < Number(birthday.D)) {
+    birthday.D = '1'
+  }
 })
 
-const form2 = reactive({
+/* 註冊表單 */
+const formStatus = ref(1)
+const formRefs = ref<Array<HTMLFormElement | null>>([null, null])
+const form = reactive({
+  email: 'test@gmail.com',
+  password: 'test123456',
+  confirm: 'test123456',
   name: '',
   phone: '',
-  birthday: '',
+  birthday: computed(() =>
+    $dayjs(`${birthday.Y}-${birthday.M}-${birthday.D}`, 'YYYY-M-D').format('YYYY-MM-DD')
+  ),
   address: {
     zipcode: 0,
     detail: ''
@@ -246,22 +317,58 @@ const rules = {
 }
 
 /* 登入 */
-const submit = () => {
-  formRefs.value?.validate().then((res: any) => {
-    console.log(res)
-  })
-  // sRefresh()
+const submit = async (i: number) => {
+  // const { valid } = await formRefs.value[i]?.validate()
+  // if (valid) {
+  // }
+  if (i === 0) {
+    formStatus.value = 1
+  }
+
+  sRefresh()
 }
+
+/* 地址 */
+const { cityTmpl } = useTmpl()
+const address = reactive({
+  city: cityTmpl[0],
+  district: '',
+  zip_code: ''
+})
+const districtTmpl = ref<
+  {
+    district: string
+    zip_code: string
+  }[]
+>([])
 
 /* API */
 const { signup } = useApi()
-const apiPending = computed(() => sPending.value)
+const apiPending = computed(() => sPending.value || tPending.value)
+/* API:註冊 */
 const { pending: sPending, refresh: sRefresh } = await signup({
-  body: computed(() => ({
-    ...form1,
-    ...form2
-  }))
+  body: computed(() => form)
 })
+/* API:地址 */
+const { data: tData, pending: tPending } = await useFetch('/api/twzipcode', {
+  method: 'get',
+  query: computed(() => ({ city: address.city })),
+  onResponse({ response }) {
+    if (response.status === 200) {
+      const temp = response._data.data.map(
+        // eslint-disable-next-line camelcase
+        ({ district, zip_code }: { district: any; zip_code: any }) => ({
+          district,
+          // eslint-disable-next-line camelcase
+          zip_code
+        })
+      )
+      districtTmpl.value = temp
+      address.district = temp[0].district
+    }
+  }
+})
+sPending.value = false // pending 初始為 false
 </script>
 
 <style lang="scss" scoped>
@@ -277,5 +384,25 @@ const { pending: sPending, refresh: sRefresh } = await signup({
 
 .space-line {
   height: 0.125rem;
+}
+
+.select {
+  padding: 8px;
+  padding: calc(1rem - 1px);
+  color: #4b4b4b;
+  border: $gray-400 1px solid;
+  border-radius: 0.375rem;
+  background: $white;
+  background:
+    url('/img/ic_ArrowDown.png') no-repeat right 1rem center,
+    linear-gradient($white, $white);
+
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+
+  &:focus-visible {
+    outline: none;
+  }
 }
 </style>

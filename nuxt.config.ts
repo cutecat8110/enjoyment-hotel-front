@@ -27,6 +27,15 @@ export default defineNuxtConfig({
     }
   },
 
+  nitro: {
+    devProxy: {
+      '/api': {
+        target: 'https://api.opencube.tw',
+        changeOrigin: true
+      }
+    }
+  },
+
   runtimeConfig: {
     public: {
       apiBase: process.env.NUXT_PUBLIC_API_BASE
