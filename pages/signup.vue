@@ -80,7 +80,7 @@
           <label class="form-label" for="confirm">密碼</label>
           <VField
             id="confirm"
-            v-model.trim="form.confirm"
+            v-model.trim="confirm"
             :class="[errors.confirm && 'verify-error', 'form-control']"
             name="confirm"
             label="密碼"
@@ -199,13 +199,13 @@
           </div>
           <div class="text-danger fs-8 fw-bold mt-2">{{ errors.birthday }}</div>
         </div>
-
+        <!-- 地址 -->
         <div>
           <label class="form-label" for="address">地址</label>
-          <div class="d-flex flex-row gap-2 mb-3">
+          <div class="select-wrapper mb-3">
             <VField
               v-model="address.city"
-              class="select flex-grow-1"
+              class="select"
               name="addressCity"
               as="select"
               rules="required"
@@ -217,27 +217,47 @@
             </VField>
             <VField
               v-model="address.district"
-              class="select flex-grow-1"
+              class="select"
               name="addressDistrict"
               as="select"
               rules="required"
               :disabled="apiPending"
             >
-              <option
-                v-for="(district, index) in districtTmpl"
-                :key="index"
-                :value="district.district"
-              >
+              <option v-for="(district, index) in districtTmpl" :key="index" :value="district">
                 {{ district.district }}
               </option>
             </VField>
           </div>
-          <input id="address" class="form-control" type="text" placeholder="請輸入詳細地址" />
+          <VField
+            id="address"
+            v-model.trim="address.detail"
+            :class="[errors.address && 'verify-error', 'form-control']"
+            name="address"
+            label="詳細地址"
+            type="text"
+            placeholder="請輸入詳細地址"
+            rules="required"
+            :disabled="apiPending"
+          />
+          <div class="text-danger fs-8 fw-bold mt-2">{{ errors.address }}</div>
         </div>
-        <label class="form-check-label text-light" for="remember">
-          <input id="remember" class="form-check-input" type="checkbox" />
-          我已閱讀並同意本網站個資使用規範
-        </label>
+        <div>
+          <label class="form-check-label text-light" for="agree">
+            <VField
+              id="agree"
+              v-model="agree"
+              class="form-check-input"
+              name="agree"
+              label="使用規範"
+              type="checkbox"
+              :value="true"
+              :rules="rules.agree"
+              :disabled="apiPending"
+            />
+            我已閱讀並同意本網站個資使用規範
+          </label>
+          <div class="text-danger fs-8 fw-bold mt-2">{{ errors.agree }}</div>
+        </div>
       </div>
 
       <div>
@@ -248,9 +268,6 @@
         </div>
       </div>
     </VForm>
-    <pre>
-      {{ tData }}
-    </pre>
   </main>
 </template>
 
@@ -275,23 +292,41 @@ watchEffect(() => {
   }
 })
 
+/* 地址 */
+const { cityTmpl } = useTmpl()
+const address = reactive({
+  city: cityTmpl[0],
+  district: {
+    district: '',
+    zip_code: 0
+  },
+  detail: ''
+})
+const districtTmpl = ref<
+  {
+    district: string
+    zip_code: string
+  }[]
+>([])
+
 /* 註冊表單 */
-const formStatus = ref(1)
+const formStatus = ref(0)
 const formRefs = ref<Array<HTMLFormElement | null>>([null, null])
 const form = reactive({
-  email: 'test@gmail.com',
-  password: 'test123456',
-  confirm: 'test123456',
+  email: '',
+  password: '',
   name: '',
   phone: '',
   birthday: computed(() =>
     $dayjs(`${birthday.Y}-${birthday.M}-${birthday.D}`, 'YYYY-M-D').format('YYYY-MM-DD')
   ),
   address: {
-    zipcode: 0,
-    detail: ''
+    zipcode: computed(() => Number(address.district.zip_code)),
+    detail: computed(() => address.city + address.district.district + address.detail)
   }
 })
+const confirm = ref('')
+const agree = ref(false)
 
 /* 輸入規則 */
 const { $validator } = useNuxtApp()
@@ -313,62 +348,64 @@ const rules = {
       return '密碼需至少 8 碼以上，並英數混合'
     }
     return {}
+  },
+  agree: (val: Boolean) => {
+    console.log(val)
+    if (!val) {
+      return '請閱讀並同意本網站個資使用規範'
+    }
+    return {}
   }
 }
 
 /* 登入 */
-const submit = async (i: number) => {
-  // const { valid } = await formRefs.value[i]?.validate()
-  // if (valid) {
-  // }
+const submit = (i: number) => {
   if (i === 0) {
     formStatus.value = 1
+    return
   }
-
   sRefresh()
 }
 
-/* 地址 */
-const { cityTmpl } = useTmpl()
-const address = reactive({
-  city: cityTmpl[0],
-  district: '',
-  zip_code: ''
-})
-const districtTmpl = ref<
-  {
-    district: string
-    zip_code: string
-  }[]
->([])
-
 /* API */
-const { signup } = useApi()
-const apiPending = computed(() => sPending.value || tPending.value)
+const { signup, getTwzipcode } = useApi()
+const apiPending = computed(() => sPending.value || gtPending.value)
+import { useCommonStore } from '@/stores/common'
+const commonStore = useCommonStore()
 /* API:註冊 */
 const { pending: sPending, refresh: sRefresh } = await signup({
-  body: computed(() => form)
+  body: computed(() => form),
+  immediate: false,
+  watch: false,
+  onResponse({ response }: { response: any }) {
+    if (response.status === 200) {
+      commonStore.token = response._data.token
+      commonStore.me = response._data.result
+      commonStore.email = commonStore.remember ? form.email : ''
+
+      navigateTo('/')
+    }
+  }
 })
-/* API:地址 */
-const { data: tData, pending: tPending } = await useFetch('/api/twzipcode', {
-  method: 'get',
+sPending.value = false
+
+const { pending: gtPending } = await getTwzipcode({
   query: computed(() => ({ city: address.city })),
-  onResponse({ response }) {
+  lazy: true,
+  server: false,
+  onResponse({ response }: { response: any }) {
     if (response.status === 200) {
       const temp = response._data.data.map(
-        // eslint-disable-next-line camelcase
         ({ district, zip_code }: { district: any; zip_code: any }) => ({
           district,
-          // eslint-disable-next-line camelcase
           zip_code
         })
       )
       districtTmpl.value = temp
-      address.district = temp[0].district
+      address.district = temp[0]
     }
   }
 })
-sPending.value = false // pending 初始為 false
 </script>
 
 <style lang="scss" scoped>
@@ -386,6 +423,12 @@ sPending.value = false // pending 初始為 false
   height: 0.125rem;
 }
 
+.select-wrapper {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: repeat(2, calc(50% - 0.25rem));
+}
+
 .select {
   padding: 8px;
   padding: calc(1rem - 1px);
@@ -393,12 +436,11 @@ sPending.value = false // pending 初始為 false
   border: $gray-400 1px solid;
   border-radius: 0.375rem;
   background: $white;
-  background:
-    url('/img/ic_ArrowDown.png') no-repeat right 1rem center,
-    linear-gradient($white, $white);
+  background: url('/img/ic_ArrowDown.png') no-repeat right 1rem center,
+  linear-gradient($white, $white);
 
-  appearance: none;
-  -moz-appearance: none;
+          appearance: none;
+     -moz-appearance: none;
   -webkit-appearance: none;
 
   &:focus-visible {

@@ -16,6 +16,24 @@ export default defineNuxtConfig({
     'nuxt-icon'
   ],
 
+  runtimeConfig: {
+    public: {
+      apiBase: process.env.NUXT_PUBLIC_API_BASE
+    }
+  },
+  vite: {
+    // 定義全域共用 Sass / SCSS 變數
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: `
+            @import "@/assets/scss/custom/_color.scss";
+            @import "@/assets/scss/custom/_variables.scss";
+          `
+        }
+      }
+    }
+  },
   app: {
     pageTransition: { name: 'page', mode: 'out-in' },
     layoutTransition: {
@@ -24,21 +42,6 @@ export default defineNuxtConfig({
     },
     head: {
       link: []
-    }
-  },
-
-  nitro: {
-    devProxy: {
-      '/api': {
-        target: 'https://api.opencube.tw',
-        changeOrigin: true
-      }
-    }
-  },
-
-  runtimeConfig: {
-    public: {
-      apiBase: process.env.NUXT_PUBLIC_API_BASE
     }
   },
 
@@ -62,20 +65,6 @@ export default defineNuxtConfig({
       autoprefixer: true
     }
   },
-  vite: {
-    // 定義全域共用 Sass / SCSS 變數
-    css: {
-      preprocessorOptions: {
-        scss: {
-          additionalData: `
-            @import "@/assets/scss/custom/_color.scss";
-            @import "@/assets/scss/custom/_variables.scss";
-          `
-        }
-      }
-    }
-  },
-
   veeValidate: {
     // 啟用 auto imports
     autoImports: true,
