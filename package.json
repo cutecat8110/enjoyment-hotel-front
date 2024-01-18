@@ -42,6 +42,12 @@
   },
   "dependencies": {
     "@nuxt/image": "^1.1.0",
-    "@popperjs/core": "^2.11.8"
+    "@popperjs/core": "^2.11.8",
+    "@vee-validate/i18n": "^4.12.4",
+    "@vee-validate/nuxt": "^4.12.4",
+    "@vee-validate/rules": "^4.12.4",
+    "dayjs": "^1.11.10",
+    "validator": "^13.11.0",
+    "vee-validate": "^4.5.8"
   }
 }

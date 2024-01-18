@@ -12,6 +12,7 @@ export default defineNuxtConfig({
     '@nuxtjs/i18n',
     '@vueuse/nuxt',
     '@nuxt/image',
+    '@vee-validate/nuxt',
     'nuxt-icon'
   ],
 
@@ -23,6 +24,15 @@ export default defineNuxtConfig({
     },
     head: {
       link: []
+    }
+  },
+
+  nitro: {
+    devProxy: {
+      '/api': {
+        target: 'https://api.opencube.tw',
+        changeOrigin: true
+      }
     }
   },
 
@@ -45,12 +55,14 @@ export default defineNuxtConfig({
   },
 
   css: ['@/assets/scss/app.scss'],
+
   postcss: {
     // CSS 屬性加上瀏覽器相容性前綴
     plugins: {
       autoprefixer: true
     }
   },
+
   vite: {
     // 定義全域共用 Sass / SCSS 變數
     css: {
@@ -62,6 +74,18 @@ export default defineNuxtConfig({
           `
         }
       }
+    }
+  },
+
+  veeValidate: {
+    // 啟用 auto imports
+    autoImports: true,
+    // 更換 components 名稱
+    componentNames: {
+      Form: 'VForm',
+      Field: 'VField',
+      FieldArray: 'VFieldArray',
+      ErrorMessage: 'VErrorMessage'
     }
   }
 })

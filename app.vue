@@ -1,8 +1,19 @@
 <template>
-  <NuxtLayout>
+  <NuxtLayout v-if="Alive">
     <NuxtPage />
   </NuxtLayout>
 </template>
+
+<script lang="ts" setup>
+const Alive = ref(true)
+const reload = () => {
+  Alive.value = false
+  nextTick(() => {
+    Alive.value = true
+  })
+}
+provide('reload', reload)
+</script>
 
 <style lang="scss">
 body {
@@ -11,7 +22,7 @@ body {
 
 .page-enter-active,
 .page-leave-active {
-  transition: all 0.075s ease-in-out !important;
+  transition: all 0.15s ease-in-out !important;
 }
 
 .page-enter-from {
@@ -26,7 +37,7 @@ body {
 
 .layout-enter-active,
 .layout-leave-active {
-  transition: all 0.075s ease-in-out !important;
+  transition: all 0.15s ease-in-out !important;
 }
 
 .layout-enter-from,

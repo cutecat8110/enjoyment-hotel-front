@@ -21,7 +21,7 @@ const handleError = (response) => {
   handleMap[response.status] ? handleMap[response.status]() : err('未知錯誤！')
 }
 
-const fetch = (url, options) => {
+const fetch = (url, options, isImmediate = false) => {
   const runtimeConfig = useRuntimeConfig()
   const { apiBase } = runtimeConfig.public
   const reqUrl = apiBase + url
@@ -39,7 +39,7 @@ const fetch = (url, options) => {
     onResponseError({ response }) {
       handleError(response)
     },
-    immediate: false, // 不立即觸發 API
+    immediate: isImmediate, // 不立即觸發 API
     watch: false, // 不因參數變化, 觸發 API
     ...options
   })
@@ -48,8 +48,8 @@ const fetch = (url, options) => {
 }
 
 export default class Http {
-  static get(url, options) {
-    return fetch(url, { method: 'get', ...options })
+  static get(url, options, isImmediate) {
+    return fetch(url, { method: 'get', ...options }, isImmediate)
   }
 
   static post(url, options) {
