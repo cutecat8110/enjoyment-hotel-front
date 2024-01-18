@@ -7,19 +7,22 @@
         <!-- 平板、電腦 -->
         <div class="row d-none d-md-flex px-3">
           <div class="col-6 pe-0">
-            <div class="rounded-end-0 rounded-4 overflow-hidden">
+            <div class="rounded-end-0 rounded-4 overflow-hidden" style="max-height: 75%;">
               <NuxtImg class="w-100 h-auto" :src="roomInfo.imageUrl" :alt="`${roomInfo.name}_0`" />
             </div>
           </div>
           <div class="col-6">
-            <div class="w-auto h-100 rounded-start-0 rounded-4 overflow-hidden">
+            <div class="w-100 h-auto rounded-start-0 rounded-4 overflow-hidden">
               <div class="row align-content-between h-100">
                 <div
-                  v-for="(image, idx) in roomInfo.imageUrlList"
+                  v-for="(image, idx) in [ ...roomInfo.imageUrlList.slice(0, 4) ]"
                   :key="`${idx}_${image}`"
                   class="col-6 ps-0"
+                  :class="{ 'mb-2': idx < 2 }"
                 >
-                  <NuxtImg class="w-100 h-auto" :src="image" :alt="`${roomInfo.name}_${idx + 1}`" />
+                  <div class="ratio ratio-4x3 overflow-hidden">
+                    <NuxtImg class="w-auto h-100 position-absolute top-50 start-50 translate-middle" :src="image" :alt="`${roomInfo.name}_${idx + 1}`" />
+                  </div>
                 </div>
               </div>
             </div>
