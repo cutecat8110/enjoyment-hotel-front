@@ -76,23 +76,21 @@
 
 <script lang="ts" setup>
 import { useCommonStore } from '@/stores/common'
-const commonStore = useCommonStore()
 
+/* layout */
 definePageMeta({
   layout: 'h-logo-f-no'
 })
 
 /* 登入表單 */
+const commonStore = useCommonStore()
 const formRefs = ref<HTMLFormElement | null>(null)
-const form = reactive({
-  email: '',
+const form = ref({
+  email: commonStore.remember && commonStore.email ? commonStore.email : '',
   password: ''
 })
-if (commonStore.remember && commonStore.email) {
-  form.email = commonStore.email
-}
 
-/* 登入 */
+/* 事件: 登入 */
 const submit = () => {
   lRefresh()
 }
@@ -100,15 +98,16 @@ const submit = () => {
 /* API */
 const { login } = useApi()
 const apiPending = computed(() => lPending.value)
+/* API: api */
 const { pending: lPending, refresh: lRefresh } = await login({
-  body: computed(() => form),
+  body: computed(() => form.value),
   immediate: false,
   watch: false,
   onResponse({ response }: { response: any }) {
     if (response.status === 200) {
       commonStore.token = response._data.token
       commonStore.me = response._data.result
-      commonStore.email = commonStore.remember ? form.email : ''
+      commonStore.email = commonStore.remember ? form.value.email : ''
 
       navigateTo('/')
     }

@@ -809,6 +809,262 @@
 
       .lord-img-one {
         width: 100%;
+        height: 400px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-image: url('/img/desktop/roomtype1-1.png');
+      }
+
+      .lord-img-two {
+        width: 100%;
+        height: 400px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-image: url('/img/desktop/roomtype1-2.png');
+      }
+
+      .lord-img-three {
+        width: 100%;
+        height: 400px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-image: url('/img/desktop/roomtype1-3.png');
+      }
+
+      .lord-img-four {
+        width: 100%;
+        height: 400px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-image: url('/img/desktop/roomtype1-4.png');
+      }
+
+      .lord-img-five {
+        width: 100%;
+        height: 400px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-image: url('/img/desktop/roomtype1-5.png');
+      }
+
+      .landscape-img-one {
+        width: 100%;
+        height: 400px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-image: url('/img/desktop/roomtype2-1.png');
+      }
+
+      .landscape-img-two {
+        width: 100%;
+        height: 400px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-image: url('/img/desktop/roomtype2-2.png');
+      }
+
+      .landscape-img-three {
+        width: 100%;
+        height: 400px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-image: url('/img/desktop/roomtype2-3.png');
+      }
+
+      .landscape-img-four {
+        width: 100%;
+        height: 400px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-image: url('/img/desktop/roomtype2-4.png');
+      }
+
+      .landscape-img-five {
+        width: 100%;
+        height: 400px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-image: url('/img/desktop/roomtype2-5.png');
+      }
+
+      .luxury-img-one {
+        width: 100%;
+        height: 400px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-image: url('/img/desktop/roomtype3-1.png');
+      }
+
+      .luxury-img-two {
+        width: 100%;
+        height: 400px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-image: url('/img/desktop/roomtype3-2.png');
+      }
+
+      .luxury-img-three {
+        width: 100%;
+        height: 400px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-image: url('/img/desktop/roomtype3-3.png');
+      }
+
+      .luxury-img-four {
+        width: 100%;
+        height: 400px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-image: url('/img/desktop/roomtype3-4.png');
+      }
+
+      .luxury-img-five {
+        width: 100%;
+        height: 400px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-image: url('/img/desktop/roomtype3-5.png');
+      }
+
+      .honor-img-one {
+        width: 100%;
+        height: 400px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-image: url('/img/desktop/roomtype4-1.png');
+      }
+
+      .honor-img-two {
+        width: 100%;
+        height: 400px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-image: url('/img/desktop/roomtype4-2.png');
+      }
+
+      .honor-img-three {
+        width: 100%;
+        height: 400px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-image: url('/img/desktop/roomtype4-3.png');
+      }
+
+      .honor-img-four {
+        width: 100%;
+        height: 400px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-image: url('/img/desktop/roomtype4-4.png');
+      }
+
+      .honor-img-five {
+        width: 100%;
+        height: 400px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-image: url('/img/desktop/roomtype4-5.png');
+      }
+
+      .room-content {
+        border-radius: 0 0px 20px 20px;
+        padding: 16px;
+
+        .room-set {
+          margin-top: 24px;
+          margin-bottom: 24px;
+
+          .room-set-detail {
+            width: 97px;
+            height: 97px;
+            margin-right: 16px;
+            padding: 16px;
+            border-radius: 8px;
+            border: solid 1px;
+            border-color: #f1eae4;
+
+            .icon-space {
+              width: 24px;
+              height: 24px;
+              background-image: url('/img/desktop/space.png');
+              background-repeat: no-repeat;
+            }
+
+            .icon-bed {
+              color: #bf9d7d;
+              width: 24px;
+              height: 24px;
+            }
+
+            .icon-people {
+              color: #bf9d7d;
+              width: 24px;
+              height: 24px;
+            }
+          }
+        }
+
+        .room-line {
+          max-width: 443px;
+          height: 1px;
+          background-image: url('/img/desktop/room-line.png');
+          margin-bottom: 40px;
+        }
+
+        .room-price {
+          margin-bottom: 16px;
+          font-size: 24px;
+          color: #bf9d7d;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .banner-img-mask {
+    .banner-img {
+      background-image: url('/img/mobile/HeroImg.png');
+    }
+    .banner-content {
+      width: 375px;
+      top: 28%;
+      text-align: center;
+
+      .line {
+        max-width: 83px;
+        margin-top: 32%;
+        margin-left: 36%;
+        transform: rotate(90deg);
+      }
+
+      .right-content {
+        margin-top: 60px;
+      }
+    }
+  }
+  .bg-color {
+    padding-top: 40px;
+
+    .room-choose {
+      margin-bottom: 8px;
+    }
+
+    .card-outer {
+      max-width: 800px;
+      margin-top: 40px;
+
+      .carousel-control-prev {
+        opacity: 0;
+      }
+
+      .carousel-control-next {
+        opacity: 0;
+      }
+
+      .lord-img-one {
+        width: 100%;
         height: 200px;
         background-image: url('/img/mobile/roomtype1-1.png');
       }
