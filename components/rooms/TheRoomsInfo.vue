@@ -4,7 +4,6 @@
       <h5 class="room-info-title-border title-border-primary fw-bold fs-5 ps-3 mb-3 mb-lg-4">
         房型基本資訊
       </h5>
-      roomDetail: {{ roomDetail }}
       <ul :class="`mb-lg-${mbSpace}`" class="list-unstyled d-flex mb-4">
         <li
           class="info-icon-wrap d-flex flex-column justify-content-center p-3 me-3 bg-light rounded-3 text-gray-80"
@@ -39,7 +38,7 @@
       </h5>
       <ul
         :class="`mb-lg-${mbSpace}`"
-        class="list-unstyled row row-cols-2 row-cols-lg-5 p-4 bg-light rounded-3 mb-4 mx-0"
+        class="list-unstyled row row-cols-2 row-cols-xl-5 p-4 bg-light rounded-3 mb-4 mx-0"
       >
         <li class="col fw-bold text-gray-80">
           <Icon class="fs-5 fw-blod text-primary" name="ic:round-check" />
@@ -70,8 +69,8 @@
     <ul
       :class="[
         `mb-lg-${mbSpace}`,
-        { 'row-cols-lg-5': !showPart },
-        { 'row-cols-lg-3 border': showPart }
+        { 'row-cols-xl-5': !showPart },
+        { 'row-cols-xl-3 border': showPart }
       ]"
       class="list-unstyled row flex-wrap row-cols-2 p-4 bg-light rounded-3 mb-4 mx-0"
     >
@@ -132,8 +131,8 @@
     <ul
       :class="[
         `mb-lg-${mbSpace}`,
-        { 'row-cols-lg-5': !showPart },
-        { 'row-cols-lg-3 border': showPart }
+        { 'row-cols-xl-5': !showPart },
+        { 'row-cols-xl-3 border': showPart }
       ]"
       class="list-unstyled row flex-wrap row-cols-2 p-4 bg-light rounded-3 mb-4 mx-0"
     >
