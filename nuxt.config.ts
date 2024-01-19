@@ -21,7 +21,6 @@ export default defineNuxtConfig({
       apiBase: process.env.NUXT_PUBLIC_API_BASE
     }
   },
-
   vite: {
     // 定義全域共用 Sass / SCSS 變數
     css: {
@@ -35,7 +34,6 @@ export default defineNuxtConfig({
       }
     }
   },
-
   app: {
     pageTransition: { name: 'page', mode: 'out-in' },
     layoutTransition: {
@@ -67,7 +65,6 @@ export default defineNuxtConfig({
       autoprefixer: true
     }
   },
-
   veeValidate: {
     // 啟用 auto imports
     autoImports: true,
