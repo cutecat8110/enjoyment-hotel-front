@@ -54,7 +54,9 @@
                 :class="{ 'active' : idx === 0 }"
                 data-bs-interval="5000"
               >
-                <NuxtImg class="w-100 h-auto" :src="image" :alt="`${roomInfo.name}_${idx}`" />
+                <div class="ratio ratio-16x9">
+                  <NuxtImg class="w-100 h-auto position-absolute top-50 start-50 translate-middle" :src="image" :alt="`${roomInfo.name}_${idx}`" />
+                </div>
               </div>
             </div>
           </div>
@@ -207,10 +209,5 @@ const { pending: lPending } = await getRoomInfo(roomId, {
     width: 60px;
     background-color: $primary;
   }
-}
-
-.carousel-item {
-  max-height: 300px;
-  overflow: hidden;
 }
 </style>
