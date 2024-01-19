@@ -8,7 +8,7 @@
       <div class="py-3 d-flex align-items-center gap-2">
         <div class="d-flex text-light flex-column align-items-center">
           <div class="bg-primary rounded-circle num-ball mb-1">
-            <template v-if="formStatus === 0">1</template>
+            <template v-if="formStatus === FORM_PHASE.FIRST">1</template>
             <template v-else>
               <Icon name="ic:baseline-check" />
             </template>
@@ -17,18 +17,21 @@
         </div>
 
         <div
-          :class="[formStatus === 0 ? 'bg-primary-60' : 'bg-primary-40', 'flex-fill space-line']"
+          :class="[
+            formStatus === FORM_PHASE.FIRST ? 'bg-primary-60' : 'bg-primary-40',
+            'flex-fill space-line'
+          ]"
         />
 
         <div
           :class="[
-            formStatus === 0 ? 'text-primary-60' : 'text-light',
+            formStatus === FORM_PHASE.FIRST ? 'text-primary-60' : 'text-light',
             'd-flex flex-column align-items-center'
           ]"
         >
           <div
             :class="[
-              formStatus === 0 ? 'border border-primary-60' : 'bg-primary',
+              formStatus === FORM_PHASE.FIRST ? 'border border-primary-60' : 'bg-primary',
               'rounded-circle num-ball mb-1'
             ]"
           >
@@ -40,10 +43,10 @@
     </div>
 
     <VForm
-      v-if="formStatus === 0"
+      v-if="formStatus === FORM_PHASE.FIRST"
       :ref="(el) => (formRefs[0] = el as HTMLFormElement)"
       v-slot="{ errors }"
-      @submit="submit(0)"
+      @submit="submit(FORM_PHASE.SECOND)"
     >
       <div class="input-wrapper fs-8 fs-md-7 mb-5">
         <div>
@@ -80,7 +83,7 @@
           <label class="form-label" for="confirm">密碼</label>
           <VField
             id="confirm"
-            v-model.trim="confirm"
+            v-model.trim="form.confirm"
             :class="[errors.confirm && 'verify-error', 'form-control']"
             name="confirm"
             label="密碼"
@@ -106,7 +109,7 @@
       v-else
       :ref="(el) => (formRefs[1] = el as HTMLFormElement)"
       v-slot="{ errors }"
-      @submit="submit(1)"
+      @submit="submit()"
     >
       <div class="input-wrapper fs-8 fs-md-7 mb-5">
         <!-- 姓名 -->
@@ -146,7 +149,7 @@
           <label class="form-label" for="birthday">生日</label>
           <div class="d-flex flex-row gap-2">
             <VField
-              v-model="birthday.Y"
+              v-model="form.birthday.Y"
               class="select flex-grow-1"
               name="birthdayY"
               as="select"
@@ -156,7 +159,7 @@
               <option
                 v-for="(item, index) in Array.from(
                   { length: 100 },
-                  (_, i) => Number(birthday.Y) - i
+                  (_, i) => Number(form.birthday.Y) - i
                 )"
                 :key="index"
                 :value="item"
@@ -165,7 +168,7 @@
               </option>
             </VField>
             <VField
-              v-model="birthday.M"
+              v-model="form.birthday.M"
               class="select flex-grow-1"
               name="birthdayM"
               as="select"
@@ -181,7 +184,7 @@
               </option>
             </VField>
             <VField
-              v-model="birthday.D"
+              v-model="form.birthday.D"
               class="select flex-grow-1"
               name="birthdayD"
               as="select"
@@ -204,7 +207,7 @@
           <label class="form-label" for="address">地址</label>
           <div class="select-wrapper mb-3">
             <VField
-              v-model="address.city"
+              v-model="form.address.city"
               class="select"
               name="addressCity"
               as="select"
@@ -216,7 +219,7 @@
               </option>
             </VField>
             <VField
-              v-model="address.district"
+              v-model="form.address.district"
               class="select"
               name="addressDistrict"
               as="select"
@@ -230,7 +233,7 @@
           </div>
           <VField
             id="address"
-            v-model.trim="address.detail"
+            v-model.trim="form.address.detail"
             :class="[errors.address && 'verify-error', 'form-control']"
             name="address"
             label="詳細地址"
@@ -245,7 +248,7 @@
           <label class="form-check-label text-light" for="agree">
             <VField
               id="agree"
-              v-model="agree"
+              v-model="form.agree"
               class="form-check-input"
               name="agree"
               label="使用規範"
@@ -272,140 +275,145 @@
 </template>
 
 <script lang="ts" setup>
+import { useCommonStore } from '@/stores/common'
+
+/* layout */
 definePageMeta({
   layout: 'h-logo-f-no'
 })
 
-/* 生日 */
-const { $dayjs } = useNuxtApp()
-const birthday = reactive({
-  Y: $dayjs().format('YYYY-M-D').split('-')[0],
-  M: $dayjs().format('YYYY-M-D').split('-')[1],
-  D: $dayjs().format('YYYY-M-D').split('-')[2]
-})
-const daysInMonth = computed(() => {
-  return $dayjs(`${birthday.Y}-${birthday.M}`, 'YYYY-M').daysInMonth()
-})
-watchEffect(() => {
-  if (daysInMonth.value < Number(birthday.D)) {
-    birthday.D = '1'
-  }
-})
-
-/* 地址 */
-const { cityTmpl } = useTmpl()
-const address = reactive({
-  city: cityTmpl[0],
-  district: {
-    district: '',
-    zip_code: 0
-  },
-  detail: ''
-})
-const districtTmpl = ref<
-  {
-    district: string
-    zip_code: string
-  }[]
->([])
+/* 列舉 */
+enum FORM_PHASE {
+  FIRST = 'FIRST', // 第一階段
+  SECOND = 'SECOND' // 第二階段
+}
 
 /* 註冊表單 */
-const formStatus = ref(0)
-const formRefs = ref<Array<HTMLFormElement | null>>([null, null])
-const form = reactive({
+const formStatus = ref(FORM_PHASE.FIRST)
+const formRefs = ref<(HTMLFormElement | null)[]>([null, null])
+const { $dayjs } = useNuxtApp()
+const initBirthday = () => {
+  const [Y, M, D] = $dayjs().format('YYYY-M-D').split('-').map(Number)
+  return { Y, M, D }
+}
+const { cityTmpl } = useTmpl()
+const form = ref({
   email: '',
   password: '',
+  confirm: '',
   name: '',
   phone: '',
-  birthday: computed(() =>
-    $dayjs(`${birthday.Y}-${birthday.M}-${birthday.D}`, 'YYYY-M-D').format('YYYY-MM-DD')
-  ),
+  birthday: initBirthday(),
   address: {
-    zipcode: computed(() => Number(address.district.zip_code)),
-    detail: computed(() => address.city + address.district.district + address.detail)
-  }
+    city: cityTmpl[0],
+    district: { district: String, zip_code: Number },
+    detail: ''
+  },
+  agree: false
 })
-const confirm = ref('')
-const agree = ref(false)
 
 /* 輸入規則 */
 const { $validator } = useNuxtApp()
 const rules = {
   password: (val: string) => {
-    if (!val) {
-      return '密碼 為必填'
-    }
-    if (!$validator.isLength(val, { min: 8 })) {
-      return '密碼需至少 8 碼以上'
-    }
-    if ($validator.isAlpha(val)) {
-      return '密碼不能只有英文'
-    }
-    if ($validator.isNumeric(val)) {
-      return '密碼不能只有數字'
-    }
-    if (!$validator.isAlphanumeric(val)) {
-      return '密碼需至少 8 碼以上，並英數混合'
-    }
+    if (!val) return '密碼 為必填'
+    if (!$validator.isLength(val, { min: 8 })) return '密碼需至少 8 碼以上'
+    if ($validator.isAlpha(val)) return '密碼不能只有英文'
+    if ($validator.isNumeric(val)) return '密碼不能只有數字'
+    if (!$validator.isAlphanumeric(val)) return '密碼需至少 8 碼以上，並英數混合'
     return {}
   },
   agree: (val: Boolean) => {
-    console.log(val)
-    if (!val) {
-      return '請閱讀並同意本網站個資使用規範'
-    }
-    return {}
+    return !val ? '請閱讀並同意本網站個資使用規範' : {}
   }
 }
 
-/* 登入 */
-const submit = (i: number) => {
-  if (i === 0) {
-    formStatus.value = 1
-    return
+/* 生日 */
+const daysInMonth = computed(() => {
+  const { Y, M } = form.value.birthday
+  return $dayjs(`${Y}-${M}`, 'YYYY-M').daysInMonth()
+})
+watchEffect(() => {
+  if (daysInMonth.value < form.value.birthday.D) {
+    form.value.birthday.D = 1
   }
+})
+
+/* 地址 */
+const districtTmpl = ref<
+  {
+    zip_code: string
+    district: string
+  }[]
+>([])
+
+/* 事件: 登入 */
+const submit = (status?: FORM_PHASE) => {
+  if (status === FORM_PHASE.SECOND) return (formStatus.value = FORM_PHASE.SECOND)
   sRefresh()
 }
 
 /* API */
 const { signup, getTwzipcode } = useApi()
-const apiPending = computed(() => sPending.value || gtPending.value)
-import { useCommonStore } from '@/stores/common'
 const commonStore = useCommonStore()
-/* API:註冊 */
+const apiPending = computed(() => sPending.value || gtPending.value)
+/* API: 註冊 */
 const { pending: sPending, refresh: sRefresh } = await signup({
-  body: computed(() => form),
+  body: computed(() => {
+    const { agree, confirm, birthday, address, ...res } = form.value
+    const { Y, M, D } = birthday
+
+    return {
+      ...res,
+      address: {
+        zipcode: address.district.zip_code,
+        detail: address.city + address.district.district + address.detail
+      },
+      birthday: $dayjs(`${Y}-${M}-${D}`, 'YYYY-M-D').format('YYYY-MM-DD')
+    }
+  }),
   immediate: false,
   watch: false,
   onResponse({ response }: { response: any }) {
     if (response.status === 200) {
       commonStore.token = response._data.token
       commonStore.me = response._data.result
-      commonStore.email = commonStore.remember ? form.email : ''
-
       navigateTo('/')
+    }
+  },
+  onResponseError({ response }: { response: any }) {
+    switch (response._data?.message) {
+      case '此 Email 已註冊':
+        formStatus.value = FORM_PHASE.FIRST
+        nextTick(() => {
+          formRefs.value[0]?.setFieldError('email', '此 Email 已註冊')
+        })
+        break
+      default:
+        break
     }
   }
 })
 sPending.value = false
-
-const { pending: gtPending } = await getTwzipcode({
-  query: computed(() => ({ city: address.city })),
-  lazy: true,
-  server: false,
+/* API: 取得郵遞區號 */
+const { pending: gtPending, refresh: gtRefresh } = await getTwzipcode({
+  query: computed(() => ({ city: form.value.address.city })),
+  immediate: false,
   onResponse({ response }: { response: any }) {
     if (response.status === 200) {
-      const temp = response._data.data.map(
-        ({ district, zip_code }: { district: any; zip_code: any }) => ({
-          district,
-          zip_code
+      const resultData = response._data.data.map(
+        (i: Partial<{ zip_code: string; district: string }>) => ({
+          zip_code: i.zip_code,
+          district: i.district
         })
       )
-      districtTmpl.value = temp
-      address.district = temp[0]
+      districtTmpl.value = resultData
+      form.value.address.district = resultData[0]
     }
   }
 })
+sPending.value = false
+gtRefresh()
 </script>
 
 <style lang="scss" scoped>
@@ -436,11 +444,12 @@ const { pending: gtPending } = await getTwzipcode({
   border: $gray-400 1px solid;
   border-radius: 0.375rem;
   background: $white;
-  background: url('/img/ic_ArrowDown.png') no-repeat right 1rem center,
-  linear-gradient($white, $white);
+  background:
+    url('/img/ic_ArrowDown.png') no-repeat right 1rem center,
+    linear-gradient($white, $white);
 
-          appearance: none;
-     -moz-appearance: none;
+  appearance: none;
+  -moz-appearance: none;
   -webkit-appearance: none;
 
   &:focus-visible {
