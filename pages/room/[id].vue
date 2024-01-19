@@ -7,8 +7,10 @@
         <!-- 平板、電腦 -->
         <div class="row d-none d-md-flex px-3">
           <div class="col-6 pe-0">
-            <div class="rounded-end-0 rounded-4 overflow-hidden" style="max-height: 75%;">
-              <NuxtImg class="w-100 h-auto" :src="roomInfo.imageUrl" :alt="`${roomInfo.name}_0`" />
+            <div class="rounded-end-0 rounded-4 overflow-hidden" style="max-height: 100%;">
+              <div class="ratio ratio-4x3">
+                <NuxtImg class="w-auto h-100 position-absolute top-50 start-50 translate-middle" :src="roomInfo.imageUrl" :alt="`${roomInfo.name}_0`" />
+              </div>
             </div>
           </div>
           <div class="col-6">
@@ -48,7 +50,8 @@
               <div
                 v-for="(image, idx) in [roomInfo.imageUrl, ...roomInfo.imageUrlList]"
                 :key="`${idx}_${image}`"
-                class="carousel-item active"
+                class="carousel-item"
+                :class="{ 'active' : idx === 0 }"
                 data-bs-interval="5000"
               >
                 <NuxtImg class="w-100 h-auto" :src="image" :alt="`${roomInfo.name}_${idx}`" />
@@ -82,7 +85,7 @@
             <span class="d-block text-primary fs-5 fw-bold mb-4 mb-5">
               NT$ {{ roomInfo.price }}
             </span>
-            <NuxtLink to="/reserve">
+            <NuxtLink :to="`/reserve/${roomId}`">
               <span class="btn btn-primary w-100">立即預訂</span>
             </NuxtLink>
           </div>
@@ -204,5 +207,10 @@ const { pending: lPending } = await getRoomInfo(roomId, {
     width: 60px;
     background-color: $primary;
   }
+}
+
+.carousel-item {
+  max-height: 300px;
+  overflow: hidden;
 }
 </style>

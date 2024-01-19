@@ -234,6 +234,9 @@ definePageMeta({
 })
 
 const isShowModal = ref(false)
+const route = useRoute()
+const roomId = route.params.id || ''
+console.log(roomId);
 
 // modal 寫法，先保留
 // const { $bootstrap } = useNuxtApp()
