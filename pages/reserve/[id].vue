@@ -134,7 +134,7 @@
             </li>
           </ul>
 
-          <TheRoomsInfo mb-space="4" />
+          <!-- <TheRoomsInfo mb-space="4" /> -->
         </div>
 
         <div class="col-md-5 mb-5 mb-lg-0">
@@ -234,6 +234,9 @@ definePageMeta({
 })
 
 const isShowModal = ref(false)
+const route = useRoute()
+const roomId = route.params.id || ''
+console.log(roomId);
 
 // modal 寫法，先保留
 // const { $bootstrap } = useNuxtApp()
