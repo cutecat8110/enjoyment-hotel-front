@@ -53,8 +53,6 @@
       </div>
     </article>
 
-    <h1 class="text-black">{{ newsData }}</h1>
-
     <!-- 最新消息 -->
     <article class="bg-goose-yellow position-relative news-outer">
       <div class="news-top-absolute"></div>
@@ -65,7 +63,22 @@
           <div class="col-12 col-lg-2">
             <img src="/img/desktop/news.png" alt="" />
           </div>
+
           <div class="col-12 col-lg-10">
+            <div class="card card-outer" v-for="(news, index) in newsTmpl" :key="index">
+              <div>
+                <div class="news-img-one"></div>
+              </div>
+              <div class="card-body d-flex justify-content-start align-items-center">
+                <div class="card-content">
+                  <div class="card-title">{{ news.title }}</div>
+                  <p class="card-text">{{ news.description }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- <div class="col-12 col-lg-10">
             <div class="card card-outer">
               <div>
                 <div class="news-img-one"></div>
@@ -79,10 +92,11 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
+
         </div>
 
-        <div class="row">
+        <!-- <div class="row">
           <div class="col-12 col-lg-2"></div>
           <div class="col-12 col-lg-10">
             <div class="card card-outer">
@@ -99,9 +113,9 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
 
-        <div class="row">
+        <!-- <div class="row">
           <div class="col-12 col-lg-2"></div>
           <div class="col-12 col-lg-10">
             <div class="card card-outer">
@@ -118,7 +132,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </article>
 
@@ -180,7 +194,24 @@
       <img class="position-absolute food-title-absolute" src="/img/desktop/foodName.png" alt="" />
 
       <div class="position-absolute food-card-box">
-        <div class="card-content">
+        <div class="card-content" v-for="(culinary, i) in culinaryTmpl" :key="i">
+          <div class="position-relative food-img-one"></div>
+          <div class="card-bg position-absolute py-4">
+            <div class="d-flex mb-4">
+              <h5 class="ms-4 fs-5">{{ culinary.title }}</h5>
+              <div class="ms-auto me-4 fs-8">
+                <div class="fs-7 card-week">{{ culinary.diningTime }}</div>
+                <!-- <div class="fs-7 card-week">SUN-MON</div>
+                <div class="fs-7">11:00 - 20:30</div> -->
+              </div>
+            </div>
+            <div class="mx-4">
+              <div class="card-directions fs-ml-7 fs-8">{{ culinary.description }}</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- <div class="card-content">
           <div class="position-relative food-img-one"></div>
           <div class="card-bg position-absolute py-4">
             <div class="d-flex mb-4">
@@ -196,9 +227,9 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
 
-        <div class="card-content">
+        <!-- <div class="card-content">
           <div class="position-relative food-img-two"></div>
           <div class="card-bg position-absolute py-4">
             <div class="d-flex mb-4">
@@ -214,9 +245,9 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
 
-        <div class="card-content">
+        <!-- <div class="card-content">
           <div class="position-relative food-img-three"></div>
           <div class="card-bg position-absolute py-4">
             <div class="d-flex mb-4">
@@ -232,9 +263,9 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
 
-        <div class="card-content">
+        <!-- <div class="card-content">
           <div class="position-relative food-img-four"></div>
           <div class="card-bg position-absolute py-4">
             <div class="d-flex mb-4">
@@ -250,9 +281,9 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
 
-        <div class="card-content">
+        <!-- <div class="card-content">
           <div class="position-relative food-img-five"></div>
           <div class="card-bg position-absolute py-4">
             <div class="d-flex mb-4">
@@ -268,7 +299,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </article>
 
@@ -323,48 +354,63 @@ definePageMeta({
   layouts: 'h-f-spl'
 })
 
+const newsTmpl = ref<
+{
+  title: string
+  description: string
+}[]
+>([])
+
+const culinaryTmpl = ref<
+{
+  title: string
+  diningTime: string
+  description: string
+}[]
+>([])
+
 /* API */
 const { news, culinary } = useApi()
-const apiPending = computed(() => lPending.value)
+const apiPending = computed(() => newsPending.value || culinaryPending.value)
 
 const {
-  data: newsData,
-  pending: lPending,
-  refresh
+  pending: newsPending,
+  refresh: newsRefresh
 } = await news({
   immediate: true,
   onResponse({ response }: { response: any }) {
     if (response.status === 200) {
-      console.log('newsData response:', response)
-      return response._data.result
+      const temp = response._data.result
+      // console.log('response._data.result:', response._data.result)
+      newsTmpl.value = temp
     }
   },
   onResponseError({ response }: { response: any }) {
-    console.log('Error:', response)
+    console.log('news api Error:', response)
   }
 })
-console.log('newsData:', newsData)
-console.log('apiPending:', apiPending)
+newsRefresh()
 
 const {
-  data: culinaryData
-  // pending: lPending,
-  // refresh
+  pending: culinaryPending,
+  refresh: culinaryRefresh
 } = await culinary({
   immediate: true,
   onResponse({ response }: { response: any }) {
     if (response.status === 200) {
-      console.log('culinaryData', response._data.result)
-      return response._data.result
+      const temp = response._data.result
+      // console.log('culinaryData', response._data.result)
+      culinaryTmpl.value = temp
     }
   },
   onResponseError({ response }: { response: any }) {
-    console.log('Error:', response)
+    console.log('culinary api Error:', response)
   }
 })
-console.log('culinaryData:', culinaryData)
-refresh()
-// lPending.value = false
+culinaryRefresh()
+
+// culinaryPending.value = false
+// newsPending.value = false
 </script>
 
 <style lang="scss" scoped>
