@@ -117,6 +117,7 @@
 
 <script lang="ts" setup>
 import TheRoomsInfo from '@/components/rooms/TheRoomsInfo.vue'
+import type { RoomInfo, RoomDetail } from '@/types/room'
 
 definePageMeta({
   layout: 'h-bg-f'
@@ -127,14 +128,6 @@ const route = useRoute()
 const roomId = route.params.id || ''
 
 // 房型資訊
-interface RoomInfo {
-  id: string
-  name: string
-  imageUrl: string
-  imageUrlList: Array<string>
-  description: string
-  price: number
-}
 let roomInfo: RoomInfo = reactive({
   id: '',
   name: '',
@@ -145,17 +138,6 @@ let roomInfo: RoomInfo = reactive({
 })
 
 // 房型細節
-interface InfoItem {
-  isProvide: Boolean
-  title: string
-}
-interface RoomDetail {
-  amenityInfo: Array<InfoItem> // 備品
-  facilityInfo: Array<InfoItem> // 房內設備
-  areaInfo: string // 坪數
-  bedInfo: string // 床型
-  maxPeople: number // 人數
-}
 let roomDetail: RoomDetail = {
   amenityInfo: [], // 備品
   facilityInfo: [], // 房內設備
@@ -173,7 +155,7 @@ const { pending: lPending } = await getRoomInfo(roomId, {
     if (!response.status) {
       return
     }
-    console.log('res: ', response)
+    // console.log('res: ', response)
     const resData = response._data.result
     roomInfo = resData
     roomDetail = {
@@ -183,7 +165,7 @@ const { pending: lPending } = await getRoomInfo(roomId, {
       bedInfo: resData.bedInfo, // 床型
       maxPeople: resData.maxPeople
     }
-    console.log('roomInfo: ', roomInfo)
+    // console.log('roomInfo: ', roomInfo)
   },
   onResponseError({ response }: { response: any }) {
     console.log('error: ', response)

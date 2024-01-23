@@ -228,6 +228,7 @@
 
 <script lang="ts" setup>
 import TheRoomsInfo from '@/components/rooms/TheRoomsInfo.vue'
+import type { RoomInfo, RoomDetail } from '@/types/room'
 
 definePageMeta({
   layout: 'h-bg-f'
