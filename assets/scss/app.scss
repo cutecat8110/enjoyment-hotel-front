@@ -6,7 +6,7 @@
 /** 2. 自訂變數置於 bootstrap variables 前，覆蓋 bootstrap 變數 */
 @import './bootstrap/spacers';
 @import './custom/variables';
-@import './custom/color';
+@import './bootstrap/color';
 @import './bootstrap/font';
 @import './bootstrap/input';
 @import './bootstrap/dropdown';

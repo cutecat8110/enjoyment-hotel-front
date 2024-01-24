@@ -234,11 +234,11 @@ definePageMeta({
   layout: 'h-bg-f'
 })
 
+const reserveRoomInfo = useReserveRoomInfoStore();
+console.log(reserveRoomInfo.roomInfo?.id);
+
 const isShowModal = ref(false)
 const route = useRoute()
-const roomId = route.params.id || ''
-console.log(roomId);
-
 // modal 寫法，先保留
 // const { $bootstrap } = useNuxtApp()
 // const orderLoad = ref(null)
@@ -260,6 +260,48 @@ const submitOrder = () => {
     navigateTo('/confirmation')
   }, 3000)
 }
+
+// 房型資訊
+let roomInfo: RoomInfo = reactive({
+  id: '',
+  name: '',
+  imageUrl: '',
+  imageUrlList: [],
+  description: '',
+  price: 0,
+  roomDetail: {
+    amenityInfo: [], // 備品
+    facilityInfo: [], // 房內設備
+    areaInfo: '', // 坪數
+    bedInfo: '', // 床型
+    maxPeople: 0 // 人數
+  }
+})
+
+// 房型細節
+let roomDetail: RoomDetail = {
+  amenityInfo: [], // 備品
+  facilityInfo: [], // 房內設備
+  areaInfo: '', // 坪數
+  bedInfo: '', // 床型
+  maxPeople: 0 // 人數
+}
+
+// form = {
+//   "roomId": "65251f6095429cd58654bf12",
+//   "checkInDate": "2023/06/18",
+//   "checkOutDate": "2023/06/19",
+//   "peopleNum": 2,
+//   "userInfo": {
+//     "address": {
+//       "zipcode": 802,
+//       "detail": "文山路23號"
+//     },
+//     "name": "Joanne Chen",
+//     "phone": "0912345678",
+//     "email": "example@gmail.com"
+//   }
+// }
 </script>
 
 <style lang="scss" scoped>
