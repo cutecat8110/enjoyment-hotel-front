@@ -1,6 +1,6 @@
 // 預約時的部分資料
 export const useReserveRoomInfoStore = defineStore(
-    'ReserveRoomInfo',
+    'reserveRoomInfo',
     () => {
         // 轉換日期格式
         function change(date) {
@@ -32,6 +32,13 @@ export const useReserveRoomInfoStore = defineStore(
             roomInfo,
             resetRoomDefaultData,
             setRoomData
+        }
+    },
+    // https://ithelp.ithome.com.tw/articles/10302381
+    {
+        persist: {
+            key: 'reserveRoomInfo',
+            storage: persistedState.localStorage
         }
     }
 )

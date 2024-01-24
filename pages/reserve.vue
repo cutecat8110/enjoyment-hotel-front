@@ -1,6 +1,7 @@
 <template>
   <div class="p-0 p-md-xl pb-md-5 bg-primary-tint">
     <div class="container-xl">
+      <!-- <NuxtLink :to="`/room/${roomId}`"  -->
       <button class="btn btn-ghost d-flex align-items-center py-5 text-dark p-0 fs-3 fw-bold">
         <Icon class="fs-1 fw-blod" name="ic:round-keyboard-arrow-left" />
         確認訂房資訊
@@ -229,13 +230,15 @@
 <script lang="ts" setup>
 import TheRoomsInfo from '@/components/rooms/TheRoomsInfo.vue'
 import type { RoomInfo, RoomDetail } from '@/types/room'
+import { useReserveRoomInfoStore } from '@/stores/room'
 
 definePageMeta({
   layout: 'h-bg-f'
 })
 
 const reserveRoomInfo = useReserveRoomInfoStore();
-console.log(reserveRoomInfo.roomInfo?.id);
+// const roomId = ref(reserveRoomInfo.roomInfo.id)
+console.log('reserveRoomInfo: ', reserveRoomInfo);
 
 const isShowModal = ref(false)
 const route = useRoute()
