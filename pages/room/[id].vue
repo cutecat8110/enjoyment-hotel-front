@@ -156,23 +156,10 @@ const reserveRoomInfo = useReserveRoomInfoStore();
 // 取得 入住時間 & 退房時間
 const checkInDate = ref(reserveRoomInfo.checkInDate);
 const checkOutDate = ref(reserveRoomInfo.checkInDate);
+const peopleNum = ref(reserveRoomInfo.peopleNum);
 
 // 房型資訊
-let roomInfo: RoomInfo = reactive({
-  id: '',
-  name: '',
-  imageUrl: '',
-  imageUrlList: [],
-  description: '',
-  price: 0,
-  roomDetail: {
-    amenityInfo: [], // 備品
-    facilityInfo: [], // 房內設備
-    areaInfo: '', // 坪數
-    bedInfo: '', // 床型
-    maxPeople: 0 // 人數
-  }
-})
+let roomInfo: RoomInfo = reactive(reserveRoomInfo.defaultRoomInfo)
 
 
 /* API */
@@ -201,7 +188,6 @@ const { pending: lPending } = await getRoomInfo(roomId, {
       }
     }
     reserveRoomInfo.roomInfo = roomInfo
-    reserveRoomInfo.checkInDate = 'zxczxcmklzxcmlzxc'
   },
   onResponseError({ response }: { response: any }) {
     console.log('error: ', response)
