@@ -1,9 +1,8 @@
 <template>
   <div class="p-0 p-md-xl pb-md-5 bg-primary-tint">
     <div class="container-xl">
-      <!-- <NuxtLink :to="`/room/${roomId}`"  -->
       <button class="btn btn-ghost d-flex align-items-center py-5 text-dark p-0 fs-3 fw-bold">
-        <Icon class="fs-1 fw-blod" name="ic:round-keyboard-arrow-left" />
+        <Icon class="fs-1 fw-bold" name="ic:round-keyboard-arrow-left" />
         確認訂房資訊
       </button>
       <div class="row">
@@ -164,7 +163,8 @@
                 <span>NT$ 19,000</span>
               </li>
             </ul>
-            <button class="btn btn-primary w-100" type="button" @click="submitOrder">
+            <!-- @click="submitOrder" -->
+            <button class="btn btn-primary w-100" type="button">
               確認訂房
             </button>
           </div>
@@ -172,9 +172,10 @@
       </div>
     </div>
 
+    <!-- :class="`modal fade ${isShowModal ? 'show d-block' : ''}`" -->
     <div
       id="orderLoadModal"
-      :class="`modal fade ${isShowModal ? 'show d-block' : ''}`"
+      class="modal fade"
       tabindex="-1"
     >
       <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -228,8 +229,8 @@
 </template>
 
 <script lang="ts" setup>
-import TheRoomsInfo from '@/components/rooms/TheRoomsInfo.vue'
-import type { RoomInfo, RoomDetail } from '@/types/room'
+// import TheRoomsInfo from '@/components/rooms/TheRoomsInfo.vue'
+// import type { RoomInfo, RoomDetail } from '@/types/room'
 import { useReserveRoomInfoStore } from '@/stores/room'
 
 definePageMeta({
@@ -237,74 +238,83 @@ definePageMeta({
 })
 
 const reserveRoomInfo = useReserveRoomInfoStore();
-// const roomId = ref(reserveRoomInfo.roomInfo.id)
+// // 取得 入住時間 & 退房時間
+const checkInDate = ref(reserveRoomInfo.checkInDate);
+const checkOutDate = ref(reserveRoomInfo.checkInDate);
+
 console.log('reserveRoomInfo: ', reserveRoomInfo);
+console.log('checkInDate: ', checkInDate);
+console.log('checkOutDate: ', checkOutDate);
 
-const isShowModal = ref(false)
-const route = useRoute()
-// modal 寫法，先保留
-// const { $bootstrap } = useNuxtApp()
-// const orderLoad = ref(null)
 
-// let modal: any
-// onMounted(() => {
-//   const routes = useRoute()
-//   modal = routes.path === '/reserve' ? $bootstrap.modal(orderLoad.value) : ''
-// })
+// const isShowModal = ref(false)
+// const route = useRoute()
+// // modal 寫法，先保留
+// // const { $bootstrap } = useNuxtApp()
+// // const orderLoad = ref(null)
 
-// onBeforeUnmount(() => {
-//   // 加上 dispose，避免切換頁面時或是 HMR 看到殘留畫面
-//   modal.dispose()
-// })
+// // let modal: any
+// // onMounted(() => {
+// //   const routes = useRoute()
+// //   modal = routes.path === '/reserve' ? $bootstrap.modal(orderLoad.value) : ''
+// // })
 
-const submitOrder = () => {
-  isShowModal.value = true
-  setTimeout(() => {
-    navigateTo('/confirmation')
-  }, 3000)
-}
+// // onBeforeUnmount(() => {
+// //   // 加上 dispose，避免切換頁面時或是 HMR 看到殘留畫面
+// //   modal.dispose()
+// // })
 
-// 房型資訊
-let roomInfo: RoomInfo = reactive({
-  id: '',
-  name: '',
-  imageUrl: '',
-  imageUrlList: [],
-  description: '',
-  price: 0,
-  roomDetail: {
-    amenityInfo: [], // 備品
-    facilityInfo: [], // 房內設備
-    areaInfo: '', // 坪數
-    bedInfo: '', // 床型
-    maxPeople: 0 // 人數
-  }
-})
+// const submitOrder = () => {
+//   isShowModal.value = true
+//   setTimeout(() => {
+//     reserveRoomInfo.roomInfo = {}
+//     console.log('reserveRoomInfo.roomInfo: ', reserveRoomInfo.roomInfo);
 
-// 房型細節
-let roomDetail: RoomDetail = {
-  amenityInfo: [], // 備品
-  facilityInfo: [], // 房內設備
-  areaInfo: '', // 坪數
-  bedInfo: '', // 床型
-  maxPeople: 0 // 人數
-}
-
-// form = {
-//   "roomId": "65251f6095429cd58654bf12",
-//   "checkInDate": "2023/06/18",
-//   "checkOutDate": "2023/06/19",
-//   "peopleNum": 2,
-//   "userInfo": {
-//     "address": {
-//       "zipcode": 802,
-//       "detail": "文山路23號"
-//     },
-//     "name": "Joanne Chen",
-//     "phone": "0912345678",
-//     "email": "example@gmail.com"
-//   }
+//     navigateTo('/confirmation')
+//   }, 3000)
 // }
+
+// // 房型資訊
+// let roomInfo: RoomInfo = reactive({
+//   id: '',
+//   name: '',
+//   imageUrl: '',
+//   imageUrlList: [],
+//   description: '',
+//   price: 0,
+//   roomDetail: {
+//     amenityInfo: [], // 備品
+//     facilityInfo: [], // 房內設備
+//     areaInfo: '', // 坪數
+//     bedInfo: '', // 床型
+//     maxPeople: 0 // 人數
+//   }
+// })
+
+// // 房型細節
+// let roomDetail: RoomDetail = {
+//   amenityInfo: [], // 備品
+//   facilityInfo: [], // 房內設備
+//   areaInfo: '', // 坪數
+//   bedInfo: '', // 床型
+//   maxPeople: 0 // 人數
+// }
+
+// // form = {
+// //   "roomId": "65251f6095429cd58654bf12",
+// //   "checkInDate": "2023/06/18",
+// //   "checkOutDate": "2023/06/19",
+// //   "peopleNum": 2,
+// //   "userInfo": {
+// //     "address": {
+// //       "zipcode": 802,
+// //       "detail": "文山路23號"
+// //     },
+// //     "name": "Joanne Chen",
+// //     "phone": "0912345678",
+// //     "email": "example@gmail.com"
+// //   }
+// // }
 </script>
 
 <style lang="scss" scoped>

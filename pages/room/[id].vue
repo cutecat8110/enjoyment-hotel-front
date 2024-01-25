@@ -1,6 +1,6 @@
 <template>
-  <!-- ID: 65a6a24a4833c79e5f489517 -->
   <div class="p-0 px-lg-xl bg-primary-tint">
+    <!-- ID: 65a6a24a4833c79e5f489517 -->
     <!-- 房型照片 -->
     <div class="pt-0 py-md-5 py-lg-xl mb-5">
       <div class="position-relative">
@@ -137,7 +137,6 @@
     </div>
   </div>
 </template>
-
 <script lang="ts" setup>
 // 月曆套件：https://vue3datepicker.com/props/modes/#multi-calendars
 
@@ -152,6 +151,11 @@ definePageMeta({
 // 取得 route id
 const route = useRoute()
 const roomId = route.params.id || ''
+
+const reserveRoomInfo = useReserveRoomInfoStore();
+// 取得 入住時間 & 退房時間
+const checkInDate = ref(reserveRoomInfo.checkInDate);
+const checkOutDate = ref(reserveRoomInfo.checkInDate);
 
 // 房型資訊
 let roomInfo: RoomInfo = reactive({
@@ -170,10 +174,9 @@ let roomInfo: RoomInfo = reactive({
   }
 })
 
+
 /* API */
 // id: 65a77277d044dc8f856c0a52
-const reserveRoomInfo = useReserveRoomInfoStore();
-
 const { getRoomInfo } = useApi()
 const apiPending = computed(() => lPending.value)
 const { pending: lPending } = await getRoomInfo(roomId, {
@@ -197,7 +200,8 @@ const { pending: lPending } = await getRoomInfo(roomId, {
         maxPeople: resData.maxPeople
       }
     }
-    reserveRoomInfo.setRoomData(roomInfo)
+    reserveRoomInfo.roomInfo = roomInfo
+    reserveRoomInfo.checkInDate = 'zxczxcmklzxcmlzxc'
   },
   onResponseError({ response }: { response: any }) {
     console.log('error: ', response)

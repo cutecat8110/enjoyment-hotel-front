@@ -3,35 +3,24 @@ export const useReserveRoomInfoStore = defineStore(
     'reserveRoomInfo',
     () => {
         // 轉換日期格式
+        const today = new Date()
+        const nextDay = new Date(today.setDate(today.getDate() + 1))
         function change(date) {
+            // YYYY/MM/DD
             return date.toISOString().split('T')?.[0]?.replaceAll('-', '/')
         }
 
-        const today = new Date()
-        const nextDay = new Date(today.setDate(today.getDate() + 1))
+         // 入住
+        const checkInDate = ref(change(today))
+         // 退房
+        const checkOutDate = ref(change(nextDay))
 
-        // 初始資料
-        const defaultRoomInfo = {
-            id: '',
-            checkInDate: ref(change(today)), // 入住 2023/06/18
-            checkOutDate: ref(change(nextDay)) // 退房 2023/06/18
-        };
-        let roomInfo = ref(defaultRoomInfo)
-
-        function resetRoomDefaultData() {
-            roomInfo = defaultRoomInfo
-        }
-        function setRoomData(data) {
-            roomInfo = {
-                ...roomInfo,
-                ...data
-            }
-        }
+        let roomInfo = ref({})
 
         return {
             roomInfo,
-            resetRoomDefaultData,
-            setRoomData
+            checkInDate,
+            checkOutDate
         }
     },
     // https://ithelp.ithome.com.tw/articles/10302381
