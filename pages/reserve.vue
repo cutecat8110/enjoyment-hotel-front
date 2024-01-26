@@ -28,10 +28,10 @@
                     訂房日期
                   </div>
                   <div class="mb-2">
-                    入住：{{ changeDateFormat(checkInDate) }}
+                    入住：{{ changeDateFormat(form.checkInDate) }}
                   </div>
                   <div>
-                    退房：{{ changeDateFormat(checkOutDate) }}
+                    退房：{{ changeDateFormat(form.checkOutDate) }}
                   </div>
                 </div>
                 <div class="col-2">
@@ -44,7 +44,7 @@
                   <div class="room-info-title-border title-border-primary ps-3 fw-bold mb-2">
                     房客人數
                   </div>
-                  <div>{{ peopleNum }} 人</div>
+                  <div>{{ form.peopleNum }} 人</div>
                 </div>
                 <div class="col-2">
                   <button class="btn btn-text text-dark fw-bold">編輯</button>
@@ -56,90 +56,128 @@
               <h4 class="fw-bold">訂房人資訊</h4>
               <button class="btn btn-text text-primary fw-bold">套用會員資料</button>
             </div>
-            <ul class="list-unstyled pb-6 mb-6 border-bottom">
-              <li class="mb-4">
-                <label class="form-label d-flex justify-content-between text-dark" for="default">
-                  姓名
-                </label>
-                <input id="text" class="form-control" type="default" placeholder="請輸入姓名" />
-              </li>
-              <li class="mb-4">
-                <label class="form-label d-flex justify-content-between text-dark" for="default">
-                  手機號碼
-                </label>
-                <input id="text" class="form-control" type="default" placeholder="請輸入手機號碼" />
-              </li>
-              <li class="mb-4">
-                <label class="form-label d-flex justify-content-between text-dark" for="default">
-                  電子信箱
-                </label>
-                <input id="email" class="form-control" type="default" placeholder="請輸入電子信箱" />
-              </li>
-              <li class="d-md-none mb-4">
-                <label class="form-label d-flex justify-content-between text-dark" for="default">
-                  生日
-                </label>
-                <div class="row">
-                  <div class="col-4 mb-3">
-                    <select class="form-select" aria-label="Default select year">
-                      <option selected>選擇年分</option>
-                      <option value="1990">1990年</option>
-                      <option value="1991">1991年</option>
-                      <option value="1992">1992年</option>
-                    </select>
+            form: {{ form }}
+            <VForm ref="formRefs" v-slot="{ errors }">
+              <ul class="list-unstyled pb-6 mb-6 border-bottom">
+                <li class="mb-4">
+                  <label class="form-label d-flex text-dark" for="default">
+                    姓名
+                    <span class="text-danger ms-1">*</span>
+                  </label>
+                  <VField
+                    id="name"
+                    v-model.trim="form.userInfo.name"
+                    :class="[errors.name && 'verify-error', 'form-control']"
+                    name="name"
+                    label="姓名"
+                    type="name"
+                    placeholder="請輸入姓名"
+                    rules="required|name"
+                  />
+                  <!-- :disabled="apiPending" -->
+                  <div class="text-danger fs-8 fw-bold mt-2">{{ errors.name }}</div>
+                </li>
+                <li class="mb-4">
+                  <label class="form-label d-flex text-dark" for="default">
+                    手機號碼
+                    <span class="text-danger ms-1">*</span>
+                  </label>
+                  <VField
+                    id="phone"
+                    v-model.trim="form.userInfo.phone"
+                    :class="[errors.phone && 'verify-error', 'form-control']"
+                    name="phone"
+                    label="手機號碼"
+                    type="phone"
+                    placeholder="請輸入手機號碼"
+                    rules="required|phone"
+                  />
+                  <!-- :disabled="apiPending" -->
+                  <div class="text-danger fs-8 fw-bold mt-2">{{ errors.phone }}</div>
+                </li>
+                <li class="mb-4">
+                  <label class="form-label d-flex justify-content-between text-dark" for="default">
+                    電子信箱
+                  </label>
+                  <VField
+                    id="email"
+                    v-model.trim="form.userInfo.email"
+                    :class="[errors.email && 'verify-error', 'form-control']"
+                    name="email"
+                    label="電子信箱"
+                    type="email"
+                    placeholder="請輸入電子信箱"
+                    rules="required|email"
+                  />
+                  <!-- :disabled="apiPending" -->
+                  <div class="text-danger fs-8 fw-bold mt-2">{{ errors.email }}</div>
+                </li>
+                <li class="d-md-none mb-4">
+                  <label class="form-label d-flex justify-content-between text-dark" for="default">
+                    生日
+                  </label>
+                  <div class="row">
+                    <div class="col-4 mb-3">
+                      <select class="form-select" aria-label="Default select year">
+                        <option selected>選擇年分</option>
+                        <option value="1990">1990年</option>
+                        <option value="1991">1991年</option>
+                        <option value="1992">1992年</option>
+                      </select>
+                    </div>
+                    <div class="col-4">
+                      <select class="form-select" aria-label="Default select month">
+                        <option selected>請選擇月份</option>
+                        <option value="1">1月</option>
+                        <option value="2">2月</option>
+                        <option value="3">3月</option>
+                      </select>
+                    </div>
+                    <div class="col-4">
+                      <select class="form-select" aria-label="Default select day">
+                        <option selected>請選擇日期</option>
+                        <option value="1">1日</option>
+                        <option value="2">2日</option>
+                        <option value="3">3日</option>
+                      </select>
+                    </div>
                   </div>
-                  <div class="col-4">
-                    <select class="form-select" aria-label="Default select month">
-                      <option selected>請選擇月份</option>
-                      <option value="1">1月</option>
-                      <option value="2">2月</option>
-                      <option value="3">3月</option>
-                    </select>
+                </li>
+                <li>
+                  <label class="form-label d-flex justify-content-between text-dark" for="default">
+                    地址
+                  </label>
+                  <div class="row">
+                    <div class="col-6 mb-3">
+                      <select class="form-select -" aria-label="Default select city">
+                        <option selected>請選擇縣市</option>
+                        <option value="高雄市">高雄市</option>
+                        <option value="台中市">台中市</option>
+                        <option value="台北市">台北市</option>
+                      </select>
+                    </div>
+                    <div class="col-6">
+                      <select class="form-select -" aria-label="Default select area">
+                        <option selected>請選擇區域</option>
+                        <option value="楠梓區">楠梓區</option>
+                        <option value="三民區">三民區</option>
+                        <option value="旗山區">旗山區</option>
+                      </select>
+                    </div>
+                    <div class="col-12">
+                      <input
+                        id="text"
+                        class="form-control"
+                        type="default"
+                        placeholder="請輸入詳細地址"
+                      />
+                    </div>
                   </div>
-                  <div class="col-4">
-                    <select class="form-select" aria-label="Default select day">
-                      <option selected>請選擇日期</option>
-                      <option value="1">1日</option>
-                      <option value="2">2日</option>
-                      <option value="3">3日</option>
-                    </select>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <label class="form-label d-flex justify-content-between text-dark" for="default">
-                  地址
-                </label>
-                <div class="row">
-                  <div class="col-6 mb-3">
-                    <select class="form-select -" aria-label="Default select city">
-                      <option selected>請選擇縣市</option>
-                      <option value="高雄市">高雄市</option>
-                      <option value="台中市">台中市</option>
-                      <option value="台北市">台北市</option>
-                    </select>
-                  </div>
-                  <div class="col-6">
-                    <select class="form-select -" aria-label="Default select area">
-                      <option selected>請選擇區域</option>
-                      <option value="楠梓區">楠梓區</option>
-                      <option value="三民區">三民區</option>
-                      <option value="旗山區">旗山區</option>
-                    </select>
-                  </div>
-                  <div class="col-12">
-                    <input
-                      id="text"
-                      class="form-control"
-                      type="default"
-                      placeholder="請輸入詳細地址"
-                    />
-                  </div>
-                </div>
-              </li>
-            </ul>
+                </li>
+              </ul>
+            </VForm>
 
-            <!-- <TheRoomsInfo mb-space="4" /> -->
+            <TheRoomsInfo :room-detail="roomInfo.roomDetail" mb-space="4" />
           </div>
 
           <div class="col-md-5 mb-5 mb-lg-0">
@@ -154,10 +192,10 @@
                   <div>
                     <span>NT$ {{ roomInfo.price }} ×</span>
                     <span class="text-gray-80">
-                      {{ roomInfo.dateDiff }}
+                      {{ dateDiff }}
                       </span>
                   </div>
-                  <span>NT$ {{ roomInfo.price * roomInfo.dateDiff }}</span>
+                  <span>NT$ {{ roomInfo.price * dateDiff }}</span>
                 </li>
 
                 <li class="d-flex justify-content-between active mb-4 pb-4 border-bottom">
@@ -167,7 +205,7 @@
 
                 <li class="d-flex justify-content-between active fw-bold">
                   <span>總價</span>
-                  <span>NT$ {{ roomInfo.price * roomInfo.dateDiff - roomInfo.discountPrice }}</span>
+                  <span>NT$ {{ roomInfo.price * dateDiff - roomInfo.discountPrice }}</span>
                 </li>
               </ul>
               <!-- @click="submitOrder" -->
@@ -237,7 +275,7 @@
 </template>
 
 <script lang="ts" setup>
-// import TheRoomsInfo from '@/components/rooms/TheRoomsInfo.vue'
+import TheRoomsInfo from '@/components/rooms/TheRoomsInfo.vue'
 import type { RoomInfo } from '@/types/room'
 import { useReserveRoomInfoStore } from '@/stores/room'
 
@@ -245,95 +283,92 @@ definePageMeta({
   layout: 'h-bg-f'
 })
 
-
+// 從 store 中取出資料
 const reserveRoomInfo = useReserveRoomInfoStore();
-// // 取得 入住時間 & 退房時間
-const checkInDate = ref(reserveRoomInfo.checkInDate);
-const checkOutDate = ref(reserveRoomInfo.checkOutDate);
-const peopleNum = ref(reserveRoomInfo.peopleNum);
 let roomInfo = reactive({
   ...JSON.parse(JSON.stringify(reserveRoomInfo.roomInfo)),
-  dateDiff: reserveRoomInfo.dateDiff(),
   discountPrice: 1400
 })
 
-function changeDateFormat(date: string) {
-  const newDate = new Date(date)
-  const month = newDate.getMonth() + 1
-  const day = newDate.getDate()
-  const weekList = [ '一', '二', '三', '四', '五', '六', '日' ]
-  const week = weekList[newDate.getDay() - 1]
-  return `${month} 月 ${day} 日星期${week}`;
+const formRefs = ref<HTMLFormElement | null>(null)
+const { cityTmpl } = useTmpl()
+console.log('cityTmpl: ', cityTmpl);
+
+let districtTmpl: Array<{ zip_code: string; district: string }> = []
+const address: { city: string; district: string; }= {
+  city: cityTmpl[0],
+  district: ''
 }
+console.log('districtTmpl: ', districtTmpl);
+console.log('address: ', address);
+/* API */
+const { getTwzipcode } = useApi()
+/* 取得郵遞區號 */
+const { pending: gtPending, refresh: gtRefresh } = await getTwzipcode({
+  query: computed(() => ({ city: address.city })),
+  immediate: false,
+  onResponse({ response }: { response: any }) {
+    if (!response.status) {
+      return;
+    }
+    console.log('response: ', response._data.data);
 
-// const isShowModal = ref(false)
-// const route = useRoute()
-// // modal 寫法，先保留
-// // const { $bootstrap } = useNuxtApp()
-// // const orderLoad = ref(null)
+    const resultData = response._data.data.map(
+      (item: Partial<{ zip_code: string; district: string }>) => ({
+        zip_code: item.zip_code,
+        district: item.district
+      })
+    )
+    districtTmpl = resultData
+    address.district = resultData[0]
+  }
+})
+gtRefresh()
+// sPending.value = false
 
-// // let modal: any
-// // onMounted(() => {
-// //   const routes = useRoute()
-// //   modal = routes.path === '/reserve' ? $bootstrap.modal(orderLoad.value) : ''
-// // })
 
-// // onBeforeUnmount(() => {
-// //   // 加上 dispose，避免切換頁面時或是 HMR 看到殘留畫面
-// //   modal.dispose()
-// // })
+interface ReserveForm {
+  roomId: string;
+  checkInDate: string;
+  checkOutDate: string;
+  peopleNum: number;
+  userInfo: {
+    address: {
+      zipcode: string;
+      detail: string
+    };
+    name: string;
+    phone: string;
+    email: string
+  }
+}
+const form: ReserveForm = reactive({
+  roomId: roomInfo.id,
+  checkInDate: reserveRoomInfo.checkInDate,
+  checkOutDate: reserveRoomInfo.checkOutDate,
+  peopleNum: reserveRoomInfo.peopleNum,
+  userInfo: {
+    address: {
+      zipcode: '',
+      detail: `${address.city}${address.district}`
+    },
+    name: '',
+    phone: '',
+    email: ''
+  }
+})
+// 生日參考: pages\signup.vue
 
-// const submitOrder = () => {
-//   isShowModal.value = true
-//   setTimeout(() => {
-//     reserveRoomInfo.roomInfo = {}
-//     console.log('reserveRoomInfo.roomInfo: ', reserveRoomInfo.roomInfo);
-
-//     navigateTo('/confirmation')
-//   }, 3000)
-// }
-
-// // 房型資訊
-// let roomInfo: RoomInfo = reactive({
-//   id: '',
-//   name: '',
-//   imageUrl: '',
-//   imageUrlList: [],
-//   description: '',
-//   price: 0,
-//   roomDetail: {
-//     amenityInfo: [], // 備品
-//     facilityInfo: [], // 房內設備
-//     areaInfo: '', // 坪數
-//     bedInfo: '', // 床型
-//     maxPeople: 0 // 人數
-//   }
-// })
-
-// // 房型細節
-// let roomDetail: RoomDetail = {
-//   amenityInfo: [], // 備品
-//   facilityInfo: [], // 房內設備
-//   areaInfo: '', // 坪數
-//   bedInfo: '', // 床型
-//   maxPeople: 0 // 人數
-// }
-
-// // form = {
-// //   "roomId": "65251f6095429cd58654bf12",
-// //   "checkInDate": "2023/06/18",
-// //   "checkOutDate": "2023/06/19",
-// //   "peopleNum": 2,
-// //   "userInfo": {
-// //     "address": {
-// //       "zipcode": 802,
-// //       "detail": "文山路23號"
-// //     },
-// //     "name": "Joanne Chen",
-// //     "phone": "0912345678",
-// //     "email": "example@gmail.com"
-// //   }
-// // }
+// 入住天數
+const dateDiff = computed(() => {
+  const day = $dayjs(form.checkInDate).diff(form.checkOutDate, 'day')
+  return day * -1;
+})
+// 轉換日期格式
+const { $dayjs } = useNuxtApp()
+function changeDateFormat(date: string) {
+  return $dayjs(date).format('M 月 D 日 dddd')
+}
 </script>
 
 <style lang="scss" scoped>
