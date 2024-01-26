@@ -149,20 +149,35 @@
                   </label>
                   <div class="row">
                     <div class="col-6 mb-3">
-                      <select class="form-select -" aria-label="Default select city">
-                        <option selected>請選擇縣市</option>
-                        <option value="高雄市">高雄市</option>
-                        <option value="台中市">台中市</option>
-                        <option value="台北市">台北市</option>
-                      </select>
+                      <VField
+                        v-model="address.city"
+                        class="form-select"
+                        name="city"
+                        as="select"
+                        rules="required"
+                      >
+                        <!-- :disabled="apiPending" -->
+                        <option value="" selected>請選擇縣市</option>
+                        <option v-for="city in cityTmpl" :key="city" :value="city">
+                          {{ city }}
+                        </option>
+                      </VField>
                     </div>
+                      districtTmpl: {{ districtTmpl }}
                     <div class="col-6">
-                      <select class="form-select -" aria-label="Default select area">
-                        <option selected>請選擇區域</option>
-                        <option value="楠梓區">楠梓區</option>
-                        <option value="三民區">三民區</option>
-                        <option value="旗山區">旗山區</option>
-                      </select>
+                      <VField
+                        v-model="form.userInfo.address.zipcode"
+                        class="form-select"
+                        name="district"
+                        as="select"
+                        rules="required"
+                      >
+                        <!-- :disabled="apiPending" -->
+                        <option value="" selected>請選擇區域</option>
+                        <option v-for="district in districtTmpl" :key="`${district.district}_${district.zipcode}`" :value="district.zipcode">
+                          {{ district.district }} \ {{ district.zipcode }}
+                        </option>
+                      </VField>
                     </div>
                     <div class="col-12">
                       <input
@@ -292,40 +307,59 @@ let roomInfo = reactive({
 
 const formRefs = ref<HTMLFormElement | null>(null)
 const { cityTmpl } = useTmpl()
-console.log('cityTmpl: ', cityTmpl);
 
-let districtTmpl: Array<{ zip_code: string; district: string }> = []
-const address: { city: string; district: string; }= {
-  city: cityTmpl[0],
-  district: ''
+interface District {
+  city: string;
+  zipcode: string
+  district: string
 }
-console.log('districtTmpl: ', districtTmpl);
-console.log('address: ', address);
+let districtTmpl: Array<District> = reactive([])
+
+let address: District = reactive({
+  city: '',
+  district: '',
+  zipcode: ''
+})
+
 /* API */
 const { getTwzipcode } = useApi()
 /* 取得郵遞區號 */
-const { pending: gtPending, refresh: gtRefresh } = await getTwzipcode({
+const { pending: gtPending, refresh: zcRefresh } = await getTwzipcode({
   query: computed(() => ({ city: address.city })),
   immediate: false,
   onResponse({ response }: { response: any }) {
     if (!response.status) {
       return;
     }
-    console.log('response: ', response._data.data);
 
+    // 針對縣市篩選出對應的區域
     const resultData = response._data.data.map(
-      (item: Partial<{ zip_code: string; district: string }>) => ({
-        zip_code: item.zip_code,
-        district: item.district
-      })
+      (item: Partial<{
+          city: string
+          zip_code: string
+          district: string
+        }>
+      ) => (
+        {
+          zipcode: item.zip_code,
+          district: item.district
+        }
+      )
     )
+
     districtTmpl = resultData
-    address.district = resultData[0]
+    address = resultData[0]
+    console.log('address', address);
+    console.log('打api', resultData);
   }
 })
-gtRefresh()
+zcRefresh()
 // sPending.value = false
 
+function selectDistrict() {
+  console.log('切換區域', address.city);
+  zcRefresh()
+}
 
 interface ReserveForm {
   roomId: string;
@@ -350,7 +384,7 @@ const form: ReserveForm = reactive({
   userInfo: {
     address: {
       zipcode: '',
-      detail: `${address.city}${address.district}`
+      detail: ''
     },
     name: '',
     phone: '',
