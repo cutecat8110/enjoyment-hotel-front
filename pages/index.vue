@@ -44,7 +44,7 @@
                 class="banner-button d-flex justify-content-end align-items-center"
                 type="button"
               >
-                <NuxtLink class="banner-button-text" to="/roomtype">立即訂房</NuxtLink>
+                <NuxtLink class="banner-button-text" to="/rooms">立即訂房</NuxtLink>
                 <div class="banner-button-line"></div>
               </button>
             </div>
@@ -119,7 +119,7 @@
               享受高級的住宿體驗，尊爵雙人房提供給您舒適寬敞的空間和精緻的裝潢。
             </div>
             <h3 class="room-price">NT$ 10,000</h3>
-            <NuxtLink class="btn room-button fs-5 d-flex justify-content-end align-items-center" to="/roomtype">
+            <NuxtLink class="btn room-button fs-5 d-flex justify-content-end align-items-center" to="/rooms">
               查看更多
               <img class="room-button-line" src="/img/desktop/line.png" alt="" />
             </NuxtLink>
