@@ -56,7 +56,6 @@
               <h4 class="fw-bold">訂房人資訊</h4>
               <button class="btn btn-text text-primary fw-bold">套用會員資料</button>
             </div>
-            form: {{ form }}
             <VForm ref="formRefs" v-slot="{ errors }">
               <ul class="list-unstyled pb-6 mb-6 border-bottom">
                 <li class="mb-4">
@@ -163,7 +162,6 @@
                         </option>
                       </VField>
                     </div>
-                      districtTmpl: {{ districtTmpl }}
                     <div class="col-6">
                       <VField
                         v-model="form.userInfo.address.zipcode"
@@ -174,8 +172,11 @@
                       >
                         <!-- :disabled="apiPending" -->
                         <option value="" selected>請選擇區域</option>
-                        <option v-for="district in districtTmpl" :key="`${district.district}_${district.zipcode}`" :value="district.zipcode">
-                          {{ district.district }} \ {{ district.zipcode }}
+                        <option v-for="item in districtTmpl"
+                          :key="`${item.district}_${item.zipcode}`"
+                          :value="item.zipcode"
+                        >
+                          {{ item.district }}
                         </option>
                       </VField>
                     </div>
@@ -308,17 +309,23 @@ let roomInfo = reactive({
 const formRefs = ref<HTMLFormElement | null>(null)
 const { cityTmpl } = useTmpl()
 
+
 interface District {
-  city: string;
-  zipcode: string
-  district: string
+  district: string;
+  zipcode: string;
 }
 let districtTmpl: Array<District> = reactive([])
 
-let address: District = reactive({
-  city: '',
-  district: '',
-  zipcode: ''
+interface Address {
+  city: string;
+  district: District;
+}
+let address: Address = reactive({
+  city: '台北市',
+  district: {
+    district: '',
+    zipcode: ''
+  }
 })
 
 /* API */
@@ -335,7 +342,6 @@ const { pending: gtPending, refresh: zcRefresh } = await getTwzipcode({
     // 針對縣市篩選出對應的區域
     const resultData = response._data.data.map(
       (item: Partial<{
-          city: string
           zip_code: string
           district: string
         }>
@@ -348,18 +354,12 @@ const { pending: gtPending, refresh: zcRefresh } = await getTwzipcode({
     )
 
     districtTmpl = resultData
-    address = resultData[0]
-    console.log('address', address);
-    console.log('打api', resultData);
+    address.district = resultData[0]
+    form.userInfo.address.zipcode = address.district.zipcode
   }
 })
 zcRefresh()
 // sPending.value = false
-
-function selectDistrict() {
-  console.log('切換區域', address.city);
-  zcRefresh()
-}
 
 interface ReserveForm {
   roomId: string;
@@ -369,11 +369,11 @@ interface ReserveForm {
   userInfo: {
     address: {
       zipcode: string;
-      detail: string
+      detail: string;
     };
     name: string;
     phone: string;
-    email: string
+    email: string;
   }
 }
 const form: ReserveForm = reactive({
@@ -392,6 +392,14 @@ const form: ReserveForm = reactive({
   }
 })
 // 生日參考: pages\signup.vue
+
+
+watch(
+  () => form.userInfo.address.zipcode,
+  (zipcode) => {
+    address.district = districtTmpl.filter(item => item.zipcode === zipcode)[0]
+  }
+)
 
 // 入住天數
 const dateDiff = computed(() => {
