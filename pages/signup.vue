@@ -381,8 +381,8 @@ const { pending: sPending, refresh: sRefresh } = await signup({
       navigateTo('/')
     }
   },
-  onResponseError({ response }: { response: any }) {
-    switch (response._data?.message) {
+  onResponseError({ error }: { error: any }) {
+    switch (error._data?.message) {
       case '此 Email 已註冊':
         formStatus.value = FORM_PHASE.FIRST
         nextTick(() => {

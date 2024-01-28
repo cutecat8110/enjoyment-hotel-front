@@ -35,8 +35,8 @@ const fetch = (url, options) => {
       options.headers = new Headers(options.headers)
       options.headers.set('Authorization', commonStore.token)
     },
-    onResponseError({ response }) {
-      handleError(response)
+    onResponseError({ error }) {
+      handleError(error)
     },
     ...options
   })

@@ -385,8 +385,8 @@ const {
       newsTmpl.value = temp
     }
   },
-  onResponseError({ response }: { response: any }) {
-    console.log('news api Error:', response)
+  onResponseError({ error }: { error: any }) {
+    console.log('news api Error:', error)
   }
 })
 newsRefresh()
@@ -403,8 +403,8 @@ const {
       culinaryTmpl.value = temp
     }
   },
-  onResponseError({ response }: { response: any }) {
-    console.log('culinary api Error:', response)
+  onResponseError({ error }: { error: any }) {
+    console.log('culinary api Error:', error)
   }
 })
 culinaryRefresh()
