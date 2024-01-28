@@ -15,15 +15,29 @@
                   <div class="room-info-title-border title-border-primary ps-3 fw-bold mb-2">
                     選擇房型
                   </div>
-                  <div>{{ roomInfo.name }} | {{ form.roomId }}</div>
-                  <select class="form-select" v-model="form.roomId">
-                    <option v-for="room in allRoomInfo" :key="room.id" :value="room.id">
-                      {{ room.name }}
-                    </option>
-                  </select>
+
+                  <template v-if="canEdit.roomType.value">
+                    <div class="row">
+                      <div class="col-6">
+                        <select class="form-select" v-model="form.roomId">
+                          <option v-for="room in allRoomInfo" :key="room.id" :value="room.id">
+                            {{ room.name }}
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+                  </template>
+                  <template v-else>
+                    <div>{{ roomInfo.name }}</div>
+                  </template>
+
                 </div>
                 <div class="col-2">
-                  <button class="btn btn-text text-dark fw-bold">編輯</button>
+                  <button class="btn btn-text text-dark fw-bold"
+                    @click="editData('roomType')"
+                  >
+                    編輯
+                  </button>
                 </div>
               </div>
 
@@ -32,15 +46,24 @@
                   <div class="room-info-title-border title-border-primary ps-3 fw-bold mb-2">
                     訂房日期
                   </div>
-                  <div class="mb-2">
-                    入住：{{ changeDateFormat(form.checkInDate) }}
-                  </div>
-                  <div>
-                    退房：{{ changeDateFormat(form.checkOutDate) }}
-                  </div>
+                  <template v-if="canEdit.checkDate.value">
+                    編輯日期
+                  </template>
+                  <template v-else>
+                    <div class="mb-2">
+                      入住：{{ changeDateFormat(form.checkInDate) }}
+                    </div>
+                    <div>
+                      退房：{{ changeDateFormat(form.checkOutDate) }}
+                    </div>
+                  </template>
                 </div>
                 <div class="col-2">
-                  <button class="btn btn-text text-dark fw-bold">編輯</button>
+                  <button class="btn btn-text text-dark fw-bold"
+                    @click="editData('checkDate')"
+                  >
+                    編輯
+                  </button>
                 </div>
               </div>
 
@@ -49,10 +72,33 @@
                   <div class="room-info-title-border title-border-primary ps-3 fw-bold mb-2">
                     房客人數
                   </div>
-                  <div>{{ form.peopleNum }} 人</div>
+                  <template v-if="canEdit.peopleNum.value">
+                    <div class="d-flex align-items-center">
+                      <button class="btn btn btn-outline-primary text-dark py-2 px-3"
+                        @click="editPeopleNum('decrease')"
+                      >
+                        －
+                      </button>
+                      <span class="p-3">
+                        {{ form.peopleNum }}
+                      </span>
+                      <button class="btn btn btn-outline-primary text-dark py-2 px-3"
+                        @click="editPeopleNum('increase')"
+                      >
+                        ＋
+                      </button>
+                    </div>
+                  </template>
+                  <template v-else>
+                    <div>{{ form.peopleNum }} 人</div>
+                  </template>
                 </div>
                 <div class="col-2">
-                  <button class="btn btn-text text-dark fw-bold">編輯</button>
+                  <button class="btn btn-text text-dark fw-bold"
+                    @click="editData('peopleNum')"
+                  >
+                    編輯
+                  </button>
                 </div>
               </div>
             </div>
@@ -364,7 +410,7 @@ const form: ReserveForm = reactive({
   roomId,
   checkInDate: reserveRoomInfo.checkInDate,
   checkOutDate: reserveRoomInfo.checkOutDate,
-  peopleNum: reserveRoomInfo.peopleNum,
+  peopleNum: ref(reserveRoomInfo.peopleNum),
   userInfo: {
     address: {
       zipcode: '',
@@ -383,7 +429,7 @@ watch(
   (val) => {
     if (!val) {
       console.log('reserveRoomInfo: ', reserveRoomInfo);
-      // 離開時清空 pinia 持久
+      // TODO: 離開時清空 pinia 持久
       // return
       navigateTo('/rooms')
     }
@@ -464,6 +510,41 @@ const dateDiff = computed(() => {
   return day * -1;
 })
 
+// 編輯房型、入住/退房日期、入住人數
+const canEdit = {
+  roomType: ref(false),
+  checkDate: ref(false),
+  peopleNum: ref(false)
+}
+
+function editData(key: keyof typeof canEdit) {
+  (canEdit[key] as Ref<boolean>).value = !(canEdit[key] as Ref<boolean>).value
+}
+
+function editPeopleNum(calc: string) {
+  const maxPeople = roomInfo.roomDetail.maxPeople
+
+  switch (calc) {
+    case 'increase':
+      if (maxPeople === form.peopleNum) {
+        return;
+      }
+
+      form.peopleNum = maxPeople > form.peopleNum
+      ? form.peopleNum += 1
+      : maxPeople
+      break
+    case 'decrease':
+      if (form.peopleNum === 1) {
+        return;
+      }
+
+      form.peopleNum = maxPeople <= form.peopleNum
+      ? form.peopleNum -= 1
+      : 1
+      break
+  }
+}
 
 // 送出訂單
 function submitOrder() {
