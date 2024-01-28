@@ -15,7 +15,12 @@
                   <div class="room-info-title-border title-border-primary ps-3 fw-bold mb-2">
                     選擇房型
                   </div>
-                  <div>{{ roomInfo.name }}</div>
+                  <div>{{ roomInfo.name }} | {{ form.roomId }}</div>
+                  <select class="form-select" v-model="form.roomId">
+                    <option v-for="room in allRoomInfo" :key="room.id" :value="room.id">
+                      {{ room.name }}
+                    </option>
+                  </select>
                 </div>
                 <div class="col-2">
                   <button class="btn btn-text text-dark fw-bold">編輯</button>
@@ -199,7 +204,7 @@
           <div class="col-md-5 mb-5 mb-lg-0">
             <div class="bg-light rounded-4 p-4 p-lg-5">
               <div class="rounded-3 overflow-hidden">
-                <NuxtImg class="w-100 h-auto" src="/img/room/Room_1.png" alt="Room_1" />
+                <NuxtImg class="w-100 h-auto" :src="roomInfo.imageUrl" alt="Room_1" />
               </div>
 
               <h3 class="fs-6 fs-md-4 fw-bold my-4 mt-lg-5">價格詳情</h3>
@@ -214,9 +219,9 @@
                   <span>NT$ {{ roomInfo.price * dateDiff }}</span>
                 </li>
 
-                <li class="d-flex justify-content-between active mb-4 pb-4 border-bottom">
+                <li v-if="roomInfo.discountPrice" class="d-flex justify-content-between active mb-4 pb-4 border-bottom">
                   <span>住宿折扣</span>
-                  <span class="text-primary">-NT$ {{ roomInfo.discountPrice }}</span>
+                  <span class="text-primary">-NT$ {{ roomInfo.discountPrice || 0 }}</span>
                 </li>
 
                 <li class="d-flex justify-content-between active fw-bold">
@@ -224,8 +229,7 @@
                   <span>NT$ {{ roomInfo.price * dateDiff - roomInfo.discountPrice }}</span>
                 </li>
               </ul>
-              <!-- @click="submitOrder" -->
-              <button class="btn btn-primary w-100" type="button">
+              <button class="btn btn-primary w-100" type="button" @click="submitOrder">
                 確認訂房
               </button>
             </div>
@@ -291,36 +295,117 @@
 </template>
 
 <script lang="ts" setup>
-import TheRoomsInfo from '@/components/rooms/TheRoomsInfo.vue'
-import type { RoomInfo } from '@/types/room'
-import { useReserveRoomInfoStore } from '@/stores/room'
-
 definePageMeta({
   layout: 'h-bg-f'
 })
 
-// 從 store 中取出資料
-const reserveRoomInfo = useReserveRoomInfoStore();
-let roomInfo = reactive({
-  ...JSON.parse(JSON.stringify(reserveRoomInfo.roomInfo)),
-  discountPrice: 1400
+import TheRoomsInfo from '@/components/rooms/TheRoomsInfo.vue'
+
+// 取得所有房型
+const { getRoomInfo, getAllRoomInfo } = useApi()
+import type { SectionRoomInfoType } from '@/types/room'
+// 所有房型下拉選單
+let allRoomInfo: Array<SectionRoomInfoType> = []
+await getAllRoomInfo({
+  onResponse({ response }: { response: any }) {
+    if (!response.status) {
+      return
+    }
+
+    allRoomInfo = response._data.result.map(
+      (item: any) => ({
+        id: item._id,
+        name: item.name,
+        imageUrl: item.imageUrl,
+        price: item.price,
+        discountPrice: 1950,
+        roomDetail: {
+          amenityInfo: item.amenityInfo,
+          facilityInfo: item.facilityInfo,
+          areaInfo: item.areaInfo,
+          bedInfo: item.bedInfo,
+          maxPeople: item.maxPeople
+        }
+      })
+    )
+
+    console.log('allRoomInfo: ',allRoomInfo);
+  },
+  onResponseError({ error }: { error: any }) {
+    console.log('error: ', error)
+  }
 })
 
+
+import { useReserveRoomInfoStore } from '@/stores/room'
+const reserveRoomInfo = useReserveRoomInfoStore();
+const roomId = ref(reserveRoomInfo.roomId);
+// 房型資料初始化
+let roomInfo: SectionRoomInfoType = reactive(reserveRoomInfo.defaultRoomInfo)
+
+// 預約資料
 const formRefs = ref<HTMLFormElement | null>(null)
-const { cityTmpl } = useTmpl()
+interface ReserveForm {
+  roomId: string | string[];
+  checkInDate: string;
+  checkOutDate: string;
+  peopleNum: number;
+  userInfo: {
+    address: {
+      zipcode: string;
+      detail: string;
+    };
+    name: string;
+    phone: string;
+    email: string;
+  }
+}
+const form: ReserveForm = reactive({
+  roomId,
+  checkInDate: reserveRoomInfo.checkInDate,
+  checkOutDate: reserveRoomInfo.checkOutDate,
+  peopleNum: reserveRoomInfo.peopleNum,
+  userInfo: {
+    address: {
+      zipcode: '',
+      detail: ''
+    },
+    name: '',
+    phone: '',
+    email: ''
+  }
+})
+// 生日參考: pages\signup.vue
 
+// 篩選單個房型
+watch(
+  () => form.roomId,
+  (val) => {
+    if (!val) {
+      console.log('reserveRoomInfo: ', reserveRoomInfo);
+      // 離開時清空 pinia 持久
+      // return
+      navigateTo('/rooms')
+    }
+    console.log('form.roomId: ', val);
+    roomInfo = allRoomInfo.filter(item => item.id === val)[0]
+    console.log(roomInfo);
+  },
+  { immediate: true }
+)
 
+// 取得地址
+const { cityTmpl } = useTmpl() // 縣市
 interface District {
   district: string;
   zipcode: string;
 }
 let districtTmpl: Array<District> = reactive([])
-
 interface Address {
   city: string;
   district: District;
 }
-let address: Address = reactive({
+const address: Address = reactive({
   city: '台北市',
   district: {
     district: '',
@@ -328,9 +413,8 @@ let address: Address = reactive({
   }
 })
 
-/* API */
+// 取得區域 & 郵遞區號
 const { getTwzipcode } = useApi()
-/* 取得郵遞區號 */
 const { pending: gtPending, refresh: zcRefresh } = await getTwzipcode({
   query: computed(() => ({ city: address.city })),
   immediate: false,
@@ -352,7 +436,6 @@ const { pending: gtPending, refresh: zcRefresh } = await getTwzipcode({
         }
       )
     )
-
     districtTmpl = resultData
     address.district = resultData[0]
     form.userInfo.address.zipcode = address.district.zipcode
@@ -361,39 +444,6 @@ const { pending: gtPending, refresh: zcRefresh } = await getTwzipcode({
 zcRefresh()
 // sPending.value = false
 
-interface ReserveForm {
-  roomId: string;
-  checkInDate: string;
-  checkOutDate: string;
-  peopleNum: number;
-  userInfo: {
-    address: {
-      zipcode: string;
-      detail: string;
-    };
-    name: string;
-    phone: string;
-    email: string;
-  }
-}
-const form: ReserveForm = reactive({
-  roomId: roomInfo.id,
-  checkInDate: reserveRoomInfo.checkInDate,
-  checkOutDate: reserveRoomInfo.checkOutDate,
-  peopleNum: reserveRoomInfo.peopleNum,
-  userInfo: {
-    address: {
-      zipcode: '',
-      detail: ''
-    },
-    name: '',
-    phone: '',
-    email: ''
-  }
-})
-// 生日參考: pages\signup.vue
-
-
 watch(
   () => form.userInfo.address.zipcode,
   (zipcode) => {
@@ -401,15 +451,23 @@ watch(
   }
 )
 
-// 入住天數
+
+const { $dayjs } = useNuxtApp()
+// 轉換日期格式
+function changeDateFormat(date: string) {
+  return $dayjs(date).format('M 月 D 日 dddd')
+}
+
+// 計算入住天數
 const dateDiff = computed(() => {
   const day = $dayjs(form.checkInDate).diff(form.checkOutDate, 'day')
   return day * -1;
 })
-// 轉換日期格式
-const { $dayjs } = useNuxtApp()
-function changeDateFormat(date: string) {
-  return $dayjs(date).format('M 月 D 日 dddd')
+
+
+// 送出訂單
+function submitOrder() {
+  console.log('submitOrder');
 }
 </script>
 
