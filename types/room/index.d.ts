@@ -3,7 +3,7 @@ interface InfoItem {
   isProvide: Boolean
   title: string
 }
-declare interface RoomDetail {
+declare interface RoomDetailType {
   amenityInfo: Array<InfoItem> // 備品
   facilityInfo: Array<InfoItem> // 房內設備
   areaInfo: string // 坪數
@@ -12,15 +12,26 @@ declare interface RoomDetail {
 }
 
 // 房型資訊
-declare interface RoomInfo {
+declare interface RoomInfoType {
   id: string
   name: string
   imageUrl: string
   imageUrlList: Array<string>
   description: string
   price: number,
+  discountPrice: number
+  roomDetail: RoomDetail
+}
+
+// 房型資訊
+declare interface SectionRoomInfoType {
+  id: string
+  name: string
+  imageUrl: string
+  price: number
+  discountPrice: number
   roomDetail: RoomDetail
 }
 
 
-export { RoomInfo, RoomDetail }
+export { RoomInfoType, RoomDetailType, SectionRoomInfoType }
