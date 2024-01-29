@@ -6,288 +6,311 @@
         確認訂房資訊
       </button>
       <ClientOnly>
-        <div class="row">
-          <div class="col-md-7 mb-lg-xl">
-            <h4 class="fw-bold mb-5">訂房資訊</h4>
-            <div class="pb-6 mb-6 border-bottom">
-              <div class="row align-items-center mb-4">
-                <div class="col-10">
-                  <div class="room-info-title-border title-border-primary ps-3 fw-bold mb-2">
-                    選擇房型
-                  </div>
+        <VForm ref="formRefs" v-slot="{ meta, errors, isSubmitting }" @submit="submitOrder">
+          <div class="row">
+            <div class="col-md-7 mb-lg-xl">
+              <h4 class="fw-bold mb-5">訂房資訊</h4>
+              <div class="pb-6 mb-6 border-bottom">
+                <div class="row align-items-center mb-4">
+                  <div class="col-10">
+                    <div class="room-info-title-border title-border-primary ps-3 fw-bold mb-2">
+                      選擇房型
+                    </div>
 
-                  <template v-if="canEdit.roomType.value">
+                    <template v-if="canEdit.roomType.value">
+                      <div class="row">
+                        <div class="col-6">
+                          <select class="form-select" v-model="form.roomId">
+                            <option v-for="room in allRoomInfo" :key="room.id" :value="room.id">
+                              {{ room.name }}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+                    </template>
+                    <template v-else>
+                      <div>{{ roomInfo.name }}</div>
+                    </template>
+
+                  </div>
+                  <div class="col-2">
+                    <button class="btn btn-text text-dark fw-bold"
+                      @click="editData('roomType')"
+                    >
+                      編輯
+                    </button>
+                  </div>
+                </div>
+
+                <div class="row align-items-center mb-4">
+                  <div class="col-10">
+                    <div class="room-info-title-border title-border-primary ps-3 fw-bold mb-2">
+                      訂房日期
+                      <!--
+                        TODO: 找月曆套件
+                        https://vue3datepicker.com/props/modes/#inline
+                      -->
+                    </div>
+
+                    <template v-if="canEdit.checkDate.value">
+                      <div class="row">
+                        <div class="col-6">
+                          <div class="rounded border">
+                            <label for="" class="d-block">入住 *未完成</label>
+                            <input type="date" class="form" v-model="form.checkInDate">
+                          </div>
+                        </div>
+                        <div class="col-6">
+                          <div class="rounded border">
+                            <label for="" class="d-block">退房 *未完成</label>
+                            <input type="date" class="form" v-model="form.checkOutDate">
+                          </div>
+                        </div>
+                      </div>
+
+                    </template>
+                    <template v-else>
+                      <div class="mb-2">
+                        入住：{{ changeDateFormat(form.checkInDate) }}
+                      </div>
+                      <div>
+                        退房：{{ changeDateFormat(form.checkOutDate) }}
+                      </div>
+                    </template>
+                  </div>
+                  <div class="col-2">
+                    <button class="btn btn-text text-dark fw-bold"
+                      @click="editData('checkDate')"
+                    >
+                      編輯
+                    </button>
+                  </div>
+                </div>
+
+                <div class="row align-items-center">
+                  <div class="col-10">
+                    <div class="room-info-title-border title-border-primary ps-3 fw-bold mb-2">
+                      房客人數
+                    </div>
+                    <template v-if="canEdit.peopleNum.value">
+                      <div class="d-flex align-items-center">
+                        <button class="btn btn btn-outline-primary text-dark py-2 px-3"
+                          @click="editPeopleNum('decrease')"
+                        >
+                          －
+                        </button>
+                        <span class="p-3">
+                          {{ form.peopleNum }}
+                        </span>
+                        <button class="btn btn btn-outline-primary text-dark py-2 px-3"
+                          @click="editPeopleNum('increase')"
+                        >
+                          ＋
+                        </button>
+                      </div>
+                    </template>
+                    <template v-else>
+                      <div>{{ form.peopleNum }} 人</div>
+                    </template>
+                  </div>
+                  <div class="col-2">
+                    <button class="btn btn-text text-dark fw-bold"
+                      @click="editData('peopleNum')"
+                    >
+                      編輯
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-between align-items-center mb-5">
+                <h4 class="fw-bold">訂房人資訊</h4>
+                <button class="btn btn-text text-primary fw-bold">套用會員資料</button>
+              </div>
+              {{ form }}
+                <ul class="list-unstyled pb-6 mb-6 border-bottom">
+                  <li class="mb-4">
+                    <label class="form-label text-dark" for="default">
+                      姓名
+                      <span class="text-danger ms-1">*</span>
+                    </label>
+                    <VField
+                      id="name"
+                      v-model.trim="form.userInfo.name"
+                      :class="[errors.name && 'verify-error', 'form-control']"
+                      name="name"
+                      label="姓名"
+                      type="name"
+                      placeholder="請輸入姓名"
+                      rules="required"
+                    />
+                    <!-- :disabled="apiPending" -->
+                    <div class="text-danger fs-8 fw-bold mt-2">{{ errors.name }}</div>
+                  </li>
+                  <li class="mb-4">
+                    <label class="form-label text-dark" for="default">
+                      手機號碼
+                      <span class="text-danger ms-1">*</span>
+                    </label>
+                    <VField
+                      id="phone"
+                      v-model.trim="form.userInfo.phone"
+                      :class="[errors.phone && 'verify-error', 'form-control']"
+                      name="phone"
+                      label="手機號碼"
+                      type="phone"
+                      placeholder="請輸入手機號碼"
+                      rules="required"
+                    />
+                    <!-- :disabled="apiPending" -->
+                    <div class="text-danger fs-8 fw-bold mt-2">{{ errors.phone }}</div>
+                  </li>
+                  <li class="mb-4">
+                    <label class="form-label text-dark" for="default">
+                      電子信箱
+                      <span class="text-danger ms-1">*</span>
+                    </label>
+                    <VField
+                      id="email"
+                      v-model.trim="form.userInfo.email"
+                      :class="[errors.email && 'verify-error', 'form-control']"
+                      name="email"
+                      label="電子信箱"
+                      type="email"
+                      placeholder="請輸入電子信箱"
+                      rules="required|email"
+                    />
+                    <!-- :disabled="apiPending" -->
+                    <div class="text-danger fs-8 fw-bold mt-2">{{ errors.email }}</div>
+                  </li>
+                  <li class="d-md-none mb-4">
+                    <label class="form-label d-flex justify-content-between text-dark" for="default">
+                      生日
+                    </label>
                     <div class="row">
-                      <div class="col-6">
-                        <select class="form-select" v-model="form.roomId">
-                          <option v-for="room in allRoomInfo" :key="room.id" :value="room.id">
-                            {{ room.name }}
-                          </option>
+                      <div class="col-4 mb-3">
+                        <select class="form-select" aria-label="Default select year">
+                          <option selected>選擇年分</option>
+                          <option value="1990">1990年</option>
+                          <option value="1991">1991年</option>
+                          <option value="1992">1992年</option>
+                        </select>
+                      </div>
+                      <div class="col-4">
+                        <select class="form-select" aria-label="Default select month">
+                          <option selected>請選擇月份</option>
+                          <option value="1">1月</option>
+                          <option value="2">2月</option>
+                          <option value="3">3月</option>
+                        </select>
+                      </div>
+                      <div class="col-4">
+                        <select class="form-select" aria-label="Default select day">
+                          <option selected>請選擇日期</option>
+                          <option value="1">1日</option>
+                          <option value="2">2日</option>
+                          <option value="3">3日</option>
                         </select>
                       </div>
                     </div>
-                  </template>
-                  <template v-else>
-                    <div>{{ roomInfo.name }}</div>
-                  </template>
-
-                </div>
-                <div class="col-2">
-                  <button class="btn btn-text text-dark fw-bold"
-                    @click="editData('roomType')"
-                  >
-                    編輯
-                  </button>
-                </div>
-              </div>
-
-              <div class="row align-items-center mb-4">
-                <div class="col-10">
-                  <div class="room-info-title-border title-border-primary ps-3 fw-bold mb-2">
-                    訂房日期
-                  </div>
-                  <template v-if="canEdit.checkDate.value">
-                    編輯日期
-                  </template>
-                  <template v-else>
-                    <div class="mb-2">
-                      入住：{{ changeDateFormat(form.checkInDate) }}
-                    </div>
-                    <div>
-                      退房：{{ changeDateFormat(form.checkOutDate) }}
-                    </div>
-                  </template>
-                </div>
-                <div class="col-2">
-                  <button class="btn btn-text text-dark fw-bold"
-                    @click="editData('checkDate')"
-                  >
-                    編輯
-                  </button>
-                </div>
-              </div>
-
-              <div class="row align-items-center">
-                <div class="col-10">
-                  <div class="room-info-title-border title-border-primary ps-3 fw-bold mb-2">
-                    房客人數
-                  </div>
-                  <template v-if="canEdit.peopleNum.value">
-                    <div class="d-flex align-items-center">
-                      <button class="btn btn btn-outline-primary text-dark py-2 px-3"
-                        @click="editPeopleNum('decrease')"
-                      >
-                        －
-                      </button>
-                      <span class="p-3">
-                        {{ form.peopleNum }}
-                      </span>
-                      <button class="btn btn btn-outline-primary text-dark py-2 px-3"
-                        @click="editPeopleNum('increase')"
-                      >
-                        ＋
-                      </button>
-                    </div>
-                  </template>
-                  <template v-else>
-                    <div>{{ form.peopleNum }} 人</div>
-                  </template>
-                </div>
-                <div class="col-2">
-                  <button class="btn btn-text text-dark fw-bold"
-                    @click="editData('peopleNum')"
-                  >
-                    編輯
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div class="d-flex justify-content-between align-items-center mb-5">
-              <h4 class="fw-bold">訂房人資訊</h4>
-              <button class="btn btn-text text-primary fw-bold">套用會員資料</button>
-            </div>
-            <VForm ref="formRefs" v-slot="{ errors }">
-              <ul class="list-unstyled pb-6 mb-6 border-bottom">
-                <li class="mb-4">
-                  <label class="form-label d-flex text-dark" for="default">
-                    姓名
-                    <span class="text-danger ms-1">*</span>
-                  </label>
-                  <VField
-                    id="name"
-                    v-model.trim="form.userInfo.name"
-                    :class="[errors.name && 'verify-error', 'form-control']"
-                    name="name"
-                    label="姓名"
-                    type="name"
-                    placeholder="請輸入姓名"
-                    rules="required|name"
-                  />
-                  <!-- :disabled="apiPending" -->
-                  <div class="text-danger fs-8 fw-bold mt-2">{{ errors.name }}</div>
-                </li>
-                <li class="mb-4">
-                  <label class="form-label d-flex text-dark" for="default">
-                    手機號碼
-                    <span class="text-danger ms-1">*</span>
-                  </label>
-                  <VField
-                    id="phone"
-                    v-model.trim="form.userInfo.phone"
-                    :class="[errors.phone && 'verify-error', 'form-control']"
-                    name="phone"
-                    label="手機號碼"
-                    type="phone"
-                    placeholder="請輸入手機號碼"
-                    rules="required|phone"
-                  />
-                  <!-- :disabled="apiPending" -->
-                  <div class="text-danger fs-8 fw-bold mt-2">{{ errors.phone }}</div>
-                </li>
-                <li class="mb-4">
-                  <label class="form-label d-flex justify-content-between text-dark" for="default">
-                    電子信箱
-                  </label>
-                  <VField
-                    id="email"
-                    v-model.trim="form.userInfo.email"
-                    :class="[errors.email && 'verify-error', 'form-control']"
-                    name="email"
-                    label="電子信箱"
-                    type="email"
-                    placeholder="請輸入電子信箱"
-                    rules="required|email"
-                  />
-                  <!-- :disabled="apiPending" -->
-                  <div class="text-danger fs-8 fw-bold mt-2">{{ errors.email }}</div>
-                </li>
-                <li class="d-md-none mb-4">
-                  <label class="form-label d-flex justify-content-between text-dark" for="default">
-                    生日
-                  </label>
-                  <div class="row">
-                    <div class="col-4 mb-3">
-                      <select class="form-select" aria-label="Default select year">
-                        <option selected>選擇年分</option>
-                        <option value="1990">1990年</option>
-                        <option value="1991">1991年</option>
-                        <option value="1992">1992年</option>
-                      </select>
-                    </div>
-                    <div class="col-4">
-                      <select class="form-select" aria-label="Default select month">
-                        <option selected>請選擇月份</option>
-                        <option value="1">1月</option>
-                        <option value="2">2月</option>
-                        <option value="3">3月</option>
-                      </select>
-                    </div>
-                    <div class="col-4">
-                      <select class="form-select" aria-label="Default select day">
-                        <option selected>請選擇日期</option>
-                        <option value="1">1日</option>
-                        <option value="2">2日</option>
-                        <option value="3">3日</option>
-                      </select>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <label class="form-label d-flex justify-content-between text-dark" for="default">
-                    地址
-                  </label>
-                  <div class="row">
-                    <div class="col-6 mb-3">
-                      <VField
-                        v-model="address.city"
-                        class="form-select"
-                        name="city"
-                        as="select"
-                        rules="required"
-                      >
-                        <!-- :disabled="apiPending" -->
-                        <option value="" selected>請選擇縣市</option>
-                        <option v-for="city in cityTmpl" :key="city" :value="city">
-                          {{ city }}
-                        </option>
-                      </VField>
-                    </div>
-                    <div class="col-6">
-                      <VField
-                        v-model="form.userInfo.address.zipcode"
-                        class="form-select"
-                        name="district"
-                        as="select"
-                        rules="required"
-                      >
-                        <!-- :disabled="apiPending" -->
-                        <option value="" selected>請選擇區域</option>
-                        <option v-for="item in districtTmpl"
-                          :key="`${item.district}_${item.zipcode}`"
-                          :value="item.zipcode"
+                  </li>
+                  <li>
+                    <label class="form-label d-flex justify-content-between text-dark" for="default">
+                      地址
+                    </label>
+                    <div class="row">
+                      <div class="col-6 mb-3">
+                        <VField
+                          v-model="address.city"
+                          class="form-select"
+                          name="city"
+                          as="select"
+                          rules="required"
                         >
-                          {{ item.district }}
-                        </option>
-                      </VField>
+                          <!-- :disabled="apiPending" -->
+                          <option value="" selected>請選擇縣市</option>
+                          <option v-for="city in cityTmpl" :key="city" :value="city">
+                            {{ city }}
+                          </option>
+                        </VField>
+                      </div>
+                      <div class="col-6">
+                        <VField
+                          v-model="form.userInfo.address.zipcode"
+                          class="form-select"
+                          name="district"
+                          as="select"
+                          rules="required"
+                        >
+                          <!-- :disabled="apiPending" -->
+                          <option value="" selected>請選擇區域</option>
+                          <option v-for="item in districtTmpl"
+                            :key="`${item.district}_${item.zipcode}`"
+                            :value="item.zipcode"
+                          >
+                            {{ item.district }}
+                          </option>
+                        </VField>
+                      </div>
+                      <div class="col-12">
+                        <input
+                          id="text"
+                          class="form-control"
+                          type="default"
+                          placeholder="請輸入詳細地址"
+                          v-model="address.street"
+                        />
+                      </div>
                     </div>
-                    <div class="col-12">
-                      <input
-                        id="text"
-                        class="form-control"
-                        type="default"
-                        placeholder="請輸入詳細地址"
-                      />
+                  </li>
+                </ul>
+
+              <TheRoomsInfo :room-detail="roomInfo.roomDetail" mb-space="4" />
+            </div>
+
+            <div class="col-md-5 mb-5 mb-lg-0">
+              <div class="bg-light rounded-4 p-4 p-lg-5">
+                <div class="rounded-3 overflow-hidden">
+                  <NuxtImg class="w-100 h-auto" :src="roomInfo.imageUrl" alt="Room_1" />
+                </div>
+
+                <h3 class="fs-6 fs-md-4 fw-bold my-4 mt-lg-5">價格詳情</h3>
+                <ul class="list-unstyled mb-4 mb-lg-5">
+                  <li class="d-flex justify-content-between active mb-3">
+                    <div>
+                      <span>NT$ {{ roomInfo.price }} ×</span>
+                      <span class="text-gray-80">
+                        {{ dateDiff }}
+                        </span>
                     </div>
-                  </div>
-                </li>
-              </ul>
-            </VForm>
+                    <span>NT$ {{ roomInfo.price * dateDiff }}</span>
+                  </li>
 
-            <TheRoomsInfo :room-detail="roomInfo.roomDetail" mb-space="4" />
-          </div>
+                  <li v-if="roomInfo.discountPrice" class="d-flex justify-content-between active mb-4 pb-4 border-bottom">
+                    <span>住宿折扣</span>
+                    <span class="text-primary">-NT$ {{ roomInfo.discountPrice || 0 }}</span>
+                  </li>
 
-          <div class="col-md-5 mb-5 mb-lg-0">
-            <div class="bg-light rounded-4 p-4 p-lg-5">
-              <div class="rounded-3 overflow-hidden">
-                <NuxtImg class="w-100 h-auto" :src="roomInfo.imageUrl" alt="Room_1" />
+                  <li class="d-flex justify-content-between active fw-bold">
+                    <span>總價</span>
+                    <span>NT$ {{ roomInfo.price * dateDiff - roomInfo.discountPrice }}</span>
+                  </li>
+                </ul>
+                meta: {{ meta }}
+                <button class="btn btn-primary w-100" :disabled="!meta.valid || isSubmitting" type="submit">
+                  確認訂房
+                </button>
               </div>
-
-              <h3 class="fs-6 fs-md-4 fw-bold my-4 mt-lg-5">價格詳情</h3>
-              <ul class="list-unstyled mb-4 mb-lg-5">
-                <li class="d-flex justify-content-between active mb-3">
-                  <div>
-                    <span>NT$ {{ roomInfo.price }} ×</span>
-                    <span class="text-gray-80">
-                      {{ dateDiff }}
-                      </span>
-                  </div>
-                  <span>NT$ {{ roomInfo.price * dateDiff }}</span>
-                </li>
-
-                <li v-if="roomInfo.discountPrice" class="d-flex justify-content-between active mb-4 pb-4 border-bottom">
-                  <span>住宿折扣</span>
-                  <span class="text-primary">-NT$ {{ roomInfo.discountPrice || 0 }}</span>
-                </li>
-
-                <li class="d-flex justify-content-between active fw-bold">
-                  <span>總價</span>
-                  <span>NT$ {{ roomInfo.price * dateDiff - roomInfo.discountPrice }}</span>
-                </li>
-              </ul>
-              <button class="btn btn-primary w-100" type="button" @click="submitOrder">
-                確認訂房
-              </button>
             </div>
           </div>
-        </div>
+        </VForm>
       </ClientOnly>
     </div>
 
-    <!-- :class="`modal fade ${isShowModal ? 'show d-block' : ''}`" -->
     <div
       id="orderLoadModal"
       class="modal fade"
+      :class="`modal fade ${isSubmitting ? 'show d-block' : ''}`"
       tabindex="-1"
     >
       <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -348,7 +371,7 @@ definePageMeta({
 import TheRoomsInfo from '@/components/rooms/TheRoomsInfo.vue'
 
 // 取得所有房型
-const { getRoomInfo, getAllRoomInfo } = useApi()
+const { getRoomInfo, getAllRoomInfo, submitOrderApi } = useApi()
 import type { SectionRoomInfoType } from '@/types/room'
 // 所有房型下拉選單
 let allRoomInfo: Array<SectionRoomInfoType> = []
@@ -408,17 +431,17 @@ interface ReserveForm {
 }
 const form: ReserveForm = reactive({
   roomId,
-  checkInDate: reserveRoomInfo.checkInDate,
-  checkOutDate: reserveRoomInfo.checkOutDate,
+  checkInDate: ref(reserveRoomInfo.checkInDate),
+  checkOutDate: ref(reserveRoomInfo.checkOutDate),
   peopleNum: ref(reserveRoomInfo.peopleNum),
   userInfo: {
     address: {
-      zipcode: '',
-      detail: ''
+      zipcode: ref(''),
+      detail: ref('')
     },
-    name: '',
-    phone: '',
-    email: ''
+    name: ref(''),
+    phone: ref(''),
+    email: ref('')
   }
 })
 // 生日參考: pages\signup.vue
@@ -433,9 +456,7 @@ watch(
       // return
       navigateTo('/rooms')
     }
-    console.log('form.roomId: ', val);
     roomInfo = allRoomInfo.filter(item => item.id === val)[0]
-    console.log(roomInfo);
   },
   { immediate: true }
 )
@@ -449,10 +470,12 @@ interface District {
 let districtTmpl: Array<District> = reactive([])
 interface Address {
   city: string;
+  street: string;
   district: District;
 }
 const address: Address = reactive({
   city: '台北市',
+  street: '',
   district: {
     district: '',
     zipcode: ''
@@ -547,8 +570,20 @@ function editPeopleNum(calc: string) {
 }
 
 // 送出訂單
-function submitOrder() {
+// const isShowModal = ref(false)
+
+async function submitOrder() {
+//   isShowModal.value = true
   console.log('submitOrder');
+  await submitOrderApi({
+    body: computed(() => form),
+    onResponse({ response }: { response: any }) {
+      console.log('response: ', response)
+    },
+    onResponseError({ error }: { error: any }) {
+      console.log('error: ', error)
+    }
+  })
 }
 </script>
 
