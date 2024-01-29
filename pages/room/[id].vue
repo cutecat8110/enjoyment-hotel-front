@@ -54,7 +54,9 @@
                 :class="{ 'active' : idx === 0 }"
                 data-bs-interval="5000"
               >
-                <NuxtImg class="w-100 h-auto" :src="image" :alt="`${roomInfo.name}_${idx}`" />
+                <div class="ratio ratio-16x9">
+                  <NuxtImg class="w-100 h-auto position-absolute top-50 start-50 translate-middle" :src="image" :alt="`${roomInfo.name}_${idx}`" />
+                </div>
               </div>
             </div>
           </div>
@@ -71,7 +73,7 @@
             {{ roomInfo.description }}
           </p>
 
-          <TheRoomsInfo :room-detail="roomDetail" mb-space="xl" />
+          <TheRoomsInfo :room-detail="roomInfo.roomDetail" mb-space="xl" />
         </div>
 
         <div class="col-md-5 mb-4 mb-lg-0">
@@ -82,10 +84,33 @@
             <p class="text-gray-80 mb-4 mb-lg-5">
               {{ roomInfo.description }}
             </p>
-            <span class="d-block text-primary fs-5 fw-bold mb-4 mb-5">
+            <!-- <div class="row mb-3">
+              <div class="col">
+                <div class="p-3 rounded border border-dark">
+                  <label for="" class="d-block">入住</label>
+                  <input type="date">
+                  <VueDatePicker v-model="date" range multi-calendars />
+                </div>
+              </div>
+              <div class="col">
+                <div class="p-3 rounded border border-dark">
+                  <label for="" class="d-block">退房</label>
+                  <input type="date">
+                </div>
+              </div>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mb-5">
+              <span class="fw-bold">人數</span>
+              <div class="d-flex align-items-center">
+                <button class="btn btn-outline-gray-40 fs-4 rounded-circle text-dark">–</button>
+                <span class="fs-6 p-3">2</span>
+                <button class="btn btn-outline-gray-40 fs-4 rounded-circle text-dark">+</button>
+              </div>
+            </div> -->
+            <span class="d-block text-primary fs-5 fwold mb-4 mb-5">
               NT$ {{ roomInfo.price }}
             </span>
-            <NuxtLink :to="`/reserve/${roomId}`">
+            <NuxtLink to="/reserve">
               <span class="btn btn-primary w-100">立即預訂</span>
             </NuxtLink>
           </div>
@@ -114,7 +139,11 @@
 </template>
 
 <script lang="ts" setup>
+// 月曆套件：https://vue3datepicker.com/props/modes/#multi-calendars
+
 import TheRoomsInfo from '@/components/rooms/TheRoomsInfo.vue'
+import type { RoomInfo } from '@/types/room'
+import { useReserveRoomInfoStore } from '@/stores/room'
 
 definePageMeta({
   layout: 'h-bg-f'
@@ -125,45 +154,26 @@ const route = useRoute()
 const roomId = route.params.id || ''
 
 // 房型資訊
-interface RoomInfo {
-  id: string
-  name: string
-  imageUrl: string
-  imageUrlList: Array<string>
-  description: string
-  price: number
-}
 let roomInfo: RoomInfo = reactive({
   id: '',
   name: '',
   imageUrl: '',
   imageUrlList: [],
   description: '',
-  price: 0
+  price: 0,
+  roomDetail: {
+    amenityInfo: [], // 備品
+    facilityInfo: [], // 房內設備
+    areaInfo: '', // 坪數
+    bedInfo: '', // 床型
+    maxPeople: 0 // 人數
+  }
 })
-
-// 房型細節
-interface InfoItem {
-  isProvide: Boolean
-  title: string
-}
-interface RoomDetail {
-  amenityInfo: Array<InfoItem> // 備品
-  facilityInfo: Array<InfoItem> // 房內設備
-  areaInfo: string // 坪數
-  bedInfo: string // 床型
-  maxPeople: number // 人數
-}
-let roomDetail: RoomDetail = {
-  amenityInfo: [], // 備品
-  facilityInfo: [], // 房內設備
-  areaInfo: '', // 坪數
-  bedInfo: '', // 床型
-  maxPeople: 0 // 人數
-}
 
 /* API */
 // id: 65a77277d044dc8f856c0a52
+const reserveRoomInfo = useReserveRoomInfoStore();
+
 const { getRoomInfo } = useApi()
 const apiPending = computed(() => lPending.value)
 const { pending: lPending } = await getRoomInfo(roomId, {
@@ -171,17 +181,23 @@ const { pending: lPending } = await getRoomInfo(roomId, {
     if (!response.status) {
       return
     }
-    console.log('res: ', response)
     const resData = response._data.result
-    roomInfo = resData
-    roomDetail = {
-      amenityInfo: resData.amenityInfo, // 備品
-      facilityInfo: resData.facilityInfo, // 房內設備
-      areaInfo: resData.areaInfo, // 坪數
-      bedInfo: resData.bedInfo, // 床型
-      maxPeople: resData.maxPeople
+    roomInfo = {
+      id: resData._id,
+      name: resData.name,
+      imageUrl: resData.imageUrl,
+      imageUrlList: resData.imageUrlList,
+      description: resData.description,
+      price: resData.price,
+      roomDetail: {
+        amenityInfo: resData.amenityInfo,
+        facilityInfo: resData.facilityInfo,
+        areaInfo: resData.areaInfo,
+        bedInfo: resData.bedInfo,
+        maxPeople: resData.maxPeople
+      }
     }
-    console.log('roomInfo: ', roomInfo)
+    reserveRoomInfo.setRoomData(roomInfo)
   },
   onResponseError({ response }: { response: any }) {
     console.log('error: ', response)
@@ -209,8 +225,8 @@ const { pending: lPending } = await getRoomInfo(roomId, {
   }
 }
 
-.carousel-item {
-  max-height: 300px;
-  overflow: hidden;
+.btn-outline-gray-40 {
+  width: 55px;
+  height: 100%;
 }
 </style>
