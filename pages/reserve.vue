@@ -1,10 +1,10 @@
 <template>
   <div class="p-0 p-md-xl pb-md-5 bg-primary-tint">
     <div class="container-xl">
-      <button class="btn btn-ghost d-flex align-items-center py-5 text-dark p-0 fs-3 fw-bold">
+      <NuxtLink :to="`/room/${form.roomId}`"  class="btn btn-ghost d-flex align-items-center py-5 text-dark p-0 fs-3 fw-bold">
         <Icon class="fs-1 fw-bold" name="ic:round-keyboard-arrow-left" />
         確認訂房資訊
-      </button>
+      </NuxtLink>
       <ClientOnly>
         <VForm ref="formRefs" v-slot="{ meta, errors, isSubmitting }" @submit="submitOrder">
           <div class="row">
@@ -127,7 +127,6 @@
                 <h4 class="fw-bold">訂房人資訊</h4>
                 <button class="btn btn-text text-primary fw-bold">套用會員資料</button>
               </div>
-              {{ form }}
                 <ul class="list-unstyled pb-6 mb-6 border-bottom">
                   <li class="mb-4">
                     <label class="form-label text-dark" for="default">
@@ -215,6 +214,7 @@
                     </div>
                   </li>
                   <li>
+                    {{ detail }}
                     <label class="form-label d-flex justify-content-between text-dark" for="default">
                       地址
                     </label>
@@ -296,39 +296,39 @@
                     <span>NT$ {{ roomInfo.price * dateDiff - roomInfo.discountPrice }}</span>
                   </li>
                 </ul>
-                meta: {{ meta }}
+                <div v-if="subErrorMsg.length > 0" class="text-danger text-center fw-bold">{{ subErrorMsg }}</div>
                 <button class="btn btn-primary w-100" :disabled="!meta.valid || isSubmitting" type="submit">
                   確認訂房
                 </button>
               </div>
             </div>
           </div>
+
+          <div
+            id="orderLoadModal"
+            class="modal fade"
+            :class="`modal fade ${isSubmitting ? 'show d-block' : ''}`"
+            tabindex="-1"
+          >
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+              <div class="modal-content p-xl">
+                <div class="modal-body d-flex flex-column justify-content-center align-items-center">
+                  <div class="d-flex">
+                    <span
+                      class="spinner-grow spinner-grow-sm mb-xl text-primary-dark me-2"
+                      role="status"
+                    ></span>
+                    <span class="spinner-grow spinner-grow-sm mb-xl text-primary-dark me-2"></span>
+                    <span class="spinner-grow spinner-grow-sm mb-xl text-primary-dark"></span>
+                  </div>
+                  <NuxtImg class="w-80 mb-3" src="/img/logo-primary.svg" />
+                  <div class="fs-5 fw-bold">正在處理你的預訂</div>
+                </div>
+              </div>
+            </div>
+          </div>
         </VForm>
       </ClientOnly>
-    </div>
-
-    <div
-      id="orderLoadModal"
-      class="modal fade"
-      :class="`modal fade ${isSubmitting ? 'show d-block' : ''}`"
-      tabindex="-1"
-    >
-      <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content p-xl">
-          <div class="modal-body d-flex flex-column justify-content-center align-items-center">
-            <div class="d-flex">
-              <span
-                class="spinner-grow spinner-grow-sm mb-xl text-primary-dark me-2"
-                role="status"
-              ></span>
-              <span class="spinner-grow spinner-grow-sm mb-xl text-primary-dark me-2"></span>
-              <span class="spinner-grow spinner-grow-sm mb-xl text-primary-dark"></span>
-            </div>
-            <NuxtImg class="w-80 mb-3" src="/img/logo-primary.svg" />
-            <div class="fs-5 fw-bold">正在處理你的預訂</div>
-          </div>
-        </div>
-      </div>
     </div>
 
     <!-- // modal 寫法，先保留
@@ -371,13 +371,13 @@ definePageMeta({
 import TheRoomsInfo from '@/components/rooms/TheRoomsInfo.vue'
 
 // 取得所有房型
-const { getRoomInfo, getAllRoomInfo, submitOrderApi } = useApi()
+const { getAllRoomInfo, submitOrderApi } = useApi()
 import type { SectionRoomInfoType } from '@/types/room'
 // 所有房型下拉選單
 let allRoomInfo: Array<SectionRoomInfoType> = []
 await getAllRoomInfo({
   onResponse({ response }: { response: any }) {
-    if (!response.status) {
+    if (!response._data.status) {
       return
     }
 
@@ -397,8 +397,6 @@ await getAllRoomInfo({
         }
       })
     )
-
-    console.log('allRoomInfo: ',allRoomInfo);
   },
   onResponseError({ error }: { error: any }) {
     console.log('error: ', error)
@@ -414,6 +412,9 @@ let roomInfo: SectionRoomInfoType = reactive(reserveRoomInfo.defaultRoomInfo)
 
 // 預約資料
 const formRefs = ref<HTMLFormElement | null>(null)
+const detail = computed(() => {
+  return `${address.city}${address.district.district}${address.street}`
+})
 interface ReserveForm {
   roomId: string | string[];
   checkInDate: string;
@@ -437,7 +438,7 @@ const form: ReserveForm = reactive({
   userInfo: {
     address: {
       zipcode: ref(''),
-      detail: ref('')
+      detail: ref(detail)
     },
     name: ref(''),
     phone: ref(''),
@@ -451,7 +452,7 @@ watch(
   () => form.roomId,
   (val) => {
     if (!val) {
-      console.log('reserveRoomInfo: ', reserveRoomInfo);
+      // console.log('reserveRoomInfo: ', reserveRoomInfo);
       // TODO: 離開時清空 pinia 持久
       // return
       navigateTo('/rooms')
@@ -488,7 +489,7 @@ const { pending: gtPending, refresh: zcRefresh } = await getTwzipcode({
   query: computed(() => ({ city: address.city })),
   immediate: false,
   onResponse({ response }: { response: any }) {
-    if (!response.status) {
+    if (!response._data.status) {
       return;
     }
 
@@ -519,7 +520,6 @@ watch(
     address.district = districtTmpl.filter(item => item.zipcode === zipcode)[0]
   }
 )
-
 
 const { $dayjs } = useNuxtApp()
 // 轉換日期格式
@@ -570,15 +570,59 @@ function editPeopleNum(calc: string) {
 }
 
 // 送出訂單
-// const isShowModal = ref(false)
-
+let subErrorMsg = ''
 async function submitOrder() {
-//   isShowModal.value = true
   console.log('submitOrder');
   await submitOrderApi({
     body: computed(() => form),
     onResponse({ response }: { response: any }) {
-      console.log('response: ', response)
+      // console.log('response: ', response)
+      if (!response._data.status) {
+        subErrorMsg = response._data.message
+        return
+      }
+
+      subErrorMsg = ''
+      // const response = {
+      //   _data: {
+      //     result: {
+      //       checkInDate: '2024-01-29T00:00:00.000Z',
+      //       checkOutDate: '2024-01-30T00:00:00.000Z',
+      //       createdAt: '2024-01-29T15:38:42.157Z',
+      //       orderUserId: '65a76f8cd044dc8f856c0a3c',
+      //       peopleNum: 1,
+      //       roomId: {
+      //         amenityInfo: ['備品'],
+      //         areaInfo: '24坪',
+      //         bedInfo: '1張大床',
+      //         createdAt: '2024-01-17T06:23:51.256Z',
+      //         description: '享受高級的住宿體驗，尊爵雙人房提供給您舒適寬敞的空間和精緻的裝潢。',
+      //         facilityInfo: ['房內設備'],
+      //         imageUrl: '房型主圖',
+      //         imageUrlList: ['房型其他圖片'],
+      //         maxPeople: 4,
+      //         name: '尊爵雙人房',
+      //         price: 10000,
+      //         status: 1,
+      //         updatedAt: '2024-01-19T06:11:15.757Z',
+      //         _id: '65a77277d044dc8f856c0a52',
+      //       },
+      //       status: 0,
+      //       updatedAt: '2024-01-29T15:38:42.157Z',
+      //       userInfo: {
+      //         address: { zipcode: 100, detail: '台北市中正區' },
+      //         email: 'bofl123123123111@gmail.com',
+      //         name: 'tom',
+      //         phone: '0912345678'
+      //       },
+      //       _id: '65b7c682937f8e0c410f6709',
+      //     },
+      //     status: true
+      //   }
+      // }
+      const orderId = response._data.result._id
+      navigateTo(`/confirmation/${orderId}`)
+
     },
     onResponseError({ error }: { error: any }) {
       console.log('error: ', error)
