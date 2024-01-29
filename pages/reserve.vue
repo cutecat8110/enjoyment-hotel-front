@@ -371,11 +371,11 @@ definePageMeta({
 import TheRoomsInfo from '@/components/rooms/TheRoomsInfo.vue'
 
 // 取得所有房型
-const { getAllRoomInfo, submitOrderApi } = useApi()
+const { getRooms, submitOrderApi } = useApi()
 import type { SectionRoomInfoType } from '@/types/room'
 // 所有房型下拉選單
 let allRoomInfo: Array<SectionRoomInfoType> = []
-await getAllRoomInfo({
+await getRooms({
   onResponse({ response }: { response: any }) {
     if (!response._data.status) {
       return
