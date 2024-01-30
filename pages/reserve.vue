@@ -6,7 +6,8 @@
         確認訂房資訊
       </NuxtLink>
       <ClientOnly>
-        <VForm ref="formRefs" v-slot="{ meta, errors, isSubmitting }" @submit="submitOrder">
+        <VForm ref="formRefs" v-slot="{ meta, errors, isSubmitting }">
+        <!-- <VForm ref="formRefs" v-slot="{ meta, errors, isSubmitting }" @submit="submitOrder"> -->
           <div class="row">
             <div class="col-md-7 mb-lg-xl">
               <h4 class="fw-bold mb-5">訂房資訊</h4>
@@ -296,9 +297,12 @@
                   </li>
                 </ul>
                 <div v-if="subErrorMsg.length > 0" class="text-danger text-center fw-bold">{{ subErrorMsg }}</div>
-                <button type="submit" class="btn btn-primary w-100" :disabled="!meta.valid || isSubmitting">
+                <nuxt-link to="/confirmation?id=65b895cac363638f26664abd">
                   確認訂房
-                </button>
+                </nuxt-link>
+                <!-- <button type="submit" class="btn btn-primary w-100" :disabled="!meta.valid || isSubmitting">
+                  確認訂房
+                </button> -->
               </div>
             </div>
           </div>

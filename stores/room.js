@@ -3,7 +3,7 @@ export const useReserveRoomInfoStore = defineStore(
     'reserveRoomInfo',
     () => {
         const peopleNum = ref(1)
-        
+
         // 轉換日期格式
         const { $dayjs } = useNuxtApp()
         function changeDateFormat(date) {

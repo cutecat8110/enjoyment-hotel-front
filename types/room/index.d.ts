@@ -10,6 +10,10 @@ declare interface RoomDetailType {
   bedInfo: string // 床型
   maxPeople: number // 人數
 }
+declare interface SectionRoomDetailType {
+  amenityInfo: Array<InfoItem> // 備品
+  facilityInfo: Array<InfoItem> // 房內設備
+}
 
 // 房型資訊
 declare interface RoomInfoType {
@@ -34,4 +38,4 @@ declare interface SectionRoomInfoType {
 }
 
 
-export { RoomInfoType, RoomDetailType, SectionRoomInfoType }
+export { RoomInfoType, SectionRoomInfoType, RoomDetailType, SectionRoomDetailType }

@@ -172,7 +172,7 @@ const { getRoomInfoApi } = useApi()
 const apiPending = computed(() => lPending.value)
 const { pending: lPending } = await getRoomInfoApi(roomId, {
   onResponse({ response }: { response: any }) {
-    if (!response.status) {
+    if (!response._data.status) {
       return
     }
     const resData = response._data.result

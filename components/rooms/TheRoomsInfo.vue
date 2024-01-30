@@ -190,12 +190,18 @@
 </template>
 
 <script lang="ts" setup>
-import type { RoomDetailType } from '@/types/room'
+import type { RoomDetailType, SectionRoomDetailType } from '@/types/room'
+
+interface RoomDetail<T extends boolean> {
+  roomDetail: T extends true ? SectionRoomDetailType : RoomDetailType
+}
 
 defineProps<{
   mbSpace?: string
   showPart?: boolean
-  roomDetail: RoomDetailType
+  roomDetail: {
+    roomDetail: SectionRoomDetailType;
+  };
 }>()
 </script>
 
