@@ -125,7 +125,7 @@
 
               <div class="d-flex justify-content-between align-items-center mb-5">
                 <h4 class="fw-bold">訂房人資訊</h4>
-                <button class="btn btn-text text-primary fw-bold">套用會員資料</button>
+                <button type="button" class="btn btn-text text-primary fw-bold">套用會員資料</button>
               </div>
                 <ul class="list-unstyled pb-6 mb-6 border-bottom">
                   <li class="mb-4">
@@ -214,7 +214,6 @@
                     </div>
                   </li>
                   <li>
-                    {{ detail }}
                     <label class="form-label d-flex justify-content-between text-dark" for="default">
                       地址
                     </label>
@@ -406,7 +405,6 @@ await getRooms({
 
 import { useReserveRoomInfoStore } from '@/stores/room'
 const reserveRoomInfo = useReserveRoomInfoStore();
-const roomId = ref(reserveRoomInfo.roomId);
 // 房型資料初始化
 let roomInfo: SectionRoomInfoType = reactive(reserveRoomInfo.defaultRoomInfo)
 
@@ -416,7 +414,7 @@ const detail = computed(() => {
   return `${address.city}${address.district.district}${address.street}`
 })
 interface ReserveForm {
-  roomId: string | string[];
+  roomId: string;
   checkInDate: string;
   checkOutDate: string;
   peopleNum: number;
@@ -430,8 +428,11 @@ interface ReserveForm {
     email: string;
   }
 }
+
+// 取得 route id
+const route = useRoute()
 const form: ReserveForm = reactive({
-  roomId,
+  roomId: route.query.id as string || '',
   checkInDate: ref(reserveRoomInfo.checkInDate),
   checkOutDate: ref(reserveRoomInfo.checkOutDate),
   peopleNum: ref(reserveRoomInfo.peopleNum),
@@ -576,7 +577,6 @@ async function submitOrder() {
   await submitOrderApi({
     body: computed(() => form),
     onResponse({ response }: { response: any }) {
-      // console.log('response: ', response)
       if (!response._data.status) {
         subErrorMsg = response._data.message
         return
@@ -621,8 +621,10 @@ async function submitOrder() {
       //   }
       // }
       const orderId = response._data.result._id
-      navigateTo(`/confirmation/${orderId}`)
-
+      navigateTo({
+        path: '/confirmation',
+        query: { id: orderId }
+      })
     },
     onResponseError({ error }: { error: any }) {
       console.log('error: ', error)

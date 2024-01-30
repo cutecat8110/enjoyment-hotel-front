@@ -78,9 +78,9 @@
 // import TheRoomsInfo from '@/components/rooms/TheRoomsInfo.vue'
 // 訂單 id 65b1db2d2013bfaa3219e590
 
-// definePageMeta({
-//   layout: 'h-logo-f-spl'
-// })
+definePageMeta({
+  layout: 'h-logo-f-spl'
+})
 </script>
 
 <style lang="scss" scoped>

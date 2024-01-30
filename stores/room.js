@@ -2,7 +2,6 @@
 export const useReserveRoomInfoStore = defineStore(
     'reserveRoomInfo',
     () => {
-        const roomId = ref('')
         const peopleNum = ref(1)
         
         // 轉換日期格式
@@ -38,7 +37,6 @@ export const useReserveRoomInfoStore = defineStore(
         }
 
         return {
-            roomId,
             peopleNum,
             checkInDate,
             checkOutDate,

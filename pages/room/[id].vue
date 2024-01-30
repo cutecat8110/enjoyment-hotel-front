@@ -110,7 +110,10 @@
             <span class="d-block text-primary fs-5 fwold mb-4 mb-5">
               NT$ {{ roomInfo.price }}
             </span>
-            <NuxtLink to="/reserve">
+            <NuxtLink :to="{
+              path: '/reserve',
+              query: { id: roomInfo.id }
+            }">
               <span class="btn btn-primary w-100">立即預訂</span>
             </NuxtLink>
           </div>
@@ -189,8 +192,6 @@ const { pending: lPending } = await getRoomInfo(roomId, {
         maxPeople: resData.maxPeople
       }
     }
-
-    reserveRoomInfo.roomId = roomInfo.id
   },
   onResponseError({ error }: { error: any }) {
     console.log('error: ', error)
