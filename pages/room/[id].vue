@@ -168,9 +168,9 @@ let roomInfo: RoomInfoType = reactive({
 })
 
 /* API */
-const { getRoomInfo } = useApi()
+const { getRoomInfoApi } = useApi()
 const apiPending = computed(() => lPending.value)
-const { pending: lPending } = await getRoomInfo(roomId, {
+const { pending: lPending } = await getRoomInfoApi(roomId, {
   onResponse({ response }: { response: any }) {
     if (!response.status) {
       return

@@ -163,13 +163,13 @@ const roomsTmpl = ref<
 >([])
 
 /* API */
-const { getRooms } = useApi()
+const { getRoomsApi } = useApi()
 const apiPending = computed(() => roomsPending.value)
 
 const {
   pending: roomsPending,
   refresh: roomsRefresh
-} = await getRooms({
+} = await getRoomsApi({
   immediate: false,
   onResponse({ response }: { response: any }) {
     if (response.status === 200) {
@@ -179,7 +179,7 @@ const {
     }
   },
   onResponseError({ response }: { response: any }) {
-    console.log('getRooms api Error:', response)
+    console.log('getRoomsApi api Error:', response)
   }
 })
 roomsRefresh()

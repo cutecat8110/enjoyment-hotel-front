@@ -370,11 +370,11 @@ definePageMeta({
 import TheRoomsInfo from '@/components/rooms/TheRoomsInfo.vue'
 
 // 取得所有房型
-const { getRooms, submitOrderApi } = useApi()
+const { getRoomsApi, submitOrderApi } = useApi()
 import type { SectionRoomInfoType } from '@/types/room'
 // 所有房型下拉選單
 let allRoomInfo: Array<SectionRoomInfoType> = []
-await getRooms({
+await getRoomsApi({
   onResponse({ response }: { response: any }) {
     if (!response._data.status) {
       return
@@ -485,8 +485,8 @@ const address: Address = reactive({
 })
 
 // 取得區域 & 郵遞區號
-const { getTwzipcode } = useApi()
-const { pending: gtPending, refresh: zcRefresh } = await getTwzipcode({
+const { getTwzipcodeApi } = useApi()
+const { pending: gtPending, refresh: zcRefresh } = await getTwzipcodeApi({
   query: computed(() => ({ city: address.city })),
   immediate: false,
   onResponse({ response }: { response: any }) {

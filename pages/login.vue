@@ -96,10 +96,10 @@ const submit = () => {
 }
 
 /* API */
-const { login } = useApi()
+const { loginApi } = useApi()
 const apiPending = computed(() => lPending.value)
 /* API: api */
-const { pending: lPending, refresh: lRefresh } = await login({
+const { pending: lPending, refresh: lRefresh } = await loginApi({
   body: computed(() => form.value),
   immediate: false,
   watch: false,

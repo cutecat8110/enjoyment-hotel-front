@@ -354,11 +354,11 @@ const submit = (status?: FORM_PHASE) => {
 }
 
 /* API */
-const { signup, getTwzipcode } = useApi()
+const { signupApi, getTwzipcodeApi } = useApi()
 const commonStore = useCommonStore()
 const apiPending = computed(() => sPending.value || gtPending.value)
 /* API: 註冊 */
-const { pending: sPending, refresh: sRefresh } = await signup({
+const { pending: sPending, refresh: sRefresh } = await signupApi({
   body: computed(() => {
     const { agree, confirm, birthday, address, ...res } = form.value
     const { Y, M, D } = birthday
@@ -396,7 +396,7 @@ const { pending: sPending, refresh: sRefresh } = await signup({
 })
 sPending.value = false
 /* API: 取得郵遞區號 */
-const { pending: gtPending, refresh: gtRefresh } = await getTwzipcode({
+const { pending: gtPending, refresh: gtRefresh } = await getTwzipcodeApi({
   query: computed(() => ({ city: form.value.address.city })),
   immediate: false,
   onResponse({ response }: { response: any }) {

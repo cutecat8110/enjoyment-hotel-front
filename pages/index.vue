@@ -224,13 +224,13 @@ const culinaryTmpl = ref<
 >([])
 
 /* API */
-const { news, culinary } = useApi()
+const { newsApi, culinaryApi } = useApi()
 const apiPending = computed(() => newsPending.value || culinaryPending.value)
 
 const {
   pending: newsPending,
   refresh: newsRefresh
-} = await news({
+} = await newsApi({
   immediate: false,
   onResponse({ response }: { response: any }) {
     if (response.status === 200) {
@@ -248,7 +248,7 @@ newsRefresh()
 const {
   pending: culinaryPending,
   refresh: culinaryRefresh
-} = await culinary({
+} = await culinaryApi({
   immediate: false,
   onResponse({ response }: { response: any }) {
     if (response.status === 200) {

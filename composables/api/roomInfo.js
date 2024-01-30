@@ -1,10 +1,10 @@
 import Http from '~/composables/api/http'
 
 const roomInfoAPI = {
-  getRooms: (options) => {
+  getRoomsApi: (options) => {
     return Http.get(`/api/v1/rooms/`, options)
   },
-  getRoomInfo: (id, options) => {
+  getRoomInfoApi: (id, options) => {
     return Http.get(`/api/v1/rooms/${id}`, options)
   }
 }
