@@ -6,8 +6,7 @@
         確認訂房資訊
       </NuxtLink>
       <ClientOnly>
-        <VForm ref="formRefs" v-slot="{ meta, errors, isSubmitting }">
-        <!-- <VForm ref="formRefs" v-slot="{ meta, errors, isSubmitting }" @submit="submitOrder"> -->
+        <VForm ref="formRefs" v-slot="{ meta, errors, isSubmitting }" @submit="submitOrder">
           <div class="row">
             <div class="col-md-7 mb-lg-xl">
               <h4 class="fw-bold mb-5">訂房資訊</h4>
@@ -297,12 +296,9 @@
                   </li>
                 </ul>
                 <div v-if="subErrorMsg.length > 0" class="text-danger text-center fw-bold">{{ subErrorMsg }}</div>
-                <nuxt-link to="/confirmation?id=65b895cac363638f26664abd">
+                <button type="submit" class="btn btn-primary w-100" :disabled="!meta.valid || isSubmitting">
                   確認訂房
-                </nuxt-link>
-                <!-- <button type="submit" class="btn btn-primary w-100" :disabled="!meta.valid || isSubmitting">
-                  確認訂房
-                </button> -->
+                </button>
               </div>
             </div>
           </div>
@@ -587,43 +583,6 @@ async function submitOrder() {
       }
 
       subErrorMsg = ''
-      // const response = {
-      //   _data: {
-      //     result: {
-      //       checkInDate: '2024-01-29T00:00:00.000Z',
-      //       checkOutDate: '2024-01-30T00:00:00.000Z',
-      //       createdAt: '2024-01-29T15:38:42.157Z',
-      //       orderUserId: '65a76f8cd044dc8f856c0a3c',
-      //       peopleNum: 1,
-      //       roomId: {
-      //         amenityInfo: ['備品'],
-      //         areaInfo: '24坪',
-      //         bedInfo: '1張大床',
-      //         createdAt: '2024-01-17T06:23:51.256Z',
-      //         description: '享受高級的住宿體驗，尊爵雙人房提供給您舒適寬敞的空間和精緻的裝潢。',
-      //         facilityInfo: ['房內設備'],
-      //         imageUrl: '房型主圖',
-      //         imageUrlList: ['房型其他圖片'],
-      //         maxPeople: 4,
-      //         name: '尊爵雙人房',
-      //         price: 10000,
-      //         status: 1,
-      //         updatedAt: '2024-01-19T06:11:15.757Z',
-      //         _id: '65a77277d044dc8f856c0a52',
-      //       },
-      //       status: 0,
-      //       updatedAt: '2024-01-29T15:38:42.157Z',
-      //       userInfo: {
-      //         address: { zipcode: 100, detail: '台北市中正區' },
-      //         email: 'bofl123123123111@gmail.com',
-      //         name: 'tom',
-      //         phone: '0912345678'
-      //       },
-      //       _id: '65b7c682937f8e0c410f6709',
-      //     },
-      //     status: true
-      //   }
-      // }
       const orderId = response._data.result._id
       navigateTo({
         path: '/confirmation',
