@@ -73,7 +73,7 @@
                   <span>NT$ 10,000</span>
                 </div>
 
-                <!-- <TheRoomsInfo :room-detail="orderInfo.roomInfo.roomDetail" :show-part="true" mb-space="4" /> -->
+                <TheRoomsInfo :room-detail="orderInfo.roomInfo.roomDetail" :show-part="true" mb-space="4" />
               </div>
             </div>
           </div>
@@ -87,7 +87,7 @@ definePageMeta({
   layout: 'h-logo-f-spl'
 })
 
-// import TheRoomsInfo from '@/components/rooms/TheRoomsInfo.vue'
+import TheRoomsInfo from '@/components/rooms/TheRoomsInfo.vue'
 // 訂單 id 65b8a177c363638f26664b16
 
 let orderInfo = {
@@ -105,7 +105,10 @@ let orderInfo = {
     price: 0,
     roomDetail: {
       facilityInfo: [],
-      amenityInfo: []
+      amenityInfo: [],
+      areaInfo: '',
+      bedInfo: '',
+      maxPeople: 0
     }
   }
 }
@@ -146,7 +149,10 @@ const { pending: apiPending, refresh: apiRefresh } = await getOrderInfoApi(order
         price: resData.roomId.price * totalDay,
         roomDetail: {
           facilityInfo: resData.roomId.facilityInfo,
-          amenityInfo: resData.roomId.amenityInfo
+          amenityInfo: resData.roomId.amenityInfo,
+          areaInfo: '',
+          bedInfo: '',
+          maxPeople: 0
         }
       }
     }
