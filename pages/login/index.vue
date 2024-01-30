@@ -50,10 +50,18 @@
             />
             記住帳號
           </label>
-          <button class="btn btn-text fs-8 fs-md-7" type="button">忘記密碼？</button>
+          <button
+            class="btn btn-text fs-8 fs-md-7"
+            type="button"
+            data-bs-target="#ModalForgot"
+            data-bs-toggle="modal"
+          >
+            忘記密碼？
+          </button>
+          <ModalForgot />
         </div>
       </div>
-
+      
       <button
         class="btn btn-primary mb-2 d-flex align-items-center gap-2"
         type="submit"
@@ -75,6 +83,8 @@
 </template>
 
 <script lang="ts" setup>
+import ModalForgot from './components/ModalForgot.vue'
+
 import { useCommonStore } from '@/stores/common'
 
 /* layout */
@@ -98,7 +108,7 @@ const submit = () => {
 /* API */
 const { login } = useApi()
 const apiPending = computed(() => lPending.value)
-/* API: api */
+/* API: 登入 */
 const { pending: lPending, refresh: lRefresh } = await login({
   body: computed(() => form.value),
   immediate: false,

@@ -6,6 +6,12 @@ const usersAPI = {
   },
   signup: (options) => {
     return Http.post('/api/v1/user/signup', options)
+  },
+  checkLogin: (options) => {
+    return Http.get('/api/v1/user/check', options)
+  },
+  resetPassword: (options) => {
+    return Http.post('/api/v1/user/forgot', options)
   }
 }
 

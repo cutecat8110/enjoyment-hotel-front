@@ -16,7 +16,7 @@
     }
   },
   "devDependencies": {
-    "@nuxt/devtools": "latest",
+    "@nuxt/devtools": "^1.0.6",
     "@nuxtjs/eslint-config-typescript": "^12.1.0",
     "@nuxtjs/i18n": "^8.0.0-rc.9",
     "@pinia-plugin-persistedstate/nuxt": "^1.2.0",
@@ -47,6 +47,7 @@
     "@vee-validate/nuxt": "^4.12.4",
     "@vee-validate/rules": "^4.12.4",
     "dayjs": "^1.11.10",
+    "sweetalert2": "^11.10.4",
     "validator": "^13.11.0",
     "vee-validate": "^4.5.8"
   }
