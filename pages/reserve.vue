@@ -34,7 +34,7 @@
 
                   </div>
                   <div class="col-2">
-                    <button class="btn btn-text text-dark fw-bold"
+                    <button type="button" class="btn btn-text text-dark fw-bold"
                       @click="editData('roomType')"
                     >
                       編輯
@@ -79,7 +79,7 @@
                     </template>
                   </div>
                   <div class="col-2">
-                    <button class="btn btn-text text-dark fw-bold"
+                    <button type="button" class="btn btn-text text-dark fw-bold"
                       @click="editData('checkDate')"
                     >
                       編輯
@@ -94,7 +94,7 @@
                     </div>
                     <template v-if="canEdit.peopleNum.value">
                       <div class="d-flex align-items-center">
-                        <button class="btn btn btn-outline-primary text-dark py-2 px-3"
+                        <button type="button" class="btn btn btn-outline-primary text-dark py-2 px-3"
                           @click="editPeopleNum('decrease')"
                         >
                           －
@@ -102,7 +102,7 @@
                         <span class="p-3">
                           {{ form.peopleNum }}
                         </span>
-                        <button class="btn btn btn-outline-primary text-dark py-2 px-3"
+                        <button type="button" class="btn btn btn-outline-primary text-dark py-2 px-3"
                           @click="editPeopleNum('increase')"
                         >
                           ＋
@@ -114,7 +114,7 @@
                     </template>
                   </div>
                   <div class="col-2">
-                    <button class="btn btn-text text-dark fw-bold"
+                    <button type="button" class="btn btn-text text-dark fw-bold"
                       @click="editData('peopleNum')"
                     >
                       編輯
@@ -296,7 +296,7 @@
                   </li>
                 </ul>
                 <div v-if="subErrorMsg.length > 0" class="text-danger text-center fw-bold">{{ subErrorMsg }}</div>
-                <button class="btn btn-primary w-100" :disabled="!meta.valid || isSubmitting" type="submit">
+                <button type="submit" class="btn btn-primary w-100" :disabled="!meta.valid || isSubmitting">
                   確認訂房
                 </button>
               </div>
