@@ -109,26 +109,39 @@
     <article class="position-relative room-outer">
       <img class="position-absolute deco-top" src="/img/desktop/deco-1.png" alt="" />
       <img style="z-index: 1;" class="position-absolute deco-bottom" src="/img/desktop/deco-2.png" alt="" />
-      <div class="position-absolute room-img"></div>
-      <div class="container">
-        <div class="row">
-          <div class="col-12 col-lg-6"></div>
-          <div class="col-12 col-lg-6 text-light room-content" style="z-index: 9;">
-            <h2 class="room-title">尊爵雙人房</h2>
-            <div class="fs-7">
-              享受高級的住宿體驗，尊爵雙人房提供給您舒適寬敞的空間和精緻的裝潢。
+      <div class="row">
+        <div class="col-12 col-lg-6 mx-lg-0 mx-1" style="z-index: 9;">
+          <div class="slides">
+            <div tag="div" :name="transitionName">
+              <div v-for="(item, idx) of imageArray" :key="idx" class="ratio ratio-1x1" v-show="idx == showImg">
+                <img :src="item" />
+                <div class="btn-group d-flex flex-row justify-content-center align-items-end" style="z-index: 10;">
+                  <div class="page" @click="setShowImgTo(num - 1)" v-for="num in 5" :key="num - 1" >
+                    <Icon class="text-white" name="heroicons-solid:minus" />
+                  </div>
+                </div>
+              </div>
             </div>
-            <h3 class="room-price">NT$ 10,000</h3>
+          </div>
+        </div>
+        <div class="col-12 col-lg-6 mx-lg-0 mx-1 text-light room-content" style="z-index: 9;" v-for="(room, id) in roomsTmpl" :key="id" v-show="id == showImg">
+            <h2 class="room-title">{{ room.name }}</h2>
+            <div class="fs-7">{{ room.description }}</div>
+            <h3 class="room-price">NT$ {{ room.price }}</h3>
             <NuxtLink class="btn room-button fs-5 d-flex justify-content-end align-items-center" to="/rooms">
               查看更多
               <img class="room-button-line" src="/img/desktop/line.png" alt="" />
             </NuxtLink>
-            <div class="d-flex justify-content-end">
-              <img src="/img/desktop/leftButton.png" alt="" />
-              <img src="/img/desktop/rightButton.png" alt="" />
+
+            <div class="room-arrow d-flex justify-content-end">
+              <div class="prev" @click="setShowImg(-1)">
+                <img src="/img/desktop/leftButton.png" alt="" />
+              </div>
+              <div class="next" @click="setShowImg(1)">
+                <img src="/img/desktop/rightButton.png" alt="" />
+              </div>
             </div>
           </div>
-        </div>
       </div>
     </article>
 
@@ -223,9 +236,21 @@ const culinaryTmpl = ref<
 }[]
 >([])
 
+let imageArray: string[]
+let showImg = ref(0)
+const transitionName = ref('right-in')
+const roomsTmpl = ref<
+{
+  name: string
+  description: string
+  price: number
+  _id: string
+}[]
+>([])
+
 /* API */
-const { news, culinary } = useApi()
-const apiPending = computed(() => newsPending.value || culinaryPending.value)
+const { news, culinary, getRooms } = useApi()
+const apiPending = computed(() => newsPending.value || culinaryPending.value || roomsPending.value)
 
 const {
   pending: newsPending,
@@ -235,7 +260,6 @@ const {
   onResponse({ response }: { response: any }) {
     if (response.status === 200) {
       const temp = response._data.result
-      // console.log('response._data.result:', response._data.result)
       newsTmpl.value = temp
     }
   },
@@ -253,7 +277,6 @@ const {
   onResponse({ response }: { response: any }) {
     if (response.status === 200) {
       const temp = response._data.result
-      // console.log('culinaryData', response._data.result)
       culinaryTmpl.value = temp
     }
   },
@@ -262,6 +285,55 @@ const {
   }
 })
 culinaryRefresh()
+
+onMounted(() => {
+  setInterval(setShowImg, autoPlayInterval);
+})
+
+watch(showImg, function (nIdx: number, oIdx: number) {
+  transitionName.value = nIdx > oIdx ? "right-in" : "left-in";
+})
+
+function setShowImg ( changeIdx = 1) {
+  switch (true) {
+    case changeIdx == 1 && showImg.value == imageArray.length - 1:
+      showImg.value = 0;
+      break;
+    case changeIdx == -1 && showImg.value == 0:
+      showImg.value = imageArray.length - 1;
+      break;
+    default:
+      showImg.value = showImg.value + changeIdx;
+      break;
+  }
+}
+
+function setShowImgTo (changeIdxTo: any) {
+  showImg.value = changeIdxTo
+}
+
+const autoPlayInterval = 5000
+
+const {
+  pending: roomsPending,
+  refresh: roomsRefresh
+} = await getRooms({
+  immediate: false,
+  onResponse({ response }: { response: any }) {
+    if (response.status === 200) {
+      const temp = response._data.result
+      roomsTmpl.value = temp
+
+      imageArray = temp.map((it: { imageUrl: any; }) => {
+        return it.imageUrl
+      })
+    }
+  },
+  onResponseError({ response }: { response: any }) {
+    console.log('getRooms api Error:', response)
+  }
+})
+roomsRefresh()
 
 // culinaryPending.value = false
 // newsPending.value = false
@@ -531,7 +603,7 @@ culinaryRefresh()
   .news-bottom-absolute {
     position: absolute;
     z-index: 9;
-    top: 1082px;
+    top: 700px;
     left: 200px;
     width: 200px;
     height: 200px;
@@ -624,7 +696,7 @@ culinaryRefresh()
     }
 
     .news-bottom-absolute {
-      top: 1900px;
+      top: 1660px;
       left: 24px;
       width: 100px;
       height: 100px;
@@ -670,6 +742,8 @@ culinaryRefresh()
     max-width: 1920px;
     height: 672px;
     background-image: url('/img/desktop/about.png');
+    background-repeat: no-repeat;
+    background-size: cover;
   }
 
   .about-main {
@@ -795,13 +869,6 @@ culinaryRefresh()
     top: 463px;
   }
 
-  .room-img {
-    width: 900px;
-    height: 900px;
-    margin-top: 120px;
-    background-image: url('/img/desktop/roomImg.png');
-  }
-
   .room-content {
     margin-top: 602px;
 
@@ -830,6 +897,42 @@ culinaryRefresh()
         margin-left: 16px;
       }
     }
+
+    .room-arrow {
+      width: 628px;
+    }
+  }
+
+  // transitionName(Next):'right-in'
+  .right-in-enter {
+      left: 100%;
+  }
+  .right-in-enter-active,
+  .right-in-leave-active {
+      transition: left 0.5s;
+  }
+  .right-in-enter-to,
+  .right-in-leave {
+      left: 0%;
+  }
+  .right-in-leave-to {
+      left: -100%;
+  }
+
+  // transitionName(Prev):'left-in'
+  .left-in-enter {
+      right: 100%;
+  }
+  .left-in-enter-active,
+  .left-in-leave-active {
+      transition: right 0.5s;
+  }
+  .left-in-enter-to,
+  .left-in-leave {
+      right: 0%;
+  }
+  .left-in-leave-to {
+      right: -100%;
   }
 
   @include md {
@@ -842,17 +945,8 @@ culinaryRefresh()
       top: 463px;
     }
 
-    .room-img {
-      width: 768px;
-      height: 768px;
-      margin-top: 180px;
-      background-image: url('/img/mobile/roomImg.png');
-      background-repeat: no-repeat;
-      background-size: cover;
-    }
-
     .room-content {
-      margin-top: 1000px;
+      margin-top: 5px;
 
       .room-title {
         margin-bottom: 16px;
@@ -879,6 +973,10 @@ culinaryRefresh()
           margin-left: 16px;
         }
       }
+
+      .room-arrow {
+        width: 628px;
+      }
     }
   }
 
@@ -892,17 +990,8 @@ culinaryRefresh()
       top: 463px;
     }
 
-    .room-img {
-      width: 430px;
-      height: 300px;
-      margin-top: 180px;
-      background-image: url('/img/mobile/roomImg.png');
-      background-repeat: no-repeat;
-      background-size: cover;
-    }
-
     .room-content {
-      margin-top: 500px;
+      margin-top: 5px;
 
       .room-title {
         margin-bottom: 16px;
@@ -929,6 +1018,10 @@ culinaryRefresh()
           margin-left: 16px;
         }
       }
+
+      .room-arrow {
+        width: 360px;
+      }  
     }
   }
 }
