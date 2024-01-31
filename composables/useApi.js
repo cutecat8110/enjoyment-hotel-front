@@ -5,7 +5,6 @@ import newsAPI from './api/news'
 import orderAPI from './api/order'
 import roomInfoAPI from './api/roomInfo'
 import usersAPI from './api/users'
-import orderAPI from './api/order'
 import verifyAPI from './api/verify'
 
 export default function () {
