@@ -87,9 +87,9 @@ const colorful = computed(() => {
 
 /* 檢查滾動是否超過 VH */
 const { y } = useWindowScroll()
-const { width, height } = useWindowSize()
+const { width } = useWindowSize()
 const isOverVH = computed(() => {
-  return y.value > height.value
+  return y.value > 5
 })
 
 /* 鎖定 Dom */

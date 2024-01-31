@@ -1,6 +1,6 @@
 <template>
-  <!-- ID: 65a6a24a4833c79e5f489517 -->
   <div class="p-0 px-lg-xl bg-primary-tint">
+    <!-- ID: 65a6a24a4833c79e5f489517 -->
     <!-- 房型照片 -->
     <div class="pt-0 py-md-5 py-lg-xl mb-5">
       <div class="position-relative">
@@ -110,7 +110,10 @@
             <span class="d-block text-primary fs-5 fwold mb-4 mb-5">
               NT$ {{ roomInfo.price }}
             </span>
-            <NuxtLink to="/reserve">
+            <NuxtLink :to="{
+              path: '/reserve',
+              query: { id: roomInfo.id }
+            }">
               <span class="btn btn-primary w-100">立即預訂</span>
             </NuxtLink>
           </div>
@@ -137,12 +140,11 @@
     </div>
   </div>
 </template>
-
 <script lang="ts" setup>
 // 月曆套件：https://vue3datepicker.com/props/modes/#multi-calendars
 
 import TheRoomsInfo from '@/components/rooms/TheRoomsInfo.vue'
-import type { RoomInfo } from '@/types/room'
+import type { RoomInfoType } from '@/types/room'
 import { useReserveRoomInfoStore } from '@/stores/room'
 
 definePageMeta({
@@ -153,30 +155,22 @@ definePageMeta({
 const route = useRoute()
 const roomId = route.params.id || ''
 
+const reserveRoomInfo = useReserveRoomInfoStore();
+// 取得 入住時間 & 退房時間
+const checkInDate = ref(reserveRoomInfo.checkInDate);
+const checkOutDate = ref(reserveRoomInfo.checkInDate);
+const peopleNum = ref(reserveRoomInfo.peopleNum);
+
 // 房型資訊
-let roomInfo: RoomInfo = reactive({
-  id: '',
-  name: '',
-  imageUrl: '',
-  imageUrlList: [],
-  description: '',
-  price: 0,
-  roomDetail: {
-    amenityInfo: [], // 備品
-    facilityInfo: [], // 房內設備
-    areaInfo: '', // 坪數
-    bedInfo: '', // 床型
-    maxPeople: 0 // 人數
-  }
+let roomInfo: RoomInfoType = reactive({
+  ...reserveRoomInfo.defaultRoomInfo,
+  ...reserveRoomInfo.enlargeRoomInfo
 })
 
 /* API */
-// id: 65a77277d044dc8f856c0a52
-const reserveRoomInfo = useReserveRoomInfoStore();
-
-const { getRoomInfo } = useApi()
+const { getRoomInfoApi } = useApi()
 const apiPending = computed(() => lPending.value)
-const { pending: lPending } = await getRoomInfo(roomId, {
+const { pending: lPending } = await getRoomInfoApi(roomId, {
   onResponse({ response }: { response: any }) {
     if (!response.status) {
       return
@@ -189,6 +183,7 @@ const { pending: lPending } = await getRoomInfo(roomId, {
       imageUrlList: resData.imageUrlList,
       description: resData.description,
       price: resData.price,
+      discountPrice: 0,
       roomDetail: {
         amenityInfo: resData.amenityInfo,
         facilityInfo: resData.facilityInfo,
@@ -197,12 +192,12 @@ const { pending: lPending } = await getRoomInfo(roomId, {
         maxPeople: resData.maxPeople
       }
     }
-    reserveRoomInfo.setRoomData(roomInfo)
   },
-  onResponseError({ response }: { response: any }) {
-    console.log('error: ', response)
+  onResponseError({ error }: { error: any }) {
+    console.log('error: ', error)
   }
 })
+
 </script>
 
 <style lang="scss" scoped>

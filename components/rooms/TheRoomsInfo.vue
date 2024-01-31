@@ -190,12 +190,12 @@
 </template>
 
 <script lang="ts" setup>
-import type { RoomDetail } from '@/types/room'
+import type { RoomDetailType } from '@/types/room'
 
 defineProps<{
   mbSpace?: string
   showPart?: boolean
-  roomDetail: RoomDetail
+  roomDetail: RoomDetailType
 }>()
 </script>
 

@@ -1,7 +1,7 @@
 import Http from '~/composables/api/http'
 
 const addressAPI = {
-  getTwzipcode: (options) => {
+  getTwzipcodeApi: (options) => {
     return Http.get('/twzipcode', options)
   }
 }
