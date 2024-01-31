@@ -2,7 +2,7 @@ import { useCommonStore } from '@/stores/common'
 
 export default defineNuxtRouteMiddleware(async (to, from) => {
   const commonStore = useCommonStore()
-  const { checkLogin } = useApi()
+  const { checkLoginApi } = useApi()
 
   const reLogin = (text) => {
     commonStore.token = ''
@@ -16,7 +16,7 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
       return reLogin('請先登入')
     }
 
-    const { data } = await checkLogin()
+    const { data } = await checkLoginApi()
 
     try {
       if (data.value.status === false) {
