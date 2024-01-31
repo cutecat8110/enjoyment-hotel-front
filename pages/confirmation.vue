@@ -156,7 +156,6 @@ const { pending: apiPending, refresh: apiRefresh } = await getOrderInfoApi(order
         }
       }
     }
-    console.log('orderInfo: ', orderInfo);
   }
 })
 apiRefresh()

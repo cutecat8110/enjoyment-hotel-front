@@ -46,6 +46,7 @@
     "@vee-validate/i18n": "^4.12.4",
     "@vee-validate/nuxt": "^4.12.4",
     "@vee-validate/rules": "^4.12.4",
+    "@vuepic/vue-datepicker": "^7.4.1",
     "dayjs": "^1.11.10",
     "validator": "^13.11.0",
     "vee-validate": "^4.5.8"

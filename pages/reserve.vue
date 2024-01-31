@@ -56,14 +56,14 @@
                       <div class="row">
                         <div class="col-6">
                           <div class="rounded border">
-                            <label for="" class="d-block">入住 *未完成</label>
-                            <input type="date" class="form" v-model="form.checkInDate">
+                            <label for="checkInDate" class="d-block">入住 *未完成</label>
+                            <input id="checkInDate" type="date" class="form" v-model="checkInDate">
                           </div>
                         </div>
                         <div class="col-6">
                           <div class="rounded border">
-                            <label for="" class="d-block">退房 *未完成</label>
-                            <input type="date" class="form" v-model="form.checkOutDate">
+                            <label for="checkOutDate" class="d-block">退房 *未完成</label>
+                            <input id="checkOutDate" type="date" class="form" v-model="checkOutDate">
                           </div>
                         </div>
                       </div>
@@ -71,10 +71,10 @@
                     </template>
                     <template v-else>
                       <div class="mb-2">
-                        入住：{{ changeDateFormat(form.checkInDate) }}
+                        入住：{{ changeDateFormat(form.checkInDate, 'zh') }}
                       </div>
                       <div>
-                        退房：{{ changeDateFormat(form.checkOutDate) }}
+                        退房：{{ changeDateFormat(form.checkOutDate, 'zh') }}
                       </div>
                     </template>
                   </div>
@@ -329,36 +329,6 @@
         </VForm>
       </ClientOnly>
     </div>
-
-    <!-- // modal 寫法，先保留
-    <div
-      id="orderLoadModal"
-      ref="orderLoad"
-      :class="{ 'show': isShowModal }"
-      class="modal fade"
-      aria-hidden="true"
-      aria-labelledby="orderLoadLabel"
-      data-bs-backdrop="static"
-      data-bs-keyboard="false"
-      tabindex="-1"
-    >
-      <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content p-xl">
-          <div class="modal-body d-flex flex-column justify-content-center align-items-center">
-            <div class="d-flex">
-              <span
-                class="spinner-grow spinner-grow-sm mb-xl text-primary-dark me-2"
-                role="status"
-              ></span>
-              <span class="spinner-grow spinner-grow-sm mb-xl text-primary-dark me-2"></span>
-              <span class="spinner-grow spinner-grow-sm mb-xl text-primary-dark"></span>
-            </div>
-            <NuxtImg class="w-80 mb-3" src="/img/logo-primary.svg" />
-            <div class="fs-5 fw-bold">正在處理你的預訂</div>
-          </div>
-        </div>
-      </div>
-    </div> -->
   </div>
 </template>
 
@@ -429,12 +399,35 @@ interface ReserveForm {
   }
 }
 
+// 入住/退房日期
+const checkInDate = computed({
+  get() {
+    return changeDateFormat(reserveRoomInfo.checkInDate, '-')
+  },
+  set(val) {
+    console.log('check In Date: ', val);
+    return ''
+  }
+})
+console.log(checkInDate);
+
+const checkOutDate = computed({
+  get() {
+    return changeDateFormat(reserveRoomInfo.checkOutDate, '-')
+  },
+  set(val) {
+    console.log('check Out Date: ', val);
+    return changeDateFormat(reserveRoomInfo.checkOutDate, '/')
+  }
+})
+
+
 // 取得 route id
 const route = useRoute()
 const form: ReserveForm = reactive({
   roomId: route.query.id as string || '',
-  checkInDate: ref(reserveRoomInfo.checkInDate),
-  checkOutDate: ref(reserveRoomInfo.checkOutDate),
+  checkInDate: ref(checkInDate),
+  checkOutDate: ref(checkOutDate),
   peopleNum: ref(reserveRoomInfo.peopleNum),
   userInfo: {
     address: {
@@ -462,6 +455,67 @@ watch(
   },
   { immediate: true }
 )
+
+// 計算入住天數
+const dateDiff = computed(() => {
+  const day = $dayjs(form.checkInDate).diff(form.checkOutDate, 'day')
+  return day * -1;
+})
+
+const { $dayjs } = useNuxtApp()
+// 轉換日期格式
+function changeDateFormat(date: string, format: string) {
+  let newFormat = ''
+  switch (format) {
+  case '-':
+    newFormat = 'YYYY-MM-DD'
+    break
+  case '/':
+    newFormat = 'YYYY/MM/DD'
+    break
+  case 'zh':
+    newFormat = 'M 月 D 日 dddd'
+  default:
+    break
+  }
+  return $dayjs(date).format(newFormat)
+}
+
+// 編輯房型、入住/退房日期、入住人數
+const canEdit = {
+  roomType: ref(false),
+  checkDate: ref(false),
+  peopleNum: ref(false)
+}
+
+function editData(key: keyof typeof canEdit) {
+  (canEdit[key] as Ref<boolean>).value = !(canEdit[key] as Ref<boolean>).value
+}
+
+function editPeopleNum(calc: string) {
+  const maxPeople = roomInfo.roomDetail.maxPeople
+
+  switch (calc) {
+    case 'increase':
+      if (maxPeople === form.peopleNum) {
+        return;
+      }
+
+      form.peopleNum = maxPeople > form.peopleNum
+      ? form.peopleNum += 1
+      : maxPeople
+      break
+    case 'decrease':
+      if (form.peopleNum === 1) {
+        return;
+      }
+
+      form.peopleNum = maxPeople <= form.peopleNum
+      ? form.peopleNum -= 1
+      : 1
+      break
+  }
+}
 
 // 取得地址
 const { cityTmpl } = useTmpl() // 縣市
@@ -522,54 +576,6 @@ watch(
   }
 )
 
-const { $dayjs } = useNuxtApp()
-// 轉換日期格式
-function changeDateFormat(date: string) {
-  return $dayjs(date).format('M 月 D 日 dddd')
-}
-
-// 計算入住天數
-const dateDiff = computed(() => {
-  const day = $dayjs(form.checkInDate).diff(form.checkOutDate, 'day')
-  return day * -1;
-})
-
-// 編輯房型、入住/退房日期、入住人數
-const canEdit = {
-  roomType: ref(false),
-  checkDate: ref(false),
-  peopleNum: ref(false)
-}
-
-function editData(key: keyof typeof canEdit) {
-  (canEdit[key] as Ref<boolean>).value = !(canEdit[key] as Ref<boolean>).value
-}
-
-function editPeopleNum(calc: string) {
-  const maxPeople = roomInfo.roomDetail.maxPeople
-
-  switch (calc) {
-    case 'increase':
-      if (maxPeople === form.peopleNum) {
-        return;
-      }
-
-      form.peopleNum = maxPeople > form.peopleNum
-      ? form.peopleNum += 1
-      : maxPeople
-      break
-    case 'decrease':
-      if (form.peopleNum === 1) {
-        return;
-      }
-
-      form.peopleNum = maxPeople <= form.peopleNum
-      ? form.peopleNum -= 1
-      : 1
-      break
-  }
-}
-
 // 送出訂單
 let subErrorMsg = ''
 async function submitOrder() {
@@ -604,6 +610,5 @@ async function submitOrder() {
 
 .modal {
   background-color: rgba($dark, 0.5);
-  box-shadow: 10px;
 }
 </style>
