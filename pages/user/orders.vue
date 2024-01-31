@@ -116,6 +116,19 @@ import TheRoomsInfo from '@/components/rooms/TheRoomsInfo.vue'
 definePageMeta({
   layout: 'h-bg-f-spl'
 })
+const { getOrdersApi } = useApi()
+/* API: 取得訂單資料 */
+const { pending: goPending, refresh: goRefresh } = await getOrdersApi({
+  immediate: false,
+  watch: false,
+  onResponse({ response }: { response: any }) {
+    console.log(response)
+    if (response.status === 200) {
+    }
+  }
+})
+goPending.value = false
+goRefresh()
 </script>
 
 <style lang="scss" scoped>

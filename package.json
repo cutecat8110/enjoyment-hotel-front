@@ -47,7 +47,7 @@
     "@vee-validate/nuxt": "^4.12.4",
     "@vee-validate/rules": "^4.12.4",
     "dayjs": "^1.11.10",
-    "sweetalert2": "^11.10.4",
+    "sweetalert2": "^11.6.13",
     "validator": "^13.11.0",
     "vee-validate": "^4.5.8"
   }

@@ -4,7 +4,7 @@
     <div class="h-bg-f-spl-banner">
       <div class="container fs-3 fs-md-1 text-light fw-bold lh-lg ls-1">
         <NuxtImg class="user-photo" src="/img/user.png" />
-        Hello，Jessica
+        Hello，{{ name }}
       </div>
     </div>
     <div class="h-bg-f-spl-content container-xl">
@@ -21,6 +21,11 @@
     <PageFooter status="spl" />
   </div>
 </template>
+
+<script lang="ts" setup>
+const commonStore = useCommonStore()
+const name = computed(() => (!('name' in commonStore.me) ? '' : commonStore.me.name))
+</script>
 
 <style lang="scss" scoped>
 .h-bg-f-spl-wrapper {

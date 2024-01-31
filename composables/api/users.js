@@ -12,6 +12,12 @@ const usersAPI = {
   },
   resetPasswordApi: (options) => {
     return Http.post('/api/v1/user/forgot', options)
+  },
+  getUserApi: (options) => {
+    return Http.get('/api/v1/user', options)
+  },
+  updateUserApi: (options) => {
+    return Http.put('/api/v1/user', options)
   }
 }
 
