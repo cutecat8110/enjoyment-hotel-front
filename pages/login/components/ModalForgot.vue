@@ -142,13 +142,13 @@
 
 <script lang="ts" setup>
 const formRefs = ref<HTMLFormElement | null>(null)
-const form = ref({ email: 'cutecat8110@gmail.com' })
+const form = ref({ email: '' })
 
 const form2Refs = ref<HTMLFormElement | null>(null)
 const form2 = ref({
   email: '',
   code: '',
-  newPassword: 'Vul3xm4000000'
+  newPassword: ''
 })
 
 /* 事件: 驗證信箱 */
