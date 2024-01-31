@@ -44,7 +44,7 @@
                 class="banner-button d-flex justify-content-end align-items-center"
                 type="button"
               >
-                <div class="banner-button-text">立即訂房</div>
+                <NuxtLink class="banner-button-text" to="/rooms">立即訂房</NuxtLink>
                 <div class="banner-button-line"></div>
               </button>
             </div>
@@ -60,14 +60,14 @@
 
       <div class="container news-content">
         <div class="row">
-          <div class="col-12 col-lg-2">
+          <div class="col-12 col-md-12 col-lg-2">
             <img src="/img/desktop/news.png" alt="" />
           </div>
 
-          <div class="col-12 col-lg-10">
+          <div class="col-12 col-md-7 col-lg-10">
             <div class="card card-outer" v-for="(news, index) in newsTmpl" :key="index">
-              <div>
-                <div class="news-img-one"></div>
+              <div class="news-img-desktop">
+                <img :src="`/img/desktop/newsImg-${index+1}.png`" alt="" class="news-img ratio ratio-1x1">
               </div>
               <div class="card-body d-flex justify-content-start align-items-center">
                 <div class="card-content">
@@ -77,62 +77,7 @@
               </div>
             </div>
           </div>
-          
-          <!-- <div class="col-12 col-lg-10">
-            <div class="card card-outer">
-              <div>
-                <div class="news-img-one"></div>
-              </div>
-              <div class="card-body d-flex justify-content-start align-items-center">
-                <div class="card-content">
-                  <div class="card-title">秋季旅遊，豪華享受方案</div>
-                  <p class="card-text">
-                    秋天就是要來場豪華的旅遊！我們為您準備了一系列的秋季特別方案，包括舒適的住宿、美食饗宴，以及精彩的活動。不論您是想來一趟浪漫之旅，還是想和家人共度美好時光，都能在這裡找到最適合的方案。
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div> -->
-
         </div>
-
-        <!-- <div class="row">
-          <div class="col-12 col-lg-2"></div>
-          <div class="col-12 col-lg-10">
-            <div class="card card-outer">
-              <div>
-                <div class="news-img-two"></div>
-              </div>
-              <div class="card-body d-flex justify-content-start align-items-center">
-                <div class="card-content">
-                  <div class="card-title">輕鬆住房專案</div>
-                  <p class="card-text">
-                    我們知道，有時候您只是需要一個舒適的地方放鬆心情。因此，我們推出了「輕鬆住房專案」，讓您無壓力地享受住宿。不管是短期的休息，還是長期的住宿，我們都會以最貼心的服務，讓您感到賓至如歸。
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> -->
-
-        <!-- <div class="row">
-          <div class="col-12 col-lg-2"></div>
-          <div class="col-12 col-lg-10">
-            <div class="card card-outer">
-              <div>
-                <div class="news-img-three"></div>
-              </div>
-              <div class="card-body d-flex justify-content-start align-items-center">
-                <div class="card-content">
-                  <div class="card-title">耶誕快樂，住房送禮</div>
-                  <p class="card-text">
-                    聖誕節來臨，我們為您準備了特別的禮物！在聖誕期間訂房，不僅有特別優惠，還會送上我們精心準備的聖誕禮物。讓我們一起慶祝這個溫馨的節日吧！
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> -->
       </div>
     </article>
 
@@ -163,21 +108,21 @@
     <!-- 房型 -->
     <article class="position-relative room-outer">
       <img class="position-absolute deco-top" src="/img/desktop/deco-1.png" alt="" />
-      <img class="position-absolute deco-bottom" src="/img/desktop/deco-2.png" alt="" />
+      <img style="z-index: 1;" class="position-absolute deco-bottom" src="/img/desktop/deco-2.png" alt="" />
       <div class="position-absolute room-img"></div>
       <div class="container">
         <div class="row">
           <div class="col-12 col-lg-6"></div>
-          <div class="col-12 col-lg-6 text-light room-content">
+          <div class="col-12 col-lg-6 text-light room-content" style="z-index: 9;">
             <h2 class="room-title">尊爵雙人房</h2>
             <div class="fs-7">
               享受高級的住宿體驗，尊爵雙人房提供給您舒適寬敞的空間和精緻的裝潢。
             </div>
             <h3 class="room-price">NT$ 10,000</h3>
-            <button class="btn room-button fs-5" type="button">
+            <NuxtLink class="btn room-button fs-5 d-flex justify-content-end align-items-center" to="/rooms">
               查看更多
               <img class="room-button-line" src="/img/desktop/line.png" alt="" />
-            </button>
+            </NuxtLink>
             <div class="d-flex justify-content-end">
               <img src="/img/desktop/leftButton.png" alt="" />
               <img src="/img/desktop/rightButton.png" alt="" />
@@ -195,14 +140,12 @@
 
       <div class="position-absolute food-card-box">
         <div class="card-content" v-for="(culinary, i) in culinaryTmpl" :key="i">
-          <div class="position-relative food-img-one"></div>
+          <img class="position-relative ratio ratio-1x1" :src="`/img/desktop/food-${i+1}.png`" alt="">
           <div class="card-bg position-absolute py-4">
             <div class="d-flex mb-4">
               <h5 class="ms-4 fs-5">{{ culinary.title }}</h5>
               <div class="ms-auto me-4 fs-8">
                 <div class="fs-7 card-week">{{ culinary.diningTime }}</div>
-                <!-- <div class="fs-7 card-week">SUN-MON</div>
-                <div class="fs-7">11:00 - 20:30</div> -->
               </div>
             </div>
             <div class="mx-4">
@@ -210,96 +153,6 @@
             </div>
           </div>
         </div>
-
-        <!-- <div class="card-content">
-          <div class="position-relative food-img-one"></div>
-          <div class="card-bg position-absolute py-4">
-            <div class="d-flex mb-4">
-              <h5 class="ms-4 fs-5">海霸</h5>
-              <div class="ms-auto me-4 fs-8 d-flex">
-                <div class="fs-7 card-week">SUN-MON</div>
-                <div class="fs-7">11:00 - 20:30</div>
-              </div>
-            </div>
-            <div class="mx-4">
-              <div class="card-directions fs-ml-7 fs-8">
-                以新鮮海產料理聞名，我們的專業廚師選用高雄當地的海鮮，每一道菜都充滿海洋的鮮美與清甜。無論是烤魚、蒸蝦還是煮蛤蜊，都能讓您品嚐到最新鮮的海洋風味。
-              </div>
-            </div>
-          </div>
-        </div> -->
-
-        <!-- <div class="card-content">
-          <div class="position-relative food-img-two"></div>
-          <div class="card-bg position-absolute py-4">
-            <div class="d-flex mb-4">
-              <h5 class="ms-4 fs-5">日食</h5>
-              <div class="ms-auto me-4 fs-8 d-flex">
-                <div class="fs-7 card-week">SUN-MON</div>
-                <div>17:00 - 22:00</div>
-              </div>
-            </div>
-            <div class="mx-4">
-              <div class="card-directions fs-md-7 fs-8">
-                為您提供優質的牛排，每一塊肉都來自頂級的牛肉，經過專業廚師的巧手烹調，口感豐滿、風味絕佳。搭配我們的特製醬料，讓您的味蕾享受一場美味的盛宴。
-              </div>
-            </div>
-          </div>
-        </div> -->
-
-        <!-- <div class="card-content">
-          <div class="position-relative food-img-three"></div>
-          <div class="card-bg position-absolute py-4">
-            <div class="d-flex mb-4">
-              <h5 class="ms-4 fs-5">山臻</h5>
-              <div class="ms-auto me-4 fs-8 d-flex">
-                <div class="card-week fs-7">SUN-MON</div>
-                <div class="fs-7">11:30 - 20:30</div>
-              </div>
-            </div>
-            <div class="mx-4">
-              <div class="card-directions fs-md-7 fs-8">
-                帶您進入一次辣味與鮮香兼具的川菜美食之旅。我們的廚師掌握正宗的川菜烹調技巧，從麻辣鍋到口水雞，每一道菜都有其獨特的風味，讓您回味無窮。
-              </div>
-            </div>
-          </div>
-        </div> -->
-
-        <!-- <div class="card-content">
-          <div class="position-relative food-img-four"></div>
-          <div class="card-bg position-absolute py-4">
-            <div class="d-flex mb-4">
-              <h5 class="ms-4 fs-5">月永</h5>
-              <div class="ms-auto me-4 fs-8 d-flex">
-                <div class="card-week fs-7">SUN-MON</div>
-                <div class="fs-7">11:00 - 20:00</div>
-              </div>
-            </div>
-            <div class="mx-4">
-              <div class="card-directions fs-md-7 fs-8">
-                從鮮美的海鮮、經典的牛排，到各國的特色美食，我們都一應俱全。在這裡，您可以品嚐到世界各地的美食，每一道菜都由專業廚師用心製作，讓您在享受美食的同時，也能感受到我們的熱情與用心。
-              </div>
-            </div>
-          </div>
-        </div> -->
-
-        <!-- <div class="card-content">
-          <div class="position-relative food-img-five"></div>
-          <div class="card-bg position-absolute py-4">
-            <div class="d-flex mb-4">
-              <h5 class="ms-4 fs-5">天潮</h5>
-              <div class="ms-auto me-4 fs-8 d-flex">
-                <div class="card-week fs-7">SUN-MON</div>
-                <div class="fs-7">14:00 - 19:30</div>
-              </div>
-            </div>
-            <div class="mx-4">
-              <div class="card-directions fs-md-7 fs-8">
-                我們提供各種精緻甜點與糕點，無論您喜歡的是巧克力蛋糕、法式馬卡龍，還是台灣傳統的糕點，都能在這裡找到。讓我們的甜點帶您進入一場繽紛的甜蜜旅程。
-              </div>
-            </div>
-          </div>
-        </div> -->
       </div>
     </article>
 
@@ -358,6 +211,7 @@ const newsTmpl = ref<
 {
   title: string
   description: string
+  image: string
 }[]
 >([])
 
@@ -370,14 +224,14 @@ const culinaryTmpl = ref<
 >([])
 
 /* API */
-const { news, culinary } = useApi()
+const { newsApi, culinaryApi } = useApi()
 const apiPending = computed(() => newsPending.value || culinaryPending.value)
 
 const {
   pending: newsPending,
   refresh: newsRefresh
-} = await news({
-  immediate: true,
+} = await newsApi({
+  immediate: false,
   onResponse({ response }: { response: any }) {
     if (response.status === 200) {
       const temp = response._data.result
@@ -385,8 +239,8 @@ const {
       newsTmpl.value = temp
     }
   },
-  onResponseError({ response }: { response: any }) {
-    console.log('news api Error:', response)
+  onResponseError({ error }: { error: any }) {
+    console.log('news api Error:', error)
   }
 })
 newsRefresh()
@@ -394,8 +248,8 @@ newsRefresh()
 const {
   pending: culinaryPending,
   refresh: culinaryRefresh
-} = await culinary({
-  immediate: true,
+} = await culinaryApi({
+  immediate: false,
   onResponse({ response }: { response: any }) {
     if (response.status === 200) {
       const temp = response._data.result
@@ -403,8 +257,8 @@ const {
       culinaryTmpl.value = temp
     }
   },
-  onResponseError({ response }: { response: any }) {
-    console.log('culinary api Error:', response)
+  onResponseError({ error }: { error: any }) {
+    console.log('culinary api Error:', error)
   }
 })
 culinaryRefresh()
@@ -463,6 +317,8 @@ culinaryRefresh()
 
       .banner-button-text {
         margin-right: 16px;
+        color: #000000;
+        text-decoration: none;
       }
 
       .banner-button-line {
@@ -687,31 +543,12 @@ culinaryRefresh()
     padding-bottom: 120px;
 
     .card-outer {
+      cursor: pointer;
       display: flex;
       margin-bottom: 40px;
 
-      .news-img-one {
-        width: 474px;
-        height: 294px;
-        background-image: url('/img/desktop/newsImg-1.png');
-        background-repeat: no-repeat;
-        background-size: cover;
-      }
-
-      .news-img-two {
-        width: 474px;
-        height: 294px;
-        background-image: url('/img/desktop/newsImg-2.png');
-        background-repeat: no-repeat;
-        background-size: cover;
-      }
-
-      .news-img-three {
-        width: 474px;
-        height: 294px;
-        background-image: url('/img/desktop/newsImg-3.png');
-        background-repeat: no-repeat;
-        background-size: cover;
+      .news-img-desktop {
+        max-width: 258px
       }
 
       .card-content {
@@ -747,25 +584,12 @@ culinaryRefresh()
         display: block;
         margin-top: 40px;
 
-        .news-img-one {
-          margin-bottom: 24px;
-          background-size: cover;
-          background-repeat: no-repeat;
-          background-image: url('/img/desktop/newsImg-1.png');
+        .news-img-desktop {
+          max-width: 100%
         }
 
-        .news-img-two {
+        .news-img {
           margin-bottom: 24px;
-          background-size: cover;
-          background-repeat: no-repeat;
-          background-image: url('/img/desktop/newsImg-2.png');
-        }
-
-        .news-img-three {
-          margin-bottom: 24px;
-          background-size: cover;
-          background-repeat: no-repeat;
-          background-image: url('/img/desktop/newsImg-3.png');
         }
 
         .card-content {
@@ -812,28 +636,8 @@ culinaryRefresh()
         display: block;
         margin-top: 40px;
 
-        .news-img-one {
-          width: 351px;
+        .news-img {
           margin-bottom: 24px;
-          background-image: url('/img/mobile/newsImg-1.png');
-          background-repeat: no-repeat;
-          background-size: cover;
-        }
-
-        .news-img-two {
-          width: 351px;
-          margin-bottom: 24px;
-          background-image: url('/img/mobile/newsImg-2.png');
-          background-repeat: no-repeat;
-          background-size: cover;
-        }
-
-        .news-img-three {
-          width: 351px;
-          margin-bottom: 24px;
-          background-image: url('/img/mobile/newsImg-3.png');
-          background-repeat: no-repeat;
-          background-size: cover;
         }
 
         .card-content {
@@ -1162,6 +966,7 @@ culinaryRefresh()
     }
 
     .card-content {
+      cursor: pointer;
       display: inline-block;
       width: 416px;
       height: 600px;
@@ -1169,38 +974,8 @@ culinaryRefresh()
       color: #fff;
       border-radius: 8px;
 
-      .food-img-one {
-        width: 416px;
-        height: 600px;
-        background-image: url('/img/desktop/food-1.png');
-      }
-
-      .food-img-two {
-        width: 416px;
-        height: 600px;
-        background-image: url('/img/desktop/food-2.png');
-      }
-
-      .food-img-three {
-        width: 416px;
-        height: 600px;
-        background-image: url('/img/desktop/food-3.png');
-      }
-
-      .food-img-four {
-        width: 416px;
-        height: 600px;
-        background-image: url('/img/desktop/food-4.png');
-      }
-
-      .food-img-five {
-        width: 416px;
-        height: 600px;
-        background-image: url('/img/desktop/food-5.png');
-      }
-
       .card-bg {
-        width: 416px;
+        max-width: 416px;
         height: 200px;
         background: linear-gradient(to bottom, #000000 0%, #140f0a 0%);
         opacity: 0.8;
@@ -1246,36 +1021,6 @@ culinaryRefresh()
         border-radius: 8px;
         display: inline-block;
         color: #ffffff;
-
-        .food-img-one {
-          width: 416px;
-          height: 600px;
-          background-image: url('/img/desktop/food-1.png');
-        }
-
-        .food-img-two {
-          width: 416px;
-          height: 600px;
-          background-image: url('/img/desktop/food-2.png');
-        }
-
-        .food-img-three {
-          width: 416px;
-          height: 600px;
-          background-image: url('/img/desktop/food-3.png');
-        }
-
-        .food-img-four {
-          width: 416px;
-          height: 600px;
-          background-image: url('/img/desktop/food-4.png');
-        }
-
-        .food-img-five {
-          width: 416px;
-          height: 600px;
-          background-image: url('/img/desktop/food-5.png');
-        }
       }
     }
   }
@@ -1307,36 +1052,6 @@ culinaryRefresh()
         border-radius: 8px;
         display: inline-block;
         color: #ffffff;
-
-        .food-img-one {
-          width: 300px;
-          height: 480px;
-          background-image: url('/img/mobile/food-1.png');
-        }
-
-        .food-img-two {
-          width: 300px;
-          height: 480px;
-          background-image: url('/img/mobile/food-2.png');
-        }
-
-        .food-img-three {
-          width: 300px;
-          height: 480px;
-          background-image: url('/img/mobile/food-3.png');
-        }
-
-        .food-img-four {
-          width: 300px;
-          height: 480px;
-          background-image: url('/img/mobile/food-4.png');
-        }
-
-        .food-img-five {
-          width: 300px;
-          height: 480px;
-          background-image: url('/img/mobile/food-5.png');
-        }
 
         .card-bg {
           width: 300px;

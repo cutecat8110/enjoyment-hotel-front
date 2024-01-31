@@ -1,10 +1,10 @@
 import Http from '~/composables/api/http'
 
 const verifyAPI = {
-  checkEmail: (options) => {
+  checkEmailApi: (options) => {
     return Http.post('/api/v1/verify/email', options)
   },
-  sendEmailCode: (options) => {
+  sendEmailCodeApi: (options) => {
     return Http.post('/api/v1/verify/generateEmailCode', options)
   }
 }

@@ -179,10 +179,10 @@ onMounted(() => {
     })
   })
 })
-const { checkEmail, sendEmailCode, resetPassword } = useApi()
+const { checkEmailApi, sendEmailCodeApi, resetPasswordApi } = useApi()
 const apiPending = computed(() => cePending.value || secPending.value)
 /* API: 檢查信箱是否存在 */
-const { pending: cePending, refresh: ceRefresh } = await checkEmail({
+const { pending: cePending, refresh: ceRefresh } = await checkEmailApi({
   body: computed(() => form.value),
   immediate: false,
   watch: false,
@@ -198,7 +198,7 @@ const { pending: cePending, refresh: ceRefresh } = await checkEmail({
 })
 cePending.value = false
 /* API: 取得認證碼 */
-const { pending: secPending, refresh: secRefresh } = await sendEmailCode({
+const { pending: secPending, refresh: secRefresh } = await sendEmailCodeApi({
   body: computed(() => form.value),
   immediate: false,
   watch: false,
@@ -214,7 +214,7 @@ const { pending: secPending, refresh: secRefresh } = await sendEmailCode({
 })
 secPending.value = false
 /* API: 重設密碼 */
-const { pending: rpPending, refresh: rpRefresh } = await resetPassword({
+const { pending: rpPending, refresh: rpRefresh } = await resetPasswordApi({
   body: computed(() => form2.value),
   immediate: false,
   watch: false,

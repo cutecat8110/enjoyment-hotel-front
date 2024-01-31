@@ -4,6 +4,7 @@ import culinaryAPI from './api/culinary'
 import newsAPI from './api/news'
 import roomInfoAPI from './api/roomInfo'
 import usersAPI from './api/users'
+import orderAPI from './api/order'
 import verifyAPI from './api/verify'
 
 export default function () {
@@ -14,6 +15,7 @@ export default function () {
     ...usersAPI,
     ...addressAPI,
     ...roomInfoAPI,
+    ...orderAPI,
     ...verifyAPI
   }
 }

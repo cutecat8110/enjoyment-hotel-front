@@ -1,16 +1,16 @@
 import Http from '~/composables/api/http'
 
 const adminNewsAPI = {
-  adminGetNews: (options) => {
+  adminGetNewsApi: (options) => {
     return Http.get('/api/v1/admin/news/', options)
   },
-  adminPostNews: (options) => {
+  adminPostNewsApi: (options) => {
     return Http.post('/api/v1/admin/news/', options)
   },
-  adminPutNews: (options) => {
+  adminPutNewsApi: (options) => {
     return Http.put('/api/v1/admin/news/{id}', options)
   },
-  adminDeleteNews: (options) => {
+  adminDeleteNewsApi: (options) => {
     return Http.delete('/api/v1/admin/news/{id}', options)
   }
 }

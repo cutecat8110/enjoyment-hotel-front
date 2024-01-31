@@ -61,7 +61,7 @@
           <ModalForgot />
         </div>
       </div>
-      
+
       <button
         class="btn btn-primary mb-2 d-flex align-items-center gap-2"
         type="submit"
@@ -106,10 +106,10 @@ const submit = () => {
 }
 
 /* API */
-const { login } = useApi()
+const { loginApi } = useApi()
 const apiPending = computed(() => lPending.value)
 /* API: 登入 */
-const { pending: lPending, refresh: lRefresh } = await login({
+const { pending: lPending, refresh: lRefresh } = await loginApi({
   body: computed(() => form.value),
   immediate: false,
   watch: false,
