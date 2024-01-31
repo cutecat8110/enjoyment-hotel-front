@@ -50,7 +50,15 @@
             />
             記住帳號
           </label>
-          <button class="btn btn-text fs-8 fs-md-7" type="button">忘記密碼？</button>
+          <button
+            class="btn btn-text fs-8 fs-md-7"
+            type="button"
+            data-bs-target="#ModalForgot"
+            data-bs-toggle="modal"
+          >
+            忘記密碼？
+          </button>
+          <ModalForgot />
         </div>
       </div>
 
@@ -75,6 +83,8 @@
 </template>
 
 <script lang="ts" setup>
+import ModalForgot from './components/ModalForgot.vue'
+
 import { useCommonStore } from '@/stores/common'
 
 /* layout */
@@ -98,7 +108,7 @@ const submit = () => {
 /* API */
 const { loginApi } = useApi()
 const apiPending = computed(() => lPending.value)
-/* API: api */
+/* API: 登入 */
 const { pending: lPending, refresh: lRefresh } = await loginApi({
   body: computed(() => form.value),
   immediate: false,
@@ -112,8 +122,8 @@ const { pending: lPending, refresh: lRefresh } = await loginApi({
       navigateTo('/')
     }
   },
-  onResponseError({ error }: { error: any }) {
-    switch (error._data?.message) {
+  onResponseError({ response }: { response: any }) {
+    switch (response._data?.message) {
       case '此使用者不存在':
         formRefs.value?.setFieldError('email', '使用者不存在')
         break
