@@ -96,10 +96,10 @@ const submit = () => {
 }
 
 /* API */
-const { login } = useApi()
+const { loginApi } = useApi()
 const apiPending = computed(() => lPending.value)
 /* API: api */
-const { pending: lPending, refresh: lRefresh } = await login({
+const { pending: lPending, refresh: lRefresh } = await loginApi({
   body: computed(() => form.value),
   immediate: false,
   watch: false,
@@ -112,8 +112,8 @@ const { pending: lPending, refresh: lRefresh } = await login({
       navigateTo('/')
     }
   },
-  onResponseError({ response }: { response: any }) {
-    switch (response._data?.message) {
+  onResponseError({ error }: { error: any }) {
+    switch (error._data?.message) {
       case '此使用者不存在':
         formRefs.value?.setFieldError('email', '使用者不存在')
         break

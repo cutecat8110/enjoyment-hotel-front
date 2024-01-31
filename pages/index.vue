@@ -249,13 +249,13 @@ const roomsTmpl = ref<
 >([])
 
 /* API */
-const { news, culinary, getRooms } = useApi()
+const { newsApi, culinaryApi, getRoomsApi } = useApi()
 const apiPending = computed(() => newsPending.value || culinaryPending.value || roomsPending.value)
 
 const {
   pending: newsPending,
   refresh: newsRefresh
-} = await news({
+} = await newsApi({
   immediate: false,
   onResponse({ response }: { response: any }) {
     if (response.status === 200) {
@@ -263,8 +263,8 @@ const {
       newsTmpl.value = temp
     }
   },
-  onResponseError({ response }: { response: any }) {
-    console.log('news api Error:', response)
+  onResponseError({ error }: { error: any }) {
+    console.log('news api Error:', error)
   }
 })
 newsRefresh()
@@ -272,7 +272,7 @@ newsRefresh()
 const {
   pending: culinaryPending,
   refresh: culinaryRefresh
-} = await culinary({
+} = await culinaryApi({
   immediate: false,
   onResponse({ response }: { response: any }) {
     if (response.status === 200) {
@@ -280,8 +280,8 @@ const {
       culinaryTmpl.value = temp
     }
   },
-  onResponseError({ response }: { response: any }) {
-    console.log('culinary api Error:', response)
+  onResponseError({ error }: { error: any }) {
+    console.log('culinary api Error:', error)
   }
 })
 culinaryRefresh()
@@ -317,7 +317,7 @@ const autoPlayInterval = 5000
 const {
   pending: roomsPending,
   refresh: roomsRefresh
-} = await getRooms({
+} = await getRoomsApi({
   immediate: false,
   onResponse({ response }: { response: any }) {
     if (response.status === 200) {
@@ -330,7 +330,7 @@ const {
     }
   },
   onResponseError({ response }: { response: any }) {
-    console.log('getRooms api Error:', response)
+    console.log('getRoomsApi Error:', response)
   }
 })
 roomsRefresh()
