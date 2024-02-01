@@ -12,10 +12,12 @@ export const useReserveRoomInfoStore = defineStore(
         }
         const today = new Date()
         // 入住
-        const checkInDate = ref(changeDateFormat(today))
+        const checkInDate = ref(today)
+        // const checkInDate = ref(changeDateFormat(today))
         const nextDay = new Date(today.setDate(today.getDate() + 1))
         // 退房
-        const checkOutDate = ref(changeDateFormat(nextDay))
+        const checkOutDate = ref(nextDay)
+        // const checkOutDate = ref(changeDateFormat(nextDay))
 
         const defaultRoomInfo = {
             id: '',

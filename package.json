@@ -21,6 +21,7 @@
     "@nuxtjs/i18n": "^8.0.0-rc.9",
     "@pinia-plugin-persistedstate/nuxt": "^1.2.0",
     "@pinia/nuxt": "^0.5.1",
+    "@samk-dev/nuxt-vcalendar": "^1.0.2",
     "@vueuse/core": "^10.7.0",
     "@vueuse/nuxt": "^10.7.0",
     "bootstrap": "^5.3.2",

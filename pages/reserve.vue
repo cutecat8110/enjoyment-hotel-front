@@ -46,13 +46,30 @@
                   <div class="col-10">
                     <div class="room-info-title-border title-border-primary ps-3 fw-bold mb-2">
                       訂房日期
-                      <!--
-                        TODO: 找月曆套件
-                        https://vue3datepicker.com/props/modes/#inline
-                      -->
                     </div>
 
-                    <template v-if="canEdit.checkDate.value">
+                    <div v-show="canEdit.checkDate.value">
+                      <!-- <VCalendar :masks="{ title: 'YYYY MMM' }" /> -->
+                      <!-- <VDatePicker v-model="form.checkInDate" :masks="{ title: 'YYYY MMM' }" :columns="2" >
+                        <template #default="{ togglePopover }">
+                          <button
+                            class="btn btn-dark px-3 py-2 rounded-md"
+                            @click="togglePopover"
+                          >
+                            Select date
+                          </button>
+                        </template>
+                      </VDatePicker> -->
+                      <VDatePicker v-model.range="checkDate" :columns="2" >
+                        <template #default="{ inputValue, inputEvents }">
+                          <div class="flex justify-center items-center">
+                            <BaseInput :value="inputValue.start" v-on="inputEvents.start" />
+                            <IconArrowRight />
+                            <BaseInput :value="inputValue.end" v-on="inputEvents.end" />
+                          </div>
+                        </template>
+                      </VDatePicker>
+
                       <div class="row">
                         <div class="col-6">
                           <div class="rounded border">
@@ -67,16 +84,15 @@
                           </div>
                         </div>
                       </div>
-
-                    </template>
-                    <template v-else>
+                    </div>
+                    <div v-show="!canEdit.checkDate.value">
                       <div class="mb-2">
                         入住：{{ changeDateFormat(form.checkInDate, 'zh') }}
                       </div>
                       <div>
                         退房：{{ changeDateFormat(form.checkOutDate, 'zh') }}
                       </div>
-                    </template>
+                    </div>
                   </div>
                   <div class="col-2">
                     <button type="button" class="btn btn-text text-dark fw-bold"
@@ -402,32 +418,43 @@ interface ReserveForm {
 // 入住/退房日期
 const checkInDate = computed({
   get() {
-    return changeDateFormat(reserveRoomInfo.checkInDate, '-')
+    return new Date()
+    // return changeDateFormat(reserveRoomInfo.checkInDate, '-')
   },
   set(val) {
-    console.log('check In Date: ', val);
     return ''
   }
 })
-console.log(checkInDate);
 
 const checkOutDate = computed({
   get() {
-    return changeDateFormat(reserveRoomInfo.checkOutDate, '-')
+    return new Date()
+    // return changeDateFormat(reserveRoomInfo.checkOutDate, '-')
   },
   set(val) {
-    console.log('check Out Date: ', val);
-    return changeDateFormat(reserveRoomInfo.checkOutDate, '/')
+    return new Date()
+    // return changeDateFormat(reserveRoomInfo.checkOutDate, '/')
   }
 })
+
+// https://vcalendar.io/
+const checkInDateA = reserveRoomInfo.checkInDate
+console.log('In A: ', checkInDateA);
+const checkOutDateA = reserveRoomInfo.checkOutDate
+console.log('Out A: ', checkOutDateA);
+const checkDate = ref({
+  start: new Date(),
+  end: new Date()
+})
+console.log('checkDate: ', checkDate);
 
 
 // 取得 route id
 const route = useRoute()
 const form: ReserveForm = reactive({
   roomId: route.query.id as string || '',
-  checkInDate: ref(checkInDate),
-  checkOutDate: ref(checkOutDate),
+  checkInDate: ref(checkInDate.value.toISOString()),
+  checkOutDate: ref(checkOutDate.value.toISOString()),
   peopleNum: ref(reserveRoomInfo.peopleNum),
   userInfo: {
     address: {
