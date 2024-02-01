@@ -12,6 +12,10 @@ const orderAPI = {
   // 取得單筆訂單
   getOrderInfoApi: (id, options) => {
     return Http.get(`/api/v1/orders/${id}`, options)
+  },
+  // 刪除訂單
+  deleteOrdersApi: (id, options) => {
+    return Http.delete(`/api/v1/orders/${id.value}`, options)
   }
 }
 
