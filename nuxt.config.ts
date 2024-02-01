@@ -16,6 +16,8 @@ export default defineNuxtConfig({
     'nuxt-icon'
   ],
 
+  image: { provider: 'none' },
+
   runtimeConfig: {
     public: {
       apiBase: process.env.NUXT_PUBLIC_API_BASE
@@ -34,6 +36,7 @@ export default defineNuxtConfig({
       }
     }
   },
+
   app: {
     pageTransition: { name: 'page', mode: 'out-in' },
     layoutTransition: {
