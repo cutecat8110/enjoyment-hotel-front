@@ -16,7 +16,7 @@
     }
   },
   "devDependencies": {
-    "@nuxt/devtools": "latest",
+    "@nuxt/devtools": "^1.0.6",
     "@nuxtjs/eslint-config-typescript": "^12.1.0",
     "@nuxtjs/i18n": "^8.0.0-rc.9",
     "@pinia-plugin-persistedstate/nuxt": "^1.2.0",
@@ -48,6 +48,7 @@
     "@vee-validate/rules": "^4.12.4",
     "@vuepic/vue-datepicker": "^7.4.1",
     "dayjs": "^1.11.10",
+    "sweetalert2": "^11.6.13",
     "validator": "^13.11.0",
     "vee-validate": "^4.5.8"
   }

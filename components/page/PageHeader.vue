@@ -124,6 +124,7 @@ const commonStore = useCommonStore()
 const reload = inject('reload', () => {})
 const name = computed(() => (!('name' in commonStore.me) ? '' : commonStore.me.name))
 const checkout = () => {
+  navigateTo('/')
   commonStore.me = {}
   commonStore.token = ''
   reload()
