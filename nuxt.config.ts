@@ -16,6 +16,16 @@ export default defineNuxtConfig({
     'nuxt-icon'
   ],
 
+  routeRules: {
+    '/': { prerender: true }
+  },
+
+  nitro: {
+    hooks: {
+      'dev:reload': () => require('sharp')
+    }
+  },
+
   runtimeConfig: {
     public: {
       apiBase: process.env.NUXT_PUBLIC_API_BASE
