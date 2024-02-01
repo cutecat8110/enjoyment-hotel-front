@@ -1,0 +1,1 @@
+import{_ as o}from"./_plugin-vue_export-helper.x3n3nnut.js";import{c as r,h as s,o as n}from"./entry.5F93Vz7a.js";const t={},c={class:"h-screen overflow-x-hidden"};function a(e,_){return n(),r("div",c,[s(e.$slots,"default")])}const l=o(t,[["render",a]]);export{l as default};

@@ -75,5 +75,9 @@ export default defineNuxtConfig({
       FieldArray: 'VFieldArray',
       ErrorMessage: 'VErrorMessage'
     }
+  },
+
+  routeRules: {
+    '/': { prerender: true }
   }
 })
