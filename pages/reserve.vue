@@ -50,19 +50,33 @@
 
                     <div v-show="canEdit.checkDate.value">    
                       <ClientOnly>
-                        <VDatePicker v-model.range="checkDate" :columns="2" mode="date" >
+                        <!--
+                          vcalendar樣式： https://vcalendar.io/calendar/theme.html#css-variables
+                          rwd 處理： https://vcalendar.io/calendar/layouts.html#responsive-layouts
+                        -->
+                        <VDatePicker v-model.range="checkDate" :columns="2" mode="date" color="gray" >
                           <template #default="{ togglePopover, inputValue, inputEvents  }">
-                            <div class="flex justify-center items-center">
-                              <input type="button" class="btn btn-outline-dark"
-                                :value="inputValue.start"
-                                @click="togglePopover"
-                                v-on="inputEvents"
-                              />
-                              <input type="button" class="btn btn-outline-dark"
-                                :value="inputValue.end"
-                                @click="togglePopover"
-                                v-on="inputEvents"
-                              />
+                            <div class="row justify-center items-center">
+                              <div class="col-md-6">
+                                <label for="check-in-date" class="w-100 py-3 mb-2 mb-md-0 btn btn-outline-dark text-start">
+                                  <small>入住</small>
+                                  <input id="check-in-date" type="button" class="d-block btn bg-transparent p-0"
+                                    :value="inputValue.start"
+                                    @click="togglePopover"
+                                    v-on="inputEvents"
+                                  />
+                                </label>
+                              </div>
+                              <div class="col-md-6">
+                                <label for="check-out-date" class="w-100 py-3 mb-2 mb-md-0 btn btn-outline-dark text-start">
+                                  <small>退房</small>
+                                  <input id="check-out-date" type="button" class="d-block btn bg-transparent p-0"
+                                    :value="inputValue.end"
+                                    @click="togglePopover"
+                                    v-on="inputEvents"
+                                  />
+                                </label>
+                              </div>
                             </div>
                           </template>
                         </VDatePicker>  
