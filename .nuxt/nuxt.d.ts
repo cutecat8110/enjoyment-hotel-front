@@ -6,6 +6,7 @@
 /// <reference types="@nuxt/image" />
 /// <reference types="@vee-validate/nuxt" />
 /// <reference types="nuxt-icon" />
+/// <reference types="@samk-dev/nuxt-vcalendar" />
 /// <reference types="@nuxt/telemetry" />
 /// <reference types="nuxt" />
 /// <reference path="types/plugins.d.ts" />

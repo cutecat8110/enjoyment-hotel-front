@@ -131,6 +131,7 @@
     "../node_modules/@nuxt/image/runtime",
     "../node_modules/@vee-validate/nuxt/runtime",
     "../node_modules/nuxt-icon/runtime",
+    "../node_modules/@samk-dev/nuxt-vcalendar/runtime",
     "../node_modules/@nuxt/telemetry/runtime",
     ".."
   ],
@@ -144,6 +145,7 @@
     "../node_modules/@nuxt/image/runtime/server",
     "../node_modules/@vee-validate/nuxt/runtime/server",
     "../node_modules/nuxt-icon/runtime/server",
+    "../node_modules/@samk-dev/nuxt-vcalendar/runtime/server",
     "../node_modules/@nuxt/telemetry/runtime/server",
     "../dist",
     "../.output"
