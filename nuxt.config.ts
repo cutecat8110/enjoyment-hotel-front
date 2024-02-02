@@ -17,6 +17,8 @@ export default defineNuxtConfig({
     '@samk-dev/nuxt-vcalendar'
   ],
 
+  image: { provider: 'none' },
+
   runtimeConfig: {
     public: {
       apiBase: process.env.NUXT_PUBLIC_API_BASE
@@ -35,6 +37,7 @@ export default defineNuxtConfig({
       }
     }
   },
+
   app: {
     pageTransition: { name: 'page', mode: 'out-in' },
     layoutTransition: {
@@ -76,5 +79,9 @@ export default defineNuxtConfig({
       FieldArray: 'VFieldArray',
       ErrorMessage: 'VErrorMessage'
     }
+  },
+
+  routeRules: {
+    '/': { prerender: true }
   }
 })

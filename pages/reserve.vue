@@ -37,7 +37,7 @@
                     <button type="button" class="btn btn-text text-dark fw-bold"
                       @click="editData('roomType')"
                     >
-                      編輯
+                      {{ canEdit.roomType.value ? '儲存' : '編輯' }}
                     </button>
                   </div>
                 </div>
@@ -48,49 +48,46 @@
                       訂房日期
                     </div>
 
-                    <div v-show="canEdit.checkDate.value">
-                      <!-- <VCalendar :masks="{ title: 'YYYY MMM' }" /> -->
-                      <!-- <VDatePicker v-model="form.checkInDate" :masks="{ title: 'YYYY MMM' }" :columns="2" >
-                        <template #default="{ togglePopover }">
-                          <button
-                            class="btn btn-dark px-3 py-2 rounded-md"
-                            @click="togglePopover"
-                          >
-                            Select date
-                          </button>
-                        </template>
-                      </VDatePicker> -->
-                      <VDatePicker v-model.range="checkDate" :columns="2" >
-                        <template #default="{ inputValue, inputEvents }">
-                          <div class="flex justify-center items-center">
-                            <BaseInput :value="inputValue.start" v-on="inputEvents.start" />
-                            <IconArrowRight />
-                            <BaseInput :value="inputValue.end" v-on="inputEvents.end" />
-                          </div>
-                        </template>
-                      </VDatePicker>
-
-                      <div class="row">
-                        <div class="col-6">
-                          <div class="rounded border">
-                            <label for="checkInDate" class="d-block">入住 *未完成</label>
-                            <input id="checkInDate" type="date" class="form" v-model="checkInDate">
-                          </div>
-                        </div>
-                        <div class="col-6">
-                          <div class="rounded border">
-                            <label for="checkOutDate" class="d-block">退房 *未完成</label>
-                            <input id="checkOutDate" type="date" class="form" v-model="checkOutDate">
-                          </div>
-                        </div>
-                      </div>
+                    <div v-show="canEdit.checkDate.value">    
+                      <ClientOnly>
+                        <!--
+                          vcalendar樣式： https://vcalendar.io/calendar/theme.html#css-variables
+                          rwd 處理： https://vcalendar.io/calendar/layouts.html#responsive-layouts
+                        -->
+                        <VDatePicker v-model.range="checkDate" :columns="2" mode="date" color="gray" >
+                          <template #default="{ togglePopover, inputValue, inputEvents  }">
+                            <div class="row justify-center items-center">
+                              <div class="col-md-6">
+                                <label for="check-in-date" class="w-100 py-3 mb-2 mb-md-0 btn btn-outline-dark text-start">
+                                  <small>入住</small>
+                                  <input id="check-in-date" type="button" class="d-block btn bg-transparent p-0"
+                                    :value="inputValue.start"
+                                    @click="togglePopover"
+                                    v-on="inputEvents"
+                                  />
+                                </label>
+                              </div>
+                              <div class="col-md-6">
+                                <label for="check-out-date" class="w-100 py-3 mb-2 mb-md-0 btn btn-outline-dark text-start">
+                                  <small>退房</small>
+                                  <input id="check-out-date" type="button" class="d-block btn bg-transparent p-0"
+                                    :value="inputValue.end"
+                                    @click="togglePopover"
+                                    v-on="inputEvents"
+                                  />
+                                </label>
+                              </div>
+                            </div>
+                          </template>
+                        </VDatePicker>  
+                      </ClientOnly>
                     </div>
                     <div v-show="!canEdit.checkDate.value">
                       <div class="mb-2">
-                        入住：{{ changeDateFormat(form.checkInDate, 'zh') }}
+                        入住：{{ changeDateFormat(checkDate.start.toISOString(), 'zh') }}
                       </div>
                       <div>
-                        退房：{{ changeDateFormat(form.checkOutDate, 'zh') }}
+                        退房：{{ changeDateFormat(checkDate.end.toISOString(), 'zh') }}
                       </div>
                     </div>
                   </div>
@@ -98,7 +95,7 @@
                     <button type="button" class="btn btn-text text-dark fw-bold"
                       @click="editData('checkDate')"
                     >
-                      編輯
+                    {{ canEdit.checkDate.value ? '儲存' : '編輯' }}
                     </button>
                   </div>
                 </div>
@@ -133,7 +130,7 @@
                     <button type="button" class="btn btn-text text-dark fw-bold"
                       @click="editData('peopleNum')"
                     >
-                      編輯
+                    {{ canEdit.peopleNum.value ? '儲存' : '編輯' }}
                     </button>
                   </div>
                 </div>
@@ -399,97 +396,20 @@ const formRefs = ref<HTMLFormElement | null>(null)
 const detail = computed(() => {
   return `${address.city}${address.district.district}${address.street}`
 })
-interface ReserveForm {
-  roomId: string;
-  checkInDate: string;
-  checkOutDate: string;
-  peopleNum: number;
-  userInfo: {
-    address: {
-      zipcode: string;
-      detail: string;
-    };
-    name: string;
-    phone: string;
-    email: string;
-  }
-}
-
-// 入住/退房日期
-const checkInDate = computed({
-  get() {
-    return new Date()
-    // return changeDateFormat(reserveRoomInfo.checkInDate, '-')
-  },
-  set(val) {
-    return ''
-  }
-})
-
-const checkOutDate = computed({
-  get() {
-    return new Date()
-    // return changeDateFormat(reserveRoomInfo.checkOutDate, '-')
-  },
-  set(val) {
-    return new Date()
-    // return changeDateFormat(reserveRoomInfo.checkOutDate, '/')
-  }
-})
 
 // https://vcalendar.io/
-const checkInDateA = reserveRoomInfo.checkInDate
-console.log('In A: ', checkInDateA);
-const checkOutDateA = reserveRoomInfo.checkOutDate
-console.log('Out A: ', checkOutDateA);
 const checkDate = ref({
-  start: new Date(),
-  end: new Date()
-})
-console.log('checkDate: ', checkDate);
-
-
-// 取得 route id
-const route = useRoute()
-const form: ReserveForm = reactive({
-  roomId: route.query.id as string || '',
-  checkInDate: ref(checkInDate.value.toISOString()),
-  checkOutDate: ref(checkOutDate.value.toISOString()),
-  peopleNum: ref(reserveRoomInfo.peopleNum),
-  userInfo: {
-    address: {
-      zipcode: ref(''),
-      detail: ref(detail)
-    },
-    name: ref(''),
-    phone: ref(''),
-    email: ref('')
-  }
-})
-// 生日參考: pages\signup.vue
-
-// 篩選單個房型
-watch(
-  () => form.roomId,
-  (val) => {
-    if (!val) {
-      // console.log('reserveRoomInfo: ', reserveRoomInfo);
-      // TODO: 離開時清空 pinia 持久
-      // return
-      navigateTo('/rooms')
-    }
-    roomInfo = allRoomInfo.filter(item => item.id === val)[0]
-  },
-  { immediate: true }
-)
-
-// 計算入住天數
-const dateDiff = computed(() => {
-  const day = $dayjs(form.checkInDate).diff(form.checkOutDate, 'day')
-  return day * -1;
+  start: reserveRoomInfo.checkInDate,
+  end: reserveRoomInfo.checkOutDate
 })
 
 const { $dayjs } = useNuxtApp()
+// 計算入住天數
+const dateDiff = computed(() => {
+  const day = $dayjs(checkDate.value.start).diff(checkDate.value.end, 'day')
+  return day * -1;
+})
+
 // 轉換日期格式
 function changeDateFormat(date: string, format: string) {
   let newFormat = ''
@@ -507,6 +427,53 @@ function changeDateFormat(date: string, format: string) {
   }
   return $dayjs(date).format(newFormat)
 }
+
+interface ReserveForm {
+  roomId: string;
+  checkInDate: string;
+  checkOutDate: string;
+  peopleNum: number;
+  userInfo: {
+    address: {
+      zipcode: string;
+      detail: string;
+    };
+    name: string;
+    phone: string;
+    email: string;
+  }
+}
+
+// 取得 route id
+const route = useRoute()
+const form: ReserveForm = reactive({
+  roomId: route.query.id as string || '',
+  checkInDate: ref(checkDate.value.start.toISOString()),
+  checkOutDate: ref(checkDate.value.end.toISOString()),
+  peopleNum: ref(reserveRoomInfo.peopleNum),
+  userInfo: {
+    address: {
+      zipcode: ref(''),
+      detail: ref(detail)
+    },
+    name: ref(''),
+    phone: ref(''),
+    email: ref('')
+  }
+})
+// 生日參考: pages\signup.vue
+
+// 篩選單個房型
+watch(
+  () => form.roomId,
+  (val: any) => {
+    if (!val) {
+      navigateTo('/rooms')
+    }
+    roomInfo = allRoomInfo.filter(item => item.id === val)[0]
+  },
+  { immediate: true }
+)
 
 // 編輯房型、入住/退房日期、入住人數
 const canEdit = {
@@ -598,7 +565,7 @@ zcRefresh()
 
 watch(
   () => form.userInfo.address.zipcode,
-  (zipcode) => {
+  (zipcode: any) => {
     address.district = districtTmpl.filter(item => item.zipcode === zipcode)[0]
   }
 )
@@ -606,9 +573,13 @@ watch(
 // 送出訂單
 let subErrorMsg = ''
 async function submitOrder() {
-  console.log('submitOrder');
+  const newForm = {
+    ...JSON.parse(JSON.stringify(form)),
+    checkInDate: changeDateFormat(checkDate.value.start.toISOString(), '/'),
+    checkOutDate: changeDateFormat(checkDate.value.end.toISOString(), '/')
+  }
   await submitOrderApi({
-    body: computed(() => form),
+    body: computed(() => newForm),
     onResponse({ response }: { response: any }) {
       if (!response._data.status) {
         subErrorMsg = response._data.message
