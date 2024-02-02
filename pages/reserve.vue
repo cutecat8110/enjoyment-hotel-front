@@ -134,7 +134,7 @@
 
               <div class="d-flex justify-content-between align-items-center mb-5">
                 <h4 class="fw-bold">訂房人資訊</h4>
-                <button type="button" class="btn btn-text text-primary fw-bold">套用會員資料</button>
+                <button type="button" class="btn btn-text text-primary fw-bold" @click="applyData">套用會員資料</button>
               </div>
                 <ul class="list-unstyled pb-6 mb-6 border-bottom">
                   <li class="mb-4">
@@ -191,7 +191,7 @@
                     <!-- :disabled="apiPending" -->
                     <div class="text-danger fs-8 fw-bold mt-2">{{ errors.email }}</div>
                   </li>
-                  <li class="d-md-none mb-4">
+                  <!-- <li class="d-md-none mb-4">
                     <label class="form-label d-flex justify-content-between text-dark" for="default">
                       生日
                     </label>
@@ -221,7 +221,7 @@
                         </select>
                       </div>
                     </div>
-                  </li>
+                  </li> -->
                   <li>
                     <label class="form-label d-flex justify-content-between text-dark" for="default">
                       地址
@@ -407,7 +407,7 @@ const dateDiff = computed(() => {
 })
 
 // 轉換日期格式
-function changeDateFormat(date: string, format: string) {
+const changeDateFormat = (date: string, format: string) => {
   let newFormat = ''
   switch (format) {
   case '-':
@@ -442,7 +442,7 @@ interface ReserveForm {
 
 // 取得 route id
 const route = useRoute()
-const form: ReserveForm = reactive({
+let form: ReserveForm = reactive({
   roomId: route.query.id as string || '',
   checkInDate: ref(checkDate.value.start.toISOString()),
   checkOutDate: ref(checkDate.value.end.toISOString()),
@@ -478,11 +478,11 @@ const canEdit = {
   peopleNum: ref(false)
 }
 
-function editData(key: keyof typeof canEdit) {
+const editData = (key: keyof typeof canEdit) => {
   (canEdit[key] as Ref<boolean>).value = !(canEdit[key] as Ref<boolean>).value
 }
 
-function editPeopleNum(calc: string) {
+const editPeopleNum = (calc: string) => {
   const maxPeople = roomInfo.roomDetail.maxPeople
 
   switch (calc) {
@@ -519,7 +519,7 @@ interface Address {
   street: string;
   district: District;
 }
-const address: Address = reactive({
+let address: Address = reactive({
   city: '台北市',
   street: '',
   district: {
@@ -566,9 +566,47 @@ watch(
   }
 )
 
+const applyData = () => {
+  interface CommonStore {
+    address: {
+      city: string
+      county: string
+      detail: string
+      zipcode: string
+    },
+    name: string
+    phone: string
+    email: string
+  }
+  const commonStore = useCommonStore()
+  const userInfo: CommonStore = commonStore.me as CommonStore
+  const userInfoAddress = userInfo.address
+
+  address = {
+    city: userInfoAddress.county,
+    street: userInfoAddress.detail,
+    district: {
+      district: userInfoAddress.city,
+      zipcode: userInfoAddress.zipcode
+    }
+  }
+
+  form.userInfo = {
+    address: {
+      zipcode: userInfoAddress.zipcode,
+      detail:  `${userInfoAddress.city}${userInfoAddress.county}${userInfoAddress.detail}`
+    },
+    name: userInfo.name,
+    phone: userInfo.phone,
+    email: userInfo.email
+  }
+}
+
+
+
 // 送出訂單
 let subErrorMsg = ''
-async function submitOrder() {
+const submitOrder = async() => {
   const newForm = {
     ...JSON.parse(JSON.stringify(form)),
     checkInDate: changeDateFormat(checkDate.value.start.toISOString(), '/'),
