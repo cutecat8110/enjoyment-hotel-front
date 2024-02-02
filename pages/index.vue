@@ -1,57 +1,59 @@
 <template>
   <div>
     <!-- 輪播 -->
-    <article>
-      <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-indicators">
-          <button
-            class="active"
-            type="button"
-            aria-current="true"
-            aria-label="Slide 1"
-            data-bs-slide-to="0"
-            data-bs-target="#carouselExampleIndicators"
-          ></button>
-          <button
-            type="button"
-            aria-label="Slide 2"
-            data-bs-slide-to="1"
-            data-bs-target="#carouselExampleIndicators"
-          ></button>
-          <button
-            type="button"
-            aria-label="Slide 3"
-            data-bs-slide-to="2"
-            data-bs-target="#carouselExampleIndicators"
-          ></button>
-        </div>
-        <div class="carousel-inner position-relative">
-          <div class="carousel-item active banner-outer">
-            <div class="d-block banner-img"></div>
-            <div class="banner-left-content text-primary-dark">
-              <div class="zh-title">享樂酒店</div>
-              <div class="en-title">Enjoyment Luxury Hotel</div>
-              <div class="line"></div>
-            </div>
-            <div class="banner-right-content"></div>
-            <div class="banner-middle-content">
-              <div class="middle-content-title text-white">高雄</div>
-              <div class="middle-content-title text-white">豪華住宿之選</div>
-              <div class="text-white banner-slogn">
-                我們致力於為您提供無與倫比的奢華體驗與優質服務
+    <ClientOnly>
+      <article>
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-indicators">
+            <button
+              class="active"
+              type="button"
+              aria-current="true"
+              aria-label="Slide 1"
+              data-bs-slide-to="0"
+              data-bs-target="#carouselExampleIndicators"
+            ></button>
+            <button
+              type="button"
+              aria-label="Slide 2"
+              data-bs-slide-to="1"
+              data-bs-target="#carouselExampleIndicators"
+            ></button>
+            <button
+              type="button"
+              aria-label="Slide 3"
+              data-bs-slide-to="2"
+              data-bs-target="#carouselExampleIndicators"
+            ></button>
+          </div>
+          <div class="carousel-inner position-relative">
+            <div class="carousel-item active banner-outer">
+              <div class="d-block banner-img"></div>
+              <div class="banner-left-content text-primary-dark">
+                <div class="zh-title">享樂酒店</div>
+                <div class="en-title">Enjoyment Luxury Hotel</div>
+                <div class="line"></div>
               </div>
-              <button
-                class="banner-button d-flex justify-content-end align-items-center"
-                type="button"
-              >
-                <NuxtLink class="banner-button-text" to="/rooms">立即訂房</NuxtLink>
-                <div class="banner-button-line"></div>
-              </button>
+              <div class="banner-right-content"></div>
+              <div class="banner-middle-content">
+                <div class="middle-content-title text-white">高雄</div>
+                <div class="middle-content-title text-white">豪華住宿之選</div>
+                <div class="text-white banner-slogn">
+                  我們致力於為您提供無與倫比的奢華體驗與優質服務
+                </div>
+                <button
+                  class="banner-button d-flex justify-content-end align-items-center"
+                  type="button"
+                >
+                  <NuxtLink class="banner-button-text" to="/rooms">立即訂房</NuxtLink>
+                  <div class="banner-button-line"></div>
+                </button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </article>
+      </article>
+    </ClientOnly>
 
     <!-- 最新消息 -->
     <article class="bg-goose-yellow position-relative news-outer">
