@@ -367,7 +367,7 @@ const { pending: sPending, refresh: sRefresh } = await signupApi({
       ...res,
       address: {
         zipcode: address.district.zip_code,
-        detail: address.city + address.district.district + address.detail
+        detail: address.detail
       },
       birthday: $dayjs(`${Y}-${M}-${D}`, 'YYYY-M-D').format('YYYY-MM-DD')
     }
@@ -412,7 +412,7 @@ const { pending: gtPending, refresh: gtRefresh } = await getTwzipcodeApi({
     }
   }
 })
-sPending.value = false
+gtPending.value = false
 gtRefresh()
 </script>
 

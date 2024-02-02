@@ -3,6 +3,7 @@ export const useCommonStore = defineStore(
   () => {
     const token = ref('')
     const me = ref({})
+
     const remember = ref(false)
     const email = ref('')
 
