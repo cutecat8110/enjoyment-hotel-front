@@ -15,6 +15,6 @@ if (import.meta.hot) {
   })
 }
 
-import cfg0 from "D:/tori/private/TypeScript 直播班/enjoyment-hotel/app.config.ts"
+import cfg0 from "F:/程式設計相關/TypeScript直播班/team/app.config.ts"
 
 export default /*@__PURE__*/ defuFn(cfg0, inlineConfig)
