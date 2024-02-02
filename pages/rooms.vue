@@ -128,7 +128,7 @@
                       </div>
                     </div>
 
-                    <dir class="room-line"></dir>
+                    <div class="room-line"></div>
                     <div class="room-price d-flex justify-content-between align-items-center">
                       <p>NT$ {{ room.price }}</p>
                       <NuxtLink :to="`/room/${room._id}`">
@@ -174,7 +174,6 @@ const {
   onResponse({ response }: { response: any }) {
     if (response.status === 200) {
       const temp = response._data.result
-      console.log('response._data.result:', response._data.result)
       roomsTmpl.value = temp
     }
   },
