@@ -16,15 +16,7 @@ export default defineNuxtConfig({
     'nuxt-icon'
   ],
 
-  routeRules: {
-    '/': { prerender: true }
-  },
-
-  nitro: {
-    hooks: {
-      'dev:reload': () => require('sharp')
-    }
-  },
+  image: { provider: 'none' },
 
   runtimeConfig: {
     public: {
@@ -44,6 +36,7 @@ export default defineNuxtConfig({
       }
     }
   },
+
   app: {
     pageTransition: { name: 'page', mode: 'out-in' },
     layoutTransition: {
