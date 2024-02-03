@@ -40,7 +40,7 @@
 
       <div class="footer-down">
         <div class="d-flex gap-3 align-items-center">
-          <NuxtLink
+          <!-- <NuxtLink
             class="btn btn-ghost footer-link"
             target="_blank"
             to="https://freyja-7ddy.onrender.com/swagger"
@@ -53,7 +53,7 @@
             <Icon name="ic:round-book" />
             Guideline
           </NuxtLink>
-        </div>
+        </div> -->
         <div>Copyright © 2024 by Hao,Tori,Renee / 素材取自網路，僅作學習用途</div>
       </div>
     </div>
