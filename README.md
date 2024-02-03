@@ -1,7 +1,7 @@
 # 2024 六角學院 TypeScript 前端工程師團隊證書任務
 > 成員：皓皓、Tori、芮妮
 ## Demo
-https://enjoyment-hotel.onrender.com/
+https://enjoyment-hotel-roan.vercel.app/
 
 <br />
 
