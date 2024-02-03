@@ -462,6 +462,9 @@ watch(
       navigateTo('/rooms')
     }
     roomInfo = allRoomInfo.filter(item => item.id === val)[0]
+
+    const maxPeople = roomInfo?.roomDetail?.maxPeople
+    form.peopleNum = form.peopleNum > maxPeople ? maxPeople : form.peopleNum
   },
   { immediate: true }
 )
