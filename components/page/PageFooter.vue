@@ -54,7 +54,7 @@
             Guideline
           </NuxtLink>
         </div> -->
-        <div>Copyright © 2024 by Hao,Tori,Renee / 素材取自網路，僅作學習用途</div>
+        <div class="w-100 text-end">Copyright © 2024 by Hao,Tori,Renee / 素材取自網路，僅作學習用途</div>
       </div>
     </div>
   </footer>
