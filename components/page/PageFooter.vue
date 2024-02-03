@@ -39,8 +39,8 @@
       </div>
 
       <div class="footer-down">
-        <div class="d-flex gap-3 align-items-center">
-          <!-- <NuxtLink
+        <!-- <div class="d-flex gap-3 align-items-center">
+          <NuxtLink
             class="btn btn-ghost footer-link"
             target="_blank"
             to="https://freyja-7ddy.onrender.com/swagger"
