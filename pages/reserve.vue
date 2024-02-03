@@ -152,7 +152,6 @@
                       placeholder="請輸入姓名"
                       rules="required"
                     />
-                    <!-- :disabled="apiPending" -->
                     <div class="text-danger fs-8 fw-bold mt-2">{{ errors.name }}</div>
                   </li>
                   <li class="mb-4">
@@ -170,7 +169,6 @@
                       placeholder="請輸入手機號碼"
                       rules="required"
                     />
-                    <!-- :disabled="apiPending" -->
                     <div class="text-danger fs-8 fw-bold mt-2">{{ errors.phone }}</div>
                   </li>
                   <li class="mb-4">
@@ -188,7 +186,6 @@
                       placeholder="請輸入電子信箱"
                       rules="required|email"
                     />
-                    <!-- :disabled="apiPending" -->
                     <div class="text-danger fs-8 fw-bold mt-2">{{ errors.email }}</div>
                   </li>
                   <!-- <li class="d-md-none mb-4">
@@ -235,7 +232,6 @@
                           as="select"
                           rules="required"
                         >
-                          <!-- :disabled="apiPending" -->
                           <option value="" selected>請選擇縣市</option>
                           <option v-for="city in cityTmpl" :key="city" :value="city">
                             {{ city }}
@@ -250,7 +246,6 @@
                           as="select"
                           rules="required"
                         >
-                          <!-- :disabled="apiPending" -->
                           <option value="" selected>請選擇區域</option>
                           <option v-for="item in districtTmpl"
                             :key="`${item.district}_${item.zipcode}`"
@@ -582,14 +577,8 @@ const applyData = () => {
   const userInfo: CommonStore = commonStore.me as CommonStore
   const userInfoAddress = userInfo.address
 
-  address = {
-    city: userInfoAddress.county,
-    street: userInfoAddress.detail,
-    district: {
-      district: userInfoAddress.city,
-      zipcode: userInfoAddress.zipcode
-    }
-  }
+  address.city = userInfoAddress.county,
+  address.street = userInfoAddress.detail,
 
   form.userInfo = {
     address: {
