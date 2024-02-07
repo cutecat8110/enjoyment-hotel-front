@@ -3,19 +3,14 @@ export const useReserveRoomInfoStore = defineStore(
     'reserveRoomInfo',
     () => {
         const peopleNum = ref(1)
-        
-        // 轉換日期格式
-        const { $dayjs } = useNuxtApp()
-        function changeDateFormat(date) {
-            // YYYY/MM/DD
-            return $dayjs(date).format('YYYY/MM/DD')
-        }
-        const today = new Date()
+
         // 入住
-        const checkInDate = ref(changeDateFormat(today))
-        const nextDay = new Date(today.setDate(today.getDate() + 1))
+        const checkInDate = ref(new Date())
+
         // 退房
-        const checkOutDate = ref(changeDateFormat(nextDay))
+        const today = new Date()
+        const nextDay = new Date(today.setDate(today.getDate() + 1))
+        const checkOutDate = ref(nextDay)
 
         const defaultRoomInfo = {
             id: '',

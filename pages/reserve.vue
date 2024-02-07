@@ -37,7 +37,7 @@
                     <button type="button" class="btn btn-text text-dark fw-bold"
                       @click="editData('roomType')"
                     >
-                      編輯
+                      {{ canEdit.roomType.value ? '儲存' : '編輯' }}
                     </button>
                   </div>
                 </div>
@@ -46,43 +46,52 @@
                   <div class="col-10">
                     <div class="room-info-title-border title-border-primary ps-3 fw-bold mb-2">
                       訂房日期
-                      <!--
-                        TODO: 找月曆套件
-                        https://vue3datepicker.com/props/modes/#inline
-                      -->
                     </div>
 
-                    <template v-if="canEdit.checkDate.value">
-                      <div class="row">
-                        <div class="col-6">
-                          <div class="rounded border">
-                            <label for="" class="d-block">入住 *未完成</label>
-                            <input type="date" class="form" v-model="form.checkInDate">
-                          </div>
-                        </div>
-                        <div class="col-6">
-                          <div class="rounded border">
-                            <label for="" class="d-block">退房 *未完成</label>
-                            <input type="date" class="form" v-model="form.checkOutDate">
-                          </div>
-                        </div>
-                      </div>
-
-                    </template>
-                    <template v-else>
+                    <div v-show="canEdit.checkDate.value">    
+                      <ClientOnly>
+                        <VDatePicker v-model.range="checkDate" :columns="2" mode="date" color="gray" >
+                          <template #default="{ togglePopover, inputValue, inputEvents  }">
+                            <div class="row justify-center items-center">
+                              <div class="col-md-6">
+                                <label for="check-in-date" class="w-100 py-3 mb-2 mb-md-0 btn btn-outline-dark text-start">
+                                  <small>入住</small>
+                                  <input id="check-in-date" type="button" class="d-block btn p-0 bg-transparent"
+                                    :value="inputValue.start"
+                                    @click="togglePopover"
+                                    v-on="inputEvents"
+                                  />
+                                </label>
+                              </div>
+                              <div class="col-md-6">
+                                <label for="check-out-date" class="w-100 py-3 mb-2 mb-md-0 btn btn-outline-dark text-start">
+                                  <small>退房</small>
+                                  <input id="check-out-date" type="button" class="d-block btn p-0 bg-transparent"
+                                    :value="inputValue.end"
+                                    @click="togglePopover"
+                                    v-on="inputEvents"
+                                  />
+                                </label>
+                              </div>
+                            </div>
+                          </template>
+                        </VDatePicker>  
+                      </ClientOnly>
+                    </div>
+                    <div v-show="!canEdit.checkDate.value">
                       <div class="mb-2">
-                        入住：{{ changeDateFormat(form.checkInDate) }}
+                        入住：{{ changeDateFormat(checkDate.start.toISOString(), 'zh') }}
                       </div>
                       <div>
-                        退房：{{ changeDateFormat(form.checkOutDate) }}
+                        退房：{{ changeDateFormat(checkDate.end.toISOString(), 'zh') }}
                       </div>
-                    </template>
+                    </div>
                   </div>
                   <div class="col-2">
                     <button type="button" class="btn btn-text text-dark fw-bold"
                       @click="editData('checkDate')"
                     >
-                      編輯
+                    {{ canEdit.checkDate.value ? '儲存' : '編輯' }}
                     </button>
                   </div>
                 </div>
@@ -117,7 +126,7 @@
                     <button type="button" class="btn btn-text text-dark fw-bold"
                       @click="editData('peopleNum')"
                     >
-                      編輯
+                    {{ canEdit.peopleNum.value ? '儲存' : '編輯' }}
                     </button>
                   </div>
                 </div>
@@ -125,7 +134,7 @@
 
               <div class="d-flex justify-content-between align-items-center mb-5">
                 <h4 class="fw-bold">訂房人資訊</h4>
-                <button type="button" class="btn btn-text text-primary fw-bold">套用會員資料</button>
+                <button type="button" class="btn btn-text text-primary fw-bold" @click="applyData">套用會員資料</button>
               </div>
                 <ul class="list-unstyled pb-6 mb-6 border-bottom">
                   <li class="mb-4">
@@ -143,7 +152,6 @@
                       placeholder="請輸入姓名"
                       rules="required"
                     />
-                    <!-- :disabled="apiPending" -->
                     <div class="text-danger fs-8 fw-bold mt-2">{{ errors.name }}</div>
                   </li>
                   <li class="mb-4">
@@ -161,7 +169,6 @@
                       placeholder="請輸入手機號碼"
                       rules="required"
                     />
-                    <!-- :disabled="apiPending" -->
                     <div class="text-danger fs-8 fw-bold mt-2">{{ errors.phone }}</div>
                   </li>
                   <li class="mb-4">
@@ -179,10 +186,9 @@
                       placeholder="請輸入電子信箱"
                       rules="required|email"
                     />
-                    <!-- :disabled="apiPending" -->
                     <div class="text-danger fs-8 fw-bold mt-2">{{ errors.email }}</div>
                   </li>
-                  <li class="d-md-none mb-4">
+                  <!-- <li class="d-md-none mb-4">
                     <label class="form-label d-flex justify-content-between text-dark" for="default">
                       生日
                     </label>
@@ -212,7 +218,7 @@
                         </select>
                       </div>
                     </div>
-                  </li>
+                  </li> -->
                   <li>
                     <label class="form-label d-flex justify-content-between text-dark" for="default">
                       地址
@@ -226,7 +232,6 @@
                           as="select"
                           rules="required"
                         >
-                          <!-- :disabled="apiPending" -->
                           <option value="" selected>請選擇縣市</option>
                           <option v-for="city in cityTmpl" :key="city" :value="city">
                             {{ city }}
@@ -241,7 +246,6 @@
                           as="select"
                           rules="required"
                         >
-                          <!-- :disabled="apiPending" -->
                           <option value="" selected>請選擇區域</option>
                           <option v-for="item in districtTmpl"
                             :key="`${item.district}_${item.zipcode}`"
@@ -329,36 +333,6 @@
         </VForm>
       </ClientOnly>
     </div>
-
-    <!-- // modal 寫法，先保留
-    <div
-      id="orderLoadModal"
-      ref="orderLoad"
-      :class="{ 'show': isShowModal }"
-      class="modal fade"
-      aria-hidden="true"
-      aria-labelledby="orderLoadLabel"
-      data-bs-backdrop="static"
-      data-bs-keyboard="false"
-      tabindex="-1"
-    >
-      <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content p-xl">
-          <div class="modal-body d-flex flex-column justify-content-center align-items-center">
-            <div class="d-flex">
-              <span
-                class="spinner-grow spinner-grow-sm mb-xl text-primary-dark me-2"
-                role="status"
-              ></span>
-              <span class="spinner-grow spinner-grow-sm mb-xl text-primary-dark me-2"></span>
-              <span class="spinner-grow spinner-grow-sm mb-xl text-primary-dark"></span>
-            </div>
-            <NuxtImg class="w-80 mb-3" src="/img/logo-primary.svg" />
-            <div class="fs-5 fw-bold">正在處理你的預訂</div>
-          </div>
-        </div>
-      </div>
-    </div> -->
   </div>
 </template>
 
@@ -413,6 +387,38 @@ const formRefs = ref<HTMLFormElement | null>(null)
 const detail = computed(() => {
   return `${address.city}${address.district.district}${address.street}`
 })
+
+// https://vcalendar.io/
+const checkDate = ref({
+  start: reserveRoomInfo.checkInDate,
+  end: reserveRoomInfo.checkOutDate
+})
+
+const { $dayjs } = useNuxtApp()
+// 計算入住天數
+const dateDiff = computed(() => {
+  const day = $dayjs(checkDate.value.start).diff(checkDate.value.end, 'day')
+  return day * -1;
+})
+
+// 轉換日期格式
+const changeDateFormat = (date: string, format: string) => {
+  let newFormat = ''
+  switch (format) {
+  case '-':
+    newFormat = 'YYYY-MM-DD'
+    break
+  case '/':
+    newFormat = 'YYYY/MM/DD'
+    break
+  case 'zh':
+    newFormat = 'M 月 D 日 dddd'
+  default:
+    break
+  }
+  return $dayjs(date).format(newFormat)
+}
+
 interface ReserveForm {
   roomId: string;
   checkInDate: string;
@@ -431,10 +437,10 @@ interface ReserveForm {
 
 // 取得 route id
 const route = useRoute()
-const form: ReserveForm = reactive({
+let form: ReserveForm = reactive({
   roomId: route.query.id as string || '',
-  checkInDate: ref(reserveRoomInfo.checkInDate),
-  checkOutDate: ref(reserveRoomInfo.checkOutDate),
+  checkInDate: ref(checkDate.value.start.toISOString()),
+  checkOutDate: ref(checkDate.value.end.toISOString()),
   peopleNum: ref(reserveRoomInfo.peopleNum),
   userInfo: {
     address: {
@@ -451,17 +457,53 @@ const form: ReserveForm = reactive({
 // 篩選單個房型
 watch(
   () => form.roomId,
-  (val) => {
+  (val: any) => {
     if (!val) {
-      // console.log('reserveRoomInfo: ', reserveRoomInfo);
-      // TODO: 離開時清空 pinia 持久
-      // return
       navigateTo('/rooms')
     }
     roomInfo = allRoomInfo.filter(item => item.id === val)[0]
+
+    const maxPeople = roomInfo?.roomDetail?.maxPeople
+    form.peopleNum = form.peopleNum > maxPeople ? maxPeople : form.peopleNum
   },
   { immediate: true }
 )
+
+// 編輯房型、入住/退房日期、入住人數
+const canEdit = {
+  roomType: ref(false),
+  checkDate: ref(false),
+  peopleNum: ref(false)
+}
+
+const editData = (key: keyof typeof canEdit) => {
+  (canEdit[key] as Ref<boolean>).value = !(canEdit[key] as Ref<boolean>).value
+}
+
+const editPeopleNum = (calc: string) => {
+  const maxPeople = roomInfo.roomDetail.maxPeople
+
+  switch (calc) {
+    case 'increase':
+      if (maxPeople === form.peopleNum) {
+        return;
+      }
+
+      form.peopleNum = maxPeople > form.peopleNum
+      ? form.peopleNum += 1
+      : maxPeople
+      break
+    case 'decrease':
+      if (form.peopleNum === 1) {
+        return;
+      }
+
+      form.peopleNum = maxPeople <= form.peopleNum
+      ? form.peopleNum -= 1
+      : 1
+      break
+  }
+}
 
 // 取得地址
 const { cityTmpl } = useTmpl() // 縣市
@@ -475,7 +517,7 @@ interface Address {
   street: string;
   district: District;
 }
-const address: Address = reactive({
+let address: Address = reactive({
   city: '台北市',
   street: '',
   district: {
@@ -517,65 +559,53 @@ zcRefresh()
 
 watch(
   () => form.userInfo.address.zipcode,
-  (zipcode) => {
+  (zipcode: any) => {
     address.district = districtTmpl.filter(item => item.zipcode === zipcode)[0]
   }
 )
 
-const { $dayjs } = useNuxtApp()
-// 轉換日期格式
-function changeDateFormat(date: string) {
-  return $dayjs(date).format('M 月 D 日 dddd')
-}
+const applyData = () => {
+  interface CommonStore {
+    address: {
+      city: string
+      county: string
+      detail: string
+      zipcode: string
+    },
+    name: string
+    phone: string
+    email: string
+  }
+  const commonStore = useCommonStore()
+  const userInfo: CommonStore = commonStore.me as CommonStore
+  const userInfoAddress = userInfo.address
 
-// 計算入住天數
-const dateDiff = computed(() => {
-  const day = $dayjs(form.checkInDate).diff(form.checkOutDate, 'day')
-  return day * -1;
-})
+  address.city = userInfoAddress.county,
+  address.street = userInfoAddress.detail,
 
-// 編輯房型、入住/退房日期、入住人數
-const canEdit = {
-  roomType: ref(false),
-  checkDate: ref(false),
-  peopleNum: ref(false)
-}
-
-function editData(key: keyof typeof canEdit) {
-  (canEdit[key] as Ref<boolean>).value = !(canEdit[key] as Ref<boolean>).value
-}
-
-function editPeopleNum(calc: string) {
-  const maxPeople = roomInfo.roomDetail.maxPeople
-
-  switch (calc) {
-    case 'increase':
-      if (maxPeople === form.peopleNum) {
-        return;
-      }
-
-      form.peopleNum = maxPeople > form.peopleNum
-      ? form.peopleNum += 1
-      : maxPeople
-      break
-    case 'decrease':
-      if (form.peopleNum === 1) {
-        return;
-      }
-
-      form.peopleNum = maxPeople <= form.peopleNum
-      ? form.peopleNum -= 1
-      : 1
-      break
+  form.userInfo = {
+    address: {
+      zipcode: userInfoAddress.zipcode,
+      detail:  `${userInfoAddress.city}${userInfoAddress.county}${userInfoAddress.detail}`
+    },
+    name: userInfo.name,
+    phone: userInfo.phone,
+    email: userInfo.email
   }
 }
 
+
+
 // 送出訂單
 let subErrorMsg = ''
-async function submitOrder() {
-  console.log('submitOrder');
+const submitOrder = async() => {
+  const newForm = {
+    ...JSON.parse(JSON.stringify(form)),
+    checkInDate: changeDateFormat(checkDate.value.start.toISOString(), '/'),
+    checkOutDate: changeDateFormat(checkDate.value.end.toISOString(), '/')
+  }
   await submitOrderApi({
-    body: computed(() => form),
+    body: computed(() => newForm),
     onResponse({ response }: { response: any }) {
       if (!response._data.status) {
         subErrorMsg = response._data.message
@@ -583,43 +613,6 @@ async function submitOrder() {
       }
 
       subErrorMsg = ''
-      // const response = {
-      //   _data: {
-      //     result: {
-      //       checkInDate: '2024-01-29T00:00:00.000Z',
-      //       checkOutDate: '2024-01-30T00:00:00.000Z',
-      //       createdAt: '2024-01-29T15:38:42.157Z',
-      //       orderUserId: '65a76f8cd044dc8f856c0a3c',
-      //       peopleNum: 1,
-      //       roomId: {
-      //         amenityInfo: ['備品'],
-      //         areaInfo: '24坪',
-      //         bedInfo: '1張大床',
-      //         createdAt: '2024-01-17T06:23:51.256Z',
-      //         description: '享受高級的住宿體驗，尊爵雙人房提供給您舒適寬敞的空間和精緻的裝潢。',
-      //         facilityInfo: ['房內設備'],
-      //         imageUrl: '房型主圖',
-      //         imageUrlList: ['房型其他圖片'],
-      //         maxPeople: 4,
-      //         name: '尊爵雙人房',
-      //         price: 10000,
-      //         status: 1,
-      //         updatedAt: '2024-01-19T06:11:15.757Z',
-      //         _id: '65a77277d044dc8f856c0a52',
-      //       },
-      //       status: 0,
-      //       updatedAt: '2024-01-29T15:38:42.157Z',
-      //       userInfo: {
-      //         address: { zipcode: 100, detail: '台北市中正區' },
-      //         email: 'bofl123123123111@gmail.com',
-      //         name: 'tom',
-      //         phone: '0912345678'
-      //       },
-      //       _id: '65b7c682937f8e0c410f6709',
-      //     },
-      //     status: true
-      //   }
-      // }
       const orderId = response._data.result._id
       navigateTo({
         path: '/confirmation',
@@ -641,6 +634,5 @@ async function submitOrder() {
 
 .modal {
   background-color: rgba($dark, 0.5);
-  box-shadow: 10px;
 }
 </style>

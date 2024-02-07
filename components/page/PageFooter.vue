@@ -39,7 +39,7 @@
       </div>
 
       <div class="footer-down">
-        <div class="d-flex gap-3 align-items-center">
+        <!-- <div class="d-flex gap-3 align-items-center">
           <NuxtLink
             class="btn btn-ghost footer-link"
             target="_blank"
@@ -53,8 +53,8 @@
             <Icon name="ic:round-book" />
             Guideline
           </NuxtLink>
-        </div>
-        <div>Copyright © 2024 by Hao,Tori,Renee / 素材取自網路，僅作學習用途</div>
+        </div> -->
+        <div class="w-100 text-end">Copyright © 2024 by Hao,Tori,Renee / 素材取自網路，僅作學習用途</div>
       </div>
     </div>
   </footer>

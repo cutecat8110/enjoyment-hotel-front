@@ -26,4 +26,10 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
       return reLogin('系統錯誤')
     }
   }
+
+  if (to.name === 'reserve') {
+    if (!commonStore.token) {
+      return reLogin('請先登入')
+    }
+  }
 })

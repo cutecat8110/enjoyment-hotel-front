@@ -13,7 +13,8 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@nuxt/image',
     '@vee-validate/nuxt',
-    'nuxt-icon'
+    'nuxt-icon',
+    '@samk-dev/nuxt-vcalendar'
   ],
 
   image: { provider: 'none' },
@@ -78,5 +79,9 @@ export default defineNuxtConfig({
       FieldArray: 'VFieldArray',
       ErrorMessage: 'VErrorMessage'
     }
+  },
+
+  routeRules: {
+    '/': { prerender: true }
   }
 })

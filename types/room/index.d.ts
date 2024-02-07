@@ -34,4 +34,4 @@ declare interface SectionRoomInfoType {
 }
 
 
-export { RoomInfoType, RoomDetailType, SectionRoomInfoType }
+export { RoomInfoType, SectionRoomInfoType, RoomDetailType }
