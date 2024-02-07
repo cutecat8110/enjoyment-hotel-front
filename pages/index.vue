@@ -85,7 +85,7 @@
 
     <!-- 關於我們 -->
     <article class="bg-deep about-outer position-relative">
-      <div class="about-img"></div>
+      <div class="about-img ratio ratio-4x3"></div>
       <div class="text-white about-main">
         <div class="about-img-text"></div>
         <div class="about-content">
@@ -438,7 +438,83 @@ roomsRefresh()
     opacity: 0.5;
   }
 
-  @include md {
+  @media (max-width: 1400px) {
+    .banner-img {
+      background-image: url('/img/mobile/HeroImg.png');
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    .banner-middle-content {
+      top: 59%;
+      left: 32%;
+
+      .middle-content-title {
+        font-size: 48px;
+      }
+
+      .banner-slogn {
+        font-size: 16px;
+        margin-bottom: 60px;
+      }
+
+      .banner-button {
+        max-width: 309px;
+        padding: 20px;
+        font-size: 16px;
+
+        .banner-button-text {
+          margin-right: 16px;
+        }
+
+        .banner-button-line {
+          width: 80px;
+          height: 1px;
+          background-image: url('/img/mobile/line.png');
+        }
+      }
+    }
+
+    .banner-left-content {
+      top: 30%;
+      left: 39%;
+      display: flex;
+      align-content: flex-start;
+      flex-direction: column;
+      justify-content: center;
+
+      .zh-title {
+        font-size: 28px;
+        font-weight: 700;
+        margin-left: 70px;
+      }
+
+      .en-title {
+        font-size: 24px;
+        font-weight: 700;
+      }
+
+      .line {
+        min-width: 0px;
+        border-left: 2px solid #be9c7c;
+        height: 100%;
+        position: absolute;
+        left: 41%;
+        width: 0;
+        margin-top: 175px;
+        border-top: solid 0px;
+      }
+    }
+
+    .banner-right-content {
+      top: 50%;
+      left: 36%;
+      padding: 240px 180px;
+      min-width: 291px;
+    }
+  }
+
+  @media (max-width: 992px) {
     .banner-img {
       background-image: url('/img/mobile/HeroImg.png');
       background-repeat: no-repeat;
@@ -635,6 +711,16 @@ roomsRefresh()
     }
   }
 
+  @media (max-width: 1400px) {
+    .news-bottom-absolute {
+      width: 100px;
+      height: 100px;
+      top: 98%;
+      left: 5%;
+      background-image: url('/img/mobile/dot.png');
+    }
+  }
+
   @include md {
     .news-top-absolute {
       position: absolute;
@@ -760,7 +846,7 @@ roomsRefresh()
     background-image: linear-gradient(to bottom, #140f0a 0%, #be9c7c 80%);
 
     .about-content {
-      width: 884px;
+      max-width: 884px;
       margin-top: 80px;
       margin-left: 80px;
       margin-right: 80px;
@@ -779,11 +865,42 @@ roomsRefresh()
     }
   }
 
-  @include md {
+  @media (max-width: 1400px) {
     .about-img {
-      max-width: 768px;
-      height: 594px;
-      background-image: url('/img/mobile/about.png');
+      max-width: 1400px;
+    }
+
+    .about-main {
+      top: 160px;
+      left: 200px;
+      opacity: 0.8;
+      border: 1px solid #fff;
+      border-top: none;
+      border-right: none;
+      border-radius: 40px 40px 0 40px;
+      background-image: linear-gradient(to bottom, #140f0a 0%, #be9c7c 80%);
+
+      .about-content {
+        max-width: 670px;
+
+        .about-content-text {
+          font-size: 14px;
+          margin-bottom: 40px;
+        }
+      }
+
+      .about-img-text {
+        width: 267px;
+        height: 80px;
+        background-image: url('/img/mobile/aboutName.png');
+      }
+    }
+  }
+
+  @media (max-width: 992px) {
+    .about-img {
+      max-width: 992px;
+      background-image: url('/img/desktop/about.png');
     }
 
     .about-main {
@@ -798,9 +915,6 @@ roomsRefresh()
 
       .about-content {
         max-width: 670px;
-        margin-top: 40px;
-        margin-left: 24px;
-        margin-right: 24px;
 
         .about-content-text {
           font-size: 14px;
@@ -810,7 +924,40 @@ roomsRefresh()
 
       .about-img-text {
         margin-top: 24px;
-        margin-left: 24px;
+        width: 267px;
+        height: 80px;
+        background-image: url('/img/mobile/aboutName.png');
+      }
+    }
+  }
+
+  @include md {
+    .about-img {
+      max-width: 768px;
+      background-image: url('/img/desktop/about.png');
+    }
+
+    .about-main {
+      top: 160px;
+      left: 7px;
+      opacity: 0.8;
+      border: 1px solid #fff;
+      border-top: none;
+      border-right: none;
+      border-radius: 40px 40px 0 40px;
+      background-image: linear-gradient(to bottom, #140f0a 0%, #be9c7c 80%);
+
+      .about-content {
+        max-width: 670px;
+
+        .about-content-text {
+          font-size: 14px;
+          margin-bottom: 40px;
+        }
+      }
+
+      .about-img-text {
+        margin-top: 24px;
         width: 267px;
         height: 80px;
         background-image: url('/img/mobile/aboutName.png');
@@ -836,7 +983,7 @@ roomsRefresh()
       border-right: none;
 
       .about-content {
-        width: 267px;
+        max-width: 267px;
         margin-top: 40px;
         margin-left: 24px;
         margin-right: 24px;
@@ -935,6 +1082,12 @@ roomsRefresh()
   }
   .left-in-leave-to {
       right: -100%;
+  }
+
+  @media (max-width: 1400px) {
+    .room-content {
+      margin-top: 5px;
+    }
   }
 
   @include md {

@@ -41,7 +41,7 @@
           </div>
         </div>
 
-        <div class="banner-content position-absolute d-lg-flex justify-content-lg-between">
+        <div class="banner-content position-absolute d-xxl-flex justify-content-xxl-between">
           <div>
             <p class="fs-4 fs-md-2 fw-bold text-primary">享樂酒店</p>
             <p class="fs-7 fs-md-5 fw-bold text-primary">Enjoyment Luxury Hotel</p>
@@ -309,6 +309,28 @@ roomsRefresh()
     }
   }
 }
+
+@media (max-width: 1400px) {
+  .banner-img-mask {
+    .banner-content {
+      width: 375px;
+      top: 28%;
+      text-align: center;
+
+      .line {
+        max-width: 83px;
+        margin-top: 32%;
+        margin-left: 36%;
+        transform: rotate(90deg);
+      }
+
+      .right-content {
+        margin-top: 60px;
+      }
+    }
+  }
+}
+
 @include md {
   .banner-img-mask {
     .banner-img {
@@ -327,7 +349,7 @@ roomsRefresh()
       }
 
       .right-content {
-        margin-top: 60px;
+        margin-top: 80px;
       }
     }
   }
