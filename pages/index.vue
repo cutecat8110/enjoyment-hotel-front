@@ -62,11 +62,11 @@
 
       <div class="container news-content">
         <div class="row">
-          <div class="col-12 col-md-12 col-lg-2">
+          <div class="col-12 col-md-12 col-lg-12 col-xxl-2">
             <img src="/img/desktop/news.png" alt="" />
           </div>
 
-          <div class="col-12 col-md-7 col-lg-10">
+          <div class="col-12 col-md-7 col-lg-7 col-xxl-10">
             <div class="card card-outer" v-for="(news, index) in newsTmpl" :key="index">
               <div class="news-img-desktop">
                 <img :src="`/img/desktop/newsImg-${index+1}.png`" alt="" class="news-img ratio ratio-1x1">
@@ -718,6 +718,39 @@ roomsRefresh()
       top: 98%;
       left: 5%;
       background-image: url('/img/mobile/dot.png');
+    }
+
+    .news-content {
+      .card-outer {
+        display: block;
+        margin-top: 40px;
+
+        .news-img-desktop {
+          max-width: 100%
+        }
+
+        .news-img {
+          margin-bottom: 24px;
+        }
+
+        .card-content {
+          width: 360px;
+          margin-left: 0px;
+
+          .card-title {
+            font-size: 28px;
+            line-height: 33px;
+            letter-spacing: 5%;
+            margin-bottom: 8px;
+          }
+
+          .card-text {
+            font-size: 14px;
+            line-height: 21px;
+            letter-spacing: 2%;
+          }
+        }
+      }
     }
   }
 
