@@ -1,6 +1,5 @@
 <template>
   <div class="p-0 px-lg-xl bg-primary-tint">
-    <!-- ID: 65a6a24a4833c79e5f489517 -->
     <!-- 房型照片 -->
     <div class="pt-0 py-md-5 py-lg-xl mb-5">
       <div class="position-relative">
@@ -141,8 +140,6 @@
   </div>
 </template>
 <script lang="ts" setup>
-// 月曆套件：https://vue3datepicker.com/props/modes/#multi-calendars
-
 import TheRoomsInfo from '@/components/rooms/TheRoomsInfo.vue'
 import type { RoomInfoType } from '@/types/room'
 import { useReserveRoomInfoStore } from '@/stores/room'
@@ -157,9 +154,9 @@ const roomId = route.params.id || ''
 
 const reserveRoomInfo = useReserveRoomInfoStore();
 // 取得 入住時間 & 退房時間
-const checkInDate = ref(reserveRoomInfo.checkInDate);
-const checkOutDate = ref(reserveRoomInfo.checkInDate);
-const peopleNum = ref(reserveRoomInfo.peopleNum);
+// const checkInDate = ref(reserveRoomInfo.checkInDate);
+// const checkOutDate = ref(reserveRoomInfo.checkOutDate);
+// const peopleNum = ref(reserveRoomInfo.peopleNum);
 
 // 房型資訊
 let roomInfo: RoomInfoType = reactive({
@@ -169,8 +166,7 @@ let roomInfo: RoomInfoType = reactive({
 
 /* API */
 const { getRoomInfoApi } = useApi()
-const apiPending = computed(() => lPending.value)
-const { pending: lPending } = await getRoomInfoApi(roomId, {
+await getRoomInfoApi(roomId, {
   onResponse({ response }: { response: any }) {
     if (!response._data.status) {
       return

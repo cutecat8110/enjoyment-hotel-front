@@ -3,7 +3,7 @@
 // App Config
 import type { Defu } from 'defu'
 
-import type { default as appConfig0 } from "F:/程式設計相關/TypeScript直播班/team/app.config";
+import type { default as appConfig0 } from "D:/tori/private/TypeScript 直播班/enjoyment-hotel/app.config";
 
 type UserAppConfig = Defu<{}, [typeof appConfig0]>
 

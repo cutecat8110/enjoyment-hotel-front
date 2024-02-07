@@ -1,27 +1,28 @@
-globalThis._importMeta_={url:import.meta.url,env:process.env};import { Server } from 'node:http';
+globalThis._importMeta_={url:import.meta.url,env:process.env};import 'file://D:/tori/private/TypeScript%20%E7%9B%B4%E6%92%AD%E7%8F%AD/enjoyment-hotel/node_modules/node-fetch-native/dist/polyfill.mjs';
+import { Server } from 'node:http';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { mkdirSync } from 'node:fs';
 import { parentPort, threadId } from 'node:worker_threads';
-import { defineEventHandler, handleCacheHeaders, splitCookiesString, isEvent, createEvent, getRequestHeader, eventHandler, setHeaders, sendRedirect, proxyRequest, setResponseHeader, send, getResponseStatus, setResponseStatus, setResponseHeaders, getRequestHeaders, createApp, createRouter as createRouter$1, toNodeListener, fetchWithEvent, lazyEventHandler, getQuery as getQuery$1, createError, getResponseStatusText } from 'file://F:/%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E7%9B%B8%E9%97%9C/TypeScript%E7%9B%B4%E6%92%AD%E7%8F%AD/team/node_modules/h3/dist/index.mjs';
-import { getRequestDependencies, getPreloadLinks, getPrefetchLinks, createRenderer } from 'file://F:/%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E7%9B%B8%E9%97%9C/TypeScript%E7%9B%B4%E6%92%AD%E7%8F%AD/team/node_modules/vue-bundle-renderer/dist/runtime.mjs';
-import { stringify, uneval } from 'file://F:/%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E7%9B%B8%E9%97%9C/TypeScript%E7%9B%B4%E6%92%AD%E7%8F%AD/team/node_modules/devalue/index.js';
-import { renderToString } from 'file://F:/%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E7%9B%B8%E9%97%9C/TypeScript%E7%9B%B4%E6%92%AD%E7%8F%AD/team/node_modules/vue/server-renderer/index.mjs';
-import { renderSSRHead } from 'file://F:/%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E7%9B%B8%E9%97%9C/TypeScript%E7%9B%B4%E6%92%AD%E7%8F%AD/team/node_modules/@unhead/ssr/dist/index.mjs';
-import { createFetch as createFetch$1, Headers as Headers$1 } from 'file://F:/%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E7%9B%B8%E9%97%9C/TypeScript%E7%9B%B4%E6%92%AD%E7%8F%AD/team/node_modules/ofetch/dist/node.mjs';
-import destr from 'file://F:/%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E7%9B%B8%E9%97%9C/TypeScript%E7%9B%B4%E6%92%AD%E7%8F%AD/team/node_modules/destr/dist/index.mjs';
-import { createCall, createFetch } from 'file://F:/%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E7%9B%B8%E9%97%9C/TypeScript%E7%9B%B4%E6%92%AD%E7%8F%AD/team/node_modules/unenv/runtime/fetch/index.mjs';
-import { createHooks } from 'file://F:/%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E7%9B%B8%E9%97%9C/TypeScript%E7%9B%B4%E6%92%AD%E7%8F%AD/team/node_modules/hookable/dist/index.mjs';
-import { snakeCase } from 'file://F:/%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E7%9B%B8%E9%97%9C/TypeScript%E7%9B%B4%E6%92%AD%E7%8F%AD/team/node_modules/scule/dist/index.mjs';
-import { klona } from 'file://F:/%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E7%9B%B8%E9%97%9C/TypeScript%E7%9B%B4%E6%92%AD%E7%8F%AD/team/node_modules/klona/dist/index.mjs';
-import defu, { defuFn } from 'file://F:/%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E7%9B%B8%E9%97%9C/TypeScript%E7%9B%B4%E6%92%AD%E7%8F%AD/team/node_modules/defu/dist/defu.mjs';
-import { hash } from 'file://F:/%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E7%9B%B8%E9%97%9C/TypeScript%E7%9B%B4%E6%92%AD%E7%8F%AD/team/node_modules/ohash/dist/index.mjs';
-import { createStorage, prefixStorage } from 'file://F:/%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E7%9B%B8%E9%97%9C/TypeScript%E7%9B%B4%E6%92%AD%E7%8F%AD/team/node_modules/unstorage/dist/index.mjs';
-import unstorage_47drivers_47fs from 'file://F:/%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E7%9B%B8%E9%97%9C/TypeScript%E7%9B%B4%E6%92%AD%E7%8F%AD/team/node_modules/unstorage/drivers/fs.mjs';
-import { toRouteMatcher, createRouter } from 'file://F:/%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E7%9B%B8%E9%97%9C/TypeScript%E7%9B%B4%E6%92%AD%E7%8F%AD/team/node_modules/radix3/dist/index.mjs';
-import { version, unref } from 'file://F:/%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E7%9B%B8%E9%97%9C/TypeScript%E7%9B%B4%E6%92%AD%E7%8F%AD/team/node_modules/vue/index.mjs';
-import { createServerHead as createServerHead$1 } from 'file://F:/%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E7%9B%B8%E9%97%9C/TypeScript%E7%9B%B4%E6%92%AD%E7%8F%AD/team/node_modules/unhead/dist/index.mjs';
-import { defineHeadPlugin } from 'file://F:/%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E7%9B%B8%E9%97%9C/TypeScript%E7%9B%B4%E6%92%AD%E7%8F%AD/team/node_modules/@unhead/shared/dist/index.mjs';
+import { defineEventHandler, handleCacheHeaders, splitCookiesString, isEvent, createEvent, getRequestHeader, eventHandler, setHeaders, sendRedirect, proxyRequest, setResponseHeader, send, getResponseStatus, setResponseStatus, setResponseHeaders, getRequestHeaders, createApp, createRouter as createRouter$1, toNodeListener, fetchWithEvent, lazyEventHandler, getQuery as getQuery$1, createError, getResponseStatusText } from 'file://D:/tori/private/TypeScript%20%E7%9B%B4%E6%92%AD%E7%8F%AD/enjoyment-hotel/node_modules/h3/dist/index.mjs';
+import { getRequestDependencies, getPreloadLinks, getPrefetchLinks, createRenderer } from 'file://D:/tori/private/TypeScript%20%E7%9B%B4%E6%92%AD%E7%8F%AD/enjoyment-hotel/node_modules/vue-bundle-renderer/dist/runtime.mjs';
+import { stringify, uneval } from 'file://D:/tori/private/TypeScript%20%E7%9B%B4%E6%92%AD%E7%8F%AD/enjoyment-hotel/node_modules/devalue/index.js';
+import { renderToString } from 'file://D:/tori/private/TypeScript%20%E7%9B%B4%E6%92%AD%E7%8F%AD/enjoyment-hotel/node_modules/vue/server-renderer/index.mjs';
+import { renderSSRHead } from 'file://D:/tori/private/TypeScript%20%E7%9B%B4%E6%92%AD%E7%8F%AD/enjoyment-hotel/node_modules/@unhead/ssr/dist/index.mjs';
+import { createFetch as createFetch$1, Headers as Headers$1 } from 'file://D:/tori/private/TypeScript%20%E7%9B%B4%E6%92%AD%E7%8F%AD/enjoyment-hotel/node_modules/ofetch/dist/node.mjs';
+import destr from 'file://D:/tori/private/TypeScript%20%E7%9B%B4%E6%92%AD%E7%8F%AD/enjoyment-hotel/node_modules/destr/dist/index.mjs';
+import { createCall, createFetch } from 'file://D:/tori/private/TypeScript%20%E7%9B%B4%E6%92%AD%E7%8F%AD/enjoyment-hotel/node_modules/unenv/runtime/fetch/index.mjs';
+import { createHooks } from 'file://D:/tori/private/TypeScript%20%E7%9B%B4%E6%92%AD%E7%8F%AD/enjoyment-hotel/node_modules/hookable/dist/index.mjs';
+import { snakeCase } from 'file://D:/tori/private/TypeScript%20%E7%9B%B4%E6%92%AD%E7%8F%AD/enjoyment-hotel/node_modules/scule/dist/index.mjs';
+import { klona } from 'file://D:/tori/private/TypeScript%20%E7%9B%B4%E6%92%AD%E7%8F%AD/enjoyment-hotel/node_modules/klona/dist/index.mjs';
+import defu, { defuFn } from 'file://D:/tori/private/TypeScript%20%E7%9B%B4%E6%92%AD%E7%8F%AD/enjoyment-hotel/node_modules/defu/dist/defu.mjs';
+import { hash } from 'file://D:/tori/private/TypeScript%20%E7%9B%B4%E6%92%AD%E7%8F%AD/enjoyment-hotel/node_modules/ohash/dist/index.mjs';
+import { createStorage, prefixStorage } from 'file://D:/tori/private/TypeScript%20%E7%9B%B4%E6%92%AD%E7%8F%AD/enjoyment-hotel/node_modules/unstorage/dist/index.mjs';
+import unstorage_47drivers_47fs from 'file://D:/tori/private/TypeScript%20%E7%9B%B4%E6%92%AD%E7%8F%AD/enjoyment-hotel/node_modules/unstorage/drivers/fs.mjs';
+import { toRouteMatcher, createRouter } from 'file://D:/tori/private/TypeScript%20%E7%9B%B4%E6%92%AD%E7%8F%AD/enjoyment-hotel/node_modules/radix3/dist/index.mjs';
+import { version, unref } from 'file://D:/tori/private/TypeScript%20%E7%9B%B4%E6%92%AD%E7%8F%AD/enjoyment-hotel/node_modules/vue/index.mjs';
+import { createServerHead as createServerHead$1 } from 'file://D:/tori/private/TypeScript%20%E7%9B%B4%E6%92%AD%E7%8F%AD/enjoyment-hotel/node_modules/unhead/dist/index.mjs';
+import { defineHeadPlugin } from 'file://D:/tori/private/TypeScript%20%E7%9B%B4%E6%92%AD%E7%8F%AD/enjoyment-hotel/node_modules/@unhead/shared/dist/index.mjs';
 
 const r=Object.create(null),E=e=>globalThis.process?.env||globalThis._importMeta_.env||globalThis.Deno?.env.toObject()||globalThis.__env__||(e?r:globalThis),s=new Proxy(r,{get(e,o){return E()[o]??r[o]},has(e,o){const i=E();return o in i||o in r},set(e,o,i){const g=E(!0);return g[o]=i,!0},deleteProperty(e,o){if(!o)return !1;const i=E(!0);return delete i[o],!0},ownKeys(){const e=E(!0);return Object.keys(e)}}),t=typeof process<"u"&&process.env&&"development"||"",p=[["APPVEYOR"],["AWS_AMPLIFY","AWS_APP_ID",{ci:!0}],["AZURE_PIPELINES","SYSTEM_TEAMFOUNDATIONCOLLECTIONURI"],["AZURE_STATIC","INPUT_AZURE_STATIC_WEB_APPS_API_TOKEN"],["APPCIRCLE","AC_APPCIRCLE"],["BAMBOO","bamboo_planKey"],["BITBUCKET","BITBUCKET_COMMIT"],["BITRISE","BITRISE_IO"],["BUDDY","BUDDY_WORKSPACE_ID"],["BUILDKITE"],["CIRCLE","CIRCLECI"],["CIRRUS","CIRRUS_CI"],["CLOUDFLARE_PAGES","CF_PAGES",{ci:!0}],["CODEBUILD","CODEBUILD_BUILD_ARN"],["CODEFRESH","CF_BUILD_ID"],["DRONE"],["DRONE","DRONE_BUILD_EVENT"],["DSARI"],["GITHUB_ACTIONS"],["GITLAB","GITLAB_CI"],["GITLAB","CI_MERGE_REQUEST_ID"],["GOCD","GO_PIPELINE_LABEL"],["LAYERCI"],["HUDSON","HUDSON_URL"],["JENKINS","JENKINS_URL"],["MAGNUM"],["NETLIFY"],["NETLIFY","NETLIFY_LOCAL",{ci:!1}],["NEVERCODE"],["RENDER"],["SAIL","SAILCI"],["SEMAPHORE"],["SCREWDRIVER"],["SHIPPABLE"],["SOLANO","TDDIUM"],["STRIDER"],["TEAMCITY","TEAMCITY_VERSION"],["TRAVIS"],["VERCEL","NOW_BUILDER"],["VERCEL","VERCEL",{ci:!1}],["VERCEL","VERCEL_ENV",{ci:!1}],["APPCENTER","APPCENTER_BUILD_ID"],["CODESANDBOX","CODESANDBOX_SSE",{ci:!1}],["STACKBLITZ"],["STORMKIT"],["CLEAVR"],["ZEABUR"],["CODESPHERE","CODESPHERE_APP_ID",{ci:!0}],["RAILWAY","RAILWAY_PROJECT_ID"],["RAILWAY","RAILWAY_SERVICE_ID"]];function B(){if(globalThis.process?.env)for(const e of p){const o=e[1]||e[0];if(globalThis.process?.env[o])return {name:e[0].toLowerCase(),...e[2]}}return globalThis.process?.env?.SHELL==="/bin/jsh"&&globalThis.process?.versions?.webcontainer?{name:"stackblitz",ci:!1}:{name:"",ci:!1}}const l=B(),d=l.name;function n(e){return e?e!=="false":!1}const I=globalThis.process?.platform||"",T=n(s.CI)||l.ci!==!1,R=n(globalThis.process?.stdout&&globalThis.process?.stdout.isTTY);n(s.DEBUG);const C=t==="test"||n(s.TEST);n(s.MINIMAL)||T||C||!R;const a=/^win/i.test(I);!n(s.NO_COLOR)&&(n(s.FORCE_COLOR)||(R||a)&&s.TERM!=="dumb"||T);const _=(globalThis.process?.versions?.node||"").replace(/^v/,"")||null;Number(_?.split(".")[0])||null;const W=globalThis.process||Object.create(null),c={versions:{}};new Proxy(W,{get(e,o){if(o==="env")return s;if(o in e)return e[o];if(o in c)return c[o]}});const A=globalThis.process?.release?.name==="node",L=!!globalThis.Bun||!!globalThis.process?.versions?.bun,D=!!globalThis.Deno,O=!!globalThis.fastly,S=!!globalThis.Netlify,N=!!globalThis.EdgeRuntime,u=globalThis.navigator?.userAgent==="Cloudflare-Workers",b=!!globalThis.__lagon__,F=[[S,"netlify"],[N,"edge-light"],[u,"workerd"],[O,"fastly"],[D,"deno"],[L,"bun"],[A,"node"],[b,"lagon"]];function G(){const e=F.find(o=>o[0]);if(e)return {name:e[1]}}const P=G();P?.name||"";
 
@@ -370,7 +371,7 @@ function stringifyParsedURL(parsed) {
   return proto + auth + host + pathname + search + hash;
 }
 
-const serverAssets = [{"baseName":"server","dir":"F:/程式設計相關/TypeScript直播班/team/server/assets"}];
+const serverAssets = [{"baseName":"server","dir":"D:/tori/private/TypeScript 直播班/enjoyment-hotel/server/assets"}];
 
 const assets = createStorage();
 
@@ -382,11 +383,11 @@ const storage = createStorage({});
 
 storage.mount('/assets', assets);
 
-storage.mount('root', unstorage_47drivers_47fs({"driver":"fs","readOnly":true,"base":"F:\\程式設計相關\\TypeScript直播班\\team","ignore":["**/node_modules/**","**/.git/**"]}));
-storage.mount('src', unstorage_47drivers_47fs({"driver":"fs","readOnly":true,"base":"F:\\程式設計相關\\TypeScript直播班\\team\\server","ignore":["**/node_modules/**","**/.git/**"]}));
-storage.mount('build', unstorage_47drivers_47fs({"driver":"fs","readOnly":false,"base":"F:\\程式設計相關\\TypeScript直播班\\team\\.nuxt","ignore":["**/node_modules/**","**/.git/**"]}));
-storage.mount('cache', unstorage_47drivers_47fs({"driver":"fs","readOnly":false,"base":"F:\\程式設計相關\\TypeScript直播班\\team\\.nuxt\\cache","ignore":["**/node_modules/**","**/.git/**"]}));
-storage.mount('data', unstorage_47drivers_47fs({"driver":"fs","base":"F:\\程式設計相關\\TypeScript直播班\\team\\.data\\kv","ignore":["**/node_modules/**","**/.git/**"]}));
+storage.mount('root', unstorage_47drivers_47fs({"driver":"fs","readOnly":true,"base":"D:\\tori\\private\\TypeScript 直播班\\enjoyment-hotel","ignore":["**/node_modules/**","**/.git/**"]}));
+storage.mount('src', unstorage_47drivers_47fs({"driver":"fs","readOnly":true,"base":"D:\\tori\\private\\TypeScript 直播班\\enjoyment-hotel\\server","ignore":["**/node_modules/**","**/.git/**"]}));
+storage.mount('build', unstorage_47drivers_47fs({"driver":"fs","readOnly":false,"base":"D:\\tori\\private\\TypeScript 直播班\\enjoyment-hotel\\.nuxt","ignore":["**/node_modules/**","**/.git/**"]}));
+storage.mount('cache', unstorage_47drivers_47fs({"driver":"fs","readOnly":false,"base":"D:\\tori\\private\\TypeScript 直播班\\enjoyment-hotel\\.nuxt\\cache","ignore":["**/node_modules/**","**/.git/**"]}));
+storage.mount('data', unstorage_47drivers_47fs({"driver":"fs","base":"D:\\tori\\private\\TypeScript 直播班\\enjoyment-hotel\\.data\\kv","ignore":["**/node_modules/**","**/.git/**"]}));
 
 function useStorage(base = "") {
   return base ? prefixStorage(storage, base) : storage;
@@ -896,13 +897,13 @@ const errorHandler = (async function errorhandler(error, event) {
   return send(event, html);
 });
 
-const _lazy_Rs5Wnw = () => Promise.resolve().then(function () { return twzipcode_get$1; });
-const _lazy_gKr0Je = () => Promise.resolve().then(function () { return renderer$1; });
+const _lazy_euhIjl = () => Promise.resolve().then(function () { return twzipcode_get$1; });
+const _lazy_45c84f = () => Promise.resolve().then(function () { return renderer$1; });
 
 const handlers = [
-  { route: '/twzipcode', handler: _lazy_Rs5Wnw, lazy: true, middleware: false, method: "get" },
-  { route: '/__nuxt_error', handler: _lazy_gKr0Je, lazy: true, middleware: false, method: undefined },
-  { route: '/**', handler: _lazy_gKr0Je, lazy: true, middleware: false, method: undefined }
+  { route: '/twzipcode', handler: _lazy_euhIjl, lazy: true, middleware: false, method: "get" },
+  { route: '/__nuxt_error', handler: _lazy_45c84f, lazy: true, middleware: false, method: undefined },
+  { route: '/**', handler: _lazy_45c84f, lazy: true, middleware: false, method: undefined }
 ];
 
 function createNitroApp() {
@@ -1172,8 +1173,8 @@ function publicAssetsURL(...path) {
 
 globalThis.__buildAssetsURL = buildAssetsURL;
 globalThis.__publicAssetsURL = publicAssetsURL;
-const getClientManifest = () => import('file://F:/%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E7%9B%B8%E9%97%9C/TypeScript%E7%9B%B4%E6%92%AD%E7%8F%AD/team/.nuxt/dist/server/client.manifest.mjs').then((r) => r.default || r).then((r) => typeof r === "function" ? r() : r);
-const getServerEntry = () => import('file://F:/%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E7%9B%B8%E9%97%9C/TypeScript%E7%9B%B4%E6%92%AD%E7%8F%AD/team/.nuxt/dist/server/server.mjs').then((r) => r.default || r);
+const getClientManifest = () => import('file://D:/tori/private/TypeScript%20%E7%9B%B4%E6%92%AD%E7%8F%AD/enjoyment-hotel/.nuxt/dist/server/client.manifest.mjs').then((r) => r.default || r).then((r) => typeof r === "function" ? r() : r);
+const getServerEntry = () => import('file://D:/tori/private/TypeScript%20%E7%9B%B4%E6%92%AD%E7%8F%AD/enjoyment-hotel/.nuxt/dist/server/server.mjs').then((r) => r.default || r);
 const getSSRRenderer = lazyCachedFunction(async () => {
   const manifest = await getClientManifest();
   if (!manifest) {
