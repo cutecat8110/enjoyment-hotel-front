@@ -67,7 +67,7 @@
           <div class="col-12">
             <div class="card mb-3 mb-md-4 card-outer">
               <div class="row g-0" >
-                <div class="col-12 col-lg-7">
+                <div class="col-12 col-xl-7">
                   <div :id="`carousel_${index}`" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-indicators">
                       <button
@@ -108,7 +108,7 @@
                   </div>
                 </div>
 
-                <div class="col-12 col-lg-5">
+                <div class="col-12 col-xl-5">
                   <div class="card-body room-content">
                     <p class="fs-2 fs-md-3 mb-md-2">{{ room.name }}</p>
                     <p class="fs-7 fs-md-8">{{  room.description }}</p>
