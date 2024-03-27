@@ -25,6 +25,7 @@
     "dayjs": "^1.11.10",
     "docker": "^0.2.14",
     "sweetalert2": "^11.6.13",
+    "swiper": "^11.0.7",
     "validator": "^13.11.0",
     "vee-validate": "^4.5.8"
   },

@@ -2,6 +2,9 @@
 declare module 'vue' {
   export interface GlobalComponents {
     'IconProfile': typeof import("../components/global/IconProfile.vue")['default']
+    'HomeBaseButton': typeof import("../components/home/BaseButton.vue")['default']
+    'HomeSectionTitle': typeof import("../components/home/SectionTitle.vue")['default']
+    'HomeSlideShow': typeof import("../components/home/SlideShow.vue")['default']
     'PageDefault': typeof import("../components/page/PageDefault.vue")['default']
     'PageFooter': typeof import("../components/page/PageFooter.vue")['default']
     'PageHeader': typeof import("../components/page/PageHeader.vue")['default']
@@ -36,6 +39,9 @@ declare module 'vue' {
     'Html': typeof import("../node_modules/nuxt/dist/head/runtime/components")['Html']
     'Body': typeof import("../node_modules/nuxt/dist/head/runtime/components")['Body']
     'LazyIconProfile': typeof import("../components/global/IconProfile.vue")['default']
+    'LazyHomeBaseButton': typeof import("../components/home/BaseButton.vue")['default']
+    'LazyHomeSectionTitle': typeof import("../components/home/SectionTitle.vue")['default']
+    'LazyHomeSlideShow': typeof import("../components/home/SlideShow.vue")['default']
     'LazyPageDefault': typeof import("../components/page/PageDefault.vue")['default']
     'LazyPageFooter': typeof import("../components/page/PageFooter.vue")['default']
     'LazyPageHeader': typeof import("../components/page/PageHeader.vue")['default']
@@ -73,6 +79,9 @@ declare module 'vue' {
 }
 
 export const IconProfile: typeof import("../components/global/IconProfile.vue")['default']
+export const HomeBaseButton: typeof import("../components/home/BaseButton.vue")['default']
+export const HomeSectionTitle: typeof import("../components/home/SectionTitle.vue")['default']
+export const HomeSlideShow: typeof import("../components/home/SlideShow.vue")['default']
 export const PageDefault: typeof import("../components/page/PageDefault.vue")['default']
 export const PageFooter: typeof import("../components/page/PageFooter.vue")['default']
 export const PageHeader: typeof import("../components/page/PageHeader.vue")['default']
@@ -107,6 +116,9 @@ export const Head: typeof import("../node_modules/nuxt/dist/head/runtime/compone
 export const Html: typeof import("../node_modules/nuxt/dist/head/runtime/components")['Html']
 export const Body: typeof import("../node_modules/nuxt/dist/head/runtime/components")['Body']
 export const LazyIconProfile: typeof import("../components/global/IconProfile.vue")['default']
+export const LazyHomeBaseButton: typeof import("../components/home/BaseButton.vue")['default']
+export const LazyHomeSectionTitle: typeof import("../components/home/SectionTitle.vue")['default']
+export const LazyHomeSlideShow: typeof import("../components/home/SlideShow.vue")['default']
 export const LazyPageDefault: typeof import("../components/page/PageDefault.vue")['default']
 export const LazyPageFooter: typeof import("../components/page/PageFooter.vue")['default']
 export const LazyPageHeader: typeof import("../components/page/PageHeader.vue")['default']

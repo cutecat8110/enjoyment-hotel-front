@@ -7,3 +7,15 @@ $duration-450: 450ms; // page, modal
     @content;
   }
 }
+
+@mixin lg {
+  @media (max-width: 1199.98px) {
+    @content;
+  }
+}
+
+@mixin xxl {
+  @media (max-width: 1999.98px) {
+    @content;
+  }
+}
